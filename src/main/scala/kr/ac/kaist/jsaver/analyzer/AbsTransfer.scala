@@ -2,13 +2,15 @@ package kr.ac.kaist.jsaver.analyzer
 
 import kr.ac.kaist.jsaver.DEBUG
 import kr.ac.kaist.jsaver.analyzer.domain._
+import kr.ac.kaist.jsaver.analyzer.domain.lint.{ LintAlg, LintUtil }
 import kr.ac.kaist.jsaver.cfg._
 import kr.ac.kaist.jsaver.ir.{ AllocSite => _, _ }
 import kr.ac.kaist.jsaver.js.{ Parser => ESParser, _ }
-import kr.ac.kaist.jsaver.js.ast.{ Lexical, AST }
+import kr.ac.kaist.jsaver.js.ast.{ AST, Lexical }
 import kr.ac.kaist.jsaver.parser.ESValueParser
 import kr.ac.kaist.jsaver.util.Useful._
 import kr.ac.kaist.jsaver.spec.algorithm._
+
 import scala.annotation.tailrec
 
 // abstract transfer function
@@ -44,7 +46,7 @@ case class AbsTransfer(sem: AbsSemantics) {
         val newSt = transfer(normal.inst)(st)
         sem += getNextNp(np, cfg.nextOf(normal)) -> newSt
       case (call: Call) =>
-        val newSt = transfer(call)(st)
+        val newSt = transfer(call, view)(st)
         sem += getNextNp(np, cfg.nextOf(call)) -> newSt
       case arrow @ Arrow(_, inst, fid) =>
         val newSt = transfer(arrow, np)(st)
@@ -134,11 +136,13 @@ case class AbsTransfer(sem: AbsSemantics) {
         v <- transfer(expr)
         _ <- modify(_.defineLocal(id -> v))
       } yield ()
-      case IAssign(ref, expr) => for {
-        rv <- transfer(ref)
-        v <- transfer(expr)
-        _ <- modify(_.update(rv, v))
-      } yield ()
+      case IAssign(ref, expr) => {
+        for {
+          rv <- transfer(ref)
+          v <- transfer(expr)
+          _ <- modify(_.update(rv, v))
+        } yield ()
+      }
       case IDelete(ref) => for {
         rv <- transfer(ref)
         _ <- modify(_.delete(rv))
@@ -185,135 +189,179 @@ case class AbsTransfer(sem: AbsSemantics) {
     } yield ()
 
     // transfer function for calls
-    def transfer(call: Call): Updater = call.inst match {
-      case IApp(id, ERef(RefId(Id(name))), args) if simpleFuncs contains name => {
-        for {
-          as <- join(args.map(transfer))
-          vs = if (name == "IsAbruptCompletion") as else as.map(_.escaped)
+    def transfer(call: Call, view: View): Updater = {
+      //      println(s"call: ${call}")
+      call.inst match {
+        // transfer function for algorithms implemented in `simpleFuncs`
+        case IApp(id, ERef(RefId(Id(name))), args) if simpleFuncs contains name => {
+          for {
+            as <- join(args.map(transfer))
+            vs = if (name == "IsAbruptCompletion") as else as.map(_.escaped)
+            st <- get
+            v <- simpleFuncs(name)(vs)
+            _ <- modify(_.defineLocal(id -> v))
+          } yield ()
+        }
+        // transfer function for non-simple algorithm calls
+        case IApp(id, fexpr, args) => for {
+          // `value` is the abstract value of the function expression
+          fValue <- transfer(fexpr)
+          // `args` is a list of argument expressions to the algorithm call
+          // `vs` is a list of the abstract values of each argument, computed via a transfer function
+          vs <- join(args.map(transfer))
           st <- get
-          v <- simpleFuncs(name)(vs)
-          _ <- modify(_.defineLocal(id -> v))
-        } yield ()
-      }
-      case IApp(id, fexpr, args) => for {
-        value <- transfer(fexpr)
-        vs <- join(args.map(transfer))
-        st <- get
-        v = {
-          // return values
-          var returnValue: AbsValue = AbsValue.Bot
+          v = {
+            // return values
+            var returnValue: AbsValue = AbsValue.Bot
 
-          // algorithms
-          for (AFunc(algo) <- value.func) if (algo.name == "GLOBAL.__ABS__") {
-            optional {
-              val args = vs(1) // get arguments
-              val obj = st(args.loc.head)
-              val name = obj(ASimple(INum(0))).str.head.str
-              returnValue = name match {
-                case "Number" => AbsValue.num
-                case "Integer" => AbsValue.int
-                case "BigInt" => AbsValue.bigint
-                case "String" => AbsValue.str
-                case "Boolean" => AbsValue.bool
-                case s"INTERVAL:[$x, $y]" if !optional { x.toDouble; y.toDouble }.isEmpty =>
-                  AbsValue(num = AbsNum.getInterval(x.toDouble, y.toDouble))
-                case _ =>
-                  warn(s"invalid abstract value: $name")
-                  AbsValue.Bot
+            // algorithms
+            for (AFunc(algo) <- fValue.func) if (algo.name == "GLOBAL.__ABS__") {
+              // special case for absolute value algorithm
+              optional {
+                val args = vs(1) // get arguments
+                val obj = st(args.loc.head)
+                val name = obj(ASimple(INum(0))).str.head.str
+                returnValue = name match {
+                  case "Number" => AbsValue.num
+                  case "Integer" => AbsValue.int
+                  case "BigInt" => AbsValue.bigint
+                  case "String" => AbsValue.str
+                  case "Boolean" => AbsValue.bool
+                  case s"INTERVAL:[$x, $y]" if !optional { x.toDouble; y.toDouble }.isEmpty =>
+                    AbsValue(num = AbsNum.getInterval(x.toDouble, y.toDouble))
+                  case _ =>
+                    warn(s"invalid abstract value: $name")
+                    AbsValue.Bot
+                }
+              }.getOrElse(warn("invalid use of __ABS__"))
+            } else {
+              algo.name match {
+                case "PutValue" => println("PutValue")
+                case "Construct" =>
+                case "Call" => {
+                  println(s"called algo '${algo.name}': ")
+                  println(s"  value= ${fValue}")
+                  vs(0).loc.getSingle match {
+                    case FlatElem(loc) => {
+                      val obj = st(loc)
+                      val code = obj(AbsValue("ECMAScriptCode"))
+                      code.ast.getSingle match {
+                        case FlatElem(ast) => {
+                          println(s"  -- ast: ${ast.ast} ||| hash: ${ast.ast.hashCode}")
+                        }
+                        case _ => ()
+                      }
+                    }
+                    case _ => ()
+                  }
+                }
+                case _ => ()
               }
-            }.getOrElse(warn("invalid use of __ABS__"))
-          } else {
-            val newLocals = getLocals(algo.head.params, vs)
-            val newSt = st.copy(locals = newLocals)
-            sem.doCall(call, view, st, algo.func, newSt)
-          }
-
-          // closures
-          for (AClo(params, locals, func) <- value.clo) {
-            val newLocals = locals ++ getLocals(params.map(x => Param(x.name)), vs)
-            val newSt = st.copy(locals = newLocals)
-            sem.doCall(call, view, st, func, newSt)
-          }
-
-          // continuations
-          for (ACont(params, locals, target) <- value.cont) target.node match {
-            // start/resume sub processes
-            case _: Entry =>
-              val newLocals = locals ++ (params zip vs)
-              val locs = vs.foldLeft(Set[Loc]())(_ ++ _.reachableLocs)
-              val fixed = st.heap.reachableLocs(locs)
-              val newSt = st
-                .copy(locals = newLocals)
-                .doProcStart(fixed)
-              sem += target -> newSt
-
-            // stop/pause sub processes
-            case arrow: Arrow =>
-              val nextNp = getNextNp(target, cfg.nextOf(arrow))
-              val targetSt = sem(target)
-              sem += nextNp -> st.doProcEnd(targetSt, params zip vs)
-
-            // othe kinds of continuations
-            case _ =>
-              sem += target -> st.copy(locals = locals ++ (params zip vs))
-          }
-
-          returnValue
-        }
-        _ <- {
-          if (v.isBottom) put(AbsState.Bot)
-          else modify(_.defineLocal(id -> v))
-        }
-      } yield ()
-      case access @ IAccess(id, bexpr, expr, args) => {
-        val loc: AllocSite = AllocSite(access.asite, cp.view)
-        for {
-          origB <- transfer(bexpr)
-          b = origB.escaped
-          p <- escape(transfer(expr))
-          astV <- (b.ast.getSingle, p.str.getSingle) match {
-            case (FlatElem(AAst(ast)), FlatElem(Str(name))) => (ast, name) match {
-              case (Lexical(kind, str), name) =>
-                pure(AbsValue(Interp.getLexicalValue(kind, name, str)))
-              case (ast, "parent") =>
-                pure(ast.parent.map(AbsValue(_)).getOrElse(AbsValue.absent))
-              case (ast, "children") => for {
-                _ <- modify(_.allocList(ast.children.map(AbsValue(_)))(loc))
-              } yield AbsValue(loc)
-              case (ast, "kind") =>
-                pure(AbsValue(ast.kind))
-              case _ => ast.semantics(name) match {
-                case Some((algo, asts)) => for {
-                  as <- join(args.map(transfer))
-                  head = algo.head
-                  body = algo.body
-                  vs = asts.map(AbsValue(_)) ++ as
-                  locals = getLocals(head.params, vs)
-                  st <- get
-                  newSt <- get(_.copy(locals = locals))
-                  astOpt = (
-                    if (name == "Evaluation" || name == "NamedEvaluation") Some(ast)
-                    else None
-                  )
-                  _ = sem.doCall(call, view, st, algo.func, newSt, astOpt)
-                } yield AbsValue.Bot
-                case None =>
-                  val v = AbsValue(ast.subs(name).getOrElse {
-                    error(s"unexpected semantics: ${ast.name}.$name")
-                  })
-                  pure(v)
-              }
+              val newLocals = getLocals(algo.head.params, vs)
+              val newSt = st.copy(locals = newLocals)
+              sem.doCall(call, view, st, algo.func, newSt)
             }
-            case (FlatBot, _) | (_, FlatBot) => pure(AbsValue.Bot)
-            case _ => exploded("impossible to handle generic access of ASTs")
+
+            // closures
+            for (AClo(params, locals, func) <- fValue.clo) {
+              val newLocals = locals ++ getLocals(params.map(x => Param(x.name)), vs)
+              val newSt = st.copy(locals = newLocals)
+              sem.doCall(call, view, st, func, newSt)
+            }
+
+            // continuations
+            for (ACont(params, locals, target) <- fValue.cont) target.node match {
+              // start/resume sub processes
+              case _: Entry =>
+                val newLocals = locals ++ (params zip vs)
+                val locs = vs.foldLeft(Set[Loc]())(_ ++ _.reachableLocs)
+                val fixed = st.heap.reachableLocs(locs)
+                val newSt = st
+                  .copy(locals = newLocals)
+                  .doProcStart(fixed)
+                sem += target -> newSt
+
+              // stop/pause sub processes
+              case arrow: Arrow =>
+                val nextNp = getNextNp(target, cfg.nextOf(arrow))
+                val targetSt = sem(target)
+                sem += nextNp -> st.doProcEnd(targetSt, params zip vs)
+
+              // othe kinds of continuations
+              case _ =>
+                sem += target -> st.copy(locals = locals ++ (params zip vs))
+            }
+
+            returnValue
           }
-          otherV <- get(_(origB, p))
-          value = astV ⊔ otherV
           _ <- {
-            if (!value.isBottom) modify(_.defineLocal(id -> value))
-            else put(AbsState.Bot)
+            if (v.isBottom) put(AbsState.Bot)
+            else modify(_.defineLocal(id -> v))
           }
         } yield ()
+        case access @ IAccess(id, bexpr, expr, args) => {
+          //          println("access: ")
+          //          println(s"  id=${id}")
+          //          println(s"  bexpr=${bexpr} => ${transfer(bexpr)}")
+          //          println(s"  expr=${expr} => ${transfer(expr)}")
+          //          println(s"  args=${args}")
+          val loc: AllocSite = AllocSite(access.asite, cp.view)
+          for {
+            origB <- transfer(bexpr)
+            b = origB.escaped
+            p <- escape(transfer(expr))
+            _ <- {
+              //println(s"expr: ${expr.toString}")
+              //              if (expr.toString == "\"StringValue\"") {
+              //                println("StringValue IAccess:")
+              //                println(s"  origB=${origB}")
+              //                println(s"  p=${p}")
+              //              }
+            }
+            astV <- (b.ast.getSingle, p.str.getSingle) match {
+              case (FlatElem(AAst(ast)), FlatElem(Str(name))) => (ast, name) match {
+                case (Lexical(kind, str), name) =>
+                  pure(AbsValue(Interp.getLexicalValue(kind, name, str)))
+                case (ast, "parent") =>
+                  pure(ast.parent.map(AbsValue(_)).getOrElse(AbsValue.absent))
+                case (ast, "children") => for {
+                  _ <- modify(_.allocList(ast.children.map(AbsValue(_)))(loc))
+                } yield AbsValue(loc)
+                case (ast, "kind") =>
+                  pure(AbsValue(ast.kind))
+                case _ => ast.semantics(name) match {
+                  case Some((algo, asts)) => for {
+                    as <- join(args.map(transfer))
+                    head = algo.head
+                    body = algo.body
+                    vs = asts.map(AbsValue(_)) ++ as
+                    locals = getLocals(head.params, vs)
+                    st <- get
+                    newSt <- get(_.copy(locals = locals))
+                    astOpt = (
+                      if (name == "Evaluation" || name == "NamedEvaluation") Some(ast)
+                      else None
+                    )
+                    _ = sem.doCall(call, view, st, algo.func, newSt, astOpt)
+                  } yield AbsValue.Bot
+                  case None =>
+                    val v = AbsValue(ast.subs(name).getOrElse {
+                      error(s"unexpected semantics: ${ast.name}.$name")
+                    })
+                    pure(v)
+                }
+              }
+              case (FlatBot, _) | (_, FlatBot) => pure(AbsValue.Bot)
+              case _ => exploded("impossible to handle generic access of ASTs")
+            }
+            otherV <- get(_(origB, p))
+            value = astV ⊔ otherV
+            _ <- {
+              if (!value.isBottom) modify(_.defineLocal(id -> value))
+              else put(AbsState.Bot)
+            }
+          } yield ()
+        }
       }
     }
 

@@ -44,6 +44,7 @@ object Command {
     CmdEntry,
     CmdWorklist,
     CmdFindMerged,
+    CmdLint,
   )
   val cmdMap: Map[String, Command] = commands.map(cmd => (cmd.name, cmd)).toMap
 }

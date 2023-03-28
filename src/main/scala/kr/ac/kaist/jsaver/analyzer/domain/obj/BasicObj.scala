@@ -120,9 +120,9 @@ object BasicObj extends Domain {
         lprops.forall(x => this(x) ⊑ that(x))
       )
       case (l: MapElem, r: MapElem) => (
-        l.ty == r.ty &&
-        l.mergedProp ⊑ r.mergedProp &&
-        l.mergedValue ⊑ r.mergedValue
+        (l.ty == r.ty) &&
+        (l.mergedProp ⊑ r.mergedProp) &&
+        (l.mergedValue ⊑ r.mergedValue)
       )
       case (KeyWiseList(lvs), KeyWiseList(rvs)) => (
         lvs.length == rvs.length &&
@@ -149,7 +149,7 @@ object BasicObj extends Domain {
       case (KeyWiseMap(lty, _), r: PropMapElem) if lty == r.ty => that ⊔ this
       case (OrderedMap(lty, lmap, lprops), OrderedMap(rty, rmap, rprops)) if lty == rty => {
         val map = (lmap.keySet ++ rmap.keySet).toList.map(x => {
-          x -> this(x) ⊔ that(x)
+          x -> (this(x) ⊔ that(x))
         }).toMap
         if (lprops == rprops) OrderedMap(lty, map, lprops)
         else KeyWiseMap(lty, map)

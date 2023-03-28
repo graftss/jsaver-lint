@@ -134,6 +134,21 @@ case class AbsSemantics(
     val np = NodePoint(func.entry, calleeView)
     this += np -> st.doCall
 
+    if (isJsCall) {
+      println("  js call: " + call)
+      println("  view: " + callerView)
+      callerView.jsCalls.headOption match {
+        case None => println("  no ast: " + callerView.calls)
+        case Some(ast) => println("  ast: " + callerView.jsCalls.headOption.map(ast => ast.span))
+      }
+    }
+
+    if (func.name contains "PutValue") {
+      // TODO: mutation detection
+      //      println(s"--- put value: ${func.name}")
+      //      println(s"    params: ${func.params}")
+    }
+
     // log max ijk
     if (LOG) {
       irIJK.update(calleeView.getIrIJK)

@@ -38,7 +38,7 @@ class Stringifier(
       calls: List[String],
       loops: List[LoopCtxt]
     ): Appender = if (detail) {
-      app >> calls.mkString("[call: ", ", ", "]")
+      app >> calls.mkString(s"[call(${calls.length}): ", ", ", "]")
       app >> loops.map(_ match {
         case LoopCtxt(loop, depth) => s"${loop.uidString}($depth)"
       }).mkString("[loop: ", ", ", "]")
@@ -50,12 +50,15 @@ class Stringifier(
     // js views
     view.jsViewOpt.map {
       case JSView(ast, calls, loops) =>
-        app >> s"☊[${ast.span}]"
-        ctxtStr(calls.map(call => s"☊[${call.span}]"), loops)
+        app >> s"☊[${ast.kind}/${ast.hashCode}]"
+        ctxtStr(calls.map(call => s"☊[${call.kind}/${call.hashCode}]"), loops)
     }
 
     // ir contexts
-    ctxtStr(view.calls.map(_.uidString), view.loops)
+
+    // original code
+    // ctxtStr(view.calls.map(call => s"${call.uidString}/${call.inst}"), view.loops)
+    ctxtStr(view.calls.map(call => s"${call.inst.toMyString}"), view.loops)
   }
 
   // abstract reference values

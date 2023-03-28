@@ -11,8 +11,8 @@ import kr.ac.kaist.jsaver.util.Useful._
 
 // basic abstract states
 object BasicState extends Domain {
-  lazy val Bot = Elem(false, Map(), Map(), AbsHeap.Bot)
-  lazy val Empty = Elem(true, Map(), Map(), AbsHeap.Bot)
+  lazy val Bot = Elem(false, Map(), Map(), AbsHeap.Bot, AbsLintState.Bot)
+  lazy val Empty = Elem(true, Map(), Map(), AbsHeap.Bot, AbsLintState.Bot)
 
   // base globals
   lazy val base: Map[Id, AbsValue] = (for {
@@ -47,8 +47,9 @@ object BasicState extends Domain {
     reachable: Boolean = true,
     locals: Map[Id, AbsValue] = Map(),
     globals: Map[Id, AbsValue] = Map(),
-    heap: AbsHeap = AbsHeap.Bot
-  ): Elem = Elem(reachable, locals, globals, heap)
+    heap: AbsHeap = AbsHeap.Bot,
+    lint: AbsLintState = AbsLintState.Bot
+  ): Elem = Elem(reachable, locals, globals, heap, lint)
 
   // extractors
   def unapply(elem: Elem) = Some((
@@ -63,7 +64,8 @@ object BasicState extends Domain {
     reachable: Boolean,
     locals: Map[Id, AbsValue],
     globals: Map[Id, AbsValue],
-    heap: AbsHeap
+    heap: AbsHeap,
+    lint: AbsLintState
   ) extends ElemTrait {
     // partial order
     override def isBottom = !this.reachable
@@ -73,8 +75,8 @@ object BasicState extends Domain {
       case _ if this.isBottom => true
       case _ if that.isBottom => false
       case (
-        Elem(_, llocals, lglobals, lheap),
-        Elem(_, rlocals, rglobals, rheap)
+        Elem(_, llocals, lglobals, lheap, llint),
+        Elem(_, rlocals, rglobals, rheap, rlint)
         ) => {
         val localsB = (llocals.keySet ++ rlocals.keySet).forall(x => {
           this.lookupLocal(x) ⊑ that.lookupLocal(x)
@@ -83,7 +85,8 @@ object BasicState extends Domain {
           this.lookupGlobal(x) ⊑ that.lookupGlobal(x)
         })
         val heapB = lheap ⊑ rheap
-        localsB && globalsB && heapB
+        val lintB = llint ⊑ rlint
+        localsB && globalsB && heapB && lintB
       }
     }
 
@@ -92,8 +95,8 @@ object BasicState extends Domain {
       case _ if this.isBottom => that
       case _ if that.isBottom => this
       case (
-        Elem(_, llocals, lglobals, lheap),
-        Elem(_, rlocals, rglobals, rheap)
+        Elem(_, llocals, lglobals, lheap, llint),
+        Elem(_, rlocals, rglobals, rheap, rlint)
         ) => {
         val newLocals = (for {
           x <- (llocals.keySet ++ rlocals.keySet).toList
@@ -106,7 +109,8 @@ object BasicState extends Domain {
           if !v.isBottom
         } yield x -> v).toMap
         val newHeap = lheap ⊔ rheap
-        Elem(true, newLocals, newGlobals, newHeap)
+        val newLint = llint ⊔ rlint
+        Elem(true, newLocals, newGlobals, newHeap, newLint)
       }
     }
 
@@ -179,6 +183,7 @@ object BasicState extends Domain {
       locals = to.locals ++ defs,
       globals = globals,
       heap = heap.doReturn(to.heap),
+      lint = lint
     ).garbageCollected
     def doProcEnd(to: Elem, defs: (Id, AbsValue)*): Elem = doProcEnd(to, defs)
     def doProcEnd(to: Elem, defs: Iterable[(Id, AbsValue)]): Elem = Elem(
@@ -186,6 +191,7 @@ object BasicState extends Domain {
       locals = to.locals ++ defs,
       globals = globals,
       heap = heap.doProcEnd(to.heap),
+      lint = lint
     ).garbageCollected
 
     // garbage collection
@@ -212,12 +218,12 @@ object BasicState extends Domain {
     }
     def apply(x: Id, cp: ControlPoint): AbsValue = {
       val v = directLookup(x)
-      if (cp.isBuiltin && AbsValue.absent ⊑ v) v.removeAbsent ⊔ AbsValue.undef
+      if (cp.isBuiltin && (AbsValue.absent ⊑ v)) v.removeAbsent ⊔ AbsValue.undef
       else v
     }
     def apply(base: AbsValue, prop: AbsValue): AbsValue = {
       val compValue = base.comp(prop)
-      if (!compValue.isBottom && prop ⊑ AV_COMP_PROPS) compValue else {
+      if (!compValue.isBottom && (prop ⊑ AV_COMP_PROPS)) compValue else {
         val escaped = base.escaped
         val locValue = heap(escaped.loc, prop)
         val strValue = (escaped.str.getSingle, prop.getSingle) match {
@@ -237,13 +243,13 @@ object BasicState extends Domain {
 
     // lookup local variables
     def lookupLocal(x: Id): AbsValue = this match {
-      case Elem(_, locals, _, _) =>
+      case Elem(_, locals, _, _, _) =>
         locals.getOrElse(x, AbsValue.Bot)
     }
 
     // lookup global variables
     def lookupGlobal(x: Id): AbsValue = this match {
-      case Elem(_, _, globals, _) =>
+      case Elem(_, _, globals, _, _) =>
         globals.getOrElse(x, base.getOrElse(x, AbsValue.Bot))
     }
 

@@ -26,6 +26,9 @@ package object domain {
   val AbsState = BasicState
   type AbsState = AbsState.Elem
 
+  val AbsLintState = LintDomain
+  type AbsLintState = AbsLintState.Elem
+
   // abstract heaps
   val AbsHeap = BasicHeap
   type AbsHeap = AbsHeap.Elem

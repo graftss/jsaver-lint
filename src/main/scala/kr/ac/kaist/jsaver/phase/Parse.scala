@@ -34,7 +34,7 @@ case object Parse extends Phase[Unit, ParseConfig, Script] {
       case None =>
     }
     if (config.pprint) println(ast.prettify.noSpaces)
-
+    if (config.printTree) println(ast.toTreeString(0))
     ast
   }
 
@@ -76,7 +76,10 @@ case object Parse extends Phase[Unit, ParseConfig, Script] {
   }
 
   def defaultConfig: ParseConfig = ParseConfig()
-  val options: List[PhaseOption[ParseConfig]] = List()
+  val options: List[PhaseOption[ParseConfig]] = List(
+    ("printTree", BoolOption(c => c.printTree = true),
+      "Print the AST as a tree after parsing."),
+  )
 }
 
 // Parse phase config
@@ -84,5 +87,7 @@ case class ParseConfig(
   var jsonFile: Option[String] = None,
   var esparse: Boolean = false,
   var test262: Boolean = false,
-  var pprint: Boolean = false
+  var pprint: Boolean = false,
+  // if true, print the AST at the end of the parse phase
+  var printTree: Boolean = false
 ) extends Config

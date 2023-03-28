@@ -5,19 +5,81 @@ import kr.ac.kaist.jsaver.spec.algorithm._
 import kr.ac.kaist.jsaver.ir._
 import kr.ac.kaist.jsaver.error._
 import kr.ac.kaist.jsaver.spec.grammar._
-import kr.ac.kaist.jsaver.util.{ WeakUId, Span, Pos }
+import kr.ac.kaist.jsaver.util.{ Pos, Span, WeakUId }
 import kr.ac.kaist.jsaver.util.Useful.{ cached, error }
-import io.circe._, io.circe.syntax._
+import io.circe._
+import io.circe.syntax._
+
+import scala.util.control.Breaks.{ break, breakable }
 
 trait AST {
   var parent: Option[AST] = None
   def kind: String
   def idx: Int
   def k: Int
+  def maxK: Int
   def span: Span
   def parserParams: List[Boolean]
+  // child AST nodes
   def fullList: List[(String, PureValue)]
-  def maxK: Int
+
+  def toLine(indent: Int = 0, newline: Boolean = true): String = {
+    val code = this.toString
+    val maxCodeLen = 75 - indent * 2
+    val codeLine = if (code.length >= maxCodeLen) {
+      code.substring(0, maxCodeLen) + " ..."
+    } else {
+      code
+    }
+
+    ("  " * indent) + s"$name:  $codeLine" + (if (newline) "\n" else "")
+  }
+
+  def toTreeString(indent: Int = 0): String = {
+    val spaces = "  " * indent
+
+    if (kind == "StatementList" && idx == 1) {
+      // special case to display StatementList1 as a flat list
+      var node = this
+      var result = List[String]()
+
+      breakable {
+        while (node.kind == "StatementList" && idx == 1) {
+          node.fullList match {
+            case (_, ASTVal(nextNode)) :: (_, ASTVal(stmt)) :: _ => {
+              // two children means there's another statement before `stmt`
+              result ::= stmt.toTreeString(indent + 1)
+              node = nextNode
+            }
+            case (_, ASTVal(stmt)) :: _ => {
+              // one child means that `stmt` is the first statement in the list,
+              // so iteration can stop
+              result ::= stmt.toTreeString(indent + 1)
+              break
+            }
+            case _ => break
+          }
+        }
+      }
+
+      toLine(indent) + result.mkString("\n")
+    } else if (fullList.length == 1 && kind.contains("Expression")) {
+      // collapse expression chains
+      fullList.head match {
+        case (_, ASTVal(ast)) => ast.toTreeString(indent)
+        case _ => ""
+      }
+    } else if (!fullList.isEmpty) {
+      // normal AST node with children
+      toLine(indent) + fullList.flatMap({
+        case (_, ASTVal(ast)) => List(ast.toTreeString(indent + 1))
+        case _ => List()
+      }).mkString("\n")
+    } else {
+      // normal AST node without children
+      toLine(indent, false)
+    }
+  }
 
   // not use helpers of case calsses
   override def hashCode: Int = super.hashCode

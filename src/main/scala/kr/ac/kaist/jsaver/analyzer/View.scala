@@ -4,6 +4,7 @@ import kr.ac.kaist.jsaver.cfg._
 import kr.ac.kaist.jsaver.js.ast._
 
 // view abstraction for analysis sensitivities
+// stringifier: `ViewApp` in `analyzer/Stringifier.scala`
 case class View(
   jsViewOpt: Option[JSView] = None,
   calls: List[Call] = Nil,
