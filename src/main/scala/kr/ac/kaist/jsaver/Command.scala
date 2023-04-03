@@ -59,3 +59,8 @@ case object CmdAnalyze extends Command("analyze", CmdBase >> Parse >> Analyze) {
 case object CmdCollect extends Command("collect", CmdBase >> Collect) {
   def help = "collects the final concrete/abstract state of a JavaScript program."
 }
+
+// lint
+case object CmdLint extends Command(name = "lint", CmdBase >> Parse >> Analyze >> Lint) {
+  def help = "applies semantic lint rules to a given JavaScript program."
+}

@@ -235,27 +235,38 @@ case class AbsTransfer(sem: AbsSemantics) {
                 }
               }.getOrElse(warn("invalid use of __ABS__"))
             } else {
-              algo.name match {
-                case "PutValue" => println("PutValue")
-                case "Construct" =>
-                case "Call" => {
+              val st2 = algo.name match {
+                case "PutValue" => {
+                  // TODO: record mutations
+                  st
+                }
+                case "Construct" | "Call" => {
                   println(s"called algo '${algo.name}': ")
-                  println(s"  value= ${fValue}")
-                  vs(0).loc.getSingle match {
+                  println(s"  view: ${view.toString(false)}")
+                  println(s"  js view: ${view.jsCalls}")
+                  println(s"  call bodies: ${view.jsCalls.map(_.nearestFnBody).map(ast => s"(${ast.kind},${ast.hashCode})")}")
+                  vs.head.loc.getSingle match {
                     case FlatElem(loc) => {
                       val obj = st(loc)
                       val code = obj(AbsValue("ECMAScriptCode"))
                       code.ast.getSingle match {
                         case FlatElem(ast) => {
-                          println(s"  -- ast: ${ast.ast} ||| hash: ${ast.ast.hashCode}")
+                          // `ast.ast`: function body of the callee
+                          val calleeBody = ast.ast
+                          val callerAst = view.jsViewOpt.get.ast
+                          val callerBody = callerAst.nearestFnBody
+                          println(s"  caller expression ast: ${callerAst} ||| caller body hash: ${callerBody.hashCode}")
+                          println(s"  callee body: ${calleeBody} ||| hash: ${calleeBody.hashCode}")
+                          val newLint = st.lint.recordCall(view, callerBody.hashCode, calleeBody.hashCode)
+                          st.copy(lint = newLint)
                         }
-                        case _ => ()
+                        case _ => st
                       }
                     }
-                    case _ => ()
+                    case _ => st
                   }
                 }
-                case _ => ()
+                case _ => st
               }
               val newLocals = getLocals(algo.head.params, vs)
               val newSt = st.copy(locals = newLocals)

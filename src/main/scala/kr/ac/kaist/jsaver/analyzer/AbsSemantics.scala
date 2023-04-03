@@ -115,32 +115,41 @@ case class AbsSemantics(
   }
 
   // handle calls
+  // `call`: the CFG node representing the call expression
+  // `callerView`: the view at the caller's call expression
+  // `callerSt`: the caller's state just before the call
+  // `func`: the CFG function representing the callee algorithm
+  // `calleeSt`: the callee's initial state at the start of the call
+  // `astOpt`: if the algorithm called is an SDO, this is the SDO's AST node receiver.
+  //           otherwise, `None`
   def doCall(
     call: Call,
     callerView: View,
     callerSt: AbsState,
     func: Function,
-    st: AbsState,
+    calleeSt: AbsState,
     astOpt: Option[js.ast.AST] = None
   ): Unit = {
     val callerNp = NodePoint(call, callerView)
     this.callInfo += callerNp -> callerSt
 
+    // compute the `NodePoint` at the entry of the callee
     val isJsCall = func.name match {
       case "Call" | "Construct" => true
       case _ => false
     }
     val calleeView = viewCall(callerView, call, isJsCall, astOpt)
-    val np = NodePoint(func.entry, calleeView)
-    this += np -> st.doCall
+    val calleeNp = NodePoint(func.entry, calleeView)
+
+    // record the
+    this += calleeNp -> calleeSt.doCall
 
     if (isJsCall) {
-      println("  js call: " + call)
-      println("  view: " + callerView)
-      callerView.jsCalls.headOption match {
-        case None => println("  no ast: " + callerView.calls)
-        case Some(ast) => println("  ast: " + callerView.jsCalls.headOption.map(ast => ast.span))
-      }
+      //      println("  js call: " + call)
+      //      callerView.jsCalls.headOption match {
+      //        case None => println("  no ast: " + callerView.calls)
+      //        case Some(ast) => println("  ast: " + callerView.jsCalls.headOption.map(ast => ast.span))
+      //      }
     }
 
     if (func.name contains "PutValue") {
@@ -169,7 +178,8 @@ case class AbsSemantics(
   def handleSens(n: Int, bound: Int): Int =
     if (INF_SENS) n else n min bound
 
-  // call transition
+  // when performing the function call `call` from the caller with view `callerView`,
+  // returns the new view at the callee.
   def viewCall(
     callerView: View,
     call: Call,

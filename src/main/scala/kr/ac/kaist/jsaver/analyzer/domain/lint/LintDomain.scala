@@ -12,7 +12,7 @@ case class MayCallees(callees: List[Int]) {
 }
 
 object LintDomain extends Domain {
-  // (view at call entry, hash of callee function AST)
+  // (view at call entry, hash of caller function body AST)
   case class CallCtx(view: View, hash: Int)
   type MayCallMap = Map[CallCtx, MayCallees]
 
@@ -50,14 +50,14 @@ object LintDomain extends Domain {
     // conversion to string
     override def toString: String = stringify(this)
 
-    def recordCall(ctxView: View, ctxHash: Int, calleeHash: Int) = {
-      val ctx = CallCtx(ctxView, ctxHash)
+    def recordCall(ctxView: View, callerHash: Int, calleeHash: Int) = {
+      val ctx = CallCtx(ctxView, callerHash)
       val nextCallees = mayCall.get(ctx) match {
         case Some(callees) => callees.addCallee(calleeHash)
         case None => MayCallees(List(calleeHash))
       }
 
-      mayCall.updated(CallCtx(ctxView, ctxHash), nextCallees)
+      this.copy(mayCall = mayCall.updated(CallCtx(ctxView, callerHash), nextCallees))
     }
 
     def getCalls(hash: Int): String = {

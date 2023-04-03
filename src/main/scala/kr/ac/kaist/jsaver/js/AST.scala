@@ -23,6 +23,18 @@ trait AST {
   // child AST nodes
   def fullList: List[(String, PureValue)]
 
+  def nearestFnBody: AST = {
+    parent match {
+      case None => {
+        println(s"??? null AST parent: ${this}")
+        this
+      }
+      case Some(parentAst) if parentAst.kind == "FunctionBody" => parentAst
+      case Some(parentAst) if parentAst.kind == "ScriptBody" => parentAst
+      case Some(parentAst) => parentAst.nearestFnBody
+    }
+  }
+
   def toLine(indent: Int = 0, newline: Boolean = true): String = {
     val code = this.toString
     val maxCodeLen = 75 - indent * 2
@@ -35,8 +47,10 @@ trait AST {
     ("  " * indent) + s"$name:  $codeLine" + (if (newline) "\n" else "")
   }
 
-  def toTreeString(indent: Int = 0): String = {
-    val spaces = "  " * indent
+  // print the AST node as a tree, with one node printed per line and depth
+  // indicated by indentation
+  def toTreeString(depth: Int = 0): String = {
+    val spaces = "  " * depth
 
     if (kind == "StatementList" && idx == 1) {
       // special case to display StatementList1 as a flat list
@@ -48,13 +62,13 @@ trait AST {
           node.fullList match {
             case (_, ASTVal(nextNode)) :: (_, ASTVal(stmt)) :: _ => {
               // two children means there's another statement before `stmt`
-              result ::= stmt.toTreeString(indent + 1)
+              result ::= stmt.toTreeString(depth + 1)
               node = nextNode
             }
             case (_, ASTVal(stmt)) :: _ => {
               // one child means that `stmt` is the first statement in the list,
               // so iteration can stop
-              result ::= stmt.toTreeString(indent + 1)
+              result ::= stmt.toTreeString(depth + 1)
               break
             }
             case _ => break
@@ -62,22 +76,22 @@ trait AST {
         }
       }
 
-      toLine(indent) + result.mkString("\n")
+      toLine(depth) + result.mkString("\n")
     } else if (fullList.length == 1 && kind.contains("Expression")) {
       // collapse expression chains
       fullList.head match {
-        case (_, ASTVal(ast)) => ast.toTreeString(indent)
+        case (_, ASTVal(ast)) => ast.toTreeString(depth)
         case _ => ""
       }
     } else if (!fullList.isEmpty) {
       // normal AST node with children
-      toLine(indent) + fullList.flatMap({
-        case (_, ASTVal(ast)) => List(ast.toTreeString(indent + 1))
+      toLine(depth) + fullList.flatMap({
+        case (_, ASTVal(ast)) => List(ast.toTreeString(depth + 1))
         case _ => List()
       }).mkString("\n")
     } else {
       // normal AST node without children
-      toLine(indent, false)
+      toLine(depth, false)
     }
   }
 

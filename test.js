@@ -1,27 +1,21 @@
-function f(a, b, c) {
-  return 1 / g();
+function e() {
+  return 0;
 }
 
-function g() {
-  return 2;
+function f() {
+  return e();
 }
 
-f();
-g();
-//
-//function h() {
-//
-//}
+function g(x) {
+  if (x) {
+    return f();
+  }  else {
+    return e();
+  }
+}
 
-
-
-//function g() {
-//  x = 3;
-//  h();
-//}
-//
-//function h() {
-//
-//}
-
+g(true);
+g(false);
+//g();
+//g();
 //g();
