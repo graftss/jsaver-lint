@@ -27,6 +27,13 @@ case class View(
     js.loops.length,
     js.calls.length
   ))
+
+  def toCallStackString: String = jsViewOpt match {
+    case Some(JSView(ast, calls, loops)) => {
+      (ast :: calls).reverse.mkString(" -> ")
+    }
+    case None => ""
+  }
 }
 
 // contexts

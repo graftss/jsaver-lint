@@ -44,7 +44,7 @@ trait AST {
       code
     }
 
-    ("  " * indent) + s"$name:  $codeLine" + (if (newline) "\n" else "")
+    ("  " * indent) + s"$name ($hashCode):  $codeLine" + (if (newline) "\n" else "")
   }
 
   // print the AST node as a tree, with one node printed per line and depth

@@ -21,7 +21,8 @@ case class AbsSemantics(
   var callInfo: Map[NodePoint[Call], AbsState] = Map(),
   var retEdges: Map[ReturnPoint, Set[NodePoint[Call]]] = Map(),
   var loopOut: Map[View, Set[View]] = Map(),
-  timeLimit: Option[Long] = None
+  timeLimit: Option[Long] = None,
+  script: js.ast.Script
 ) {
   // CFG
   val cfg = js.cfg
@@ -339,7 +340,7 @@ object AbsSemantics {
     execLevel: Int
   ): AbsSemantics = {
     val initPair = Initialize(script)
-    val sem = AbsSemantics(npMap = Map(initPair), timeLimit = timeLimit)
+    val sem = AbsSemantics(npMap = Map(initPair), timeLimit = timeLimit, script = script)
     if (execLevel >= 1) {
       sem.checkWithInterp = Some(CheckWithInterp(sem, script, execLevel))
     }

@@ -188,9 +188,8 @@ case class AbsTransfer(sem: AbsSemantics) {
       _ = sem.doReturn(rp, ret)
     } yield ()
 
-    // transfer function for calls
+    // transfer function for algorithm calls
     def transfer(call: Call, view: View): Updater = {
-      //      println(s"call: ${call}")
       call.inst match {
         // transfer function for algorithms implemented in `simpleFuncs`
         case IApp(id, ERef(RefId(Id(name))), args) if simpleFuncs contains name => {
@@ -204,12 +203,13 @@ case class AbsTransfer(sem: AbsSemantics) {
         }
         // transfer function for non-simple algorithm calls
         case IApp(id, fexpr, args) => for {
-          // `value` is the abstract value of the function expression
+          // `fValue` is the abstract value of the callee function expression
           fValue <- transfer(fexpr)
           // `args` is a list of argument expressions to the algorithm call
-          // `vs` is a list of the abstract values of each argument, computed via a transfer function
+          // `vs` is a list of the abstract values of each argument, computed via transfer function
           vs <- join(args.map(transfer))
           st <- get
+          // `v` is the value returned from the call
           v = {
             // return values
             var returnValue: AbsValue = AbsValue.Bot
@@ -269,7 +269,7 @@ case class AbsTransfer(sem: AbsSemantics) {
                 case _ => st
               }
               val newLocals = getLocals(algo.head.params, vs)
-              val newSt = st.copy(locals = newLocals)
+              val newSt = st2.copy(locals = newLocals)
               sem.doCall(call, view, st, algo.func, newSt)
             }
 
@@ -310,6 +310,7 @@ case class AbsTransfer(sem: AbsSemantics) {
             else modify(_.defineLocal(id -> v))
           }
         } yield ()
+        // transfer function for syntax-directed operations
         case access @ IAccess(id, bexpr, expr, args) => {
           //          println("access: ")
           //          println(s"  id=${id}")

@@ -11,9 +11,12 @@ case class MayCallees(callees: List[Int]) {
     MayCallees(callees :+ hash)
 }
 
+case class CallCtx(view: View, hash: Int) {
+  override def toString: String = s"CallCtx(view=${view.toString(false)}, hash=$hash)"
+}
+
 object LintDomain extends Domain {
   // (view at call entry, hash of caller function body AST)
-  case class CallCtx(view: View, hash: Int)
   type MayCallMap = Map[CallCtx, MayCallees]
 
   lazy val Bot = Elem(Map())
@@ -22,6 +25,7 @@ object LintDomain extends Domain {
   implicit val app: App[Elem] = (app, elem) => app >> (elem match {
     case Bot => "⊥"
     case Top => "T"
+    case Elem(mayCall) => s"MayCall($mayCall)"
   })
 
   // constructors
@@ -45,12 +49,18 @@ object LintDomain extends Domain {
     }
 
     // TODO: join operator
-    def ⊔(that: Elem): Elem = that
+    def ⊔(that: Elem): Elem = {
+      println(s"joining lint states: ${this} || ${that}")
+      that
+    }
 
     // conversion to string
-    override def toString: String = stringify(this)
+    override def toString: String = {
+      stringify(this)
+    }
 
     def recordCall(ctxView: View, callerHash: Int, calleeHash: Int) = {
+      println(s"recording call: view=${ctxView.toString(false)}, caller=${callerHash}, callee=$calleeHash")
       val ctx = CallCtx(ctxView, callerHash)
       val nextCallees = mayCall.get(ctx) match {
         case Some(callees) => callees.addCallee(calleeHash)

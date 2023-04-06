@@ -68,6 +68,7 @@ object JSAVER {
 
     // Linter
     CmdLint,
+    CmdLintTest,
   )
   val cmdMap = commands.foldLeft[Map[String, Command[_]]](Map()) {
     case (map, cmd) => map + (cmd.name -> cmd)
@@ -87,6 +88,7 @@ object JSAVER {
 
     // Linter
     Lint,
+    LintTest,
   )
 
   // global options
