@@ -22,12 +22,11 @@ case object Lint extends Phase[AbsSemantics, LintConfig, LintResult] {
     jsaverConfig: JSAVERConfig,
     config: LintConfig = defaultConfig
   ): LintResult = {
-    // walk the script AST
-    walker.walk(sem.script)
-
+    // read the exit state from the analysis result
     val exitState = sem.getState(sem.runJobsRp)
 
-    println(s"calls: ${callsToString(exitState)}")
+    // walk the script AST
+    walker.walk(sem.script)
 
     LintResult()
   }

@@ -17,7 +17,7 @@ sealed trait AValue {
     case AComp(ty, value, target) => s"C($ty, $value, $target)"
     case AConst(name) => s"~$name~"
     case NamedLoc(name) => s"#$name"
-    case AllocSite(k, view) => s"#$k:$view"
+    case AllocSite(k, view) => s"#$k:${view.toString(false)}"
     case SubMapLoc(baseLoc) => s"$baseLoc:SubMap"
     case AFunc(algo) => s"λ(${algo.name})"
     case AClo(params, locals, func) => (

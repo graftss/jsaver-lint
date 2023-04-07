@@ -238,25 +238,33 @@ case class AbsTransfer(sem: AbsSemantics) {
               val st2 = algo.name match {
                 case "PutValue" => {
                   // TODO: record mutations
+                  println("called PutValue:")
+                  // read value argument
+                  val W = vs(1)
+                  println(s"  W=${W}")
+
+                  // read reference record argument
+                  vs(0).loc.getSingle match {
+                    case FlatBot => println("bot")
+                    case FlatTop => println("top")
+                    case FlatElem(loc) => {
+                      val V = st(loc)
+                      println(s"V=${V}")
+                    }
+                  }
                   st
                 }
                 case "Construct" | "Call" => {
-                  println(s"called algo '${algo.name}': ")
-                  println(s"  view: ${view.toString(false)}")
-                  println(s"  js view: ${view.jsCalls}")
-                  println(s"  call bodies: ${view.jsCalls.map(_.nearestFnBody).map(ast => s"(${ast.kind},${ast.hashCode})")}")
                   vs.head.loc.getSingle match {
                     case FlatElem(loc) => {
                       val obj = st(loc)
                       val code = obj(AbsValue("ECMAScriptCode"))
                       code.ast.getSingle match {
-                        case FlatElem(ast) => {
+                        case FlatElem(absAst) => {
                           // `ast.ast`: function body of the callee
-                          val calleeBody = ast.ast
+                          val calleeBody = absAst.ast
                           val callerAst = view.jsViewOpt.get.ast
                           val callerBody = callerAst.nearestFnBody
-                          println(s"  caller expression ast: ${callerAst} ||| caller body hash: ${callerBody.hashCode}")
-                          println(s"  callee body: ${calleeBody} ||| hash: ${calleeBody.hashCode}")
                           val newLint = st.lint.recordCall(view, callerBody.hashCode, calleeBody.hashCode)
                           st.copy(lint = newLint)
                         }

@@ -25,13 +25,8 @@ case object LintTest extends Phase[Script, LintConfig, LintTestResult] {
     walker.walk(script)
 
     println(script.toTreeString())
-    script match {
-      case Script0(Some(x0), parserParams, span) =>
-        println(s"script0: ${script.kind}, ${x0.kind}")
-      case _ =>
-    }
 
-    println("func defs: " + walker.funcDefs)
+    println("mutations: " + walker.mutations)
 
     LintTestResult()
   }
