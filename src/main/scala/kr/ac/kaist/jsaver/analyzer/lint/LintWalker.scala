@@ -43,7 +43,9 @@ class LintWalker extends ASTWalker {
   }
 
   def recordFuncDefInfo(ast: AST): Unit = {
-    parseFuncDefInfo(ast).foreach(info => funcDefs += info.bodyHash -> info)
+    parseFuncDefInfo(ast).foreach(info => {
+      funcDefs += info.bodyHash -> info
+    })
   }
 
   // record a `FuncDefInto` object from a `Script` node

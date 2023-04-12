@@ -23,6 +23,15 @@ trait AST {
   // child AST nodes
   def fullList: List[(String, PureValue)]
 
+  // Compute the root node of the AST by recursively traveling upwards.
+  def root: AST = {
+    parent match {
+      case None => this
+      case Some(ast) => ast.root
+    }
+  }
+
+  // Compute the nearest ancestor that is a `FunctionBody` node.
   def nearestFnBody: AST = {
     parent match {
       case None => {
