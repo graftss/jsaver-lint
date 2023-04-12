@@ -3,10 +3,13 @@ package kr.ac.kaist.jsaver.phase
 import kr.ac.kaist.jsaver.{ JSAVERConfig, js }
 import kr.ac.kaist.jsaver.analyzer.AbsSemantics
 import kr.ac.kaist.jsaver.analyzer.domain.{ AbsState, MayCallees }
+import kr.ac.kaist.jsaver.analyzer.lint.{ LintContext, LintWalker }
+import kr.ac.kaist.jsaver.analyzer.lint.rule.{ ArrayCallbackReturn, LintRule }
+import kr.ac.kaist.jsaver.cfg.{ Branch, Call, Exit, InstNode, Linear }
+import kr.ac.kaist.jsaver.ir.{ ArrowInst, CallInst, CondInst, ILet, ISeq, Id, NormalInst }
 import kr.ac.kaist.jsaver.js.ASTWalker
 import kr.ac.kaist.jsaver.js
 import kr.ac.kaist.jsaver.js.ast._
-import kr.ac.kaist.jsaver.lint.LintWalker
 import kr.ac.kaist.jsaver.util.OptionKind
 
 case class LintResult()
@@ -17,16 +20,20 @@ case object Lint extends Phase[AbsSemantics, LintConfig, LintResult] {
 
   val walker = new LintWalker()
 
+  val rules: List[LintRule] = List(ArrayCallbackReturn)
+
   def apply(
     sem: AbsSemantics,
     jsaverConfig: JSAVERConfig,
     config: LintConfig = defaultConfig
   ): LintResult = {
+    val ctx = new LintContext(sem)
+
     // read the exit state from the analysis result
     val exitState = sem.getState(sem.runJobsRp)
 
-    // walk the script AST
-    walker.walk(sem.script)
+    rules.foreach(_.validate(ctx))
+    ctx.logReports()
 
     LintResult()
   }

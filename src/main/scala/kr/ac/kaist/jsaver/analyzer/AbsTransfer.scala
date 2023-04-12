@@ -1,6 +1,7 @@
 package kr.ac.kaist.jsaver.analyzer
 
 import kr.ac.kaist.jsaver.DEBUG
+import kr.ac.kaist.jsaver.analyzer.domain.BasicObj.KeyWiseList
 import kr.ac.kaist.jsaver.analyzer.domain._
 import kr.ac.kaist.jsaver.analyzer.domain.lint.{ LintAlg, LintUtil }
 import kr.ac.kaist.jsaver.cfg._
@@ -128,57 +129,65 @@ case class AbsTransfer(sem: AbsSemantics) {
     }, view)
 
     // transfer function for normal instructions
-    def transfer(inst: NormalInst): Updater = inst match {
-      case IExpr(expr) => for {
-        v <- transfer(expr)
-      } yield v
-      case ILet(id, expr) => for {
-        v <- transfer(expr)
-        _ <- modify(_.defineLocal(id -> v))
-      } yield ()
-      case IAssign(ref, expr) => {
-        for {
-          rv <- transfer(ref)
+    def transfer(inst: NormalInst): Updater = {
+      inst match {
+        case IExpr(expr) => for {
           v <- transfer(expr)
-          _ <- modify(_.update(rv, v))
+        } yield v
+        case ILet(id, expr) => for {
+          v <- transfer(expr)
+          _ <- {
+            // value returned from map
+            if (inst.uid == 12318) {
+              println(s"  assigned value = ${v}")
+            }
+          }
+          _ <- modify(_.defineLocal(id -> v))
         } yield ()
-      }
-      case IDelete(ref) => for {
-        rv <- transfer(ref)
-        _ <- modify(_.delete(rv))
-      } yield ()
-      case IAppend(expr, list) => for {
-        l <- escape(transfer(list))
-        loc = l.loc
-        v <- escape(transfer(expr))
-        _ <- modify(_.append(l.loc, v))
-      } yield ()
-      case IPrepend(expr, list) => for {
-        l <- escape(transfer(list))
-        loc = l.loc
-        v <- escape(transfer(expr))
-        _ <- modify(_.prepend(l.loc, v))
-      } yield ()
-      case IReturn(expr) => for {
-        v <- transfer(expr)
-        _ <- doReturn(v)
-        _ <- put(AbsState.Bot)
-      } yield ()
-      case thr @ IThrow(name) => {
-        val loc: AllocSite = AllocSite(thr.asite, cp.view)
-        for {
-          _ <- modify(_.allocMap(Ty("OrdinaryObject"), List(
-            AbsValue(Str("Prototype")) -> AbsValue(NamedLoc(s"GLOBAL.$name.prototype")),
-            AbsValue(Str("ErrorData")) -> AbsValue(Undef),
-          ))(loc))
-          _ <- doReturn(AbsValue(loc).wrapCompletion("throw"))
+        case IAssign(ref, expr) => {
+          for {
+            rv <- transfer(ref)
+            v <- transfer(expr)
+            _ <- modify(_.update(rv, v))
+          } yield ()
+        }
+        case IDelete(ref) => for {
+          rv <- transfer(ref)
+          _ <- modify(_.delete(rv))
+        } yield ()
+        case IAppend(expr, list) => for {
+          l <- escape(transfer(list))
+          loc = l.loc
+          v <- escape(transfer(expr))
+          _ <- modify(_.append(l.loc, v))
+        } yield ()
+        case IPrepend(expr, list) => for {
+          l <- escape(transfer(list))
+          loc = l.loc
+          v <- escape(transfer(expr))
+          _ <- modify(_.prepend(l.loc, v))
+        } yield ()
+        case IReturn(expr) => for {
+          v <- transfer(expr)
+          _ <- doReturn(v)
           _ <- put(AbsState.Bot)
         } yield ()
+        case thr @ IThrow(name) => {
+          val loc: AllocSite = AllocSite(thr.asite, cp.view)
+          for {
+            _ <- modify(_.allocMap(Ty("OrdinaryObject"), List(
+              AbsValue(Str("Prototype")) -> AbsValue(NamedLoc(s"GLOBAL.$name.prototype")),
+              AbsValue(Str("ErrorData")) -> AbsValue(Undef),
+            ))(loc))
+            _ <- doReturn(AbsValue(loc).wrapCompletion("throw"))
+            _ <- put(AbsState.Bot)
+          } yield ()
+        }
+        case IAssert(expr) => for {
+          v <- transfer(expr)
+        } yield ()
+        case IPrint(expr) => st => st
       }
-      case IAssert(expr) => for {
-        v <- transfer(expr)
-      } yield ()
-      case IPrint(expr) => st => st
     }
 
     // return specific value
@@ -236,12 +245,32 @@ case class AbsTransfer(sem: AbsSemantics) {
               }.getOrElse(warn("invalid use of __ABS__"))
             } else {
               val st2 = algo.name match {
+                case "GLOBAL.Array.prototype.map" => {
+                  val argArray = vs(1).loc.getSingle match {
+                    case FlatElem(elem) => st(elem)
+                  }
+                  println(s"map args: ${args}")
+                  println(s"  map arg array loc: ${vs(1)}")
+                  println(s"  map arg array: ${argArray}")
+                  //                  println(s"view: ${view}")
+                  println(s"  arg array type: ${argArray.getTy}")
+                  argArray match {
+                    case KeyWiseList(values) => {
+                      st(values(0).loc).foreach(absObj => {
+                        val absVal = absObj(AbsValue("ECMAScriptCode"))
+                        println(s"  ast hash=${absVal.getSingleAst.map(_.hashCode).getOrElse(-1)}")
+                      })
+                    }
+                    case a @ _ => { println(s"unexpected type of `argArray`: ${a.getClass}") }
+                  }
+                  st
+                }
                 case "PutValue" => {
                   // TODO: record mutations
-                  println("called PutValue:")
+                  println("PutValue:")
                   // read value argument
-                  val W = vs(1)
-                  println(s"  W=${W}")
+                  //                  val W = vs(1)
+                  //                  println(s"  W=${W}")
 
                   // read reference record argument
                   vs(0).loc.getSingle match {

@@ -60,7 +60,6 @@ object LintDomain extends Domain {
     }
 
     def recordCall(ctxView: View, callerHash: Int, calleeHash: Int) = {
-      println(s"recording call: view=${ctxView.toString(false)}, caller=${callerHash}, callee=$calleeHash")
       val ctx = CallCtx(ctxView, callerHash)
       val nextCallees = mayCall.get(ctx) match {
         case Some(callees) => callees.addCallee(calleeHash)

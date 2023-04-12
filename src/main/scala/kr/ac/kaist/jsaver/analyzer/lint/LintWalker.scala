@@ -1,11 +1,13 @@
-package kr.ac.kaist.jsaver.lint
+package kr.ac.kaist.jsaver.analyzer.lint
 
 import kr.ac.kaist.jsaver.js.ASTWalker
 import kr.ac.kaist.jsaver.js.ast._
 import kr.ac.kaist.jsaver.util.Span
 
 // data recorded for each function definition in a program
-case class FuncDefInfo(bodyHash: Int, name: Option[String], span: Span)
+case class FuncDefInfo(ast: AST, bodyHash: Int, name: Option[String], span: Span) {
+  def getName: String = name.getOrElse("[anonymous]")
+}
 
 // data recorded for each mutation expression in a program
 case class MutationInfo(exprHash: Int, span: Span)
@@ -17,14 +19,26 @@ class LintWalker extends ASTWalker {
 
   // attempt to parse a `FuncDefInfo` object from an AST node
   def parseFuncDefInfo(ast: AST): Option[FuncDefInfo] = ast match {
+    // Script :: ScriptBody
     case Script0(Some(x0), _, span) =>
-      Some(FuncDefInfo(x0.hashCode, Some("File"), span))
+      Some(FuncDefInfo(ast, x0.hashCode, Some("File"), span))
+
+    // FunctionDeclaration :: "function" BindingIdentifier "(" FormalParameters ")" "{" FunctionBody "}"
     case FunctionDeclaration0(x1, _, x6, _, span) =>
-      Some(FuncDefInfo(x6.hashCode, Some(x1.toString), span))
+      Some(FuncDefInfo(ast, x6.hashCode, Some(x1.toString), span))
+
+    // FunctionDeclaration :: "function" "(" FormalParameters ")" "{" FunctionBody "}"
     case FunctionDeclaration1(_, x5, _, span) =>
-      Some(FuncDefInfo(x5.hashCode, None, span))
+      Some(FuncDefInfo(ast, x5.hashCode, None, span))
+
+    // FunctionExpression :: "function" BindingIdentifier "(" FormalParameters ")" "{" FunctionBody "}"
     case FunctionExpression0(x1, _, x6, _, span) =>
-      Some(FuncDefInfo(x6.hashCode, x1.map(_.toString), span))
+      Some(FuncDefInfo(ast, x6.hashCode, x1.map(_.toString), span))
+
+    // MethodDefinition :: PropertyName "(" UniqueFormalParameters ")" "{" FunctionBody "}"
+    case MethodDefinition0(x0, x2, x5, _, span) =>
+      Some(FuncDefInfo(ast, x5.hashCode, Some(x0.toString), span))
+
     case _ => None
   }
 
@@ -46,6 +60,11 @@ class LintWalker extends ASTWalker {
 
   // record a `FuncDefInfo` object from a `FunctionExpression` node
   override def walk(ast: FunctionExpression): Unit = {
+    recordFuncDefInfo(ast)
+    super.walk(ast)
+  }
+
+  override def walk(ast: MethodDefinition): Unit = {
     recordFuncDefInfo(ast)
     super.walk(ast)
   }

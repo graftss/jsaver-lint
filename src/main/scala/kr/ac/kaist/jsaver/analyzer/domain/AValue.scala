@@ -12,27 +12,29 @@ import kr.ac.kaist.jsaver.util.Useful._
 // values used in analysis
 sealed trait AValue {
   // conversion to string
-  override def toString: String = this match {
-    case AComp(AConst("noraml"), value, _) => s"N($value)"
-    case AComp(ty, value, target) => s"C($ty, $value, $target)"
-    case AConst(name) => s"~$name~"
-    case NamedLoc(name) => s"#$name"
-    case AllocSite(k, view) => s"#$k:${view.toString(false)}"
-    case SubMapLoc(baseLoc) => s"$baseLoc:SubMap"
-    case AFunc(algo) => s"λ(${algo.name})"
-    case AClo(params, locals, func) => (
-      params.mkString("(", ", ", ")") +
-      (for ((x, v) <- locals) yield s"$x -> $v").mkString("[", ", ", "]") +
-      s" => ${func.uidString}"
-    )
-    case ACont(pararms, locals, target) =>
-      s"${pararms.mkString("(", ", ", ")")} [=>] $target"
-    case AAst(ast) =>
-      val max = AValue.AST_MAX_LENGTH
-      var str = ast.toString
-      if (str.length > max) str = str.substring(0, max - 3) + "..."
-      f"☊[${ast.kind}]($str) @ 0x${ast.hashCode}%08x"
-    case ASimple(simple) => simple.toString
+  override def toString: String = {
+    this match {
+      case AComp(AConst("noraml"), value, _) => s"N($value)"
+      case AComp(ty, value, target) => s"C($ty, $value, $target)"
+      case AConst(name) => s"~$name~"
+      case NamedLoc(name) => s"#$name"
+      case AllocSite(k, view) => s"#$k:${view.toString(false)}"
+      case SubMapLoc(baseLoc) => s"$baseLoc:SubMap"
+      case AFunc(algo) => s"λ(${algo.name})"
+      case AClo(params, locals, func) => (
+        params.mkString("(", ", ", ")") +
+        (for ((x, v) <- locals) yield s"$x -> $v").mkString("[", ", ", "]") +
+        s" => ${func.uidString}"
+      )
+      case ACont(pararms, locals, target) =>
+        s"${pararms.mkString("(", ", ", ")")} [=>] $target"
+      case AAst(ast) =>
+        val max = AValue.AST_MAX_LENGTH
+        var str = ast.toString
+        if (str.length > max) str = str.substring(0, max - 3) + "..."
+        f"☊[${ast.kind}]($str) @ 0x${ast.hashCode}%08x"
+      case ASimple(simple) => simple.toString
+    }
   }
 }
 object AValue {

@@ -240,6 +240,11 @@ object BasicState extends Domain {
       }
     }
     def apply(loc: Loc): AbsObj = heap(loc)
+    // lookup abstract location that has a single concrete location
+    def apply(aloc: AbsLoc): Option[AbsObj] = aloc.getSingle match {
+      case FlatElem(loc) => Some(this(loc))
+      case _ => None
+    }
 
     // lookup local variables
     def lookupLocal(x: Id): AbsValue = this match {

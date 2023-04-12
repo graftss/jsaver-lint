@@ -173,6 +173,12 @@ object BasicValue extends Domain {
       this.simple.getSingle
     )
 
+    // get single AST value
+    def getSingleAst: Option[AST] = ast.getSingle match {
+      case FlatElem(ast) => Some(ast.ast)
+      case _ => None
+    }
+
     // get reachable locations
     def reachableLocs: Set[Loc] = {
       var locs = loc.toSet
