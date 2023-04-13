@@ -136,12 +136,6 @@ case class AbsTransfer(sem: AbsSemantics) {
         } yield v
         case ILet(id, expr) => for {
           v <- transfer(expr)
-          _ <- {
-            // value returned from map
-            if (inst.uid == 12318) {
-              println(s"  assigned value = ${v}")
-            }
-          }
           _ <- modify(_.defineLocal(id -> v))
         } yield ()
         case IAssign(ref, expr) => {
@@ -245,26 +239,6 @@ case class AbsTransfer(sem: AbsSemantics) {
               }.getOrElse(warn("invalid use of __ABS__"))
             } else {
               val st2 = algo.name match {
-                case "GLOBAL.Array.prototype.map" => {
-                  val argArray = vs(1).loc.getSingle match {
-                    case FlatElem(elem) => st(elem)
-                  }
-                  println(s"map args: ${args}")
-                  println(s"  map arg array loc: ${vs(1)}")
-                  println(s"  map arg array: ${argArray}")
-                  //                  println(s"view: ${view}")
-                  println(s"  arg array type: ${argArray.getTy}")
-                  argArray match {
-                    case KeyWiseList(values) => {
-                      st(values(0).loc).foreach(absObj => {
-                        val absVal = absObj(AbsValue("ECMAScriptCode"))
-                        println(s"  ast hash=${absVal.getSingleAst.map(_.hashCode).getOrElse(-1)}")
-                      })
-                    }
-                    case a @ _ => { println(s"unexpected type of `argArray`: ${a.getClass}") }
-                  }
-                  st
-                }
                 case "PutValue" => {
                   // TODO: record mutations
                   println("PutValue:")
