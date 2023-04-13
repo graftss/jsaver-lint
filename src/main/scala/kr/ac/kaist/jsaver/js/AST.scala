@@ -31,6 +31,22 @@ trait AST {
     }
   }
 
+  def exprChild: Option[AST] = {
+    if (kind.contains("Expression") || kind == "Initializer") {
+      fullList.head match {
+        case (_, ASTVal(child)) if child.kind.contains("Expression") => {
+          child.exprChild
+        }
+        case (_, ASTVal(child)) => {
+          Some(child)
+        }
+        case _ => Some(this)
+      }
+    } else {
+      None
+    }
+  }
+
   // Compute the nearest ancestor that is a `FunctionBody` node.
   def nearestFnBody: AST = {
     parent match {

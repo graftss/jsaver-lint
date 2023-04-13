@@ -241,20 +241,20 @@ case class AbsTransfer(sem: AbsSemantics) {
               val st2 = algo.name match {
                 case "PutValue" => {
                   // TODO: record mutations
-                  println("PutValue:")
+                  //                  println("PutValue:")
                   // read value argument
                   //                  val W = vs(1)
                   //                  println(s"  W=${W}")
 
                   // read reference record argument
-                  vs(0).loc.getSingle match {
-                    case FlatBot => println("bot")
-                    case FlatTop => println("top")
-                    case FlatElem(loc) => {
-                      val V = st(loc)
-                      println(s"V=${V}")
-                    }
-                  }
+                  //                  vs(0).loc.getSingle match {
+                  //                    case FlatBot => println("bot")
+                  //                    case FlatTop => println("top")
+                  //                    case FlatElem(loc) => {
+                  //                      val V = st(loc)
+                  //                      println(s"V=${V}")
+                  //                    }
+                  //                  }
                   st
                 }
                 case "Construct" | "Call" => {

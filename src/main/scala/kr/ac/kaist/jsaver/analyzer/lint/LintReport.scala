@@ -6,7 +6,7 @@ import kr.ac.kaist.jsaver.js.ast.AST
 // Data encoding a single instance of a lint rule violation
 trait LintReport {
   val rule: LintRule
-  val message: String
+  def message: String
 
   override def toString: String = message
 }
