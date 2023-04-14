@@ -3,11 +3,13 @@ package kr.ac.kaist.jsaver.analyzer
 import kr.ac.kaist.jsaver.cfg._
 import kr.ac.kaist.jsaver.js.ast._
 
+case class CallView(call: Call, astOpt: Option[AST])
+
 // view abstraction for analysis sensitivities
 // stringifier: `ViewApp` in `analyzer/Stringifier.scala`
 case class View(
   jsViewOpt: Option[JSView] = None,
-  calls: List[Call] = Nil,
+  calls: List[CallView] = Nil,
   loops: List[LoopCtxt] = Nil,
   intraLoopDepth: Int = 0
 ) extends AnalyzerElem {

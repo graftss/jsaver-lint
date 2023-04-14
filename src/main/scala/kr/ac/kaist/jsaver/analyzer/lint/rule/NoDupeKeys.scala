@@ -1,21 +1,22 @@
 package kr.ac.kaist.jsaver.analyzer.lint.rule
-import kr.ac.kaist.jsaver.analyzer.{ NodePoint, View }
+import kr.ac.kaist.jsaver.analyzer.{ CallView, NodePoint, View }
 import kr.ac.kaist.jsaver.analyzer.domain.{ AbsObj, AbsState, AbsValue }
 import kr.ac.kaist.jsaver.analyzer.lint.{ LintContext, LintReport }
 import kr.ac.kaist.jsaver.cfg.{ Branch, Exit, InstNode, Linear, Node }
-import kr.ac.kaist.jsaver.ir.{ ASTVal, Addr, Clo, Const, Cont, Func, IAccess, Id, SimpleValue }
-import kr.ac.kaist.jsaver.js.ast.{ ObjectLiteral, ObjectLiteral0, ObjectLiteral1, ObjectLiteral2 }
+import kr.ac.kaist.jsaver.ir.{ ASTVal, Addr, Clo, Const, Cont, EStr, Func, IAccess, IApp, Id, SimpleValue }
+import kr.ac.kaist.jsaver.js.ast.{ AST, ObjectLiteral, ObjectLiteral0, ObjectLiteral1, ObjectLiteral2, PropertyDefinition }
 
 import scala.collection.mutable.ListBuffer
 
-case class NdkReport(view: View, ast: ObjectLiteral, property: AbsValue, oldValue: AbsValue, newValue: AbsValue) extends LintReport {
+case class NdkReport(view: View, ast: ObjectLiteral, keyAst: AST, keyValue: AbsValue, oldValue: AbsValue, newValue: AbsValue) extends LintReport {
   override val rule: LintRule = NoDupeKeys
 
   override def message: String = {
     val lines = ListBuffer(
       "Defined duplicate key in object literal:",
       s"  object literal: ${ast}",
-      s"  property: ${property}",
+      s"  duplicate property: `${keyAst}`",
+      s"  key: ${keyValue}",
       s"  old value: ${oldValue}",
       s"  new value: ${newValue}",
     )
@@ -40,6 +41,12 @@ object NoDupeKeys extends LintRule {
   def isInstrumentedInstruction(pair: (NodePoint[Node], AbsState)): Boolean =
     pair._1.node.getInst.exists(_.uid == INSTRUMENTED_UID)
 
+  def isPropDefEval(cv: CallView): Boolean =
+    cv.call.inst match {
+      case IAccess(_, _, EStr("PropertyDefinitionEvaluation"), _) => true
+      case _ => false
+    }
+
   def validatePropDefn(pair: (NodePoint[Node], AbsState)): Option[NdkReport] = {
     val (np, st) = pair
 
@@ -58,8 +65,6 @@ object NoDupeKeys extends LintRule {
 
     // Then check the value of the old property descriptor:
     astOpt.flatMap(ast => {
-      println(s"view: ${np.view.jsViewOpt}")
-
       val oldDescValue = st(OLD_DESC_ID, np)
 
       // If it has a nonempty location, the property may already exist, so we have a dupe key.
@@ -67,9 +72,10 @@ object NoDupeKeys extends LintRule {
         val newDescValue = st(NEW_DESC_ID, np)
         (st(oldDescValue.loc), st(newDescValue.loc)) match {
           case (Some(oldDesc), Some(newDesc)) => {
-            val oldValue = oldDesc(DESC_VALUE_KEY)
-            val newValue = newDesc(DESC_VALUE_KEY)
-            Some(NdkReport(np.view, ast, st(PROPERTY_ID, np), oldValue, newValue))
+            val keyAst = np.view.calls.find(isPropDefEval) match {
+              case Some(CallView(_, Some(ast))) => ast
+            }
+            Some(NdkReport(np.view, ast, keyAst, st(PROPERTY_ID, np), oldDesc(DESC_VALUE_KEY), newDesc(DESC_VALUE_KEY)))
           }
           case _ => None
         }

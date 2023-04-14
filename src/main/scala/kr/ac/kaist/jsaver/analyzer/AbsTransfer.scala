@@ -365,7 +365,7 @@ case class AbsTransfer(sem: AbsSemantics) {
                       if (name == "Evaluation" || name == "NamedEvaluation") Some(ast)
                       else None
                     )
-                    _ = sem.doCall(call, view, st, algo.func, newSt, astOpt)
+                    _ = sem.doCall(call, view, st, algo.func, newSt, astOpt, Some(ast))
                   } yield AbsValue.Bot
                   case None =>
                     val v = AbsValue(ast.subs(name).getOrElse {

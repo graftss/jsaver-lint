@@ -5,7 +5,7 @@ import kr.ac.kaist.jsaver.analyzer.domain._
 import kr.ac.kaist.jsaver.error.AnalysisImprecise
 import kr.ac.kaist.jsaver.cfg._
 import kr.ac.kaist.jsaver.ir
-import kr.ac.kaist.jsaver.ir.{ Bool, IAccess }
+import kr.ac.kaist.jsaver.ir.{ Bool, IAccess, IApp }
 import kr.ac.kaist.jsaver.js
 import kr.ac.kaist.jsaver.js.ast._
 import kr.ac.kaist.jsaver.util.Useful._
@@ -122,15 +122,17 @@ case class AbsSemantics(
   // `callerSt`: the caller's state just before the call
   // `func`: the CFG function representing the callee algorithm
   // `calleeSt`: the callee's initial state at the start of the call
-  // `astOpt`: if the algorithm called is an SDO, this is the SDO's AST node receiver.
-  //           otherwise, `None`
+  // `astOpt`: if the algorithm called is the SDO "Evaluation" or "NamedEvaluation",
+  //           this is the SDO's AST node receiver. otherwise, `None`
+  // `sdoAstOpt`: if the algorithm called is *any* SDO, this is the SDO's AST node receiver.
   def doCall(
     call: Call,
     callerView: View,
     callerSt: AbsState,
     func: Function,
     calleeSt: AbsState,
-    astOpt: Option[js.ast.AST] = None
+    astOpt: Option[js.ast.AST] = None,
+    sdoAstOpt: Option[js.ast.AST] = None
   ): Unit = {
     val callerNp = NodePoint(call, callerView)
     this.callInfo += callerNp -> callerSt
@@ -140,25 +142,9 @@ case class AbsSemantics(
       case "Call" | "Construct" => true
       case _ => false
     }
-    val calleeView = viewCall(callerView, call, isJsCall, astOpt)
+    val calleeView = viewCall(callerView, call, isJsCall, astOpt, sdoAstOpt)
     val calleeNp = NodePoint(func.entry, calleeView)
-
-    // record the
     this += calleeNp -> calleeSt.doCall
-
-    if (isJsCall) {
-      //      println("  js call: " + call)
-      //      callerView.jsCalls.headOption match {
-      //        case None => println("  no ast: " + callerView.calls)
-      //        case Some(ast) => println("  ast: " + callerView.jsCalls.headOption.map(ast => ast.span))
-      //      }
-    }
-
-    if (func.name contains "PutValue") {
-      // TODO: mutation detection
-      //      println(s"--- put value: ${func.name}")
-      //      println(s"    params: ${func.params}")
-    }
 
     // log max ijk
     if (LOG) {
@@ -186,16 +172,17 @@ case class AbsSemantics(
     callerView: View,
     call: Call,
     isJsCall: Boolean,
-    astOpt: Option[AST]
+    astOpt: Option[AST],
+    sdoAstOpt: Option[AST]
   ): View = {
     val View(_, calls, _, _) = callerView
+
     val view = callerView.copy(
-      calls = handleSens(call :: calls, IR_CALL_DEPTH),
+      calls = handleSens(CallView(call, sdoAstOpt) :: calls, IR_CALL_DEPTH),
       intraLoopDepth = 0
     )
 
-    val result = viewJsSens(view, isJsCall, astOpt)
-    result
+    viewJsSens(view, isJsCall, astOpt)
   }
 
   // JavaScript sensitivities

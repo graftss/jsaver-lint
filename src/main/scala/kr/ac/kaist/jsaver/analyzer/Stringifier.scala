@@ -58,7 +58,7 @@ class Stringifier(
 
     // original code
     // ctxtStr(view.calls.map(call => s"${call.uidString}/${call.inst}"), view.loops)
-    ctxtStr(view.calls.map(call => s"${call.inst.toMyString}"), view.loops)
+    ctxtStr(view.calls.map(cv => s"${cv.call.inst.toMyString}"), view.loops)
   }
 
   // abstract reference values
