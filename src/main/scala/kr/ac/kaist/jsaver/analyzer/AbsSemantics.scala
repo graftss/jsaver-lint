@@ -5,12 +5,13 @@ import kr.ac.kaist.jsaver.analyzer.domain._
 import kr.ac.kaist.jsaver.error.AnalysisImprecise
 import kr.ac.kaist.jsaver.cfg._
 import kr.ac.kaist.jsaver.ir
-import kr.ac.kaist.jsaver.ir.Bool
+import kr.ac.kaist.jsaver.ir.{ Bool, IAccess }
 import kr.ac.kaist.jsaver.js
 import kr.ac.kaist.jsaver.js.ast._
 import kr.ac.kaist.jsaver.util.Useful._
 import kr.ac.kaist.jsaver.util._
 import kr.ac.kaist.jsaver.{ DEBUG, LINE_SEP }
+
 import scala.Console._
 import scala.annotation.tailrec
 
@@ -180,7 +181,7 @@ case class AbsSemantics(
     if (INF_SENS) n else n min bound
 
   // when performing the function call `call` from the caller with view `callerView`,
-  // returns the new view at the callee.
+  // returns the new view at the callee entry.
   def viewCall(
     callerView: View,
     call: Call,
@@ -192,7 +193,9 @@ case class AbsSemantics(
       calls = handleSens(call :: calls, IR_CALL_DEPTH),
       intraLoopDepth = 0
     )
-    viewJsSens(view, isJsCall, astOpt)
+
+    val result = viewJsSens(view, isJsCall, astOpt)
+    result
   }
 
   // JavaScript sensitivities

@@ -1,22 +1,28 @@
 package kr.ac.kaist.jsaver.analyzer.lint.rule
-import kr.ac.kaist.jsaver.analyzer.NodePoint
+import kr.ac.kaist.jsaver.analyzer.{ NodePoint, View }
 import kr.ac.kaist.jsaver.analyzer.domain.{ AbsObj, AbsState, AbsValue }
 import kr.ac.kaist.jsaver.analyzer.lint.{ LintContext, LintReport }
 import kr.ac.kaist.jsaver.cfg.{ Branch, Exit, InstNode, Linear, Node }
-import kr.ac.kaist.jsaver.ir.{ ASTVal, Addr, Clo, Const, Cont, Func, Id, SimpleValue }
+import kr.ac.kaist.jsaver.ir.{ ASTVal, Addr, Clo, Const, Cont, Func, IAccess, Id, SimpleValue }
 import kr.ac.kaist.jsaver.js.ast.{ ObjectLiteral, ObjectLiteral0, ObjectLiteral1, ObjectLiteral2 }
 
-case class NdkReport(ast: ObjectLiteral, property: AbsValue, oldValue: AbsValue, newValue: AbsValue) extends LintReport {
+import scala.collection.mutable.ListBuffer
+
+case class NdkReport(view: View, ast: ObjectLiteral, property: AbsValue, oldValue: AbsValue, newValue: AbsValue) extends LintReport {
   override val rule: LintRule = NoDupeKeys
 
   override def message: String = {
-    List(
+    val lines = ListBuffer(
       "Defined duplicate key in object literal:",
       s"  object literal: ${ast}",
       s"  property: ${property}",
       s"  old value: ${oldValue}",
-      s"  new value: ${newValue}"
-    ).mkString("\n")
+      s"  new value: ${newValue}",
+    )
+
+    jsCallString(view).foreach(s => lines += s"  source: ${s}")
+
+    lines.mkString("\n")
   }
 }
 
@@ -52,6 +58,8 @@ object NoDupeKeys extends LintRule {
 
     // Then check the value of the old property descriptor:
     astOpt.flatMap(ast => {
+      println(s"view: ${np.view.jsViewOpt}")
+
       val oldDescValue = st(OLD_DESC_ID, np)
 
       // If it has a nonempty location, the property may already exist, so we have a dupe key.
@@ -61,7 +69,7 @@ object NoDupeKeys extends LintRule {
           case (Some(oldDesc), Some(newDesc)) => {
             val oldValue = oldDesc(DESC_VALUE_KEY)
             val newValue = newDesc(DESC_VALUE_KEY)
-            Some(NdkReport(ast, st(PROPERTY_ID, np), oldValue, newValue))
+            Some(NdkReport(np.view, ast, st(PROPERTY_ID, np), oldValue, newValue))
           }
           case _ => None
         }
@@ -75,9 +83,7 @@ object NoDupeKeys extends LintRule {
     ctx.sem.npMap.filter(isInstrumentedInstruction)
       .map(validatePropDefn)
       .foreach {
-        case Some(a @ NdkReport(ast, property, oldDesc, newDesc)) => {
-          ctx.report(a)
-        }
+        case Some(report) => ctx.report(report)
         case _ => ()
       }
   }

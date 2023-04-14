@@ -1,5 +1,6 @@
 package kr.ac.kaist.jsaver.ir
 
+import kr.ac.kaist.jsaver.js.ast.AST
 import kr.ac.kaist.jsaver.util.WeakUId
 
 // IR Instructions
