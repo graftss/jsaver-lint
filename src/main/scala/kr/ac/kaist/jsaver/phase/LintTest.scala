@@ -26,8 +26,8 @@ case object LintTest extends Phase[Script, LintConfig, LintTestResult] {
 
     println(script.toTreeString())
 
-    println("func defs: " + walker.funcDefs)
-    println("mutations: " + walker.mutations)
+    val addexp = script.findKind("AdditiveExpression").get
+    println(s"add: ${script.childIds}")
 
     LintTestResult()
   }

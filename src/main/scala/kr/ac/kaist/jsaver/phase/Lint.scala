@@ -4,7 +4,7 @@ import kr.ac.kaist.jsaver.{ JSAVERConfig, js }
 import kr.ac.kaist.jsaver.analyzer.AbsSemantics
 import kr.ac.kaist.jsaver.analyzer.domain.{ AbsState, MayCallees }
 import kr.ac.kaist.jsaver.analyzer.lint.{ LintContext, LintWalker }
-import kr.ac.kaist.jsaver.analyzer.lint.rule.{ ArrayCallbackReturn, LintRule, NoDupeKeys }
+import kr.ac.kaist.jsaver.analyzer.lint.rule.{ ArrayCallbackReturn, LintRule, NoArrayForEach, NoDupeKeys }
 import kr.ac.kaist.jsaver.cfg.{ Branch, Call, Exit, InstNode, Linear }
 import kr.ac.kaist.jsaver.ir.{ ArrowInst, CallInst, CondInst, ILet, ISeq, Id, NormalInst }
 import kr.ac.kaist.jsaver.js.ASTWalker
@@ -20,7 +20,7 @@ case object Lint extends Phase[AbsSemantics, LintConfig, LintResult] {
 
   val walker = new LintWalker()
 
-  val rules: List[LintRule] = List(ArrayCallbackReturn, NoDupeKeys)
+  val rules: List[LintRule] = List(ArrayCallbackReturn, NoDupeKeys, NoArrayForEach)
 
   def apply(
     sem: AbsSemantics,

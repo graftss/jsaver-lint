@@ -1,7 +1,7 @@
 package kr.ac.kaist.jsaver.analyzer.lint.rule
 import kr.ac.kaist.jsaver.analyzer.{ CallView, NodePoint, View }
 import kr.ac.kaist.jsaver.analyzer.domain.{ AbsObj, AbsState, AbsValue }
-import kr.ac.kaist.jsaver.analyzer.lint.{ LintContext, LintReport }
+import kr.ac.kaist.jsaver.analyzer.lint.{ LintContext, LintError, LintReport, LintSeverity }
 import kr.ac.kaist.jsaver.cfg.{ Branch, Exit, InstNode, Linear, Node }
 import kr.ac.kaist.jsaver.ir.{ ASTVal, Addr, Clo, Const, Cont, EStr, Func, IAccess, IApp, Id, SimpleValue }
 import kr.ac.kaist.jsaver.js.ast.{ AST, ObjectLiteral, ObjectLiteral0, ObjectLiteral1, ObjectLiteral2, PropertyDefinition }
@@ -10,6 +10,7 @@ import scala.collection.mutable.ListBuffer
 
 case class NdkReport(view: View, ast: ObjectLiteral, keyAst: AST, keyValue: AbsValue, oldValue: AbsValue, newValue: AbsValue) extends LintReport {
   override val rule: LintRule = NoDupeKeys
+  override val severity: LintSeverity = LintError
 
   override def message: String = {
     val lines = ListBuffer(
@@ -30,7 +31,7 @@ case class NdkReport(view: View, ast: ObjectLiteral, keyAst: AST, keyValue: AbsV
 object NoDupeKeys extends LintRule {
   override val name: String = "no-dupe-keys"
 
-  private val INSTRUMENTED_UID = 24505
+  private val INSTRUMENTED_INST_UID = 24505
   private val PROPERTY_ID = Id("P")
   private val OLD_DESC_ID = Id("current")
   private val NEW_DESC_ID = Id("Desc")
@@ -39,7 +40,7 @@ object NoDupeKeys extends LintRule {
   // Find all valid nodepoints in `OrdinaryDefineOwnProperty` at the instruction:
   //  2:app __x2__ = (ValidateAndApplyPropertyDescriptor O P extensible Desc current)
   def isInstrumentedInstruction(pair: (NodePoint[Node], AbsState)): Boolean =
-    pair._1.node.getInst.exists(_.uid == INSTRUMENTED_UID)
+    pair._1.node.getInst.exists(_.uid == INSTRUMENTED_INST_UID)
 
   def isPropDefEval(cv: CallView): Boolean =
     cv.call.inst match {

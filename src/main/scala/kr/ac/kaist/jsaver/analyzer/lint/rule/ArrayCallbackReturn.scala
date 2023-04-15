@@ -1,7 +1,7 @@
 package kr.ac.kaist.jsaver.analyzer.lint.rule
 import kr.ac.kaist.jsaver.analyzer.domain.{ AbsState, AbsValue, SimpleDomain }
 import kr.ac.kaist.jsaver.analyzer.{ AbsSemantics, NodePoint }
-import kr.ac.kaist.jsaver.analyzer.lint.{ FuncDefInfo, LintContext, LintReport }
+import kr.ac.kaist.jsaver.analyzer.lint.{ FuncDefInfo, LintContext, LintError, LintReport, LintSeverity }
 import kr.ac.kaist.jsaver.cfg.{ CFG, Call, InstNode, Linear, Node }
 import kr.ac.kaist.jsaver.ir.{ IApp, ILet, Id }
 import kr.ac.kaist.jsaver.js.ast.AST
@@ -17,6 +17,7 @@ case class AcrInst(id: AcrInstId, methodName: String, node: Node, valueId: Id)
 
 case class AcrReport(override val message: String) extends LintReport {
   override val rule: LintRule = ArrayCallbackReturn
+  override val severity: LintSeverity = LintError
 }
 
 object ArrayCallbackReturn extends LintRule {

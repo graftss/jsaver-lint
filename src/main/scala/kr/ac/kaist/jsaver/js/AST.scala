@@ -31,6 +31,35 @@ trait AST {
     }
   }
 
+  // The list of direct child AST nodes of this AST node
+  def childAsts: List[AST] = fullList.flatMap {
+    case (_, ASTVal(ast)) => Some(ast)
+    case _ => None
+  }
+
+  def findKind(kind: String): Option[AST] = {
+    if (this.kind == kind) Some(this)
+    else {
+      childAsts.foreach(child => {
+        child.findKind(kind) match {
+          case Some(ast) => return Some(ast)
+          case _ => ()
+        }
+      })
+      None
+    }
+  }
+
+  // The list of identifier children of this AST
+  def childIds: List[Identifier] =
+    recChildIds.distinctBy(_.toString)
+
+  private def recChildIds: List[Identifier] = {
+    if (kind == "Identifier") List(this.asInstanceOf[Identifier])
+    else if (fullList.isEmpty) List()
+    else childAsts.flatMap(_.recChildIds)
+  }
+
   def exprChild: Option[AST] = {
     if (kind.contains("Expression") || kind == "Initializer") {
       fullList.head match {
@@ -51,7 +80,7 @@ trait AST {
   def nearestFnBody: AST = {
     parent match {
       case None => {
-        println(s"??? null AST parent: ${this}")
+        //        println(s"??? null AST parent of [${this.kind}]: ${this}")
         this
       }
       case Some(parentAst) if parentAst.kind == "FunctionBody" => parentAst

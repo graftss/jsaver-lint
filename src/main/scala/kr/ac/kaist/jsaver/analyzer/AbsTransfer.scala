@@ -206,7 +206,7 @@ case class AbsTransfer(sem: AbsSemantics) {
         }
         // transfer function for non-simple algorithm calls
         case IApp(id, fexpr, args) => for {
-          // `fValue` is the abstract value of the callee function expression
+          // `fValue` is the abstract value of the callee's function expression
           fValue <- transfer(fexpr)
           // `args` is a list of argument expressions to the algorithm call
           // `vs` is a list of the abstract values of each argument, computed via transfer function
@@ -238,6 +238,10 @@ case class AbsTransfer(sem: AbsSemantics) {
                 }
               }.getOrElse(warn("invalid use of __ABS__"))
             } else {
+              if (algo.name == "GLOBAL.Array.prototype.forEach") {
+                println("calling forEach")
+                println(s"  inst [${call.inst.uid}]: ${call.inst}")
+              }
               val st2 = algo.name match {
                 case "PutValue" => {
                   // TODO: record mutations
