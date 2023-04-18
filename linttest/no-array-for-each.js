@@ -7,6 +7,4 @@ function main(a, b) {
     methods.forEach((methodName, idx) => arr[methodName](callbacks[idx]))
 }
 
-main();
-
 

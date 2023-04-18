@@ -132,7 +132,8 @@ case class AbsSemantics(
     func: Function,
     calleeSt: AbsState,
     astOpt: Option[js.ast.AST] = None,
-    sdoAstOpt: Option[js.ast.AST] = None
+    sdoAstOpt: Option[js.ast.AST] = None,
+    calleeLoc: AbsValue = AbsValue.Bot,
   ): Unit = {
     val callerNp = NodePoint(call, callerView)
     this.callInfo += callerNp -> callerSt
@@ -142,7 +143,8 @@ case class AbsSemantics(
       case "Call" | "Construct" => true
       case _ => false
     }
-    val calleeView = viewCall(callerView, call, isJsCall, astOpt, sdoAstOpt)
+
+    val calleeView = viewCall(callerView, call, isJsCall, astOpt, sdoAstOpt, calleeLoc)
     val calleeNp = NodePoint(func.entry, calleeView)
     this += calleeNp -> calleeSt.doCall
 
@@ -173,7 +175,8 @@ case class AbsSemantics(
     call: Call,
     isJsCall: Boolean,
     astOpt: Option[AST],
-    sdoAstOpt: Option[AST]
+    sdoAstOpt: Option[AST],
+    calleeLoc: AbsValue,
   ): View = {
     val View(_, calls, _, _) = callerView
 

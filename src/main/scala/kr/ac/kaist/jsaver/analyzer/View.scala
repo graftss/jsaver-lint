@@ -1,9 +1,22 @@
 package kr.ac.kaist.jsaver.analyzer
 
+import kr.ac.kaist.jsaver.analyzer.domain.AbsValue
 import kr.ac.kaist.jsaver.cfg._
 import kr.ac.kaist.jsaver.js.ast._
 
-case class CallView(call: Call, astOpt: Option[AST])
+case class CallView(call: Call, astOpt: Option[AST]) {
+  //    override def equals(o: Any): Boolean = o match {
+  //      case o: CallView => o.call.equals(call)
+  //      case _ => false
+  //    }
+}
+
+case class JSCallView(ast: AST, calleeValue: AbsValue) {
+    override def equals(o: Any): Boolean = o match {
+      case o: JSCallView => o.ast.equals(ast)
+      case _ => false
+    }
+}
 
 // view abstraction for analysis sensitivities
 // stringifier: `ViewApp` in `analyzer/Stringifier.scala`
@@ -35,6 +48,24 @@ case class View(
       (ast :: calls).reverse.mkString(" -> ")
     }
     case None => ""
+  }
+
+  def toVerboseString: String = {
+    val sep = "\n  "
+    val sep2 = "\n    "
+    val irStr = s"View: $sep" +
+      s"calls:$sep2${calls.map(_.call).mkString(sep2)}$sep" +
+      s"loops:$sep2${loops.mkString(sep2)}"
+
+    val jsStr = jsViewOpt match {
+      case Some(jsView) =>
+        sep +
+          s"js calls:$sep2${jsView.calls.mkString(sep2)}$sep" +
+          s"js loops:$sep2${jsView.loops.mkString(sep2)}"
+      case None => ""
+    }
+
+    irStr + jsStr
   }
 }
 

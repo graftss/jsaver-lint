@@ -62,11 +62,12 @@ trait AST {
 
   def exprChild: Option[AST] = {
     if (kind.contains("Expression") || kind == "Initializer") {
-      fullList.head match {
-        case (_, ASTVal(child)) if child.kind.contains("Expression") => {
+      fullList.headOption match {
+        case None => Some(this)
+        case Some((_, ASTVal(child))) if child.kind.contains("Expression") => {
           child.exprChild
         }
-        case (_, ASTVal(child)) => {
+        case Some((_, ASTVal(child))) => {
           Some(child)
         }
         case _ => Some(this)
