@@ -1,6 +1,6 @@
 package kr.ac.kaist.jsaver.analyzer
 
-import kr.ac.kaist.jsaver.analyzer.domain.AbsValue
+import kr.ac.kaist.jsaver.analyzer.domain.{ AbsState, AbsValue }
 import kr.ac.kaist.jsaver.cfg._
 import kr.ac.kaist.jsaver.js.ast._
 
@@ -11,11 +11,15 @@ case class CallView(call: Call, astOpt: Option[AST]) {
   //    }
 }
 
-case class JSCallView(ast: AST, calleeValue: AbsValue) {
-    override def equals(o: Any): Boolean = o match {
-      case o: JSCallView => o.ast.equals(ast)
-      case _ => false
-    }
+case class JSCallToken(ast: AST, value: AbsValue) {
+  override def equals(o: Any): Boolean = o match {
+    case o: JSCallToken => o.ast.equals(ast)
+    case _ => false
+  }
+
+  override def toString: String = {
+    s"[${value}] $ast"
+  }
 }
 
 // view abstraction for analysis sensitivities
@@ -27,7 +31,7 @@ case class View(
   intraLoopDepth: Int = 0
 ) extends AnalyzerElem {
   // get JavaScript contexts
-  def jsCalls: List[AST] = jsViewOpt.fold(List[AST]())(_.calls)
+  def jsCalls: List[JSCallToken] = jsViewOpt.fold(List[JSCallToken]())(_.calls)
   def jsLoops: List[LoopCtxt] = jsViewOpt.fold(List[LoopCtxt]())(_.loops)
 
   // get ir ijk
@@ -43,11 +47,11 @@ case class View(
     js.calls.length
   ))
 
-  def toCallStackString: String = jsViewOpt match {
+  def toJsCallsString: String = jsViewOpt match {
     case Some(JSView(ast, calls, loops)) => {
-      (ast :: calls).reverse.mkString(" -> ")
+      "  " + (ast :: calls).reverse.mkString(" ->\n  ")
     }
-    case None => ""
+    case None => "None"
   }
 
   def toVerboseString: String = {
@@ -75,6 +79,6 @@ case class LoopCtxt(loop: Loop, depth: Int)
 // views for JavaScript
 case class JSView(
   ast: AST,
-  calls: List[AST],
+  calls: List[JSCallToken],
   loops: List[LoopCtxt]
 )

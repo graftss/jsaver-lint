@@ -51,7 +51,7 @@ class Stringifier(
     view.jsViewOpt.map {
       case JSView(ast, calls, loops) =>
         app >> s"☊[${ast.kind}/${ast.hashCode}]"
-        ctxtStr(calls.map(call => s"☊[${call.kind}/${call.hashCode}]"), loops)
+        ctxtStr(calls.map(call => s"☊[${call.ast.kind}/${call.ast.hashCode}]"), loops)
     }
 
     // ir contexts

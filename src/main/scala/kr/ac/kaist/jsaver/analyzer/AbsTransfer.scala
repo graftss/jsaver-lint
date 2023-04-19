@@ -242,6 +242,7 @@ case class AbsTransfer(sem: AbsSemantics) {
                 println("calling forEach")
                 println(s"  inst [${call.inst.uid}]: ${call.inst}")
               }
+              var calleeLoc: Option[AbsValue] = None
               val st2 = algo.name match {
                 case "PutValue" => {
                   // TODO: record mutations
@@ -264,11 +265,14 @@ case class AbsTransfer(sem: AbsSemantics) {
                 case "Construct" | "Call" => {
                   vs.head.loc.getSingle match {
                     case FlatElem(loc) => {
+                      calleeLoc = Some(vs.head)
                       val obj = st(loc)
                       val code = obj(AbsValue("ECMAScriptCode"))
+                      //                      println(s"calleeLoc: ${calleeLoc.get}")
                       code.ast.getSingle match {
                         case FlatElem(absAst) => {
-                          // `ast.ast`: function body of the callee
+                          //                          println(s"code: ${absAst.ast}")
+                          // `absAst.ast`: function body of the callee
                           val calleeBody = absAst.ast
                           val callerAst = view.jsViewOpt.get.ast
                           val callerBody = callerAst.nearestFnBody
@@ -285,7 +289,7 @@ case class AbsTransfer(sem: AbsSemantics) {
               }
               val newLocals = getLocals(algo.head.params, vs)
               val newSt = st2.copy(locals = newLocals)
-              sem.doCall(call, view, st, algo.func, newSt)
+              sem.doCall(call, view, st, algo.func, newSt, None, None, calleeLoc)
             }
 
             // closures

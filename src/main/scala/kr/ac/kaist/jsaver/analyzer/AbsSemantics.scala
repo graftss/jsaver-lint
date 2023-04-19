@@ -133,7 +133,7 @@ case class AbsSemantics(
     calleeSt: AbsState,
     astOpt: Option[js.ast.AST] = None,
     sdoAstOpt: Option[js.ast.AST] = None,
-    calleeLoc: AbsValue = AbsValue.Bot,
+    calleeLocOpt: Option[AbsValue] = None
   ): Unit = {
     val callerNp = NodePoint(call, callerView)
     this.callInfo += callerNp -> callerSt
@@ -144,7 +144,7 @@ case class AbsSemantics(
       case _ => false
     }
 
-    val calleeView = viewCall(callerView, call, isJsCall, astOpt, sdoAstOpt, calleeLoc)
+    val calleeView = viewCall(callerView, call, isJsCall, astOpt, sdoAstOpt, calleeLocOpt)
     val calleeNp = NodePoint(func.entry, calleeView)
     this += calleeNp -> calleeSt.doCall
 
@@ -176,7 +176,7 @@ case class AbsSemantics(
     isJsCall: Boolean,
     astOpt: Option[AST],
     sdoAstOpt: Option[AST],
-    calleeLoc: AbsValue,
+    calleeLocOpt: Option[AbsValue]
   ): View = {
     val View(_, calls, _, _) = callerView
 
@@ -185,14 +185,15 @@ case class AbsSemantics(
       intraLoopDepth = 0
     )
 
-    viewJsSens(view, isJsCall, astOpt)
+    viewJsSens(view, isJsCall, astOpt, calleeLocOpt)
   }
 
   // JavaScript sensitivities
   def viewJsSens(
     view: View,
     isJsCall: Boolean,
-    astOpt: Option[AST]
+    astOpt: Option[AST],
+    calleeLocOpt: Option[AbsValue]
   ): View = {
     val View(jsViewOpt, calls, loops, _) = view
     val (jsCalls, jsLoops) = (view.jsCalls, view.jsLoops)
@@ -206,7 +207,7 @@ case class AbsSemantics(
       case _ if isJsCall => view.copy(jsViewOpt = jsViewOpt.map {
         case JSView(ast, calls, loops) => JSView(
           ast,
-          handleSens(ast :: calls, JS_CALL_DEPTH),
+          handleSens(JSCallToken(ast, calleeLocOpt.get) :: calls, JS_CALL_DEPTH),
           loops
         )
       })

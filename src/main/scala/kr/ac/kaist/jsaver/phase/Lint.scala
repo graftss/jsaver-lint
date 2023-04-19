@@ -1,8 +1,8 @@
 package kr.ac.kaist.jsaver.phase
 
 import kr.ac.kaist.jsaver.{ JSAVERConfig, js }
-import kr.ac.kaist.jsaver.analyzer.AbsSemantics
-import kr.ac.kaist.jsaver.analyzer.domain.{ AbsState, MayCallees }
+import kr.ac.kaist.jsaver.analyzer.{ AbsSemantics, JSCallToken }
+import kr.ac.kaist.jsaver.analyzer.domain.{ AbsLoc, AbsState, AbsValue, FlatBot, FlatElem, FlatTop, MayCallees }
 import kr.ac.kaist.jsaver.analyzer.lint.{ LintContext, LintUtil, LintWalker }
 import kr.ac.kaist.jsaver.analyzer.lint.rule.{ ArrayCallbackReturn, LintRule, NoArrayForEach, NoDupeKeys, NoLifecycleSetState }
 import kr.ac.kaist.jsaver.cfg.{ Branch, Call, Exit, InstNode, Linear }
@@ -35,14 +35,6 @@ case object Lint extends Phase[AbsSemantics, LintConfig, LintResult] {
     rules.foreach(_.validate(ctx))
     ctx.logReports()
 
-    val node = sem.cfg.funcMap("Call").nodes.find(_.uid == 4068).get
-    sem.npMap.filter(pair => pair._1.node.uid == node.uid).foreach {
-      case (np, st) => {
-        val view = np.view
-        println(view.toVerboseString)
-      }
-    }
-
     LintResult()
   }
 
@@ -56,7 +48,7 @@ case object Lint extends Phase[AbsSemantics, LintConfig, LintResult] {
       callees.foreach(callee => {
         val callerName = walker.funcDefs.get(ctx.hash).flatMap(_.name).getOrElse("?")
         val calleeName = walker.funcDefs.get(callee).flatMap(_.name).getOrElse("?")
-        println(s"- ${callerName} may call ${calleeName}: ${ctx.view.toCallStackString}")
+        println(s"- ${callerName} may call ${calleeName}: ${ctx.view.toJsCallsString}")
       })
     })
   }

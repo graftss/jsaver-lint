@@ -1,6 +1,6 @@
 package kr.ac.kaist.jsaver.analyzer.lint
 
-import kr.ac.kaist.jsaver.analyzer.View
+import kr.ac.kaist.jsaver.analyzer.{ JSCallToken, View }
 import kr.ac.kaist.jsaver.analyzer.domain.AbsState
 import kr.ac.kaist.jsaver.analyzer.lint.rule.LintRule
 import kr.ac.kaist.jsaver.ir.ASTVal
@@ -18,7 +18,7 @@ trait LintReport {
   def jsCallString(view: View): Option[String] = {
     view.jsViewOpt.map(jsView => {
       val callString = jsView.calls.flatMap {
-        case ast if ast.kind == "Initializer" => ast.children.head match {
+        case JSCallToken(ast, _) if ast.kind == "Initializer" => ast.children.head match {
           case ASTVal(ast) => Some(ast)
           case _ => None
         }

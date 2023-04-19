@@ -1,1 +1,3 @@
-a + b + a
+function f() {}
+
+f();

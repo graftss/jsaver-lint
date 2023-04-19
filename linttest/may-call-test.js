@@ -14,8 +14,10 @@ function b(x) {
   }
 }
 
-b(1);
-b(false);
-b(true);
+var x = b;
+
+x(1);
+x(false);
+x(true);
 
 
