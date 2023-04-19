@@ -48,7 +48,7 @@ case object Lint extends Phase[AbsSemantics, LintConfig, LintResult] {
       callees.foreach(callee => {
         val callerName = walker.funcDefs.get(ctx.hash).flatMap(_.name).getOrElse("?")
         val calleeName = walker.funcDefs.get(callee).flatMap(_.name).getOrElse("?")
-        println(s"- ${callerName} may call ${calleeName}: ${ctx.view.toJsCallsString}")
+        println(s"- ${callerName} may call ${calleeName}: ${ctx.view.jsCallString()}")
       })
     })
   }

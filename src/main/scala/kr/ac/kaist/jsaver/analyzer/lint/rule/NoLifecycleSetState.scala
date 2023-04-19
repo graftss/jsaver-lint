@@ -1,13 +1,30 @@
 package kr.ac.kaist.jsaver.analyzer.lint.rule
-import kr.ac.kaist.jsaver.analyzer.{ JSCallToken, JSView, NodePoint }
-import kr.ac.kaist.jsaver.analyzer.domain.{ AbsLoc, AbsObj, AbsState, AbsValue, FlatElem }
-import kr.ac.kaist.jsaver.analyzer.lint.LintContext
+import kr.ac.kaist.jsaver.analyzer.{ JSCallToken, JSView, NodePoint, View }
+import kr.ac.kaist.jsaver.analyzer.domain.{ AAst, AbsLoc, AbsObj, AbsState, AbsValue, FlatBot, FlatElem, FlatTop }
+import kr.ac.kaist.jsaver.analyzer.lint.{ LintContext, LintError, LintReport, LintSeverity }
 import kr.ac.kaist.jsaver.cfg.Node
 import kr.ac.kaist.jsaver.ir.Id
+import kr.ac.kaist.jsaver.js.ast.{ AST, ClassDeclaration0 }
+
+import scala.collection.mutable.ListBuffer
 
 case class ClassEval(np: NodePoint[Node], st: AbsState, obj: AbsObj) {
-  def getProto(): Option[AbsObj] = {
+  def protoObj(): Option[AbsObj] = {
     st(obj(AbsValue("Prototype")).loc)
+  }
+
+  def className(): Option[String] = {
+    val ast = obj(AbsValue("ECMAScriptCode")).ast
+
+    val declAst = ast.getSingle match {
+      case FlatElem(AAst(ast)) => ast.findKindAbove("ClassDeclaration")
+      case _ => None
+    }
+
+    declAst.flatMap {
+      case ClassDeclaration0(id, _, _, _) => Some(id.toString)
+      case _ => None
+    }
   }
 }
 
@@ -32,6 +49,23 @@ trait Key[T] {
 case class RefKey(key: AbsValue) extends Key[AbsObj] {
   def lookup(st: AbsState, obj: AbsObj): Option[AbsObj] = {
     st(obj(key).loc)
+  }
+}
+
+case class NlssReport(methodName: String, className: Option[String], view: View) extends LintReport {
+  override val rule: LintRule = NoLifecycleSetState
+  override val severity: LintSeverity = LintError
+
+  override def message: String = {
+    val lines = ListBuffer(
+      "Called `setState` from a lifecycle method:",
+      s"  component name: ${className.getOrElse("[anonymous]")}",
+      s"  method name: ${methodName}",
+    )
+
+    view.jsCallString.foreach(s => lines += s"  source: ${s}")
+
+    lines.mkString("\n")
   }
 }
 
@@ -140,20 +174,14 @@ object NoLifecycleSetState extends LintRule {
             case JSView(_, calls, _) => {
               calls.foreach {
                 case JSCallToken(ast, fnRef) => {
-                  println(s"call token ast: ${ast}")
                   rcMethodsList.zip(rcMethodsList.map(_.findMatch(fnRef))).foreach {
-                    case (rcm, matches) if !matches.isEmpty => {
-                      // found a rule violation: the `setState` method of the react component class may be called
-                      // while a react component lifecycle method is on the call stack.
-                      println(s"matches: ${matches}")
-                    }
-                    case _ => ()
+                    case (rcm, matches) => matches.foreach(methodName =>
+                      ctx.report(NlssReport(methodName, rcm.classEval.className(), np.view)))
                   }
                 }
               }
             }
           }
-          println("called setState:\n" + np.view.toJsCallsString)
         }
       }
     }

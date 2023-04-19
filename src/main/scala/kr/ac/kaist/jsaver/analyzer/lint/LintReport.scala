@@ -14,21 +14,6 @@ trait LintReport {
 
   override def toString: String = message
 
-  // Map a `View` to its JS function call string
-  def jsCallString(view: View): Option[String] = {
-    view.jsViewOpt.map(jsView => {
-      val callString = jsView.calls.flatMap {
-        case JSCallToken(ast, _) if ast.kind == "Initializer" => ast.children.head match {
-          case ASTVal(ast) => Some(ast)
-          case _ => None
-        }
-        case ast => Some(ast)
-      }.reverse.mkString(", ")
-
-      s"call string: ${callString}"
-    })
-  }
-
   def jsIdValues(st: AbsState, ast: AST): String = {
     ""
   }

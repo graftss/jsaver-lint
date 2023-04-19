@@ -37,11 +37,16 @@ trait AST {
     case _ => None
   }
 
-  def findKind(kind: String): Option[AST] = {
+  def findKindAbove(kind: String): Option[AST] = {
+    if (this.kind == kind) Some(this)
+    else this.parent.flatMap(_.findKindAbove(kind))
+  }
+
+  def findKindBelow(kind: String): Option[AST] = {
     if (this.kind == kind) Some(this)
     else {
       childAsts.foreach(child => {
-        child.findKind(kind) match {
+        child.findKindBelow(kind) match {
           case Some(ast) => return Some(ast)
           case _ => ()
         }

@@ -17,9 +17,9 @@ class A extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount(flag = true) {
     2;
-    this.mySetState(true, {});
+    this.mySetState(flag, {});
   }
 
   componentDidUpdate() {
@@ -28,5 +28,7 @@ class A extends Component {
 }
 
 const a = new A();
-a.componentDidMount();
+A.prototype.componentDidUpdate = A.prototype.componentDidMount;
 a.componentDidUpdate();
+a.componentDidUpdate(false);
+a.componentDidMount();

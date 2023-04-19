@@ -2,6 +2,7 @@ package kr.ac.kaist.jsaver.analyzer
 
 import kr.ac.kaist.jsaver.analyzer.domain.{ AbsState, AbsValue }
 import kr.ac.kaist.jsaver.cfg._
+import kr.ac.kaist.jsaver.ir.ASTVal
 import kr.ac.kaist.jsaver.js.ast._
 
 case class CallView(call: Call, astOpt: Option[AST]) {
@@ -17,9 +18,7 @@ case class JSCallToken(ast: AST, value: AbsValue) {
     case _ => false
   }
 
-  override def toString: String = {
-    s"[${value}] $ast"
-  }
+  override def toString: String = ast.toString
 }
 
 // view abstraction for analysis sensitivities
@@ -47,11 +46,17 @@ case class View(
     js.calls.length
   ))
 
-  def toJsCallsString: String = jsViewOpt match {
-    case Some(JSView(ast, calls, loops)) => {
-      "  " + (ast :: calls).reverse.mkString(" ->\n  ")
-    }
-    case None => "None"
+  // Map a `View` to its JS function call string
+  def jsCallString(): Option[String] = {
+    jsViewOpt.map(jsView => {
+      jsView.calls.flatMap {
+        case JSCallToken(ast, _) if ast.kind == "Initializer" => ast.children.head match {
+          case ASTVal(ast) => Some(ast)
+          case _ => None
+        }
+        case ast => Some(ast)
+      }.reverse.mkString(" -> ")
+    })
   }
 
   def toVerboseString: String = {

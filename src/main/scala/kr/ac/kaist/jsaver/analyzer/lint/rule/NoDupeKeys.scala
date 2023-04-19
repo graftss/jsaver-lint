@@ -22,7 +22,7 @@ case class NdkReport(view: View, ast: ObjectLiteral, keyAst: AST, keyValue: AbsV
       s"  new value: ${newValue}",
     )
 
-    jsCallString(view).foreach(s => lines += s"  source: ${s}")
+    view.jsCallString.foreach(s => lines += s"  source: ${s}")
 
     lines.mkString("\n")
   }
