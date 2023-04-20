@@ -72,65 +72,7 @@ case class NlssReport(methodName: String, className: Option[String], view: View)
 object NoLifecycleSetState extends LintRule {
   override val name = "no-lifecycle-set-state"
 
-  private val REACT_COMPONENT_CLASSNAME = "Component"
   private val REACT_LIFECYCLE_METHODS = List("componentDidMount", "componentWillUpdate", "componentDidUpdate")
-
-  // Instrument the following instruction of `ClassDeclaration[0,0].BindingClassDeclarationEvaluation`
-  //   5:return value
-  private val CLASS_DECL_EVAL_NODE_ID = 5675
-  private val CLASSNAME_ID = Id("className")
-  private val CLASSOBJ_ID = Id("value")
-  private val PROTOTYPE_KEY = AbsValue("Prototype")
-
-  def isClassEvalPair(pair: (NodePoint[Node], AbsState)): Boolean =
-    pair._1.node.uid == CLASS_DECL_EVAL_NODE_ID
-
-  def findReactComponentClass(pair: (NodePoint[Node], AbsState)): Boolean = {
-    val (np, st) = pair
-
-    // read the class name from an class declaration, looking for the designated name of the
-    // placeholder React component class
-    st(CLASSNAME_ID, np).comp.normal.value.simple.str.getSingle match {
-      case FlatElem(name) if name.str == REACT_COMPONENT_CLASSNAME => true
-      case _ => false
-    }
-  }
-
-  def getClassObjLoc(pair: (NodePoint[Node], AbsState)): AbsLoc = pair match {
-    case (np, st) => st(CLASSOBJ_ID, np).loc
-  }
-
-  // Bundle a class object with its pair data into a `ClassEval`
-  def pairToClassEval(pair: (NodePoint[Node], AbsState)): Option[ClassEval] = pair match {
-    case (np, st) => st(getClassObjLoc(pair)).map(ClassEval(np, st, _))
-  }
-
-  def classMayHaveProto(classEval: ClassEval, protoLoc: AbsLoc): Boolean = classEval match {
-    case ClassEval(np, st, obj) =>
-      val thisProtoLoc = obj(PROTOTYPE_KEY).loc
-      if (!(thisProtoLoc ⊓ protoLoc).isBottom) {
-        // if the class eval's prototype and the target prototype have a nontrivial meet, they may match
-        true
-      } else {
-        false
-      }
-  }
-
-  def lookupRef(st: AbsState, obj: AbsObj, key: String): Option[AbsObj] =
-    lookupRef(st, obj, AbsValue(key))
-
-  def lookupRef(st: AbsState, obj: AbsObj, key: AbsValue): Option[AbsObj] =
-    st(obj(key).loc)
-
-  def lookupRefPath(st: AbsState, obj: AbsObj, path: List[String]): Option[AbsObj] =
-    path.foldLeft[Option[AbsObj]](Some(obj))((obj, key) => obj.flatMap(lookupRef(st, _, AbsValue(key))))
-
-  // Finds the `SubMap` with properties corresponding to the JS prototype of `obj`
-  def lookupJsProto(st: AbsState, obj: AbsObj): Option[AbsObj] =
-    lookupRefPath(st, obj, List("SubMap", "prototype", "Value", "SubMap"))
-
-  def lookupDataProp(obj: AbsObj): AbsValue =
-    obj(AbsValue("Value")).comp.normal.value
 
   override def validate(ctx: LintContext): Unit = {
     val classEvalPairs = ctx.sem.npMap.filter(isClassEvalPair)
