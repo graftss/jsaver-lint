@@ -11,11 +11,11 @@ class Component {
 class A extends Component {
   constructor() {
     super()
-    this.state = { x: 9, y: { z: 88} }
+    this.state = { x: 9 }
   }
 }
 
 const a = new A();
 
-a.state.x = 9;
-a.state.y.z = 3;
+a.state.x = {};
+a.state.x.z = 9;

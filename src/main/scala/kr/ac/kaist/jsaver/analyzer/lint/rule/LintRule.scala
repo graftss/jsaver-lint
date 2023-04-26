@@ -7,8 +7,18 @@ import kr.ac.kaist.jsaver.cfg.Node
 import kr.ac.kaist.jsaver.ir.Id
 import kr.ac.kaist.jsaver.js.ast.ClassDeclaration0
 
-case class ObjPath(keys: Iterable[AbsValue] = List()) {
-  def add(key: AbsValue): ObjPath = ObjPath(keys ++ List(key))
+import scala.collection.mutable.ListBuffer
+
+sealed trait ObjPath {
+  def add(key: AbsValue): ObjPath
+}
+
+case class PrecisePath(keys: Iterable[AbsValue] = List()) extends ObjPath {
+  def add(key: AbsValue): ObjPath = PrecisePath(keys ++ List(key))
+}
+
+case class ImprecisePath(prefix: ObjPath) extends ObjPath {
+  def add(key: AbsValue): ObjPath = this
 }
 
 case class ClassEval(np: NodePoint[Node], st: AbsState, loc: AbsLoc, obj: AbsObj) {
@@ -41,42 +51,32 @@ trait LintRule {
   def locMeet(a: AbsValue, b: AbsValue): Boolean =
     !(a.loc ⊓ b.loc).isBottom
 
-  def refsInObject(st: AbsState, objRef: AbsValue, targetRef: AbsValue, path: ObjPath = ObjPath(List())): List[ObjPath] = {
+  def refsInObject(st: AbsState, objRef: AbsValue, targetRef: AbsValue, path: ObjPath = PrecisePath(List())): Iterable[ObjPath] = {
     // First check if the target reference may meet the original object reference.
-    val rootResult = if (locMeet(objRef, targetRef)) {
-      List(path)
-    } else {
-      List()
-    }
-    //    println("refs call:")
-    //    println(s"  path=${path}, rootResult=$rootResult")
-    //    println(s"  objRef:$objRef, targetRef:$targetRef")
-    //    println(s"  \n\nobj:${st(objRef.loc)}\n\n")
-    //    println(s"  \n\ntarget:${st(targetRef.loc)}\n\n")
+    val result = ListBuffer[ObjPath]()
 
-    val deepResults = st(objRef.loc)
+    if (locMeet(objRef, targetRef)) {
+      result += path
+    }
+
+    st(objRef.loc)
       .flatMap(obj => st(obj("SubMap").loc))
       .map {
         case elem: BasicObj.PropMapElem => {
-          elem.map.flatMap {
+          elem.map.foreach {
             case (key, value) => {
               // for each key-value pair in the object, recursively check the value for `targetRef`:
               val nextPath = path.add(AbsValue(key))
-              println(s"  nextpath: ${nextPath}, meet:${}")
-              val result = st(value.loc).map(_("Value"))
-                .map(refsInObject(st, _, targetRef, nextPath))
-                .getOrElse(List())
-              result
+              st(value.loc).map(_("Value"))
+                .foreach(ref => result ++= refsInObject(st, ref, targetRef, nextPath))
             }
           }
         }
         // TODO: if merged object, return data showing that the result is imprecise
-        case _ => List[ObjPath]()
+        case _ => result += ImprecisePath(path)
       }.getOrElse(List())
 
-    println(s"path: ${path}, root:${rootResult}, deep:${deepResults}")
-
-    rootResult ++ deepResults
+    result
   }
 
   def findReactComponentClass(pair: (NodePoint[Node], AbsState)): Boolean = {

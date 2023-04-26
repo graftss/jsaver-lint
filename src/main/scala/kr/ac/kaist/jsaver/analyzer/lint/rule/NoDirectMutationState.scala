@@ -80,6 +80,7 @@ object NoDirectMutationState extends LintRule {
     // for each property write:
     ctx.sem.npMap.filter(isPropRefWritePair).foreach {
       case (np, st) => {
+        println(s"loc: ${np.view.jsViewOpt.map(_.ast)}")
         // `V` is a reference record describing the location of the mutated value.
         val Vref = st(Id("V"), np)
         val V = st(Vref.loc).get
@@ -100,7 +101,7 @@ object NoDirectMutationState extends LintRule {
         }
 
         rcInstances.foreach {
-          case RcInstance(np, st, ctorRef, instanceRef, stateRef) => {
+          case RcInstance(np, _, ctorRef, instanceRef, stateRef) => {
             val refs = refsInObject(st, stateRef, base).map(_.add(referencedName))
             println(s"refs: $refs")
           }
