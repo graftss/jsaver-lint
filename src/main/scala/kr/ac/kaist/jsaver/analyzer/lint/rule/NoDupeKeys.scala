@@ -73,10 +73,11 @@ object NoDupeKeys extends LintRule {
         val newDescValue = st(NEW_DESC_ID, np)
         (st(oldDescValue.loc), st(newDescValue.loc)) match {
           case (Some(oldDesc), Some(newDesc)) => {
-            val keyAst = np.view.calls.find(isPropDefEval) match {
-              case Some(CallView(_, Some(ast))) => ast
+            np.view.calls.find(isPropDefEval) match {
+              case Some(CallView(_, Some(keyAst))) =>
+                Some(NdkReport(np.view, ast, keyAst, st(PROPERTY_ID, np), oldDesc(DESC_VALUE_KEY), newDesc(DESC_VALUE_KEY)))
+              case _ => None
             }
-            Some(NdkReport(np.view, ast, keyAst, st(PROPERTY_ID, np), oldDesc(DESC_VALUE_KEY), newDesc(DESC_VALUE_KEY)))
           }
           case _ => None
         }

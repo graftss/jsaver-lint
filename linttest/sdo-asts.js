@@ -1,3 +1,10 @@
-function f() {}
+class Component {
+}
 
-f();
+class A extends Component {}
+
+class B {
+  f() {}
+}
+
+class C extends A {}

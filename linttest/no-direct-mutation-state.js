@@ -1,5 +1,8 @@
 // placeholder React component class
 class Component {
+  constructor() {
+    this.state = { x: 9, y: 5 }
+  }
   setState() { 1; }
   componentDidMount() { 1; }
   componentDidUpdate() { 1; }
@@ -17,15 +20,10 @@ class A extends Component {
     }
   }
 
-  initState(flag = true) {
-    this.state = { x: 3 }
-  }
-
   updateState() {
     this.state.x += 3;
   }
 }
 
 const a = new A();
-a.initState();
-a.updateState();
+a.state = 3;

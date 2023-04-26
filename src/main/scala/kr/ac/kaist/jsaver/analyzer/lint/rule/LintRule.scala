@@ -1,10 +1,33 @@
 package kr.ac.kaist.jsaver.analyzer.lint.rule
 
-import kr.ac.kaist.jsaver.analyzer.domain.{ AbsLoc, AbsObj, AbsState, AbsValue, FlatElem }
+import kr.ac.kaist.jsaver.analyzer.domain.{ AAst, AbsLoc, AbsObj, AbsState, AbsValue, FlatElem }
 import kr.ac.kaist.jsaver.analyzer.{ NodePoint, View }
 import kr.ac.kaist.jsaver.analyzer.lint.LintContext
 import kr.ac.kaist.jsaver.cfg.Node
 import kr.ac.kaist.jsaver.ir.Id
+import kr.ac.kaist.jsaver.js.ast.ClassDeclaration0
+
+case class ClassEval(np: NodePoint[Node], st: AbsState, loc: AbsLoc, obj: AbsObj) {
+  def protoObj(): Option[AbsObj] = {
+    st(obj(AbsValue("Prototype")).loc)
+  }
+
+  def className(): Option[String] = {
+    val ast = obj(AbsValue("ECMAScriptCode")).ast
+
+    val declAst = ast.getSingle match {
+      case FlatElem(AAst(ast)) => ast.findKindAbove("ClassDeclaration")
+      case _ => None
+    }
+
+    declAst.flatMap {
+      case ClassDeclaration0(id, _, _, _) => Some(id.toString)
+      case _ => None
+    }
+  }
+
+  override def toString: String = s"ClassEval:\n  ${np}\n  $loc\n  $obj"
+}
 
 trait LintRule {
   val name: String
@@ -42,17 +65,27 @@ trait LintRule {
 
   // Bundle a class object with its pair data into a `ClassEval`
   def pairToClassEval(pair: (NodePoint[Node], AbsState)): Option[ClassEval] = pair match {
-    case (np, st) => st(getClassObjLoc(pair)).map(ClassEval(np, st, _))
+    case (np, st) => {
+      val loc = getClassObjLoc(pair)
+      st(loc).map(ClassEval(np, st, loc, _))
+    }
   }
 
-  // Returns `true` if the
-  def classMayHaveProto(classEval: ClassEval, protoLoc: AbsLoc): Boolean = classEval match {
-    case ClassEval(_, _, obj) =>
-      val PROTOTYPE_KEY = AbsValue("Prototype")
-      val thisProtoLoc = obj(PROTOTYPE_KEY).loc
+  // Returns `true` if the abstract object `obj` may have the object located at `targetProtoLoc` *anywhere* along its
+  // prototype chain, not including `obj` itself.
+  def classMayHaveProto(st: AbsState, obj: AbsObj, targetProtoLoc: AbsLoc): Boolean = {
+    val PROTOTYPE_KEY = AbsValue("Prototype")
+    val thisProtoLoc = obj(PROTOTYPE_KEY).loc
 
-      // if the class eval's prototype and the target prototype have a nontrivial meet, they may match
-      !(thisProtoLoc ⊓ protoLoc).isBottom
+    // if the object's direct prototype and the target prototype have a nontrivial meet, they may match
+    if (!(thisProtoLoc ⊓ targetProtoLoc).isBottom) {
+      true
+    } else {
+      st(thisProtoLoc) match {
+        case Some(protoObj) => classMayHaveProto(st, protoObj, targetProtoLoc)
+        case None => false
+      }
+    }
   }
 
   def lookupRef(st: AbsState, obj: AbsObj, key: String): Option[AbsObj] =

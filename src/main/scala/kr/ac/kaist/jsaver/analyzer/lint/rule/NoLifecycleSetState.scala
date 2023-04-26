@@ -8,26 +8,6 @@ import kr.ac.kaist.jsaver.js.ast.{ AST, ClassDeclaration0 }
 
 import scala.collection.mutable.ListBuffer
 
-case class ClassEval(np: NodePoint[Node], st: AbsState, obj: AbsObj) {
-  def protoObj(): Option[AbsObj] = {
-    st(obj(AbsValue("Prototype")).loc)
-  }
-
-  def className(): Option[String] = {
-    val ast = obj(AbsValue("ECMAScriptCode")).ast
-
-    val declAst = ast.getSingle match {
-      case FlatElem(AAst(ast)) => ast.findKindAbove("ClassDeclaration")
-      case _ => None
-    }
-
-    declAst.flatMap {
-      case ClassDeclaration0(id, _, _, _) => Some(id.toString)
-      case _ => None
-    }
-  }
-}
-
 case class RcMethods(classEval: ClassEval, methodRefs: Map[String, AbsValue]) {
   // Returns the list of all method names whose references may meet `fnRef`
   def findMatch(fnRef: AbsValue): List[String] = {
@@ -85,9 +65,12 @@ object NoLifecycleSetState extends LintRule {
 
     // iterate over all class evaluations
     val rcMethodsList = classEvalPairs.flatMap(pairToClassEval)
-      // TODO: check that the class has react component as a prototype
+      // filter class evaluations to just those with the react component class as a prototype
+      .filter {
+        case ClassEval(np, st, loc, obj) => classMayHaveProto(st, obj, rcLoc)
+      }
       .flatMap {
-        case ce @ ClassEval(_, st, obj) => {
+        case ce @ ClassEval(_, st, _, obj) => {
           lookupJsProto(st, obj).map(jsProto => {
             val methodRefs = REACT_LIFECYCLE_METHODS
               .foldLeft(Map[String, AbsValue]()) {

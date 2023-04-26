@@ -170,6 +170,7 @@ object BasicObj extends Domain {
     }
 
     // lookup
+    def apply(key: String): AbsValue = apply(AbsValue(key))
     def apply(key: AValue): AbsValue = this match {
       case Bot => AbsValue.Bot
       case SymbolElem(desc) => key match {
