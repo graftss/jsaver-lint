@@ -1,11 +1,19 @@
 package kr.ac.kaist.jsaver.analyzer.lint.rule
 import kr.ac.kaist.jsaver.analyzer.NodePoint
 import kr.ac.kaist.jsaver.analyzer.domain.{ AbsState, AbsValue }
-import kr.ac.kaist.jsaver.analyzer.lint.LintContext
+import kr.ac.kaist.jsaver.analyzer.lint.{ LintContext, LintError, LintReport, LintSeverity }
 import kr.ac.kaist.jsaver.cfg.Node
 import kr.ac.kaist.jsaver.ir.Id
 
-case class RcInstance(classEval: ClassEval, instanceRef: AbsValue, stateRef: AbsValue)
+case class RcInstance(np: NodePoint[Node], st: AbsState, ctorRef: AbsValue, instanceRef: AbsValue, stateRef: AbsValue) {
+}
+
+case class NdmsReport() extends LintReport {
+  override val rule: LintRule = NoDirectMutationState
+  override val severity: LintSeverity = LintError
+
+  override def message: String = "Directly mutated React component state:"
+}
 
 object NoDirectMutationState extends LintRule {
   override val name: String = "no-direct-mutation-state"
@@ -14,6 +22,7 @@ object NoDirectMutationState extends LintRule {
   // 4: Normal[6516] return [? __x2__]
   private val CONSTRUCT_NODE_ID = 6516
   private val CONSTRUCT_NODE_INSTANCE_REF = Id("__x2__")
+  private val CONSTRUCT_NODE_CTOR_OBJ = Id("F")
   def isConstructPair(pair: (NodePoint[Node], AbsState)): Boolean =
     pair._1.node.uid == CONSTRUCT_NODE_ID
 
@@ -37,61 +46,66 @@ object NoDirectMutationState extends LintRule {
         case ClassEval(_, st, _, obj) => classMayHaveProto(st, obj, rcLoc)
       }
 
-    rcClassEvals.foreach {
-      case ce @ ClassEval(np, st, loc, obj) => {
-        println(s"class eval: ${obj(AbsValue("SourceText"))}")
-        val hasProto = classMayHaveProto(st, obj, rcLoc)
-        println(s"hasProto: ${hasProto}")
-      }
-    }
-
-    return
-
+    // returns an iterator over react components `ClassEval` objects which may meet `value`.
     def meetsRcObjs(value: AbsValue): Iterable[ClassEval] =
       rcClassEvals.filter {
         case ClassEval(np, st, loc, obj) => !(loc ⊓ value.loc).isBottom
       }
 
-    ctx.sem.npMap.filter(isConstructPair)
+    val rcInstances = ctx.sem.npMap.filter(isConstructPair)
       .flatMap {
         case (np, st) => {
-          println(s"construct np: ${np}")
-          val F = st(Id("F"), np)
-          println(s"F: ${F}")
-          println(s"meets: ${}")
-          val instanceRef = st(CONSTRUCT_NODE_INSTANCE_REF, np).comp.normal.value
-          val instance = st(instanceRef.loc).get
-          val subMapRef = instance("SubMap")
-          val subMap = st(subMapRef.loc).get
-          meetsRcObjs(F).foreach(ce => println(s"met ce: ${ce}"))
-          println(s"instance: ${instance}")
-          println(s"submap: ${subMap}")
-          val stateDpRef = subMap("state")
-          val stateDp = st(stateDpRef.loc).get
-          val stateRef = stateDp("Value")
-          val state = st(stateRef.loc).get
-          val stateSubMapRef = state("SubMap")
-          val stateSubMap = st(stateSubMapRef.loc).get
-          println(s"stateRef: ${stateRef}")
-          println(s"state: ${state}")
-          println(s"statesubmap: ${stateSubMap}")
-          None
+          // iterate over all constructor calls, looking for constructions of react components:
+          val ctor = st(CONSTRUCT_NODE_CTOR_OBJ, np)
+
+          if (meetsRcObjs(ctor).isEmpty) {
+            // if `ctor` cannot refer to a react component, skip this object instance.
+            None
+          } else {
+            // otherwise, record data about this react component instance.
+            val instanceRef = st(CONSTRUCT_NODE_INSTANCE_REF, np).comp.normal.value
+            val instance = st(instanceRef.loc).get
+
+            lookupRef(st, instance, "SubMap")
+              .flatMap(lookupRef(st, _, "state"))
+              .map(_("Value"))
+              .map(stateRef => {
+                println(s"stateRef: ${stateRef}")
+                RcInstance(np, st, ctor, instanceRef, stateRef)
+              })
+          }
         }
       }
 
-    ctx.sem.npMap.filter(isPropRefWritePair)
-      .foreach {
-        case (np, st) => {
-          println("putvalue: ")
-          val Vref = st(Id("V"), np)
-          val W = st(Id("W"), np)
-          val VrefRec = st(Vref.loc).get
-          val Vbase = VrefRec("Base")
-          println(s"  Vref: ${Vref}")
-          println(s"  VrefRec: ${VrefRec}")
-          println(s"  Vbase: ${Vbase}")
-          println(s"  W: ${W}")
+    // for each property write:
+    ctx.sem.npMap.filter(isPropRefWritePair).foreach {
+      case (np, st) => {
+        // `V` is a reference record describing the location of the mutated value.
+        val Vref = st(Id("V"), np)
+        val V = st(Vref.loc).get
+        // The `Base` of `V` is the object whose value is mutated.
+        val base = V("Base")
+        // The `ReferencedName` of `V` is the key associated to the mutated value.
+        val referencedName = V("ReferencedName")
+
+        if (rcInstances.exists(rci => locMeet(rci.instanceRef, base))) {
+          // if directly mutating an instance of a react component:
+          if (!(referencedName ⊓ AbsValue("state")).isBottom) {
+            // if the mutated property may be "state":
+            //            println("js call string: \n\n" + np.view.jsCallString() + "\n\n\n")
+
+            // TODO: don't report a rule violation if a react component's constructor occurs in the JS call string
+            ctx.report(NdmsReport())
+          }
+        }
+
+        rcInstances.foreach {
+          case RcInstance(np, st, ctorRef, instanceRef, stateRef) => {
+            val refs = refsInObject(st, stateRef, base).map(_.add(referencedName))
+            println(s"refs: $refs")
+          }
         }
       }
+    }
   }
 }

@@ -75,7 +75,7 @@ object NoLifecycleSetState extends LintRule {
             val methodRefs = REACT_LIFECYCLE_METHODS
               .foldLeft(Map[String, AbsValue]()) {
                 case (map, methodName) => lookupRef(st, jsProto, methodName) match {
-                  case Some(methodObj) => map + (methodName -> lookupDataProp(methodObj))
+                  case Some(methodObj) => map + (methodName -> lookupDataPropComp(methodObj))
                   case None => map
                 }
               }
@@ -89,7 +89,7 @@ object NoLifecycleSetState extends LintRule {
       case (np, st) => {
         val rcss = lookupJsProto(st, st(rcLoc).get)
           .flatMap(lookupRef(st, _, "setState"))
-          .map(lookupDataProp)
+          .map(lookupDataPropComp)
 
         val calleeLoc = st(Id("F"), np).loc
         val calleeMayBeRcss = !(calleeLoc ⊓ rcss.get.loc).isBottom

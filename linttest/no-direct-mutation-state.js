@@ -1,7 +1,6 @@
 // placeholder React component class
 class Component {
   constructor() {
-    this.state = { x: 9, y: 5 }
   }
   setState() { 1; }
   componentDidMount() { 1; }
@@ -12,18 +11,11 @@ class Component {
 class A extends Component {
   constructor() {
     super()
-  }
-
-  mySetState(flag, value) {
-    if (flag) {
-      this.setState(value)
-    }
-  }
-
-  updateState() {
-    this.state.x += 3;
+    this.state = { x: 9, y: { z: 88} }
   }
 }
 
 const a = new A();
-a.state = 3;
+
+a.state.x = 9;
+a.state.y.z = 3;

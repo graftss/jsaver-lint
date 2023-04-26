@@ -1,11 +1,15 @@
 package kr.ac.kaist.jsaver.analyzer.lint.rule
 
-import kr.ac.kaist.jsaver.analyzer.domain.{ AAst, AbsLoc, AbsObj, AbsState, AbsValue, FlatElem }
+import kr.ac.kaist.jsaver.analyzer.domain.{ AAst, AbsLoc, AbsObj, AbsState, AbsValue, BasicObj, FlatElem }
 import kr.ac.kaist.jsaver.analyzer.{ NodePoint, View }
 import kr.ac.kaist.jsaver.analyzer.lint.LintContext
 import kr.ac.kaist.jsaver.cfg.Node
 import kr.ac.kaist.jsaver.ir.Id
 import kr.ac.kaist.jsaver.js.ast.ClassDeclaration0
+
+case class ObjPath(keys: Iterable[AbsValue] = List()) {
+  def add(key: AbsValue): ObjPath = ObjPath(keys ++ List(key))
+}
 
 case class ClassEval(np: NodePoint[Node], st: AbsState, loc: AbsLoc, obj: AbsObj) {
   def protoObj(): Option[AbsObj] = {
@@ -32,6 +36,48 @@ case class ClassEval(np: NodePoint[Node], st: AbsState, loc: AbsLoc, obj: AbsObj
 trait LintRule {
   val name: String
   def validate(ctx: LintContext): Unit
+
+  // Returns `true` if the abstract values `a` and `b` have abstract locations with a nontrivial meet.
+  def locMeet(a: AbsValue, b: AbsValue): Boolean =
+    !(a.loc ⊓ b.loc).isBottom
+
+  def refsInObject(st: AbsState, objRef: AbsValue, targetRef: AbsValue, path: ObjPath = ObjPath(List())): List[ObjPath] = {
+    // First check if the target reference may meet the original object reference.
+    val rootResult = if (locMeet(objRef, targetRef)) {
+      List(path)
+    } else {
+      List()
+    }
+    //    println("refs call:")
+    //    println(s"  path=${path}, rootResult=$rootResult")
+    //    println(s"  objRef:$objRef, targetRef:$targetRef")
+    //    println(s"  \n\nobj:${st(objRef.loc)}\n\n")
+    //    println(s"  \n\ntarget:${st(targetRef.loc)}\n\n")
+
+    val deepResults = st(objRef.loc)
+      .flatMap(obj => st(obj("SubMap").loc))
+      .map {
+        case elem: BasicObj.PropMapElem => {
+          elem.map.flatMap {
+            case (key, value) => {
+              // for each key-value pair in the object, recursively check the value for `targetRef`:
+              val nextPath = path.add(AbsValue(key))
+              println(s"  nextpath: ${nextPath}, meet:${}")
+              val result = st(value.loc).map(_("Value"))
+                .map(refsInObject(st, _, targetRef, nextPath))
+                .getOrElse(List())
+              result
+            }
+          }
+        }
+        // TODO: if merged object, return data showing that the result is imprecise
+        case _ => List[ObjPath]()
+      }.getOrElse(List())
+
+    println(s"path: ${path}, root:${rootResult}, deep:${deepResults}")
+
+    rootResult ++ deepResults
+  }
 
   def findReactComponentClass(pair: (NodePoint[Node], AbsState)): Boolean = {
     val CLASSNAME_ID = Id("className")
@@ -101,6 +147,6 @@ trait LintRule {
   def lookupJsProto(st: AbsState, obj: AbsObj): Option[AbsObj] =
     lookupRefPath(st, obj, List("SubMap", "prototype", "Value", "SubMap"))
 
-  def lookupDataProp(obj: AbsObj): AbsValue =
+  def lookupDataPropComp(obj: AbsObj): AbsValue =
     obj(AbsValue("Value")).comp.normal.value
 }
