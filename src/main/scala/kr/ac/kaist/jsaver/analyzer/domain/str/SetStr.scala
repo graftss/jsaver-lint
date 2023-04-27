@@ -8,7 +8,7 @@ import kr.ac.kaist.jsaver.util.Useful._
 
 class SetStr(val max: Int) extends StrDomain {
   // name of top element
-  protected val topName: String = "str"
+  protected val topName: String = "⊤"
 
   // max size of set
   protected val maxSizeOpt: Option[Int] = Some(max)

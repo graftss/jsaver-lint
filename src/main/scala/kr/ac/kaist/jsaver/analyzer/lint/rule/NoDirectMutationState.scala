@@ -4,15 +4,45 @@ import kr.ac.kaist.jsaver.analyzer.domain.{ AbsState, AbsValue }
 import kr.ac.kaist.jsaver.analyzer.lint.{ LintContext, LintError, LintReport, LintSeverity }
 import kr.ac.kaist.jsaver.cfg.Node
 import kr.ac.kaist.jsaver.ir.Id
+import kr.ac.kaist.jsaver.js.ast.AST
 
-case class RcInstance(np: NodePoint[Node], st: AbsState, ctorRef: AbsValue, instanceRef: AbsValue, stateRef: AbsValue) {
-}
+import scala.collection.mutable.ListBuffer
 
-case class NdmsReport() extends LintReport {
+trait NdmsReport extends LintReport {
   override val rule: LintRule = NoDirectMutationState
   override val severity: LintSeverity = LintError
 
-  override def message: String = "Directly mutated React component state:"
+  def message(np: NodePoint[Node], header: String, footer: Option[List[String]] = None): String = {
+    val astStr = np.view.jsViewOpt.map(_.ast.toString).getOrElse("[unknown]")
+    val callStringStr = np.view.jsCallString().getOrElse("[unknown]")
+
+    var lines = ListBuffer(
+      header,
+      s"  call string: $callStringStr",
+      s"  source: $astStr",
+    )
+
+    footer.foreach(footerLines => lines ++= footerLines)
+
+    lines.mkString("\n")
+  }
+}
+
+case class OverwriteStateReport(np: NodePoint[Node]) extends NdmsReport {
+  override def message(): String = {
+    super.message(np, "Overwrote `state` property of React component:")
+  }
+}
+
+case class MutateStateReport(np: NodePoint[Node], statePath: ObjPath) extends NdmsReport {
+  override val rule: LintRule = NoDirectMutationState
+  override val severity: LintSeverity = LintError
+
+  override def message(): String = {
+    super.message(np, "Mutated React component state:", Some(List(
+      s"  mutated state path: ${statePath}"
+    )))
+  }
 }
 
 object NoDirectMutationState extends LintRule {
@@ -62,51 +92,66 @@ object NoDirectMutationState extends LintRule {
             // if `ctor` cannot refer to a react component, skip this object instance.
             None
           } else {
-            // otherwise, record data about this react component instance.
             val instanceRef = st(CONSTRUCT_NODE_INSTANCE_REF, np).comp.normal.value
-            val instance = st(instanceRef.loc).get
-
-            lookupRef(st, instance, "SubMap")
-              .flatMap(lookupRef(st, _, "state"))
-              .map(_("Value"))
-              .map(stateRef => {
-                println(s"stateRef: ${stateRef}")
-                RcInstance(np, st, ctor, instanceRef, stateRef)
-              })
+            Some(RcInstance(np, st, ctor, instanceRef))
           }
         }
       }
 
     // for each property write:
     ctx.sem.npMap.filter(isPropRefWritePair).foreach {
-      case (np, st) => {
-        println(s"loc: ${np.view.jsViewOpt.map(_.ast)}")
+      case (npWrite, stWrite) => {
         // `V` is a reference record describing the location of the mutated value.
-        val Vref = st(Id("V"), np)
-        val V = st(Vref.loc).get
+        val Vref = stWrite(Id("V"), npWrite)
+        val V = stWrite(Vref.loc).get
         // The `Base` of `V` is the object whose value is mutated.
         val base = V("Base")
         // The `ReferencedName` of `V` is the key associated to the mutated value.
         val referencedName = V("ReferencedName")
 
-        if (rcInstances.exists(rci => locMeet(rci.instanceRef, base))) {
-          // if directly mutating an instance of a react component:
-          if (!(referencedName ⊓ AbsValue("state")).isBottom) {
-            // if the mutated property may be "state":
-            //            println("js call string: \n\n" + np.view.jsCallString() + "\n\n\n")
+        // Check if the property write is overwriting a react component's `state` field:
+        rcInstances.filter(rci => {
+          // If the reference record's base may be the react component instance itself,
+          locMeet(rci.instanceRef, base) &&
+            // if the reference record's referenced name may be `state`,
+            !(referencedName ⊓ AbsValue("state")).isBottom &&
+            // and if the react component's constructor isn't on the call stack.
+            !rci.ctorInCallString(npWrite)
+        }).foreach(rci => ctx.report(OverwriteStateReport(npWrite)))
 
-            // TODO: don't report a rule violation if a react component's constructor occurs in the JS call string
-            ctx.report(NdmsReport())
+        // Check if the property write is overwriting a value within a react component's `state` object:
+        rcInstances.foreach(rci => {
+          // If the react component's constructor isn't on the call stack,
+          if (!rci.ctorInCallString(npWrite)) {
+            rci.stateRef(stWrite).foreach(stateRef => {
+              // for each intersection between the reference record's base
+              // and locations referenced by the component's `state` object:
+              refsInObject(stWrite, stateRef, base).map(_.add(referencedName)).foreach(objPath => {
+                ctx.report(MutateStateReport(npWrite, objPath))
+              })
+            })
           }
-        }
-
-        rcInstances.foreach {
-          case RcInstance(np, _, ctorRef, instanceRef, stateRef) => {
-            val refs = refsInObject(st, stateRef, base).map(_.add(referencedName))
-            println(s"refs: $refs")
-          }
-        }
+        })
       }
+    }
+  }
+
+  case class RcInstance(np: NodePoint[Node], stCtor: AbsState, ctorRef: AbsValue, instanceRef: AbsValue) {
+    // Returns `true` if the view of `np` has this instance's constructor in its call string.
+    def ctorInCallString(np: NodePoint[Node]): Boolean = {
+      np.view.jsViewOpt.exists(jsView => {
+        jsView.calls.exists(callToken => {
+          !(callToken.value.loc ⊓ ctorRef.loc).isBottom
+        })
+      })
+    }
+
+    // Compute the value of the react component instance's `state` field in the state `st`
+    def stateRef(st: AbsState): Option[AbsValue] = {
+      val instance = st(instanceRef.loc).get
+      lookupRef(st, instance, "SubMap")
+        .flatMap(lookupRef(st, _, "state"))
+        .map(_("Value"))
     }
   }
 }

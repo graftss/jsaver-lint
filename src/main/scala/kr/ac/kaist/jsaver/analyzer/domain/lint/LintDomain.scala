@@ -50,7 +50,6 @@ object LintDomain extends Domain {
 
     // TODO: join operator
     def ⊔(that: Elem): Elem = {
-      println(s"joining lint states: ${this} || ${that}")
       that
     }
 

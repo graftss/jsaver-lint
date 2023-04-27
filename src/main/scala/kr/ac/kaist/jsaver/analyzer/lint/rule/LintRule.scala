@@ -15,10 +15,18 @@ sealed trait ObjPath {
 
 case class PrecisePath(keys: Iterable[AbsValue] = List()) extends ObjPath {
   def add(key: AbsValue): ObjPath = PrecisePath(keys ++ List(key))
+
+  override def toString: String = {
+    keys.mkString("[", ", ", "]")
+  }
 }
 
 case class ImprecisePath(prefix: ObjPath) extends ObjPath {
   def add(key: AbsValue): ObjPath = this
+
+  override def toString: String = {
+    prefix.toString + ". ???"
+  }
 }
 
 case class ClassEval(np: NodePoint[Node], st: AbsState, loc: AbsLoc, obj: AbsObj) {

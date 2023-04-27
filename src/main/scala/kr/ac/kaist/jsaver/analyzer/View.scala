@@ -49,13 +49,18 @@ case class View(
   // Map a `View` to its JS function call string
   def jsCallString(): Option[String] = {
     jsViewOpt.map(jsView => {
-      jsView.calls.flatMap {
-        case JSCallToken(ast, _) if ast.kind == "Initializer" => ast.children.head match {
-          case ASTVal(ast) => Some(ast)
-          case _ => None
-        }
-        case ast => Some(ast)
-      }.reverse.mkString(" -> ")
+      if (jsView.calls.isEmpty) {
+        // if the call string is empty, the view occurs in the top-level
+        "(top-level)"
+      } else {
+        jsView.calls.flatMap {
+          case JSCallToken(ast, _) if ast.kind == "Initializer" => ast.children.head match {
+            case ASTVal(ast) => Some(ast)
+            case _ => None
+          }
+          case ast => Some(ast)
+        }.reverse.mkString(" -> ")
+      }
     })
   }
 

@@ -1,21 +1,29 @@
 // placeholder React component class
 class Component {
-  constructor() {
-  }
-  setState() { 1; }
-  componentDidMount() { 1; }
-  componentDidUpdate() { 1; }
-  componentWillUpdate() { 1; }
+  constructor() { }
+  setState() { }
+  componentDidMount() { }
+  componentDidUpdate() { }
+  componentWillUpdate() { }
 }
 
 class A extends Component {
   constructor() {
     super()
-    this.state = { x: 9 }
+    this.state = { x: 9, y: {} }
+  }
+
+  badUpdateState(flag, prop) {
+    if (flag) {
+      this.state.y[prop] = true;
+    }
   }
 }
 
-const a = new A();
+function main() {
+  const a = new A();
+  a.badUpdateState(false, "x");
+  a.badUpdateState(true, "abc");
+}
 
-a.state.x = {};
-a.state.x.z = 9;
+main();
