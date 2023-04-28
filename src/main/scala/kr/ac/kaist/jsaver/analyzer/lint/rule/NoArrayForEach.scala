@@ -12,13 +12,14 @@ abstract class NafeReport() extends LintReport {
   override val rule: LintRule = NoArrayForEach
 }
 
-case class PreciseNafeReport(astOpt: Option[AST]) extends NafeReport {
+case class PreciseNafeReport(np: NodePoint[Node]) extends NafeReport {
   override val severity: LintSeverity = LintWarning
 
   override def message: String = {
     List(
       "Called `Array.prototype.forEach` method:",
-      s"  callsite: ${astOpt}"
+      viewAstStr(np),
+      callStringStr(np),
     ).mkString("\n")
   }
 }
@@ -49,9 +50,8 @@ object NoArrayForEach extends LintRule {
     f(AbsValue("Code")).func.getSingle match {
       case FlatElem(afunc) if afunc.algo.name == FOREACH_ALGO_NAME => {
         val x = st(st.lookupGlobal(Id("CONTEXT")).loc)
-        println(s"x d: ${x}")
 
-        Some(PreciseNafeReport(astOpt))
+        Some(PreciseNafeReport(np))
       }
       case FlatTop => Some(ImpreciseNafeReport())
       case _ => None

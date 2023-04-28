@@ -13,13 +13,10 @@ trait NdmsReport extends LintReport {
   override val severity: LintSeverity = LintError
 
   def message(np: NodePoint[Node], header: String, footer: Option[List[String]] = None): String = {
-    val astStr = np.view.jsViewOpt.map(_.ast.toString).getOrElse("[unknown]")
-    val callStringStr = np.view.jsCallString().getOrElse("[unknown]")
-
-    var lines = ListBuffer(
+    val lines = ListBuffer(
       header,
-      s"  call string: $callStringStr",
-      s"  source: $astStr",
+      viewAstStr(np),
+      callStringStr(np),
     )
 
     footer.foreach(footerLines => lines ++= footerLines)

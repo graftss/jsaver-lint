@@ -9,15 +9,37 @@ import kr.ac.kaist.jsaver.js.ast.AST
 // Data characterizing an algorithm step that receives the return value of an array callback.
 case class CallbackArg(algoIdName: String, name: String)
 
+// Data characterizing an instruction in an array method's algorithm where the return value of that
+// array method's callback argument can be inspected.
 case class AcrInstId(algoName: String, step: Int, valueIdName: String, args: List[CallbackArg])
 
 // Data characterizing a CFG node that receives the return value of an array callback.
 // Each `AcrInstId` value is mapped to an `AcrInst` using a spec CFG.
-case class AcrInst(id: AcrInstId, methodName: String, node: Node, valueId: Id)
+case class AcrInst(id: AcrInstId, methodName: String, node: Node, valueId: Id) {
+  // read the argument values passed to the callback from the state
+  def argValues(np: NodePoint[Node], st: AbsState): List[AbsValue] =
+    id.args.map(arg => st(Id(arg.algoIdName), np))
 
-case class AcrReport(override val message: String) extends LintReport {
+  def argsStr(np: NodePoint[Node], st: AbsState, indent: String = "  "): String =
+    id.args.zip(argValues(np, st)).map {
+      case (CallbackArg(_, name), value) => s"$indent$name argument: $value"
+    }.mkString("\n")
+}
+
+case class AcrReport(np: NodePoint[Node], st: AbsState, acrInst: AcrInst, callbackDef: Option[FuncDefInfo]) extends LintReport {
   override val rule: LintRule = ArrayCallbackReturn
   override val severity: LintSeverity = LintError
+
+  override def message: String = {
+    val name = "callback" + callbackDef.map(cb => " " + cb.getName).getOrElse("")
+
+    List(
+      s"Returned `undefined` from ${name} to array method `${acrInst.methodName}`:",
+      callStringStr(np),
+      viewAstStr(np, "callsite"),
+      acrInst.argsStr(np, st),
+    ).mkString("\n")
+  }
 }
 
 object ArrayCallbackReturn extends LintRule {
@@ -117,32 +139,9 @@ object ArrayCallbackReturn extends LintRule {
           }
         }
 
-        // read the array method callite from the control point's view.
-        val callsite = np.view.jsViewOpt.map(_.ast)
-
-        // read the argument values passed to the callback from the state
-        val argValues = acrInst.id.args.map(arg => st(Id(arg.algoIdName), np))
-
-        ctx.report(AcrReport(reportMessage(acrInst, callbackDef, callsite, argValues)))
+        ctx.report(AcrReport(np, st, acrInst, callbackDef))
       }
     })
-  }
-
-  def reportMessage(
-    acrInst: AcrInst,
-    callbackDef: Option[FuncDefInfo],
-    callsite: Option[AST],
-    argValues: List[AbsValue]
-  ): String = {
-    val name = callbackDef.map(cb => s"callback `${cb.getName}`").getOrElse("callback")
-    val callsiteStr = callsite.map(_.toString).getOrElse("[callsite AST]")
-    val argsStr = acrInst.id.args.zip(argValues).map {
-      case (CallbackArg(_, name), value) => s"  ${name} argument: ${value}"
-    }.mkString("\n")
-
-    s"Returned `undefined` from ${name} to array method `${acrInst.methodName}`:\n" +
-      s"  callsite:   ${callsiteStr}\n" +
-      argsStr
   }
 
   override def validate(ctx: LintContext): Unit = {
