@@ -17,9 +17,9 @@ sealed trait AValue {
       case AComp(AConst("noraml"), value, _) => s"N($value)"
       case AComp(ty, value, target) => s"C($ty, $value, $target)"
       case AConst(name) => s"~$name~"
-      case NamedLoc(name) => s"#$name"
-      case AllocSite(k, view) => s"#$k:${view.toString(false)}"
-      case SubMapLoc(baseLoc) => s"$baseLoc:SubMap"
+      case NamedLoc(name) => s"{{${this.hashCode}}}#$name"
+      case AllocSite(k, view) => s"{{${this.hashCode}}}#$k:${view.toString(false)}"
+      case SubMapLoc(baseLoc) => s"{{${this.hashCode}}}$baseLoc:SubMap"
       case AFunc(algo) => s"λ(${algo.name})"
       case AClo(params, locals, func) => (
         params.mkString("(", ", ", ")") +

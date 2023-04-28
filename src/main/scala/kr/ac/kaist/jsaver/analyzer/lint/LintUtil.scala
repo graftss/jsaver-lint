@@ -1,7 +1,7 @@
 package kr.ac.kaist.jsaver.analyzer.lint
 
 import kr.ac.kaist.jsaver.analyzer.{ AbsSemantics, JSCallToken }
-import kr.ac.kaist.jsaver.analyzer.domain.{ AbsLoc, AbsState, AbsValue }
+import kr.ac.kaist.jsaver.analyzer.domain.{ AbsLoc, AbsObj, AbsState, AbsValue }
 import kr.ac.kaist.jsaver.cfg.CFG
 
 import java.io._
@@ -61,6 +61,13 @@ object LintUtil {
       })
     })
 
+    bw.flush()
+  }
+
+  def writeToFile(filename: String, str: String): Unit = {
+    val file = new File(filename)
+    val bw = new BufferedWriter(new FileWriter(file))
+    bw.write(str)
     bw.flush()
   }
 }

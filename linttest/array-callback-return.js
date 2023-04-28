@@ -1,12 +1,31 @@
-const table = { a: 1, b: 2, d: 4 };
+const xxx = 'asdf'
+const yyy = '3'
 
-function letterToNumber(letter) {
-  return table[letter];
+function main() {
+
+    const table = { a: 1, b: 2, d: 4 };
+    const yyy = 78
+
+    function letterToNumber(letter) {
+      return table[letter];
+    }
+
+    function inner() {
+        let xxx = 999;
+        const keys = ['a', 'b', 'ccc', 'd']
+        const result = keys.map(letterToNumber);
+
+        table.ccc = 3;
+
+        xxx = keys.map(letterToNumber);
+    }
+
+    inner()
 }
 
-const keys = ['a', 'b', 'c', 'd']
-const result = keys.map(letterToNumber);
+function f(a) {
+  if (a) main();
+}
 
-table.c = 3;
-
-const result2 = keys.map(letterToNumber);
+f(true);
+f(false);

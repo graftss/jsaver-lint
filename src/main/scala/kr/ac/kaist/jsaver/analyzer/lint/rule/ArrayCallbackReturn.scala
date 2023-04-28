@@ -1,7 +1,7 @@
 package kr.ac.kaist.jsaver.analyzer.lint.rule
-import kr.ac.kaist.jsaver.analyzer.domain.{ AbsState, AbsValue, SimpleDomain }
+import kr.ac.kaist.jsaver.analyzer.domain.{ AbsObj, AbsState, AbsValue, BasicObj, SimpleDomain }
 import kr.ac.kaist.jsaver.analyzer.{ AbsSemantics, NodePoint }
-import kr.ac.kaist.jsaver.analyzer.lint.{ FuncDefInfo, LintContext, LintError, LintReport, LintSeverity }
+import kr.ac.kaist.jsaver.analyzer.lint.{ FuncDefInfo, LintContext, LintError, LintReport, LintSeverity, LintUtil }
 import kr.ac.kaist.jsaver.cfg.{ CFG, Call, InstNode, Linear, Node }
 import kr.ac.kaist.jsaver.ir.{ IApp, ILet, Id }
 import kr.ac.kaist.jsaver.js.ast.AST
@@ -30,8 +30,27 @@ case class AcrReport(np: NodePoint[Node], st: AbsState, acrInst: AcrInst, callba
   override val rule: LintRule = ArrayCallbackReturn
   override val severity: LintSeverity = LintError
 
+  private def callsiteEnv(np: NodePoint[Node], st: AbsState): Option[AbsObj] = {
+    val stackRef = st(Id("EXECUTION_STACK"), np)
+
+    st(stackRef.loc).flatMap {
+      case elem: BasicObj.KeyWiseList if elem.values.length >= 2 => {
+        val ctxRef = elem.values(elem.values.length - 2)
+        val ctx = st(ctxRef.loc).get
+
+        st(ctx("LexicalEnvironment").comp.normal.value.loc)
+      }
+      case _ => None
+    }
+  }
+
   override def message: String = {
     val name = "callback" + callbackDef.map(cb => " " + cb.getName).getOrElse("")
+
+    val xxx = callsiteEnv(np, st).map(readEnvValue(st, _, "xxx"))
+    println(s"xxx: ${xxx}")
+    val yyy = callsiteEnv(np, st).map(readEnvValue(st, _, "yyy"))
+    println(s"yyy: $yyy")
 
     List(
       s"Returned `undefined` from ${name} to array method `${acrInst.methodName}`:",
@@ -140,6 +159,8 @@ object ArrayCallbackReturn extends LintRule {
         }
 
         ctx.report(AcrReport(np, st, acrInst, callbackDef))
+        LintUtil.writeToFile("acr-state.txt", st.toString)
+        println("wrote state to acr-state.txt")
       }
     })
   }
