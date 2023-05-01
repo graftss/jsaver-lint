@@ -46,17 +46,14 @@ case class AcrReport(np: NodePoint[Node], st: AbsState, acrInst: AcrInst, callba
 
   override def message: String = {
     val name = "callback" + callbackDef.map(cb => " " + cb.getName).getOrElse("")
-
-    val xxx = callsiteEnv(np, st).map(readEnvValue(st, _, "xxx"))
-    println(s"xxx: ${xxx}")
-    val yyy = callsiteEnv(np, st).map(readEnvValue(st, _, "yyy"))
-    println(s"yyy: $yyy")
+    val env = callsiteEnv(np, st).get
+    val ast = np.view.jsViewOpt.get.ast
 
     List(
       s"Returned `undefined` from ${name} to array method `${acrInst.methodName}`:",
-      callStringStr(np),
-      viewAstStr(np, "callsite"),
       acrInst.argsStr(np, st),
+      callStringStr(np),
+      jsIdValuesStr(st, ast, env, indent = 2),
     ).mkString("\n")
   }
 }

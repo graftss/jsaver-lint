@@ -3,7 +3,8 @@ const yyy = '3'
 
 function main() {
 
-    const table = { a: 1, b: 2, d: 4 };
+    const subtable = {x: 3, y: 4}
+    const table = { a: 1, b: 2, d: subtable };
     const yyy = 78
 
     function letterToNumber(letter) {
@@ -13,7 +14,8 @@ function main() {
     function inner() {
         let xxx = 999;
         const keys = ['a', 'b', 'ccc', 'd']
-        const result = keys.map(letterToNumber);
+        var ggg = 8;
+        const result = keys.map(letterToNumber, table);
 
         table.ccc = 3;
 

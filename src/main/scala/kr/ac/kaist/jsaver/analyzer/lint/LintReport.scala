@@ -1,11 +1,12 @@
 package kr.ac.kaist.jsaver.analyzer.lint
 
+import kr.ac.kaist.jsaver.analyzer.domain.BasicObj.PropMap
 import kr.ac.kaist.jsaver.analyzer.{ JSCallToken, NodePoint, View }
-import kr.ac.kaist.jsaver.analyzer.domain.{ AbsBool, AbsObj, AbsState, AbsValue, FlatBot, FlatElem, FlatTop }
+import kr.ac.kaist.jsaver.analyzer.domain.{ ASimple, AbsBool, AbsComp, AbsObj, AbsState, AbsValue, BasicObj, FlatBot, FlatElem, FlatTop }
 import kr.ac.kaist.jsaver.analyzer.lint.LintReport.UNKNOWN
 import kr.ac.kaist.jsaver.analyzer.lint.rule.LintRule
 import kr.ac.kaist.jsaver.cfg.Node
-import kr.ac.kaist.jsaver.ir.{ ASTVal, Bool }
+import kr.ac.kaist.jsaver.ir.{ ASTVal, Bool, Str }
 import kr.ac.kaist.jsaver.js.ast.{ AST, Expression }
 
 // Data encoding a single instance of a lint rule violation
@@ -16,13 +17,13 @@ trait LintReport {
 
   override def toString: String = message
 
-  def callStringStr(np: NodePoint[Node], label: String = "call string", indent: String = "  "): String =
-    s"${indent}${label}: " + np.view.jsCallString().getOrElse(UNKNOWN)
+  def callStringStr(np: NodePoint[Node], indent: Int = 1, label: String = "call string"): String =
+    s"${spaces(indent)}${label}: " + np.view.jsCallString().getOrElse(UNKNOWN)
 
-  def viewAstStr(np: NodePoint[Node], label: String = "source", indent: String = "  "): String = {
+  def viewAstStr(np: NodePoint[Node], indent: Int = 1, label: String = "source"): String = {
     //    println(s"ast kind: ${np.view.jsViewOpt.get.ast.kind}")
     // TODO: if initializer, get rid of the "= " prefix
-    s"${indent}${label}: " + np.view.jsViewOpt.map(_.ast).getOrElse(UNKNOWN)
+    s"${spaces(indent)}${label}: " + np.view.jsViewOpt.map(_.ast).getOrElse(UNKNOWN)
   }
 
   def readOwnEnvBinding(st: AbsState, env: AbsObj, id: String): AbsValue = {
@@ -35,10 +36,17 @@ trait LintReport {
     }).getOrElse(AbsValue.Bot)
   }
 
+  private def uncompleteValue(value: AbsValue): AbsValue = {
+    value.copy(comp = value.comp.removeNormal) ⊔ value.comp.normal.value
+  }
+
   def readBindingValue(binding: AbsObj): AbsValue = {
-    //    println(s"read binding value of: ${binding}")
     binding.getTy.name match {
-      case "ImmutableBinding" | "MutableBinding" => binding("BoundValue")
+      case "ImmutableBinding" | "MutableBinding" => uncompleteValue(binding("BoundValue"))
+      case _ => {
+        println(s"unknown binding type: ${binding.getTy.name}")
+        AbsValue.Bot
+      }
     }
   }
 
@@ -59,8 +67,63 @@ trait LintReport {
     }
   }
 
-  def jsIdValues(st: AbsState, ast: AST, env: AbsObj): String = {
-    ""
+  def spaces(indent: Int): String = indent.toString + "  " * indent
+
+  def propMapStr(st: AbsState, propMap: PropMap, indent: Int): String = {
+    val itemSpace = spaces(indent)
+    propMap.map {
+      case (k, dpRef) => {
+        st(dpRef.loc).map(dp => {
+          val value = uncompleteValue(dp("Value"))
+          val valueStr = k match {
+            case ASimple(Str("prototype")) | ASimple(Str("constructor")) => value.toString
+            case _ => {
+              val value = uncompleteValue(dp("Value"))
+              jsValueStr(st, value, indent)
+            }
+          }
+
+          s"${itemSpace}${k} -> ${valueStr}"
+        }).getOrElse("???")
+      }
+    }.mkString("{\n", "\n", s"\n${spaces(indent - 1)}}")
+  }
+
+  def jsValueStr(st: AbsState, value: AbsValue, indent: Int): String = {
+    // primitive javascript values
+    val simpleStr = if (!value.simple.isBottom) {
+      value.simple.toString
+    } else {
+      ""
+    }
+
+    // objects
+    val objStr = if (!value.loc.isBottom) {
+      st(value.loc).flatMap(obj => {
+        obj.getTy.name match {
+          case _ => st(obj("SubMap").loc).map {
+            case submap: BasicObj.OrderedMap => propMapStr(st, submap.map, indent + 1)
+            case submap: BasicObj.KeyWiseMap => propMapStr(st, submap.map, indent + 1)
+            case submap @ _ => {
+              println(s"hello [${submap.getClass}]: ${submap}")
+              ""
+            }
+          }
+        }
+      }).getOrElse("")
+    } else {
+      ""
+    }
+
+    simpleStr + objStr
+  }
+
+  def jsIdValuesStr(st: AbsState, ast: AST, env: AbsObj, indent: Int): String = {
+    val idNames = ast.childIds.map(id => id.toString)
+    val outer = spaces(indent)
+
+    idNames.map(id => s"${outer}${id} -> ${jsValueStr(st, readEnvValue(st, env, id), indent)}")
+      .mkString("\n")
   }
 }
 

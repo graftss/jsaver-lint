@@ -15,8 +15,8 @@ trait NdmsReport extends LintReport {
   def message(np: NodePoint[Node], header: String, footer: Option[List[String]] = None): String = {
     val lines = ListBuffer(
       header,
-      viewAstStr(np),
-      callStringStr(np),
+      viewAstStr(np, 2),
+      callStringStr(np, 2),
     )
 
     footer.foreach(footerLines => lines ++= footerLines)
