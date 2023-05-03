@@ -1,28 +1,34 @@
 package kr.ac.kaist.jsaver.analyzer.lint.rule
 import kr.ac.kaist.jsaver.analyzer.{ CallView, NodePoint, View }
 import kr.ac.kaist.jsaver.analyzer.domain.{ AbsObj, AbsState, AbsValue }
-import kr.ac.kaist.jsaver.analyzer.lint.{ LintContext, LintError, LintReport, LintSeverity }
+import kr.ac.kaist.jsaver.analyzer.lint.{ LintContext, LintError, LintReport, LintSeverity, LintUtil }
 import kr.ac.kaist.jsaver.cfg.{ Branch, Exit, InstNode, Linear, Node }
 import kr.ac.kaist.jsaver.ir.{ ASTVal, Addr, Clo, Const, Cont, EStr, Func, IAccess, IApp, Id, SimpleValue }
+import kr.ac.kaist.jsaver.js.EXECUTION_STACK
 import kr.ac.kaist.jsaver.js.ast.{ AST, ObjectLiteral, ObjectLiteral0, ObjectLiteral1, ObjectLiteral2, PropertyDefinition }
 
 import scala.collection.mutable.ListBuffer
 
-case class NdkReport(view: View, ast: ObjectLiteral, keyAst: AST, keyValue: AbsValue, oldValue: AbsValue, newValue: AbsValue) extends LintReport {
+case class NdkReport(np: NodePoint[Node], st: AbsState, ast: ObjectLiteral, keyAst: AST, keyValue: AbsValue, oldValue: AbsValue, newValue: AbsValue) extends LintReport {
   override val rule: LintRule = NoDupeKeys
   override val severity: LintSeverity = LintError
 
   override def message: String = {
+    val env = execContextEnv(np, st, 0).get
+    println("write state to no-dupe-keys-state.txt")
+    LintUtil.writeToFile("no-dupe-keys-state.txt", st.toString())
+
     val lines = ListBuffer(
       "Defined duplicate key in object literal:",
       s"  object literal: ${ast}",
+      jsIdValuesStr(st, ast, env, 2),
       s"  duplicate property: `${keyAst}`",
       s"  key: ${keyValue}",
       s"  old value: ${oldValue}",
       s"  new value: ${newValue}",
     )
 
-    view.jsCallString.foreach(s => lines += s"  source: ${s}")
+    lines += callStringStr(np)
 
     lines.mkString("\n")
   }
@@ -75,7 +81,7 @@ object NoDupeKeys extends LintRule {
           case (Some(oldDesc), Some(newDesc)) => {
             np.view.calls.find(isPropDefEval) match {
               case Some(CallView(_, Some(keyAst))) =>
-                Some(NdkReport(np.view, ast, keyAst, st(PROPERTY_ID, np), oldDesc(DESC_VALUE_KEY), newDesc(DESC_VALUE_KEY)))
+                Some(NdkReport(np, st, ast, keyAst, st(PROPERTY_ID, np), oldDesc(DESC_VALUE_KEY), newDesc(DESC_VALUE_KEY)))
               case _ => None
             }
           }

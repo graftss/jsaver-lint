@@ -6,7 +6,7 @@ import kr.ac.kaist.jsaver.analyzer.domain.{ ASimple, AbsBool, AbsComp, AbsObj, A
 import kr.ac.kaist.jsaver.analyzer.lint.LintReport.UNKNOWN
 import kr.ac.kaist.jsaver.analyzer.lint.rule.LintRule
 import kr.ac.kaist.jsaver.cfg.Node
-import kr.ac.kaist.jsaver.ir.{ ASTVal, Bool, Str }
+import kr.ac.kaist.jsaver.ir.{ ASTVal, Bool, Id, Str }
 import kr.ac.kaist.jsaver.js.ast.{ AST, Expression }
 
 // Data encoding a single instance of a lint rule violation
@@ -124,6 +124,20 @@ trait LintReport {
 
     idNames.map(id => s"${outer}${id} -> ${jsValueStr(st, readEnvValue(st, env, id), indent)}")
       .mkString("\n")
+  }
+
+  def execContextEnv(np: NodePoint[Node], st: AbsState, stackIdx: Int): Option[AbsObj] = {
+    val stackRef = st(Id("EXECUTION_STACK"), np)
+
+    st(stackRef.loc).flatMap {
+      case elem: BasicObj.KeyWiseList if elem.values.length >= stackIdx + 1 => {
+        val ctxRef = elem.values(elem.values.length - 1 - stackIdx)
+        val ctx = st(ctxRef.loc).get
+
+        st(ctx("LexicalEnvironment").comp.normal.value.loc)
+      }
+      case _ => None
+    }
   }
 }
 

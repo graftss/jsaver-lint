@@ -4,7 +4,7 @@ import kr.ac.kaist.jsaver.{ JSAVERConfig, js }
 import kr.ac.kaist.jsaver.analyzer.{ AbsSemantics, JSCallToken }
 import kr.ac.kaist.jsaver.analyzer.domain.{ AbsLoc, AbsState, AbsValue, FlatBot, FlatElem, FlatTop, MayCallees }
 import kr.ac.kaist.jsaver.analyzer.lint.{ LintContext, LintUtil, LintWalker }
-import kr.ac.kaist.jsaver.analyzer.lint.rule.{ ArrayCallbackReturn, LintRule, NoArrayForEach, NoDirectMutationState, NoDupeKeys, NoLifecycleSetState }
+import kr.ac.kaist.jsaver.analyzer.lint.rule.{ ArrayCallbackReturn, LintRule, NoArrayForEach, NoDirectMutationState, NoDupeKeys, NoLifecycleSetState, NoUnusedProperties }
 import kr.ac.kaist.jsaver.cfg.{ Branch, Call, Exit, InstNode, Linear }
 import kr.ac.kaist.jsaver.ir.{ ArrowInst, CallInst, CondInst, ILet, ISeq, Id, NormalInst }
 import kr.ac.kaist.jsaver.js.ASTWalker
@@ -26,6 +26,7 @@ case object Lint extends Phase[AbsSemantics, LintConfig, LintResult] {
     NoArrayForEach,
     NoLifecycleSetState,
     NoDirectMutationState,
+    NoUnusedProperties
   )
 
   def apply(

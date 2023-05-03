@@ -30,23 +30,9 @@ case class AcrReport(np: NodePoint[Node], st: AbsState, acrInst: AcrInst, callba
   override val rule: LintRule = ArrayCallbackReturn
   override val severity: LintSeverity = LintError
 
-  private def callsiteEnv(np: NodePoint[Node], st: AbsState): Option[AbsObj] = {
-    val stackRef = st(Id("EXECUTION_STACK"), np)
-
-    st(stackRef.loc).flatMap {
-      case elem: BasicObj.KeyWiseList if elem.values.length >= 2 => {
-        val ctxRef = elem.values(elem.values.length - 2)
-        val ctx = st(ctxRef.loc).get
-
-        st(ctx("LexicalEnvironment").comp.normal.value.loc)
-      }
-      case _ => None
-    }
-  }
-
   override def message: String = {
     val name = "callback" + callbackDef.map(cb => " " + cb.getName).getOrElse("")
-    val env = callsiteEnv(np, st).get
+    val env = execContextEnv(np, st, 1).get
     val ast = np.view.jsViewOpt.get.ast
 
     List(
