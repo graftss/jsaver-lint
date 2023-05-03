@@ -35,14 +35,9 @@ trait LintReport {
       }
     }).getOrElse(AbsValue.Bot)
   }
-
-  private def uncompleteValue(value: AbsValue): AbsValue = {
-    value.copy(comp = value.comp.removeNormal) ⊔ value.comp.normal.value
-  }
-
   def readBindingValue(binding: AbsObj): AbsValue = {
     binding.getTy.name match {
-      case "ImmutableBinding" | "MutableBinding" => uncompleteValue(binding("BoundValue"))
+      case "ImmutableBinding" | "MutableBinding" => binding("BoundValue").exclam
       case _ => {
         println(s"unknown binding type: ${binding.getTy.name}")
         AbsValue.Bot
@@ -74,11 +69,11 @@ trait LintReport {
     propMap.map {
       case (k, dpRef) => {
         st(dpRef.loc).map(dp => {
-          val value = uncompleteValue(dp("Value"))
+          val value = dp("Value").exclam
           val valueStr = k match {
             case ASimple(Str("prototype")) | ASimple(Str("constructor")) => value.toString
             case _ => {
-              val value = uncompleteValue(dp("Value"))
+              val value = dp("Value").exclam
               jsValueStr(st, value, indent)
             }
           }

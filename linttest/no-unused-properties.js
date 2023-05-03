@@ -4,7 +4,7 @@ function makeColors() {
    red: 1,
    blue: 2,
    green: {
-     dark: 3,
+     ['dark??']: 3,
      light: 4,
      neon: 5,
    },
@@ -21,3 +21,4 @@ function useColors(obj) {
 const x = makeColors()
 useColors(x)
 const y = makeColors()
+const z = makeColors()

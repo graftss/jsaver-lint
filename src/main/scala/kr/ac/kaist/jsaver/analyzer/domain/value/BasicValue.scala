@@ -203,6 +203,10 @@ object BasicValue extends Domain {
     // escape completion
     def escaped: Elem = comp.normal.value ⊔ copy(comp = AbsComp.Bot)
 
+    def exclam: AbsValue = {
+      copy(comp = comp.removeNormal) ⊔ comp.normal.value
+    }
+
     // only values usable as keys
     def keyValue: AbsValue = AbsValue(loc = loc, str = str)
 
