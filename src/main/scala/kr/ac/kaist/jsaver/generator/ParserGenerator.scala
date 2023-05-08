@@ -6,7 +6,7 @@ import kr.ac.kaist.jsaver.spec.grammar.token._
 import kr.ac.kaist.jsaver.util.Useful._
 import kr.ac.kaist.jsaver.util.JvmUseful._
 
-case class ParserGenerator(grammar: Grammar) {
+case class ParserGenerator(grammar: Grammar, outPath: Option[String] = None) {
   val Grammar(lexProds, prods) = grammar
   val lexNames = lexProds.map(_.lhs.name).toSet
   val terminalTokens = prods.foldLeft(Set[String]()) {
@@ -25,7 +25,7 @@ case class ParserGenerator(grammar: Grammar) {
   )
   val paramMap: Map[String, List[String]] =
     prods.map(prod => prod.lhs.name -> prod.lhs.params).toMap
-  val nf = getPrintWriter(s"$SRC_DIR/js/Parser.scala")
+  val nf = getPrintWriter(outPath.getOrElse(s"$SRC_DIR/js/Parser.scala"))
   generate
   nf.close()
 

@@ -69,3 +69,7 @@ case object CmdLint extends Command(name = "lint", CmdBase >> Parse >> Analyze >
 case object CmdLintTest extends Command(name = "linttest", CmdBase >> Parse >> LintTest) {
   def help = "test syntactic lint behaviour"
 }
+
+case object CmdParserGen extends Command(name = "gen-parser", CmdBase >> GenerateParser) {
+  def help = "generate JS parser"
+}

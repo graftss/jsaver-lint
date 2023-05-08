@@ -30,6 +30,11 @@ case object Extract extends Phase[Unit, ExtractConfig, ECMAScript] {
     // generate models
     if (config.genModel) time(s"generating models", ModelGenerator(spec, false))
 
+    if (config.genParser) {
+      println("generating JS parser...")
+      ParserGenerator(spec.grammar, config.parserPath)
+    }
+
     // set spec for js
     setSpec(spec)
 
@@ -41,12 +46,18 @@ case object Extract extends Phase[Unit, ExtractConfig, ECMAScript] {
     ("version", StrOption((c, s) => c.version = Some(s)),
       "set the git version of ecma262."),
     ("genModel", BoolOption(c => c.genModel = true),
-      "generate models of the extracted definitional interpreter.")
+      "generate models of the extracted definitional interpreter."),
+    ("genParser", BoolOption(c => c.genParser = true),
+      "only generate javascript parser"),
+    ("parserPath", StrOption((c, s) => c.parserPath = Some(s)),
+      "set the path to write the JS parser")
   )
 }
 
 // Extract phase config
 case class ExtractConfig(
   var version: Option[String] = None,
-  var genModel: Boolean = false
+  var genModel: Boolean = false,
+  var genParser: Boolean = false,
+  var parserPath: Option[String] = None
 ) extends Config
