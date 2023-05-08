@@ -54,6 +54,9 @@ object NoLifecycleSetState extends LintRule {
 
   private val REACT_LIFECYCLE_METHODS = List("componentDidMount", "componentWillUpdate", "componentDidUpdate")
 
+  def lookupDataPropComp(obj: AbsObj): AbsValue =
+    obj(AbsValue("Value")).comp.normal.value
+
   override def validate(ctx: LintContext): Unit = {
     val classEvalPairs = ctx.sem.npMap.filter(isClassEvalPair)
     val rcLocOpt = classEvalPairs.find(findReactComponentClass)

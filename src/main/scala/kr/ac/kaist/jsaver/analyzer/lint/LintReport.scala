@@ -62,7 +62,7 @@ trait LintReport {
     }
   }
 
-  def spaces(indent: Int): String = indent.toString + "  " * indent
+  def spaces(indent: Int): String = "  " * indent
 
   def propMapStr(st: AbsState, propMap: PropMap, indent: Int): String = {
     val itemSpace = spaces(indent)
@@ -138,4 +138,6 @@ trait LintReport {
 
 object LintReport {
   val UNKNOWN = "[unknown]"
+
+  val LOG: Boolean = true
 }

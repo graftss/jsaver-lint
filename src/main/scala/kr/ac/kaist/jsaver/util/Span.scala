@@ -1,11 +1,20 @@
 package kr.ac.kaist.jsaver.util
 
+import scala.util.matching.Regex
+
 case class Span(
   start: Pos = Pos(),
-  end: Pos = Pos()
+  end: Pos = Pos(),
+  rawPreComment: Option[String] = None
 ) {
   // validity check
   def valid: Boolean = start.valid && end.valid
+
+  def preComment: Option[String] = {
+    val commentPattern = "(?:(?://)|(?:/\\*))\\s+(.*)".r
+    rawPreComment.flatMap(commentPattern.findFirstMatchIn)
+      .map(_.group(1))
+  }
 
   // conversion to string
   override def toString: String = toString(useIndex = false)

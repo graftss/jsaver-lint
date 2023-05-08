@@ -23,6 +23,11 @@ trait AST {
   // child AST nodes
   def fullList: List[(String, PureValue)]
 
+  def preComment: Option[String] = {
+    if (span.preComment.isDefined) span.preComment
+    else parent.flatMap(_.preComment)
+  }
+
   // Compute the root node of the AST by recursively traveling upwards.
   def root: AST = {
     parent match {
@@ -104,12 +109,13 @@ trait AST {
       code
     }
 
-    ("  " * indent) + s"$name ($hashCode):  $codeLine" + (if (newline) "\n" else "")
+    val commentStr = preComment.map(pc => s"[${pc}] ").getOrElse("")
+    ("  " * indent) + s"$name ($hashCode): ${commentStr}$codeLine" + (if (newline) "\n" else "")
   }
 
   // print the AST node as a tree, with one node printed per line and depth
   // indicated by indentation
-  def toTreeString(depth: Int = 0): String = {
+  def toTreeString(depth: Int = 0, collapseExpr: Boolean = true): String = {
     val spaces = "  " * depth
 
     if (kind == "StatementList" && idx == 1) {
@@ -137,13 +143,13 @@ trait AST {
       }
 
       toLine(depth) + result.mkString("\n")
-    } else if (fullList.length == 1 && kind.contains("Expression")) {
+    } else if (collapseExpr && fullList.length == 1 && kind.contains("Expression")) {
       // collapse expression chains
       fullList.head match {
         case (_, ASTVal(ast)) => ast.toTreeString(depth)
         case _ => ""
       }
-    } else if (!fullList.isEmpty) {
+    } else if (fullList.nonEmpty) {
       // normal AST node with children
       toLine(depth) + fullList.flatMap({
         case (_, ASTVal(ast)) => List(ast.toTreeString(depth + 1))

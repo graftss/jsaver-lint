@@ -155,6 +155,7 @@ trait LintRule {
   def lookupJsProto(st: AbsState, obj: AbsObj): Option[AbsObj] =
     lookupRefPath(st, obj, List("SubMap", "prototype", "Value", "SubMap"))
 
-  def lookupDataPropComp(obj: AbsObj): AbsValue =
-    obj(AbsValue("Value")).comp.normal.value
+  def isDisableComment(preComment: String): Boolean = {
+    (s"lint-disable-next-line ${this.name}").r.matches(preComment)
+  }
 }

@@ -15,8 +15,13 @@ case class NdkReport(np: NodePoint[Node], st: AbsState, ast: ObjectLiteral, keyA
 
   override def message: String = {
     val env = execContextEnv(np, st, 0).get
-    println("write state to no-dupe-keys-state.txt")
-    LintUtil.writeToFile("no-dupe-keys-state.txt", st.toString())
+
+    if (LintReport.LOG) {
+      println("no-dupe-keys violation:")
+      println(s"  ast: ${ast}")
+      println(s"  comment: ${ast.preComment}")
+      println(s"  is disable comment: ${ast.preComment.exists(rule.isDisableComment)}")
+    }
 
     val lines = ListBuffer(
       "Defined duplicate key in object literal:",

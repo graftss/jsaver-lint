@@ -1,34 +1,23 @@
 {
   locals: {
-    Desc: {{-1701494675}}#1100:☊[Expression/1655750533][call: 2][loop: 1][call: 5][loop: 0]
-    O: {{-912899472}}#2819:☊[Expression/1655750533][call: 2][loop: 1][call: 2][loop: 0]
+    Desc: {{1061839432}}#1100:☊[Expression/431966204][call: 2][loop: 1][call: 5][loop: 0]
+    O: {{-264301315}}#2819:☊[Expression/431966204][call: 2][loop: 1][call: 2][loop: 0]
     P: "y"
-    __x0__: {{-334432863}}#3086:☊[Expression/1655750533][call: 2][loop: 1][call: 9][loop: 0]
+    __x0__: {{827792842}}#3086:☊[Expression/431966204][call: 2][loop: 1][call: 9][loop: 0]
     __x1__: true
-    current: {{-334432863}}#3086:☊[Expression/1655750533][call: 2][loop: 1][call: 9][loop: 0]
+    current: {{827792842}}#3086:☊[Expression/431966204][call: 2][loop: 1][call: 9][loop: 0]
     extensible: true
   }
   globals: {
-    CONTEXT: {{-1616393055}}#3169:☊[Initializer/1686232293][call: 2][loop: 1][call: 4][loop: 0]
-    SCRIPT_BODY: ☊[ScriptBody](functio...) @ 0x10131289
+    CONTEXT: {{1979375552}}#3169:☊[Initializer/903663666][call: 2][loop: 1][call: 4][loop: 0]
+    SCRIPT_BODY: ☊[ScriptBody](functio...) @ 0x55222ee9
   }
   heaps: {
-    [ ] {{-1001101469}}#3086:☊[Initializer/2036295297][call: 2][loop: 1][call: 15][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> "x"
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{-1003994233}}#3086:☊[Initializer/1686232293][call: 1][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1359140605}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> false
-    }
-    [ ] {{-1017262942}}#3779:☊[Initializer/2036295297][call: 2][loop: 1][call: 18][loop: 1] -> DataProperty {
-      [0] "Value" -> "z"
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
+    [ ] {{-1000278148}}#3553:☊[Initializer/1722868231][call: 2][loop: 1][call: 10][loop: 0] -> []
+    [ ] {{-1000478951}}#3779:[call: 10][loop: 2] -> DataProperty {
+      [0] "Value" -> {~normal~ -> ("main", ~empty~)}
+      [1] "Writable" -> false
+      [2] "Enumerable" -> false
       [3] "Configurable" -> true
     }
     [ ] {{-1017857108}}#3372:[call: 0][loop: 1] -> ExecutionContext {
@@ -37,111 +26,140 @@
       [2] "Realm" -> {~normal~ -> ({{-572624684}}#REALM, ~empty~)}
       [3] "ScriptOrModule" -> null
     }
-    [ ] {{-1033905874}}#2491:☊[Initializer/2036295297][call: 2][loop: 1][call: 11][loop: 0] -> ReferenceRecord {
-      [0] "Base" -> {~normal~ -> ({{68671446}}#2978:☊[Initializer/2036295297][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
-      [1] "ReferencedName" -> {~normal~ -> ("key1", ~empty~)}
-      [2] "Strict" -> true
-      [3] "ThisValue" -> ~empty~
+    [ ] {{-1052149288}}#2819:☊[Initializer/903663666][call: 2][loop: 1][call: 15][loop: 1] -> OrdinaryObject {
+      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
+      [1] "Delete" -> λ(OrdinaryObject.Delete)
+      [2] "Get" -> λ(OrdinaryObject.Get)
+      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
+      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
+      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
+      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
+      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
+      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
+      [9] "Set" -> λ(OrdinaryObject.Set)
+      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
+      [11] "SubMap" -> {{259185374}}{{-1052149288}}#2819:☊[Initializer/903663666][call: 2][loop: 1][call: 15][loop: 1]:SubMap
+      [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
+      [13] "Extensible" -> true
     }
-    [ ] {{-1035275694}}#3779:[call: 10][loop: 2] -> DataProperty {
-      [0] "Value" -> {~normal~ -> ({{1359140605}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
+    [ ] {{-1058157729}}#3498:☊[Expression/510873326][call: 1][loop: 1][call: 11][loop: 0] -> []
+    [ ] {{-1059932099}}#3169:☊[Initializer/1722868231][call: 2][loop: 1][call: 4][loop: 0] -> ExecutionContext {
+      [0] "Function" -> {{89390415}}#2819:[call: 8][loop: 2]
+      [1] "Realm" -> {{-572624684}}#REALM
+      [2] "ScriptOrModule" -> {~normal~ -> ({{-1204254822}}#3110:[call: 2][loop: 1], ~empty~)}
+      [3] "LexicalEnvironment" -> {~normal~ -> ({{1337896232}}#2978:☊[Initializer/1722868231][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
+      [4] "VariableEnvironment" -> {~normal~ -> ({{1337896232}}#2978:☊[Initializer/1722868231][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
+      [5] "Generator" -> {{-958527277}}#2819:☊[Initializer/1722868231][call: 2][loop: 1][call: 11][loop: 0]
+      [6] "ResumeCont" -> (resumptionValue) [=>] ☊[Initializer/1722868231][call(2): ☊[Initializer/1722868231], ☊[Expression/510873326]][loop: Loop[25926](0)][call(13): IApp(GeneratorYield), IApp(Yield), IApp(generatorBody), IApp(GeneratorStart), IApp(CreateIteratorFromClosure), IApp(CreateListIteratorRecord), IApp(FunctionDeclarationInstantiation), IAccess(FunctionBody."EvaluateFunctionBody"), IAccess(F.ECMAScriptCode."EvaluateBody"), IApp(OrdinaryCallEvaluateBody), IApp(F.Call), IApp(Call), IApp(EvaluateCall)][loop: Loop[6948](1)]:Entry[19206]
+      [7] "ReturnCont" -> {{203066978}}#2479:☊[Initializer/1722868231][call: 3][loop: 1][call: 15][loop: 0]
     }
-    [ ] {{-1069327294}}#1166:☊[Initializer/1686232293][call: 2][loop: 1][call: 8][loop: 1] -> MutableBinding {
+    [ ] {{-1069932302}}#1166:☊[Initializer/903663666][call: 2][loop: 1][call: 8][loop: 1] -> MutableBinding {
       [0] "initialized" -> true
-      [1] "BoundValue" -> "y"
+      [1] "BoundValue" -> "z"
     }
-    [ ] {{-1070667548}}#3779:[call: 10][loop: 2] -> DataProperty {
-      [0] "Value" -> {~normal~ -> ({{1624244029}}#2819:[call: 8][loop: 2], ~empty~)}
+    [ ] {{-107365638}}#3779:[call: 10][loop: 2] -> DataProperty {
+      [0] "Value" -> {~normal~ -> ("makeObject", ~empty~)}
+      [1] "Writable" -> false
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> true
+    }
+    [ ] {{-1088077588}}#3553:☊[Initializer/903663666][call: 2][loop: 1][call: 10][loop: 0] -> []
+    [ ] {{-1100984531}}#1121:☊[Expression/510873326][call: 1][loop: 1][call: 8][loop: 0] -> Record {
+      [0] "Iterator" -> {{-1167856949}}#2819:☊[Expression/510873326][call: 1][loop: 1][call: 11][loop: 0]
+      [1] "NextMethod" -> {{-41776461}}#GLOBAL.Generator.prototype.next
+      [2] "Done" -> false
+    }
+    [ ] {{-1105385526}}{{-958527277}}#2819:☊[Initializer/1722868231][call: 2][loop: 1][call: 11][loop: 0]:SubMap -> SubMap {}
+    [ ] {{-1123423803}}#2819:☊[Initializer/1722868231][call: 2][loop: 1][call: 15][loop: 1] -> OrdinaryObject {
+      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
+      [1] "Delete" -> λ(OrdinaryObject.Delete)
+      [2] "Get" -> λ(OrdinaryObject.Get)
+      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
+      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
+      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
+      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
+      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
+      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
+      [9] "Set" -> λ(OrdinaryObject.Set)
+      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
+      [11] "SubMap" -> {{1464471295}}{{-1123423803}}#2819:☊[Initializer/1722868231][call: 2][loop: 1][call: 15][loop: 1]:SubMap
+      [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
+      [13] "Extensible" -> true
+    }
+    [ ] {{-1149334904}}#3779:☊[Initializer/1722868231][call: 2][loop: 1][call: 12][loop: 0] -> DataProperty {
+      [0] "Value" -> {{296244539}}#GLOBAL.Array.prototype.values
       [1] "Writable" -> true
       [2] "Enumerable" -> false
       [3] "Configurable" -> true
     }
-    [ ] {{-109030448}}#3779:☊[Initializer/1686232293][call: 2][loop: 1][call: 13][loop: 1] -> DataProperty {
+    [ ] {{-1154289446}}#3779:[call: 10][loop: 2] -> DataProperty {
+      [0] "Value" -> {~normal~ -> ({{734547689}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> true
+    }
+    [ ] {{-1159891719}}#3086:☊[Initializer/903663666][call: 2][loop: 1][call: 15][loop: 0] -> PropertyDescriptor {
       [0] "Value" -> "y"
       [1] "Writable" -> true
       [2] "Enumerable" -> true
       [3] "Configurable" -> true
     }
-    [ ] {{-1096474807}}#582:☊[Expression/1022713356][call: 1][loop: 1][call: 10][loop: 1] -> ["obj2"]
-    [ ] {{-109922226}}#3470:[call: 6][loop: 1] -> []
-    [ ] {{-1139967700}}#3484:[call: 7][loop: 1] -> []
-    [ ] {{-1142727528}}#2978:☊[Initializer/1686232293][call: 2][loop: 1][call: 5][loop: 0] -> FunctionEnvironmentRecord {
-      [0] "BindThisValue" -> λ(FunctionEnvironmentRecord.BindThisValue)
-      [1] "CreateImmutableBinding" -> λ(DeclarativeEnvironmentRecord.CreateImmutableBinding)
-      [2] "CreateMutableBinding" -> λ(DeclarativeEnvironmentRecord.CreateMutableBinding)
-      [3] "DeleteBinding" -> λ(DeclarativeEnvironmentRecord.DeleteBinding)
-      [4] "GetBindingValue" -> λ(DeclarativeEnvironmentRecord.GetBindingValue)
-      [5] "GetSuperBase" -> λ(FunctionEnvironmentRecord.GetSuperBase)
-      [6] "GetThisBinding" -> λ(FunctionEnvironmentRecord.GetThisBinding)
-      [7] "HasBinding" -> λ(DeclarativeEnvironmentRecord.HasBinding)
-      [8] "HasSuperBinding" -> λ(FunctionEnvironmentRecord.HasSuperBinding)
-      [9] "HasThisBinding" -> λ(FunctionEnvironmentRecord.HasThisBinding)
-      [10] "InitializeBinding" -> λ(DeclarativeEnvironmentRecord.InitializeBinding)
-      [11] "SetMutableBinding" -> λ(DeclarativeEnvironmentRecord.SetMutableBinding)
-      [12] "WithBaseObject" -> λ(DeclarativeEnvironmentRecord.WithBaseObject)
-      [13] "SubMap" -> {{60092979}}{{-1142727528}}#2978:☊[Initializer/1686232293][call: 2][loop: 1][call: 5][loop: 0]:SubMap
-      [14] "FunctionObject" -> {{1359140605}}#2819:[call: 8][loop: 2]
-      [15] "ThisBindingStatus" -> ~initialized~
-      [16] "NewTarget" -> undefined
-      [17] "OuterEnv" -> {~normal~ -> ({{-1394450300}}#2981:[call: 3][loop: 0], ~empty~)}
-      [18] "ThisValue" -> {~normal~ -> (undefined, ~empty~)}
+    [ ] {{-1161815233}}#1803:☊[Initializer/1722868231][call: 2][loop: 1][call: 7][loop: 0] -> []
+    [ ] {{-1167856949}}#2819:☊[Expression/510873326][call: 1][loop: 1][call: 11][loop: 0] -> OrdinaryObject {
+      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
+      [1] "Delete" -> λ(OrdinaryObject.Delete)
+      [2] "Get" -> λ(OrdinaryObject.Get)
+      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
+      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
+      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
+      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
+      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
+      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
+      [9] "Set" -> λ(OrdinaryObject.Set)
+      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
+      [11] "SubMap" -> {{-2114352533}}{{-1167856949}}#2819:☊[Expression/510873326][call: 1][loop: 1][call: 11][loop: 0]:SubMap
+      [12] "Prototype" -> {{802063200}}#GLOBAL.IteratorPrototype
+      [13] "Extensible" -> true
+      [14] "GeneratorState" -> ~suspendedStart~
+      [15] "GeneratorContext" -> {{-573185702}}#3169:☊[Expression/510873326][call: 1][loop: 1][call: 4][loop: 0]
+      [16] "GeneratorBrand" -> ~empty~
     }
-    [ ] {{-1145519627}}#1116:☊[Expression/1022713356][call: 1][loop: 1][call: 9][loop: 0] -> ["GeneratorState", "GeneratorContext", "GeneratorBrand"]
-    [ ] {{-1164129017}}#582:☊[Initializer/1686232293][call: 2][loop: 1][call: 10][loop: 0] -> ["key1", "key2", "arguments"]
-    [ ] {{-1179460615}}#1145:☊[Initializer/2036295297][call: 2][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
-      [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
-      [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> false
-    }
-    [ ] {{-1190049529}}#2491:☊[Initializer/1686232293][call: 2][loop: 1][call: 11][loop: 0] -> ReferenceRecord {
-      [0] "Base" -> {~normal~ -> ({{-1142727528}}#2978:☊[Initializer/1686232293][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
-      [1] "ReferencedName" -> {~normal~ -> ("key2", ~empty~)}
-      [2] "Strict" -> true
-      [3] "ThisValue" -> ~empty~
-    }
+    [ ] {{-1168387523}}#1802:☊[Initializer/1722868231][call: 2][loop: 1][call: 7][loop: 0] -> []
     [ ] {{-1195183080}}#3779:[call: 8][loop: 2] -> DataProperty {
-      [0] "Value" -> {~normal~ -> ({{1359140605}}#2819:[call: 8][loop: 2], ~empty~)}
+      [0] "Value" -> {~normal~ -> ({{89390415}}#2819:[call: 8][loop: 2], ~empty~)}
       [1] "Writable" -> true
       [2] "Enumerable" -> true
       [3] "Configurable" -> false
     }
+    [ ] {{-1197335131}}#3779:☊[Initializer/1722868231][call: 2][loop: 1][call: 18][loop: 1] -> DataProperty {
+      [0] "Value" -> "x"
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{-1201426648}}#3484:[call: 7][loop: 1] -> []
     [ ] {{-1204254822}}#3110:[call: 2][loop: 1] -> ScriptRecord {
       [0] "Realm" -> {{-572624684}}#REALM
       [1] "Environment" -> undefined
-      [2] "ECMAScriptCode" -> ☊[ScriptBody](functio...) @ 0x10131289
+      [2] "ECMAScriptCode" -> ☊[ScriptBody](functio...) @ 0x55222ee9
       [3] "HostDefined" -> undefined
     }
-    [ ] {{-1266940965}}{{-1394450300}}#2981:[call: 3][loop: 0]:SubMap -> SubMap {}
-    [ ] {{-1270781272}}#582:☊[Expression/1022713356][call: 1][loop: 1][call: 14][loop: 0] -> ["obj2"]
-    [ ] {{-1302503763}}#1143:☊[Expression/1022713356][call: 1][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> 0i
-      [1] "Writable" -> true
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
-    }
-    [ ] {{-1308445710}}#3086:☊[Initializer/2036295297][call: 2][loop: 1][call: 16][loop: 0] -> PropertyDescriptor {
+    [ ] {{-1209693099}}#3779:☊[Initializer/1722868231][call: 2][loop: 1][call: 18][loop: 1] -> DataProperty {
       [0] "Value" -> false
       [1] "Writable" -> true
       [2] "Enumerable" -> true
       [3] "Configurable" -> true
     }
-    [ ] {{-1312209675}}#1166:☊[Initializer/2036295297][call: 2][loop: 1][call: 8][loop: 1] -> MutableBinding {
-      [0] "initialized" -> true
-      [1] "BoundValue" -> "x"
-    }
-    [ ] {{-1324250568}}#2491:☊[MemberExpression/1359849336][call: 1][loop: 1][call: 3][loop: 0] -> ReferenceRecord {
-      [0] "Base" -> {~normal~ -> ({{-1394450300}}#2981:[call: 3][loop: 0], ~empty~)}
-      [1] "ReferencedName" -> {~normal~ -> ("makeObject", ~empty~)}
-      [2] "Strict" -> true
-      [3] "ThisValue" -> ~empty~
-    }
-    [ ] {{-1324341071}}#1166:☊[Initializer/2036295297][call: 2][loop: 1][call: 8][loop: 1] -> MutableBinding {
-      [0] "initialized" -> true
-      [1] "BoundValue" -> "z"
+    [ ] {{-1210963555}}#3497:[call: 7][loop: 1] -> [☊[FunctionDeclaration](functio...) @ 0x112c2930, ☊[FunctionDeclaration](functio...) @ 0x2cae5fa7]
+    [ ] {{-1229948721}}#3542:[call: 7][loop: 1] -> []
+    [ ] {{-1247235496}}#1802:☊[Initializer/903663666][call: 2][loop: 1][call: 7][loop: 0] -> []
+    [ ] {{-1256210936}}#3484:[call: 7][loop: 1] -> []
+    [ ] {{-1266940965}}{{-1394450300}}#2981:[call: 3][loop: 0]:SubMap -> SubMap {}
+    [ ] {{-1312543919}}#1143:☊[Initializer/1722868231][call: 2][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> 2i
+      [1] "Writable" -> true
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> true
     }
     [ ] {{-1330350393}}#2980:[call: 3][loop: 0] -> DeclarativeEnvironmentRecord {
       [0] "CreateImmutableBinding" -> λ(DeclarativeEnvironmentRecord.CreateImmutableBinding)
@@ -156,23 +174,23 @@
       [9] "WithBaseObject" -> λ(DeclarativeEnvironmentRecord.WithBaseObject)
       [10] "SubMap" -> {{-1873405495}}{{-1330350393}}#2980:[call: 3][loop: 0]:SubMap
     }
-    [ ] {{-1337710481}}#3779:☊[Initializer/1686232293][call: 2][loop: 1][call: 13][loop: 1] -> DataProperty {
+    [ ] {{-1353097206}}#582:[call: 5][loop: 2] -> ["main"]
+    [ ] {{-136215614}}#3470:☊[Initializer/903663666][call: 2][loop: 1][call: 9][loop: 0] -> []
+    [ ] {{-1363743256}}#3779:☊[Initializer/903663666][call: 2][loop: 1][call: 12][loop: 0] -> DataProperty {
+      [0] "Value" -> 2i
+      [1] "Writable" -> true
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> true
+    }
+    [ ] {{-1365615513}}#1166:☊[Initializer/1722868231][call: 2][loop: 1][call: 8][loop: 1] -> MutableBinding {
+      [0] "initialized" -> true
+      [1] "BoundValue" -> "x"
+    }
+    [ ] {{-1370966548}}#3086:☊[Initializer/903663666][call: 2][loop: 1][call: 15][loop: 0] -> PropertyDescriptor {
       [0] "Value" -> "z"
       [1] "Writable" -> true
       [2] "Enumerable" -> true
       [3] "Configurable" -> true
-    }
-    [ ] {{-1345709512}}#658:☊[Initializer/2036295297][call: 3][loop: 1][call: 12][loop: 0] -> []
-    [ ] {{-1351623902}}{{68671446}}#2978:☊[Initializer/2036295297][call: 2][loop: 1][call: 5][loop: 0]:SubMap -> SubMap {
-      [0] "key1" -> {{-1312209675}}#1166:☊[Initializer/2036295297][call: 2][loop: 1][call: 8][loop: 1]
-      [1] "key2" -> {{-1324341071}}#1166:☊[Initializer/2036295297][call: 2][loop: 1][call: 8][loop: 1]
-      [2] "arguments" -> {{-1962236274}}#1165:☊[Initializer/2036295297][call: 2][loop: 1][call: 8][loop: 0]
-    }
-    [ ] {{-1372247280}}#3088:☊[Initializer/1686232293][call: 2][loop: 1][call: 9][loop: 0] -> ["Prototype", "Extensible", "ParameterMap"]
-    [ ] {{-1381796030}}{{1624244029}}#2819:[call: 8][loop: 2]:SubMap -> SubMap {
-      [0] "length" -> {{595616264}}#3779:[call: 11][loop: 2]
-      [1] "name" -> {{-201995481}}#3779:[call: 10][loop: 2]
-      [2] "prototype" -> {{1445083888}}#3779:[call: 10][loop: 2]
     }
     [ ] {{-1394450300}}#2981:[call: 3][loop: 0] -> GlobalEnvironmentRecord {
       [0] "CanDeclareGlobalFunction" -> λ(GlobalEnvironmentRecord.CanDeclareGlobalFunction)
@@ -200,34 +218,86 @@
       [22] "VarNames" -> {{-1894333701}}#2982:[call: 3][loop: 0]
       [23] "OuterEnv" -> null
     }
-    [ ] {{-1396685069}}#3779:☊[Initializer/2036295297][call: 2][loop: 1][call: 13][loop: 1] -> DataProperty {
-      [0] "Value" -> "x"
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
+    [ ] {{-1399175302}}{{1702131055}}#2819:☊[Initializer/1722868231][call: 2][loop: 1][call: 15][loop: 1]:SubMap -> SubMap {
+      [0] "value" -> {{486475623}}#3779:☊[Initializer/1722868231][call: 2][loop: 1][call: 18][loop: 1]
+      [1] "done" -> {{398156720}}#3779:☊[Initializer/1722868231][call: 2][loop: 1][call: 18][loop: 1]
     }
-    [ ] {{-1403344860}}#582:[call: 5][loop: 2] -> ["main"]
+    [ ] {{-1419919297}}#1817:☊[Initializer/1722868231][call: 2][loop: 1][call: 7][loop: 0] -> ["key1", "key2", "arguments"]
     [ ] {{-1426842409}}#3086:[call: 12][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1624244029}}#2819:[call: 8][loop: 2], ~empty~)}
+      [0] "Value" -> {~normal~ -> ({{734547689}}#2819:[call: 8][loop: 2], ~empty~)}
       [1] "Writable" -> true
       [2] "Enumerable" -> true
       [3] "Configurable" -> false
     }
-    [ ] {{-1439076677}}#658:☊[Initializer/1686232293][call: 3][loop: 1][call: 12][loop: 0] -> []
-    [ ] {{-1445978846}}#3088:☊[Initializer/1686232293][call: 2][loop: 1][call: 14][loop: 1] -> ["Prototype", "Extensible"]
-    [ ] {{-1450872584}}#3413:[call: 6][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ("main", ~empty~)}
-      [1] "Writable" -> false
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
+    [ ] {{-1433278738}}#2491:☊[AssignmentExpression/1349536242][call: 2][loop: 1][call: 2][loop: 0] -> ReferenceRecord {
+      [0] "Base" -> {~normal~ -> ({{1702519098}}#2978:☊[Initializer/903663666][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
+      [1] "ReferencedName" -> {~normal~ -> ("key1", ~empty~)}
+      [2] "Strict" -> true
+      [3] "ThisValue" -> ~empty~
     }
-    [ ] {{-1479352574}}#3779:☊[Initializer/1686232293][call: 2][loop: 1][call: 18][loop: 1] -> DataProperty {
+    [ ] {{-1480065397}}#2491:☊[BindingList/812708838][call: 1][loop: 1][call: 2][loop: 0] -> ReferenceRecord {
+      [0] "Base" -> {~normal~ -> ({{-1591112506}}#2978:☊[Expression/510873326][call: 1][loop: 1][call: 5][loop: 0], ~empty~)}
+      [1] "ReferencedName" -> {~normal~ -> ("obj1", ~empty~)}
+      [2] "Strict" -> true
+      [3] "ThisValue" -> ~empty~
+    }
+    [ ] {{-1494960665}}#1100:☊[Initializer/903663666][call: 2][loop: 1][call: 10][loop: 1] -> PropertyDescriptor {
       [0] "Value" -> "z"
       [1] "Writable" -> true
       [2] "Enumerable" -> true
       [3] "Configurable" -> true
     }
-    [ ] {{-1480555934}}#2819:[call: 8][loop: 2] -> OrdinaryObject {
+    [ ] {{-1496014057}}#3086:☊[Initializer/903663666][call: 2][loop: 1][call: 16][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> false
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{-1500631431}}#1132:[call: 2][loop: 0] -> []
+    [ ] {{-1516227070}}#3779:[call: 10][loop: 2] -> DataProperty {
+      [0] "Value" -> {{1606539702}}#2819:[call: 8][loop: 2]
+      [1] "Writable" -> true
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> false
+    }
+    [ ] {{-1520670404}}#3779:☊[Initializer/903663666][call: 2][loop: 1][call: 18][loop: 1] -> DataProperty {
+      [0] "Value" -> false
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{-1521644147}}#3779:☊[Initializer/1722868231][call: 2][loop: 1][call: 13][loop: 1] -> DataProperty {
+      [0] "Value" -> "x"
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{-1530364195}}#3470:☊[Initializer/1722868231][call: 2][loop: 1][call: 9][loop: 0] -> []
+    [ ] {{-1531503961}}#2491:☊[MemberExpression/209029677][call: 1][loop: 1][call: 3][loop: 0] -> ReferenceRecord {
+      [0] "Base" -> {~normal~ -> ({{-1394450300}}#2981:[call: 3][loop: 0], ~empty~)}
+      [1] "ReferencedName" -> {~normal~ -> ("makeObject", ~empty~)}
+      [2] "Strict" -> true
+      [3] "ThisValue" -> ~empty~
+    }
+    [ ] {{-1534090226}}#1262:[call: 1][loop: 0] -> PendingJob {
+      [0] "Job" -> λ(ScriptEvaluationJob)
+      [1] "Arguments" -> {{-41008453}}#3371:[call: 0][loop: 0]
+      [2] "Realm" -> {~normal~ -> ({{-572624684}}#REALM, ~empty~)}
+      [3] "ScriptOrModule" -> null
+      [4] "HostDefined" -> undefined
+    }
+    [ ] {{-1534909544}}#1100:☊[Initializer/1722868231][call: 2][loop: 1][call: 15][loop: 1] -> PropertyDescriptor {
+      [0] "Value" -> "z"
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{-154381522}}#3093:[call: 8][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{734547689}}#2819:[call: 8][loop: 2], ~empty~)}
+    }
+    [ ] {{-1544072342}}#582:☊[Initializer/1722868231][call: 2][loop: 1][call: 10][loop: 0] -> ["key2"]
+    [ ] {{-1559668874}}#2546:[call: 3][loop: 1] -> []
+    [ ] {{-1577460986}}#2819:☊[Expression/431966204][call: 2][loop: 1][call: 2][loop: 0] -> OrdinaryObject {
       [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
       [1] "Delete" -> λ(OrdinaryObject.Delete)
       [2] "Get" -> λ(OrdinaryObject.Get)
@@ -239,57 +309,30 @@
       [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
       [9] "Set" -> λ(OrdinaryObject.Set)
       [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
-      [11] "SubMap" -> {{183524208}}{{-1480555934}}#2819:[call: 8][loop: 2]:SubMap
+      [11] "SubMap" -> {{312518289}}{{-1577460986}}#2819:☊[Expression/431966204][call: 2][loop: 1][call: 2][loop: 0]:SubMap
       [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
       [13] "Extensible" -> true
     }
-    [ ] {{-1491373922}}#1802:☊[Initializer/2036295297][call: 2][loop: 1][call: 7][loop: 0] -> []
-    [ ] {{-1499813830}}#3088:☊[Expression/1655750533][call: 2][loop: 1][call: 1][loop: 0] -> ["Prototype", "Extensible"]
-    [ ] {{-1500631431}}#1132:[call: 2][loop: 0] -> []
-    [ ] {{-1511557876}}#1165:☊[Expression/1022713356][call: 1][loop: 1][call: 8][loop: 2] -> ImmutableBinding {
-      [0] "initialized" -> true
-      [1] "strict" -> true
-      [2] "BoundValue" -> {{-1822807976}}#2819:☊[Expression/1655750533][call: 2][loop: 1][call: 2][loop: 0]
-    }
-    [ ] {{-1523192078}}#1121:☊[Initializer/1686232293][call: 2][loop: 1][call: 8][loop: 0] -> Record {
-      [0] "Iterator" -> {{-194756375}}#2819:☊[Initializer/1686232293][call: 2][loop: 1][call: 11][loop: 0]
-      [1] "NextMethod" -> {{-41776461}}#GLOBAL.Generator.prototype.next
-      [2] "Done" -> false
-    }
-    [ ] {{-1534090226}}#1262:[call: 1][loop: 0] -> PendingJob {
-      [0] "Job" -> λ(ScriptEvaluationJob)
-      [1] "Arguments" -> {{-41008453}}#3371:[call: 0][loop: 0]
-      [2] "Realm" -> {~normal~ -> ({{-572624684}}#REALM, ~empty~)}
-      [3] "ScriptOrModule" -> null
-      [4] "HostDefined" -> undefined
-    }
-    [ ] {{-154381522}}#3093:[call: 8][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1624244029}}#2819:[call: 8][loop: 2], ~empty~)}
-    }
-    [ ] {{-1551040385}}#3088:☊[Expression/1022713356][call: 1][loop: 1][call: 9][loop: 0] -> ["Prototype", "Extensible", "ParameterMap"]
-    [ ] {{-1554308988}}#1802:☊[Initializer/1686232293][call: 2][loop: 1][call: 7][loop: 0] -> []
-    [ ] {{-1559668874}}#2546:[call: 3][loop: 1] -> []
-    [ ] {{-1562782005}}#1100:☊[Expression/1655750533][call: 2][loop: 1][call: 5][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> 9.0
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{-1598861726}}#3086:☊[Expression/1022713356][call: 0][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1624244029}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> false
-    }
-    [ ] {{-1616393055}}#3169:☊[Initializer/1686232293][call: 2][loop: 1][call: 4][loop: 0] -> ExecutionContext {
-      [0] "Function" -> {{1359140605}}#2819:[call: 8][loop: 2]
-      [1] "Realm" -> {{-572624684}}#REALM
-      [2] "ScriptOrModule" -> {~normal~ -> ({{-1204254822}}#3110:[call: 2][loop: 1], ~empty~)}
-      [3] "LexicalEnvironment" -> {~normal~ -> ({{-1142727528}}#2978:☊[Initializer/1686232293][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
-      [4] "VariableEnvironment" -> {~normal~ -> ({{-1142727528}}#2978:☊[Initializer/1686232293][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
-      [5] "Generator" -> {{-194756375}}#2819:☊[Initializer/1686232293][call: 2][loop: 1][call: 11][loop: 0]
-      [6] "ResumeCont" -> (resumptionValue) [=>] ☊[Initializer/1686232293][call(2): ☊[Initializer/1686232293], ☊[Expression/1022713356]][loop: Loop[25926](0)][call(13): IApp(GeneratorYield), IApp(Yield), IApp(generatorBody), IApp(GeneratorStart), IApp(CreateIteratorFromClosure), IApp(CreateListIteratorRecord), IApp(FunctionDeclarationInstantiation), IAccess(FunctionBody."EvaluateFunctionBody"), IAccess(F.ECMAScriptCode."EvaluateBody"), IApp(OrdinaryCallEvaluateBody), IApp(F.Call), IApp(Call), IApp(EvaluateCall)][loop: Loop[6948](1)]:Entry[19206]
-      [7] "ReturnCont" -> {{1301564699}}#2479:☊[Initializer/1686232293][call: 3][loop: 1][call: 15][loop: 0]
+    [ ] {{-1591112506}}#2978:☊[Expression/510873326][call: 1][loop: 1][call: 5][loop: 0] -> FunctionEnvironmentRecord {
+      [0] "BindThisValue" -> λ(FunctionEnvironmentRecord.BindThisValue)
+      [1] "CreateImmutableBinding" -> λ(DeclarativeEnvironmentRecord.CreateImmutableBinding)
+      [2] "CreateMutableBinding" -> λ(DeclarativeEnvironmentRecord.CreateMutableBinding)
+      [3] "DeleteBinding" -> λ(DeclarativeEnvironmentRecord.DeleteBinding)
+      [4] "GetBindingValue" -> λ(DeclarativeEnvironmentRecord.GetBindingValue)
+      [5] "GetSuperBase" -> λ(FunctionEnvironmentRecord.GetSuperBase)
+      [6] "GetThisBinding" -> λ(FunctionEnvironmentRecord.GetThisBinding)
+      [7] "HasBinding" -> λ(DeclarativeEnvironmentRecord.HasBinding)
+      [8] "HasSuperBinding" -> λ(FunctionEnvironmentRecord.HasSuperBinding)
+      [9] "HasThisBinding" -> λ(FunctionEnvironmentRecord.HasThisBinding)
+      [10] "InitializeBinding" -> λ(DeclarativeEnvironmentRecord.InitializeBinding)
+      [11] "SetMutableBinding" -> λ(DeclarativeEnvironmentRecord.SetMutableBinding)
+      [12] "WithBaseObject" -> λ(DeclarativeEnvironmentRecord.WithBaseObject)
+      [13] "SubMap" -> {{1986437413}}{{-1591112506}}#2978:☊[Expression/510873326][call: 1][loop: 1][call: 5][loop: 0]:SubMap
+      [14] "FunctionObject" -> {{734547689}}#2819:[call: 8][loop: 2]
+      [15] "ThisBindingStatus" -> ~initialized~
+      [16] "NewTarget" -> undefined
+      [17] "OuterEnv" -> {~normal~ -> ({{-1394450300}}#2981:[call: 3][loop: 0], ~empty~)}
+      [18] "ThisValue" -> {~normal~ -> (undefined, ~empty~)}
     }
     [ ] {{-1623763448}}#2819:[call: 4][loop: 0] -> OrdinaryObject {
       [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
@@ -307,6 +350,11 @@
       [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
       [13] "Extensible" -> true
     }
+    [ ] {{-162819210}}#1121:☊[Initializer/903663666][call: 2][loop: 1][call: 8][loop: 0] -> Record {
+      [0] "Iterator" -> {{-344900471}}#2819:☊[Initializer/903663666][call: 2][loop: 1][call: 11][loop: 0]
+      [1] "NextMethod" -> {{-41776461}}#GLOBAL.Generator.prototype.next
+      [2] "Done" -> false
+    }
     [ ] {{-1637028203}}#3390:[call: 2][loop: 1] -> ExecutionContext {
       [0] "Function" -> null
       [1] "Realm" -> {{-572624684}}#REALM
@@ -320,46 +368,8 @@
       [2] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
       [3] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
     }
-    [ ] {{-1688827317}}#3779:☊[Initializer/2036295297][call: 2][loop: 1][call: 18][loop: 1] -> DataProperty {
-      [0] "Value" -> false
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{-1697909493}}#1144:☊[Initializer/1686232293][call: 2][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> {{296244539}}#GLOBAL.Array.prototype.values
-      [1] "Writable" -> true
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
-    }
-    [ ] {{-1701494675}}#1100:☊[Expression/1655750533][call: 2][loop: 1][call: 5][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> 9.0
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{-1703822157}}#1767:☊[Expression/1022713356][call: 1][loop: 1][call: 8][loop: 0] -> ["arguments"]
-    [ ] {{-1716034070}}#EXECUTION_STACK -> [{{-1017857108}}#3372:[call: 0][loop: 1], {{-1637028203}}#3390:[call: 2][loop: 1], {{1916050812}}#3169:☊[Expression/1022713356][call: 1][loop: 1][call: 4][loop: 0], {{-1616393055}}#3169:☊[Initializer/1686232293][call: 2][loop: 1][call: 4][loop: 0]]
-    [ ] {{-1738274543}}{{1359140605}}#2819:[call: 8][loop: 2]:SubMap -> SubMap {
-      [0] "length" -> {{-1968187951}}#3779:[call: 11][loop: 2]
-      [1] "name" -> {{-688013441}}#3779:[call: 10][loop: 2]
-      [2] "prototype" -> {{-2123151303}}#3779:[call: 10][loop: 2]
-    }
-    [ ] {{-1751315990}}#3783:[call: 8][loop: 0] -> ["Configurable", "Enumerable", "Get", "Set"]
-    [ ] {{-1757741450}}#3088:[call: 7][loop: 2] -> ["Prototype", "Extensible"]
-    [ ] {{-1761152294}}#3086:[call: 10][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1359140605}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> false
-    }
-    [ ] {{-1762898498}}#2491:☊[AssignmentExpression/1641214567][call: 2][loop: 1][call: 2][loop: 0] -> ReferenceRecord {
-      [0] "Base" -> {~normal~ -> ({{68671446}}#2978:☊[Initializer/2036295297][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
-      [1] "ReferencedName" -> {~normal~ -> ("key2", ~empty~)}
-      [2] "Strict" -> true
-      [3] "ThisValue" -> ~empty~
-    }
-    [ ] {{-1822807976}}#2819:☊[Expression/1655750533][call: 2][loop: 1][call: 2][loop: 0] -> OrdinaryObject {
+    [ ] {{-1694661249}}#3498:☊[Expression/510873326][call: 1][loop: 1][call: 10][loop: 0] -> []
+    [ ] {{-1697358579}}#2819:☊[Initializer/1722868231][call: 2][loop: 1][call: 10][loop: 0] -> OrdinaryObject {
       [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
       [1] "Delete" -> λ(OrdinaryObject.Delete)
       [2] "Get" -> λ(OrdinaryObject.Get)
@@ -371,226 +381,150 @@
       [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
       [9] "Set" -> λ(OrdinaryObject.Set)
       [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
-      [11] "SubMap" -> {{615123384}}{{-1822807976}}#2819:☊[Expression/1655750533][call: 2][loop: 1][call: 2][loop: 0]:SubMap
+      [11] "SubMap" -> {{521762662}}{{-1697358579}}#2819:☊[Initializer/1722868231][call: 2][loop: 1][call: 10][loop: 0]:SubMap
       [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
       [13] "Extensible" -> true
+      [14] "ParameterMap" -> undefined
     }
-    [ ] {{-184791943}}#1100:☊[Initializer/2036295297][call: 2][loop: 1][call: 15][loop: 1] -> PropertyDescriptor {
-      [0] "Value" -> "x"
+    [ ] {{-1704802592}}#3779:☊[Expression/431966204][call: 2][loop: 1][call: 8][loop: 0] -> DataProperty {
+      [0] "Value" -> 3.0
       [1] "Writable" -> true
       [2] "Enumerable" -> true
       [3] "Configurable" -> true
     }
-    [ ] {{-1870457092}}#2822:[call: 6][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1359140605}}#2819:[call: 8][loop: 2], ~empty~)}
+    [ ] {{-1711489488}}{{149737348}}#2819:☊[Expression/510873326][call: 1][loop: 1][call: 10][loop: 0]:SubMap -> SubMap {
+      [0] "length" -> {{2114950787}}#3779:☊[Expression/510873326][call: 1][loop: 1][call: 12][loop: 0]
+      [1] {{-1717161388}}#GLOBAL.Symbol.iterator -> {{-630962282}}#3779:☊[Expression/510873326][call: 1][loop: 1][call: 12][loop: 0]
+      [2] "callee" -> {{-706017743}}#3780:☊[Expression/510873326][call: 1][loop: 1][call: 12][loop: 0]
+    }
+    [ ] {{-1712486428}}#1143:☊[Initializer/903663666][call: 2][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> 2i
       [1] "Writable" -> true
       [2] "Enumerable" -> false
       [3] "Configurable" -> true
     }
-    [ ] {{-1873405495}}{{-1330350393}}#2980:[call: 3][loop: 0]:SubMap -> SubMap {}
-    [ ] {{-1875609531}}#2823:[call: 6][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {{1082500274}}#2819:[call: 8][loop: 2]
-      [1] "Writable" -> true
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> false
-    }
-    [ ] {{-1880326736}}#651:☊[Initializer/1686232293][call: 3][loop: 1][call: 13][loop: 0] -> ExecutionContext {
-      [0] "Function" -> {{-41776461}}#GLOBAL.Generator.prototype.next
-      [1] "Realm" -> {{-572624684}}#REALM
-      [2] "ScriptOrModule" -> null
-    }
-    [ ] {{-1889506688}}#1100:☊[Initializer/1686232293][call: 2][loop: 1][call: 15][loop: 1] -> PropertyDescriptor {
-      [0] "Value" -> "z"
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{-1894333701}}#2982:[call: 3][loop: 0] -> ["makeObject", "main"]
-    [ ] {{-1918539922}}#3779:[call: 8][loop: 2] -> DataProperty {
-      [0] "Value" -> {~normal~ -> ({{1624244029}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> false
-    }
-    [ ] {{-1918932424}}#3497:[call: 7][loop: 1] -> [☊[FunctionDeclaration](functio...) @ 0x448cdb47, ☊[FunctionDeclaration](functio...) @ 0x221ca495]
-    [ ] {{-1935306594}}#582:[call: 5][loop: 2] -> ["main"]
-    [ ] {{-194756375}}#2819:☊[Initializer/1686232293][call: 2][loop: 1][call: 11][loop: 0] -> OrdinaryObject {
-      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
-      [1] "Delete" -> λ(OrdinaryObject.Delete)
-      [2] "Get" -> λ(OrdinaryObject.Get)
-      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
-      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
-      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
-      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
-      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
-      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
-      [9] "Set" -> λ(OrdinaryObject.Set)
-      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
-      [11] "SubMap" -> {{1788195656}}{{-194756375}}#2819:☊[Initializer/1686232293][call: 2][loop: 1][call: 11][loop: 0]:SubMap
-      [12] "Prototype" -> {{802063200}}#GLOBAL.IteratorPrototype
-      [13] "Extensible" -> true
-      [14] "GeneratorState" -> ~suspendedYield~
-      [15] "GeneratorContext" -> {{-1616393055}}#3169:☊[Initializer/1686232293][call: 2][loop: 1][call: 4][loop: 0]
-      [16] "GeneratorBrand" -> ~empty~
-    }
-    [ ] {{-1951589847}}#2558:[call: 4][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1359140605}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> false
-    }
-    [ ] {{-1961614699}}#3086:[call: 12][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1359140605}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> false
-    }
-    [ ] {{-1962236274}}#1165:☊[Initializer/2036295297][call: 2][loop: 1][call: 8][loop: 0] -> ImmutableBinding {
-      [0] "initialized" -> true
-      [1] "strict" -> false
-      [2] "BoundValue" -> {~normal~ -> ({{709043656}}#2819:☊[Initializer/2036295297][call: 2][loop: 1][call: 10][loop: 0], ~empty~)}
-    }
-    [ ] {{-1964494710}}#3542:[call: 7][loop: 1] -> []
-    [ ] {{-1968187951}}#3779:[call: 11][loop: 2] -> DataProperty {
+    [ ] {{-1716034070}}#EXECUTION_STACK -> [{{-1017857108}}#3372:[call: 0][loop: 1], {{-1637028203}}#3390:[call: 2][loop: 1], {{-573185702}}#3169:☊[Expression/510873326][call: 1][loop: 1][call: 4][loop: 0], {{1979375552}}#3169:☊[Initializer/903663666][call: 2][loop: 1][call: 4][loop: 0]]
+    [ ] {{-172230552}}#3088:[call: 7][loop: 2] -> ["Prototype", "Extensible"]
+    [ ] {{-17452428}}#3779:[call: 11][loop: 2] -> DataProperty {
       [0] "Value" -> {~normal~ -> (2i, ~empty~)}
       [1] "Writable" -> false
       [2] "Enumerable" -> false
       [3] "Configurable" -> true
     }
-    [ ] {{-1986272857}}#3484:[call: 7][loop: 1] -> []
-    [ ] {{-1986655637}}#3088:☊[Expression/1655750533][call: 2][loop: 1][call: 1][loop: 0] -> ["Prototype", "Extensible"]
-    [ ] {{-1992099342}}#3779:☊[Initializer/1686232293][call: 2][loop: 1][call: 18][loop: 1] -> DataProperty {
-      [0] "Value" -> false
+    [ ] {{-1751315990}}#3783:[call: 8][loop: 0] -> ["Configurable", "Enumerable", "Get", "Set"]
+    [ ] {{-1761152294}}#3086:[call: 10][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{89390415}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> false
+    }
+    [ ] {{-1828660164}}#3543:[call: 7][loop: 1] -> []
+    [ ] {{-1839398083}}#3779:☊[Initializer/1722868231][call: 2][loop: 1][call: 13][loop: 1] -> DataProperty {
+      [0] "Value" -> "z"
       [1] "Writable" -> true
       [2] "Enumerable" -> true
       [3] "Configurable" -> true
     }
-    [ ] {{-2015839820}}#1165:☊[Expression/1022713356][call: 1][loop: 1][call: 8][loop: 0] -> ImmutableBinding {
-      [0] "initialized" -> true
-      [1] "strict" -> false
-      [2] "BoundValue" -> {~normal~ -> ({{839505632}}#2819:☊[Expression/1022713356][call: 1][loop: 1][call: 10][loop: 0], ~empty~)}
+    [ ] {{-1867300101}}#1817:☊[Expression/510873326][call: 1][loop: 1][call: 7][loop: 0] -> ["arguments"]
+    [ ] {{-1873405495}}{{-1330350393}}#2980:[call: 3][loop: 0]:SubMap -> SubMap {}
+    [ ] {{-1894333701}}#2982:[call: 3][loop: 0] -> ["makeObject", "main"]
+    [ ] {{-1896342371}}{{734547689}}#2819:[call: 8][loop: 2]:SubMap -> SubMap {
+      [0] "length" -> {{1039324101}}#3779:[call: 11][loop: 2]
+      [1] "name" -> {{-1000478951}}#3779:[call: 10][loop: 2]
+      [2] "prototype" -> {{-1516227070}}#3779:[call: 10][loop: 2]
     }
-    [ ] {{-201995481}}#3779:[call: 10][loop: 2] -> DataProperty {
-      [0] "Value" -> {~normal~ -> ("main", ~empty~)}
-      [1] "Writable" -> false
+    [ ] {{-1905088577}}#1144:☊[Initializer/903663666][call: 2][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> {{296244539}}#GLOBAL.Array.prototype.values
+      [1] "Writable" -> true
       [2] "Enumerable" -> false
       [3] "Configurable" -> true
+    }
+    [ ] {{-1918539922}}#3779:[call: 8][loop: 2] -> DataProperty {
+      [0] "Value" -> {~normal~ -> ({{734547689}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> false
+    }
+    [ ] {{-1940468927}}#1116:☊[Initializer/1722868231][call: 2][loop: 1][call: 9][loop: 0] -> ["GeneratorState", "GeneratorContext", "GeneratorBrand"]
+    [ ] {{-1951589847}}#2558:[call: 4][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{89390415}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> false
+    }
+    [ ] {{-1951893862}}#3086:☊[Initializer/1722868231][call: 1][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{89390415}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> false
+    }
+    [ ] {{-1961614699}}#3086:[call: 12][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{89390415}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> false
+    }
+    [ ] {{-1978100271}}#3086:☊[Initializer/903663666][call: 1][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{89390415}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> false
+    }
+    [ ] {{-1997979951}}#3489:☊[Expression/510873326][call: 1][loop: 1][call: 11][loop: 0] -> [☊[Declaration](const o...) @ 0x1689527c]
+    [ ] {{-2002341301}}#582:[call: 5][loop: 2] -> ["main"]
+    [ ] {{-2005591724}}#3469:☊[Initializer/903663666][call: 2][loop: 1][call: 9][loop: 0] -> []
+    [ ] {{-2024153730}}#3088:☊[Initializer/1722868231][call: 2][loop: 1][call: 10][loop: 0] -> ["Prototype", "Extensible", "GeneratorState", "GeneratorContext", "GeneratorBrand"]
+    [ ] {{-2029492071}}#1100:☊[Initializer/903663666][call: 2][loop: 1][call: 15][loop: 1] -> PropertyDescriptor {
+      [0] "Value" -> "y"
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{-2029791848}}#3086:☊[MemberExpression/1749250768][call: 0][loop: 1][call: 9][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{734547689}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> false
     }
     [ ] {{-2031457878}}#2660:[call: 1][loop: 0] -> ExecutionContext {
       [0] "Function" -> null
       [1] "Realm" -> {~normal~ -> ({{-572624684}}#REALM, ~empty~)}
       [2] "ScriptOrModule" -> null
     }
+    [ ] {{-2063798659}}#1100:☊[Expression/431966204][call: 2][loop: 1][call: 4][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> 7.0
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{-2072078113}}#1100:☊[Initializer/1722868231][call: 2][loop: 1][call: 15][loop: 1] -> PropertyDescriptor {
+      [0] "Value" -> "x"
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{-2078858531}}#658:☊[Initializer/903663666][call: 3][loop: 1][call: 12][loop: 0] -> []
     [ ] {{-2092809426}}#DESC:GLOBAL.Function.prototype.caller -> PropertyDescriptor {
       [0] "Configurable" -> true
       [1] "Enumerable" -> false
       [2] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
       [3] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
     }
-    [ ] {{-210665023}}#1817:☊[Initializer/1686232293][call: 2][loop: 1][call: 7][loop: 0] -> ["key1", "key2", "arguments"]
-    [ ] {{-2123151303}}#3779:[call: 10][loop: 2] -> DataProperty {
-      [0] "Value" -> {{-1480555934}}#2819:[call: 8][loop: 2]
-      [1] "Writable" -> true
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> false
+    [ ] {{-2114352533}}{{-1167856949}}#2819:☊[Expression/510873326][call: 1][loop: 1][call: 11][loop: 0]:SubMap -> SubMap {}
+    [ ] {{-229431270}}#2491:☊[Initializer/1722868231][call: 2][loop: 1][call: 11][loop: 0] -> ReferenceRecord {
+      [0] "Base" -> {~normal~ -> ({{1337896232}}#2978:☊[Initializer/1722868231][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
+      [1] "ReferencedName" -> {~normal~ -> ("key2", ~empty~)}
+      [2] "Strict" -> true
+      [3] "ThisValue" -> ~empty~
     }
-    [ ] {{-2124834654}}#1100:☊[Initializer/2036295297][call: 2][loop: 1][call: 15][loop: 1] -> PropertyDescriptor {
-      [0] "Value" -> false
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{-214120021}}#651:☊[Initializer/1686232293][call: 3][loop: 1][call: 13][loop: 0] -> ExecutionContext {
-      [0] "Function" -> {{-41776461}}#GLOBAL.Generator.prototype.next
-      [1] "Realm" -> {{-572624684}}#REALM
-      [2] "ScriptOrModule" -> null
-    }
-    [ ] {{-244399160}}#3088:☊[Initializer/2036295297][call: 2][loop: 1][call: 14][loop: 1] -> ["Prototype", "Extensible"]
+    [ ] {{-239611649}}#2479:☊[Initializer/903663666][call: 3][loop: 1][call: 15][loop: 0] -> []
     [ ] {{-244631975}}#DESC:GLOBAL.globalThis -> PropertyDescriptor {
       [0] "Configurable" -> true
       [1] "Enumerable" -> false
       [2] "Value" -> {{-1623763448}}#2819:[call: 4][loop: 0]
       [3] "Writable" -> true
     }
-    [ ] {{-245632652}}#3086:☊[Initializer/1686232293][call: 2][loop: 1][call: 15][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> "y"
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{-259516983}}#1802:☊[Expression/1022713356][call: 1][loop: 1][call: 7][loop: 0] -> []
-    [ ] {{-267900963}}#3497:[call: 7][loop: 1] -> [☊[FunctionDeclaration](functio...) @ 0x221ca495]
-    [ ] {{-272872357}}{{1754125319}}#2819:☊[Initializer/1686232293][call: 2][loop: 1][call: 15][loop: 1]:SubMap -> SubMap {
-      [0] "value" -> {{1026392079}}#3779:☊[Initializer/1686232293][call: 2][loop: 1][call: 18][loop: 1]
-      [1] "done" -> {{-1992099342}}#3779:☊[Initializer/1686232293][call: 2][loop: 1][call: 18][loop: 1]
-    }
-    [ ] {{-282189951}}#3779:☊[Expression/1655750533][call: 2][loop: 1][call: 8][loop: 0] -> DataProperty {
-      [0] "Value" -> 3.0
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{-300585837}}#3086:☊[MemberExpression/1164442411][call: 0][loop: 1][call: 9][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1624244029}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> false
-    }
-    [ ] {{-301952045}}#3086:☊[MemberExpression/1359849336][call: 1][loop: 1][call: 10][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1359140605}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> false
-    }
-    [ ] {{-326306562}}#2491:☊[BindingList/1736227182][call: 1][loop: 1][call: 2][loop: 0] -> ReferenceRecord {
-      [0] "Base" -> {~normal~ -> ({{1998408796}}#2978:☊[Expression/1022713356][call: 1][loop: 1][call: 5][loop: 0], ~empty~)}
-      [1] "ReferencedName" -> {~normal~ -> ("obj2", ~empty~)}
-      [2] "Strict" -> true
-      [3] "ThisValue" -> ~empty~
-    }
-    [ ] {{-332795680}}#1100:☊[Initializer/2036295297][call: 2][loop: 1][call: 15][loop: 1] -> PropertyDescriptor {
-      [0] "Value" -> false
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{-334432863}}#3086:☊[Expression/1655750533][call: 2][loop: 1][call: 9][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> 3.0
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{-341670593}}#28:☊[Expression/1022713356][call: 0][loop: 1][call: 2][loop: 0] -> []
-    [ ] {{-37748530}}#3779:☊[Expression/1655750533][call: 2][loop: 1][call: 7][loop: 0] -> DataProperty {
-      [0] "Value" -> 7.0
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{-41008453}}#3371:[call: 0][loop: 0] -> [☊[ScriptBody](functio...) @ 0x10131289, undefined]
-    [ ] {{-453648283}}#1100:☊[Initializer/1686232293][call: 2][loop: 1][call: 15][loop: 1] -> PropertyDescriptor {
-      [0] "Value" -> false
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{-472600206}}#3783:[call: 11][loop: 2] -> ["Value"]
-    [ ] {{-51115882}}#3088:☊[Initializer/1686232293][call: 2][loop: 1][call: 10][loop: 0] -> ["Prototype", "Extensible", "GeneratorState", "GeneratorContext", "GeneratorBrand"]
-    [ ] {{-514091193}}#658:☊[Initializer/2036295297][call: 3][loop: 1][call: 12][loop: 0] -> []
-    [ ] {{-51522682}}#1100:☊[Initializer/2036295297][call: 2][loop: 1][call: 15][loop: 1] -> PropertyDescriptor {
-      [0] "Value" -> "z"
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{-519441435}}#2535:[call: 3][loop: 1] -> [☊[FunctionDeclaration](functio...) @ 0x448cdb47, ☊[FunctionDeclaration](functio...) @ 0x221ca495]
-    [ ] {{-52049661}}#3373:[call: 0][loop: 1] -> SubMap {}
-    [ ] {{-52736604}}{{1037235094}}#2819:☊[Initializer/2036295297][call: 2][loop: 1][call: 15][loop: 1]:SubMap -> SubMap {
-      [0] "value" -> {{1590766950}}#3779:☊[Initializer/2036295297][call: 2][loop: 1][call: 18][loop: 1]
-      [1] "done" -> {{-1688827317}}#3779:☊[Initializer/2036295297][call: 2][loop: 1][call: 18][loop: 1]
-    }
-    [ ] {{-530253830}}#582:☊[Expression/1022713356][call: 1][loop: 1][call: 14][loop: 0] -> ["obj1", "obj2", "obj3"]
-    [ ] {{-534815878}}#2819:☊[Initializer/2036295297][call: 2][loop: 1][call: 11][loop: 0] -> OrdinaryObject {
+    [ ] {{-264301315}}#2819:☊[Expression/431966204][call: 2][loop: 1][call: 2][loop: 0] -> OrdinaryObject {
       [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
       [1] "Delete" -> λ(OrdinaryObject.Delete)
       [2] "Get" -> λ(OrdinaryObject.Get)
@@ -602,23 +536,82 @@
       [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
       [9] "Set" -> λ(OrdinaryObject.Set)
       [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
-      [11] "SubMap" -> {{1310528265}}{{-534815878}}#2819:☊[Initializer/2036295297][call: 2][loop: 1][call: 11][loop: 0]:SubMap
+      [11] "SubMap" -> {{-46910921}}{{-264301315}}#2819:☊[Expression/431966204][call: 2][loop: 1][call: 2][loop: 0]:SubMap
+      [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
+      [13] "Extensible" -> true
+    }
+    [ ] {{-288084853}}#1166:☊[Initializer/903663666][call: 2][loop: 1][call: 8][loop: 1] -> MutableBinding {
+      [0] "initialized" -> true
+      [1] "BoundValue" -> "y"
+    }
+    [ ] {{-331398265}}#2491:☊[BindingList/558984328][call: 1][loop: 1][call: 2][loop: 0] -> ReferenceRecord {
+      [0] "Base" -> {~normal~ -> ({{-1591112506}}#2978:☊[Expression/510873326][call: 1][loop: 1][call: 5][loop: 0], ~empty~)}
+      [1] "ReferencedName" -> {~normal~ -> ("obj2", ~empty~)}
+      [2] "Strict" -> true
+      [3] "ThisValue" -> ~empty~
+    }
+    [ ] {{-344900471}}#2819:☊[Initializer/903663666][call: 2][loop: 1][call: 11][loop: 0] -> OrdinaryObject {
+      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
+      [1] "Delete" -> λ(OrdinaryObject.Delete)
+      [2] "Get" -> λ(OrdinaryObject.Get)
+      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
+      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
+      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
+      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
+      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
+      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
+      [9] "Set" -> λ(OrdinaryObject.Set)
+      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
+      [11] "SubMap" -> {{624861493}}{{-344900471}}#2819:☊[Initializer/903663666][call: 2][loop: 1][call: 11][loop: 0]:SubMap
       [12] "Prototype" -> {{802063200}}#GLOBAL.IteratorPrototype
       [13] "Extensible" -> true
       [14] "GeneratorState" -> ~suspendedYield~
-      [15] "GeneratorContext" -> {{780438941}}#3169:☊[Initializer/2036295297][call: 2][loop: 1][call: 4][loop: 0]
+      [15] "GeneratorContext" -> {{1979375552}}#3169:☊[Initializer/903663666][call: 2][loop: 1][call: 4][loop: 0]
       [16] "GeneratorBrand" -> ~empty~
     }
+    [ ] {{-381357705}}#28:☊[Expression/510873326][call: 0][loop: 1][call: 2][loop: 0] -> []
+    [ ] {{-402736704}}#3086:☊[Initializer/1722868231][call: 2][loop: 1][call: 16][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> false
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{-40776623}}#3469:[call: 6][loop: 1] -> []
+    [ ] {{-41008453}}#3371:[call: 0][loop: 0] -> [☊[ScriptBody](functio...) @ 0x55222ee9, undefined]
+    [ ] {{-424815310}}#3088:[call: 7][loop: 2] -> ["Prototype", "Extensible", "Environment", "FormalParameters", "ECMAScriptCode", "ConstructorKind", "Realm", "ScriptOrModule", "ThisMode", "Strict", "HomeObject", "SourceText", "IsClassConstructor"]
+    [ ] {{-442835170}}#3780:☊[Initializer/1722868231][call: 2][loop: 1][call: 12][loop: 0] -> AccessorProperty {
+      [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
+      [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> false
+    }
+    [ ] {{-464224383}}#1100:☊[Initializer/903663666][call: 2][loop: 1][call: 15][loop: 1] -> PropertyDescriptor {
+      [0] "Value" -> "z"
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{-46910921}}{{-264301315}}#2819:☊[Expression/431966204][call: 2][loop: 1][call: 2][loop: 0]:SubMap -> SubMap {
+      [0] "y" -> {{-1704802592}}#3779:☊[Expression/431966204][call: 2][loop: 1][call: 8][loop: 0]
+    }
+    [ ] {{-472600206}}#3783:[call: 11][loop: 2] -> ["Value"]
+    [ ] {{-497748347}}#3088:☊[Initializer/903663666][call: 2][loop: 1][call: 9][loop: 0] -> ["Prototype", "Extensible", "ParameterMap"]
+    [ ] {{-500606676}}{{1606539702}}#2819:[call: 8][loop: 2]:SubMap -> SubMap {
+      [0] "constructor" -> {{-1154289446}}#3779:[call: 10][loop: 2]
+    }
+    [ ] {{-519441435}}#2535:[call: 3][loop: 1] -> [☊[FunctionDeclaration](functio...) @ 0x112c2930, ☊[FunctionDeclaration](functio...) @ 0x2cae5fa7]
+    [ ] {{-52049661}}#3373:[call: 0][loop: 1] -> SubMap {}
     [ ] {{-550490261}}#9:[call: 4][loop: 0] -> PropertyDescriptor {
       [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
       [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
       [2] "Enumerable" -> false
       [3] "Configurable" -> true
     }
-    [ ] {{-553204433}}#1165:☊[Initializer/1686232293][call: 2][loop: 1][call: 8][loop: 0] -> ImmutableBinding {
-      [0] "initialized" -> true
-      [1] "strict" -> false
-      [2] "BoundValue" -> {~normal~ -> ({{689232984}}#2819:☊[Initializer/1686232293][call: 2][loop: 1][call: 10][loop: 0], ~empty~)}
+    [ ] {{-567932673}}#2491:☊[Initializer/903663666][call: 2][loop: 1][call: 11][loop: 0] -> ReferenceRecord {
+      [0] "Base" -> {~normal~ -> ({{1702519098}}#2978:☊[Initializer/903663666][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
+      [1] "ReferencedName" -> {~normal~ -> ("key1", ~empty~)}
+      [2] "Strict" -> true
+      [3] "ThisValue" -> ~empty~
     }
     [ ] {{-572624684}}#REALM -> RealmRecord {
       [0] "SubMap" -> {{1898973283}}{{-572624684}}#REALM:SubMap
@@ -626,6 +619,15 @@
       [2] "GlobalObject" -> {{-1623763448}}#2819:[call: 4][loop: 0]
       [3] "GlobalEnv" -> {~normal~ -> ({{-1394450300}}#2981:[call: 3][loop: 0], ~empty~)}
       [4] "TemplateMap" -> {{-1500631431}}#1132:[call: 2][loop: 0]
+    }
+    [ ] {{-573185702}}#3169:☊[Expression/510873326][call: 1][loop: 1][call: 4][loop: 0] -> ExecutionContext {
+      [0] "Function" -> {{734547689}}#2819:[call: 8][loop: 2]
+      [1] "Realm" -> {{-572624684}}#REALM
+      [2] "ScriptOrModule" -> {~normal~ -> ({{-1204254822}}#3110:[call: 2][loop: 1], ~empty~)}
+      [3] "LexicalEnvironment" -> {~normal~ -> ({{-1591112506}}#2978:☊[Expression/510873326][call: 1][loop: 1][call: 5][loop: 0], ~empty~)}
+      [4] "VariableEnvironment" -> {~normal~ -> ({{-1591112506}}#2978:☊[Expression/510873326][call: 1][loop: 1][call: 5][loop: 0], ~empty~)}
+      [5] "Generator" -> {{-1167856949}}#2819:☊[Expression/510873326][call: 1][loop: 1][call: 11][loop: 0]
+      [6] "ResumeCont" -> () [=>] ☊[Expression/510873326][call(1): ☊[Expression/510873326]][loop: Loop[25926](0)][call(10): IApp(GeneratorStart), IApp(CreateIteratorFromClosure), IApp(CreateListIteratorRecord), IApp(FunctionDeclarationInstantiation), IAccess(FunctionBody."EvaluateFunctionBody"), IAccess(F.ECMAScriptCode."EvaluateBody"), IApp(OrdinaryCallEvaluateBody), IApp(F.Call), IApp(Call), IApp(EvaluateCall)][loop: ]:Entry[19164]
     }
     [ ] {{-578919868}}{{-1623763448}}#2819:[call: 4][loop: 0]:SubMap -> SubMap {
       [0] "print" -> {{-1462149321}}#DESC:GLOBAL.print
@@ -712,201 +714,98 @@
       [81] "makeObject" -> {{-1195183080}}#3779:[call: 8][loop: 2]
       [82] "main" -> {{-1918539922}}#3779:[call: 8][loop: 2]
     }
-    [ ] {{-587714281}}#2491:☊[Initializer/1686232293][call: 2][loop: 1][call: 11][loop: 0] -> ReferenceRecord {
-      [0] "Base" -> {~normal~ -> ({{-1142727528}}#2978:☊[Initializer/1686232293][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
-      [1] "ReferencedName" -> {~normal~ -> ("key1", ~empty~)}
-      [2] "Strict" -> true
-      [3] "ThisValue" -> ~empty~
-    }
-    [ ] {{-595090222}}#3498:☊[Expression/1022713356][call: 1][loop: 1][call: 11][loop: 0] -> []
-    [ ] {{-616053586}}#582:☊[Initializer/2036295297][call: 2][loop: 1][call: 10][loop: 0] -> ["key1", "key2", "arguments"]
-    [ ] {{-627189223}}#1121:☊[Initializer/2036295297][call: 2][loop: 1][call: 8][loop: 0] -> Record {
-      [0] "Iterator" -> {{-534815878}}#2819:☊[Initializer/2036295297][call: 2][loop: 1][call: 11][loop: 0]
-      [1] "NextMethod" -> {{-41776461}}#GLOBAL.Generator.prototype.next
-      [2] "Done" -> false
-    }
-    [ ] {{-631687069}}#582:☊[Initializer/1686232293][call: 2][loop: 1][call: 10][loop: 0] -> ["key2"]
-    [ ] {{-641828929}}#3783:[call: 8][loop: 0] -> ["Configurable", "Enumerable", "Get", "Set"]
-    [ ] {{-654122640}}#651:☊[Initializer/2036295297][call: 3][loop: 1][call: 13][loop: 0] -> ExecutionContext {
-      [0] "Function" -> {{-41776461}}#GLOBAL.Generator.prototype.next
-      [1] "Realm" -> {{-572624684}}#REALM
-      [2] "ScriptOrModule" -> null
-    }
-    [ ] {{-665366187}}#3093:[call: 8][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1359140605}}#2819:[call: 8][loop: 2], ~empty~)}
-    }
-    [ ] {{-688013441}}#3779:[call: 10][loop: 2] -> DataProperty {
-      [0] "Value" -> {~normal~ -> ("makeObject", ~empty~)}
-      [1] "Writable" -> false
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
-    }
-    [ ] {{-69993118}}#3086:☊[Initializer/1686232293][call: 1][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1359140605}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> false
-    }
-    [ ] {{-7106306}}#3086:☊[MemberExpression/707492405][call: 1][loop: 1][call: 10][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1359140605}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> false
-    }
-    [ ] {{-744456481}}#3543:[call: 7][loop: 1] -> []
-    [ ] {{-745979147}}{{709043656}}#2819:☊[Initializer/2036295297][call: 2][loop: 1][call: 10][loop: 0]:SubMap -> SubMap {
-      [0] "length" -> {{1767895838}}#3779:☊[Initializer/2036295297][call: 2][loop: 1][call: 12][loop: 0]
-      [1] "0" -> {{-1396685069}}#3779:☊[Initializer/2036295297][call: 2][loop: 1][call: 13][loop: 1]
-      [2] "1" -> {{565720343}}#3779:☊[Initializer/2036295297][call: 2][loop: 1][call: 13][loop: 1]
-      [3] {{-1717161388}}#GLOBAL.Symbol.iterator -> {{1245733103}}#3779:☊[Initializer/2036295297][call: 2][loop: 1][call: 12][loop: 0]
-      [4] "callee" -> {{779196986}}#3780:☊[Initializer/2036295297][call: 2][loop: 1][call: 12][loop: 0]
-    }
-    [ ] {{-75508273}}#1143:☊[Initializer/2036295297][call: 2][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> 2i
-      [1] "Writable" -> true
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
-    }
-    [ ] {{-760771571}}#1100:☊[Initializer/1686232293][call: 2][loop: 1][call: 15][loop: 1] -> PropertyDescriptor {
-      [0] "Value" -> false
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{-786243214}}#1142:☊[Expression/1022713356][call: 1][loop: 1][call: 8][loop: 0] -> ["ParameterMap"]
-    [ ] {{-789632398}}#3552:☊[Initializer/1686232293][call: 2][loop: 1][call: 10][loop: 0] -> []
-    [ ] {{-796298280}}#3779:☊[Initializer/1686232293][call: 2][loop: 1][call: 18][loop: 1] -> DataProperty {
-      [0] "Value" -> false
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{-819699283}}#1116:☊[Initializer/1686232293][call: 2][loop: 1][call: 9][loop: 0] -> ["GeneratorState", "GeneratorContext", "GeneratorBrand"]
-    [ ] {{-868758431}}#1803:☊[Initializer/1686232293][call: 2][loop: 1][call: 7][loop: 0] -> []
-    [ ] {{-896963614}}#582:[call: 5][loop: 2] -> ["makeObject"]
-    [ ] {{-912899472}}#2819:☊[Expression/1655750533][call: 2][loop: 1][call: 2][loop: 0] -> OrdinaryObject {
-      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
-      [1] "Delete" -> λ(OrdinaryObject.Delete)
-      [2] "Get" -> λ(OrdinaryObject.Get)
-      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
-      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
-      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
-      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
-      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
-      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
-      [9] "Set" -> λ(OrdinaryObject.Set)
-      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
-      [11] "SubMap" -> {{1907209741}}{{-912899472}}#2819:☊[Expression/1655750533][call: 2][loop: 1][call: 2][loop: 0]:SubMap
-      [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
-      [13] "Extensible" -> true
-    }
-    [ ] {{-914770900}}#3088:☊[Initializer/1686232293][call: 2][loop: 1][call: 14][loop: 1] -> ["Prototype", "Extensible"]
-    [ ] {{-979403248}}#1115:[call: 3][loop: 0] -> Record {}
-    [ ] {{-985867073}}#JOB_QUEUE -> []
-    [ ] {{-997435389}}#1165:☊[Expression/1022713356][call: 1][loop: 1][call: 8][loop: 2] -> ImmutableBinding {
-      [0] "initialized" -> false
-      [1] "strict" -> true
-    }
-    [ ] {{1004558874}}#1100:☊[Initializer/1686232293][call: 2][loop: 1][call: 10][loop: 1] -> PropertyDescriptor {
-      [0] "Value" -> "z"
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{1026392079}}#3779:☊[Initializer/1686232293][call: 2][loop: 1][call: 18][loop: 1] -> DataProperty {
-      [0] "Value" -> "y"
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{1037235094}}#2819:☊[Initializer/2036295297][call: 2][loop: 1][call: 15][loop: 1] -> OrdinaryObject {
-      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
-      [1] "Delete" -> λ(OrdinaryObject.Delete)
-      [2] "Get" -> λ(OrdinaryObject.Get)
-      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
-      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
-      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
-      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
-      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
-      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
-      [9] "Set" -> λ(OrdinaryObject.Set)
-      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
-      [11] "SubMap" -> {{-52736604}}{{1037235094}}#2819:☊[Initializer/2036295297][call: 2][loop: 1][call: 15][loop: 1]:SubMap
-      [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
-      [13] "Extensible" -> true
-    }
-    [ ] {{1043453567}}#1100:☊[Initializer/2036295297][call: 2][loop: 1][call: 10][loop: 1] -> PropertyDescriptor {
-      [0] "Value" -> "x"
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{1080202553}}#3086:[call: 9][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1624244029}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> false
-    }
-    [ ] {{1082500274}}#2819:[call: 8][loop: 2] -> OrdinaryObject {
-      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
-      [1] "Delete" -> λ(OrdinaryObject.Delete)
-      [2] "Get" -> λ(OrdinaryObject.Get)
-      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
-      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
-      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
-      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
-      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
-      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
-      [9] "Set" -> λ(OrdinaryObject.Set)
-      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
-      [11] "SubMap" -> {{837747378}}{{1082500274}}#2819:[call: 8][loop: 2]:SubMap
-      [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
-      [13] "Extensible" -> true
-    }
-    [ ] {{115359628}}#3779:☊[Initializer/2036295297][call: 2][loop: 1][call: 18][loop: 1] -> DataProperty {
-      [0] "Value" -> false
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{1155803809}}#2823:[call: 6][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {{-1480555934}}#2819:[call: 8][loop: 2]
-      [1] "Writable" -> true
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> false
-    }
-    [ ] {{1158609966}}#3493:☊[Expression/1022713356][call: 1][loop: 1][call: 11][loop: 0] -> []
-    [ ] {{1162312360}}#3413:[call: 6][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ("makeObject", ~empty~)}
-      [1] "Writable" -> false
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
-    }
-    [ ] {{1164682329}}#3779:☊[Initializer/1686232293][call: 2][loop: 1][call: 12][loop: 0] -> DataProperty {
+    [ ] {{-598922703}}#3497:[call: 7][loop: 1] -> [☊[FunctionDeclaration](functio...) @ 0x2cae5fa7]
+    [ ] {{-630962282}}#3779:☊[Expression/510873326][call: 1][loop: 1][call: 12][loop: 0] -> DataProperty {
       [0] "Value" -> {{296244539}}#GLOBAL.Array.prototype.values
       [1] "Writable" -> true
       [2] "Enumerable" -> false
       [3] "Configurable" -> true
     }
-    [ ] {{1210732460}}#3780:☊[Expression/1022713356][call: 1][loop: 1][call: 12][loop: 0] -> AccessorProperty {
+    [ ] {{-633724526}}#1116:☊[Expression/510873326][call: 1][loop: 1][call: 9][loop: 0] -> ["GeneratorState", "GeneratorContext", "GeneratorBrand"]
+    [ ] {{-641828929}}#3783:[call: 8][loop: 0] -> ["Configurable", "Enumerable", "Get", "Set"]
+    [ ] {{-649979601}}#3086:☊[Initializer/903663666][call: 1][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{89390415}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> false
+    }
+    [ ] {{-665366187}}#3093:[call: 8][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{89390415}}#2819:[call: 8][loop: 2], ~empty~)}
+    }
+    [ ] {{-706017743}}#3780:☊[Expression/510873326][call: 1][loop: 1][call: 12][loop: 0] -> AccessorProperty {
       [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
       [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
       [2] "Enumerable" -> false
       [3] "Configurable" -> false
     }
-    [ ] {{1225841524}}#3412:[call: 7][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> (2i, ~empty~)}
-      [1] "Writable" -> false
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
-    }
-    [ ] {{1245733103}}#3779:☊[Initializer/2036295297][call: 2][loop: 1][call: 12][loop: 0] -> DataProperty {
+    [ ] {{-727781362}}#1144:☊[Initializer/1722868231][call: 2][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
       [0] "Value" -> {{296244539}}#GLOBAL.Array.prototype.values
       [1] "Writable" -> true
       [2] "Enumerable" -> false
       [3] "Configurable" -> true
     }
-    [ ] {{1255686456}}#2819:☊[Initializer/1686232293][call: 2][loop: 1][call: 15][loop: 1] -> OrdinaryObject {
+    [ ] {{-755127375}}#3086:☊[Initializer/1722868231][call: 2][loop: 1][call: 15][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> "z"
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{-762547581}}#1165:☊[Initializer/1722868231][call: 2][loop: 1][call: 8][loop: 0] -> ImmutableBinding {
+      [0] "initialized" -> true
+      [1] "strict" -> false
+      [2] "BoundValue" -> {~normal~ -> ({{-1697358579}}#2819:☊[Initializer/1722868231][call: 2][loop: 1][call: 10][loop: 0], ~empty~)}
+    }
+    [ ] {{-763219366}}#3779:☊[Initializer/903663666][call: 2][loop: 1][call: 12][loop: 0] -> DataProperty {
+      [0] "Value" -> {{296244539}}#GLOBAL.Array.prototype.values
+      [1] "Writable" -> true
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> true
+    }
+    [ ] {{-77517039}}#582:☊[Expression/510873326][call: 1][loop: 1][call: 10][loop: 1] -> ["obj1"]
+    [ ] {{-781773862}}#651:☊[Initializer/903663666][call: 3][loop: 1][call: 13][loop: 0] -> ExecutionContext {
+      [0] "Function" -> {{-41776461}}#GLOBAL.Generator.prototype.next
+      [1] "Realm" -> {{-572624684}}#REALM
+      [2] "ScriptOrModule" -> null
+    }
+    [ ] {{-785516142}}#3493:☊[Expression/510873326][call: 1][loop: 1][call: 11][loop: 0] -> []
+    [ ] {{-788395942}}{{1190873651}}#2819:[call: 8][loop: 2]:SubMap -> SubMap {
+      [0] "constructor" -> {{1097011032}}#3779:[call: 10][loop: 2]
+    }
+    [ ] {{-798609019}}#1145:☊[Initializer/903663666][call: 2][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
+      [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
+      [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> false
+    }
+    [ ] {{-831045925}}#1803:☊[Initializer/903663666][call: 2][loop: 1][call: 7][loop: 0] -> []
+    [ ] {{-861450707}}#582:☊[Expression/510873326][call: 1][loop: 1][call: 10][loop: 1] -> ["obj3"]
+    [ ] {{-876979709}}#1100:☊[Expression/431966204][call: 2][loop: 1][call: 5][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> 3.0
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{-883703903}}#1100:☊[Initializer/1722868231][call: 2][loop: 1][call: 10][loop: 1] -> PropertyDescriptor {
+      [0] "Value" -> "z"
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{-898241444}}#2491:☊[AssignmentExpression/1161209621][call: 2][loop: 1][call: 2][loop: 0] -> ReferenceRecord {
+      [0] "Base" -> {~normal~ -> ({{1337896232}}#2978:☊[Initializer/1722868231][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
+      [1] "ReferencedName" -> {~normal~ -> ("key2", ~empty~)}
+      [2] "Strict" -> true
+      [3] "ThisValue" -> ~empty~
+    }
+    [ ] {{-903022951}}#2491:☊[MemberExpression/838015776][call: 1][loop: 1][call: 3][loop: 0] -> ReferenceRecord {
+      [0] "Base" -> {~normal~ -> ({{-1394450300}}#2981:[call: 3][loop: 0], ~empty~)}
+      [1] "ReferencedName" -> {~normal~ -> ("makeObject", ~empty~)}
+      [2] "Strict" -> true
+      [3] "ThisValue" -> ~empty~
+    }
+    [ ] {{-926983823}}#3489:☊[Expression/510873326][call: 1][loop: 1][call: 10][loop: 0] -> [☊[Declaration](const o...) @ 0x4fc6e776]
+    [ ] {{-941471393}}#20:☊[Initializer/903663666][call: 1][loop: 1][call: 3][loop: 0] -> ["y", "z"]
+    [ ] {{-958527277}}#2819:☊[Initializer/1722868231][call: 2][loop: 1][call: 11][loop: 0] -> OrdinaryObject {
       [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
       [1] "Delete" -> λ(OrdinaryObject.Delete)
       [2] "Get" -> λ(OrdinaryObject.Get)
@@ -918,34 +817,203 @@
       [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
       [9] "Set" -> λ(OrdinaryObject.Set)
       [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
-      [11] "SubMap" -> {{1804972473}}{{1255686456}}#2819:☊[Initializer/1686232293][call: 2][loop: 1][call: 15][loop: 1]:SubMap
+      [11] "SubMap" -> {{-1105385526}}{{-958527277}}#2819:☊[Initializer/1722868231][call: 2][loop: 1][call: 11][loop: 0]:SubMap
+      [12] "Prototype" -> {{802063200}}#GLOBAL.IteratorPrototype
+      [13] "Extensible" -> true
+      [14] "GeneratorState" -> ~suspendedYield~
+      [15] "GeneratorContext" -> {{-1059932099}}#3169:☊[Initializer/1722868231][call: 2][loop: 1][call: 4][loop: 0]
+      [16] "GeneratorBrand" -> ~empty~
+    }
+    [ ] {{-979403248}}#1115:[call: 3][loop: 0] -> Record {}
+    [ ] {{-985867073}}#JOB_QUEUE -> []
+    [ ] {{-998529643}}#1166:☊[Initializer/1722868231][call: 2][loop: 1][call: 8][loop: 1] -> MutableBinding {
+      [0] "initialized" -> true
+      [1] "BoundValue" -> "z"
+    }
+    [ ] {{1039324101}}#3779:[call: 11][loop: 2] -> DataProperty {
+      [0] "Value" -> {~normal~ -> (0i, ~empty~)}
+      [1] "Writable" -> false
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> true
+    }
+    [ ] {{1061839432}}#1100:☊[Expression/431966204][call: 2][loop: 1][call: 5][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> 9.0
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{1069264618}}#1100:☊[Initializer/903663666][call: 2][loop: 1][call: 15][loop: 1] -> PropertyDescriptor {
+      [0] "Value" -> false
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{1070943678}}#1142:☊[Expression/510873326][call: 1][loop: 1][call: 8][loop: 0] -> ["ParameterMap"]
+    [ ] {{1071808030}}#1143:☊[Expression/510873326][call: 1][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> 0i
+      [1] "Writable" -> true
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> true
+    }
+    [ ] {{1080202553}}#3086:[call: 9][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{734547689}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> false
+    }
+    [ ] {{1097011032}}#3779:[call: 10][loop: 2] -> DataProperty {
+      [0] "Value" -> {~normal~ -> ({{89390415}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> true
+    }
+    [ ] {{1098186063}}#2819:☊[Initializer/903663666][call: 2][loop: 1][call: 15][loop: 1] -> OrdinaryObject {
+      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
+      [1] "Delete" -> λ(OrdinaryObject.Delete)
+      [2] "Get" -> λ(OrdinaryObject.Get)
+      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
+      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
+      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
+      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
+      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
+      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
+      [9] "Set" -> λ(OrdinaryObject.Set)
+      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
+      [11] "SubMap" -> {{1598039463}}{{1098186063}}#2819:☊[Initializer/903663666][call: 2][loop: 1][call: 15][loop: 1]:SubMap
       [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
       [13] "Extensible" -> true
     }
-    [ ] {{1296387901}}#3088:☊[Expression/1022713356][call: 1][loop: 1][call: 10][loop: 0] -> ["Prototype", "Extensible", "GeneratorState", "GeneratorContext", "GeneratorBrand"]
+    [ ] {{111718891}}#1165:☊[Expression/510873326][call: 1][loop: 1][call: 8][loop: 0] -> ImmutableBinding {
+      [0] "initialized" -> true
+      [1] "strict" -> false
+      [2] "BoundValue" -> {~normal~ -> ({{149737348}}#2819:☊[Expression/510873326][call: 1][loop: 1][call: 10][loop: 0], ~empty~)}
+    }
+    [ ] {{1126091763}}#3779:[call: 10][loop: 2] -> DataProperty {
+      [0] "Value" -> {{1190873651}}#2819:[call: 8][loop: 2]
+      [1] "Writable" -> true
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> false
+    }
+    [ ] {{1130898839}}#1165:☊[Expression/510873326][call: 1][loop: 1][call: 8][loop: 2] -> ImmutableBinding {
+      [0] "initialized" -> false
+      [1] "strict" -> true
+    }
+    [ ] {{1144338717}}#3086:☊[MemberExpression/838015776][call: 1][loop: 1][call: 10][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{89390415}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> false
+    }
+    [ ] {{1145046710}}#1145:☊[Initializer/1722868231][call: 2][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
+      [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
+      [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> false
+    }
+    [ ] {{1169518849}}#2491:☊[Initializer/903663666][call: 2][loop: 1][call: 11][loop: 0] -> ReferenceRecord {
+      [0] "Base" -> {~normal~ -> ({{1702519098}}#2978:☊[Initializer/903663666][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
+      [1] "ReferencedName" -> {~normal~ -> ("key2", ~empty~)}
+      [2] "Strict" -> true
+      [3] "ThisValue" -> ~empty~
+    }
+    [ ] {{1171906648}}#3088:☊[Expression/431966204][call: 2][loop: 1][call: 1][loop: 0] -> ["Prototype", "Extensible"]
+    [ ] {{1172753989}}#1165:☊[Expression/510873326][call: 1][loop: 1][call: 8][loop: 2] -> ImmutableBinding {
+      [0] "initialized" -> false
+      [1] "strict" -> true
+    }
+    [ ] {{1190873651}}#2819:[call: 8][loop: 2] -> OrdinaryObject {
+      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
+      [1] "Delete" -> λ(OrdinaryObject.Delete)
+      [2] "Get" -> λ(OrdinaryObject.Get)
+      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
+      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
+      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
+      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
+      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
+      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
+      [9] "Set" -> λ(OrdinaryObject.Set)
+      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
+      [11] "SubMap" -> {{-788395942}}{{1190873651}}#2819:[call: 8][loop: 2]:SubMap
+      [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
+      [13] "Extensible" -> true
+    }
+    [ ] {{1221769488}}#582:☊[Initializer/903663666][call: 2][loop: 1][call: 10][loop: 0] -> ["key2"]
+    [ ] {{1222506284}}#3413:[call: 6][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ("makeObject", ~empty~)}
+      [1] "Writable" -> false
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> true
+    }
+    [ ] {{1274326481}}#3088:☊[Expression/510873326][call: 1][loop: 1][call: 9][loop: 0] -> ["Prototype", "Extensible", "ParameterMap"]
+    [ ] {{1286715377}}#2822:[call: 6][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{89390415}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> true
+    }
     [ ] {{1298949275}}#8:[call: 4][loop: 0] -> PropertyDescriptor {
       [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
       [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
       [2] "Enumerable" -> false
       [3] "Configurable" -> true
     }
-    [ ] {{1301564699}}#2479:☊[Initializer/1686232293][call: 3][loop: 1][call: 15][loop: 0] -> []
-    [ ] {{1310528265}}{{-534815878}}#2819:☊[Initializer/2036295297][call: 2][loop: 1][call: 11][loop: 0]:SubMap -> SubMap {}
-    [ ] {{1334583125}}#3779:☊[Expression/1022713356][call: 1][loop: 1][call: 12][loop: 0] -> DataProperty {
-      [0] "Value" -> 0i
-      [1] "Writable" -> true
+    [ ] {{1337896232}}#2978:☊[Initializer/1722868231][call: 2][loop: 1][call: 5][loop: 0] -> FunctionEnvironmentRecord {
+      [0] "BindThisValue" -> λ(FunctionEnvironmentRecord.BindThisValue)
+      [1] "CreateImmutableBinding" -> λ(DeclarativeEnvironmentRecord.CreateImmutableBinding)
+      [2] "CreateMutableBinding" -> λ(DeclarativeEnvironmentRecord.CreateMutableBinding)
+      [3] "DeleteBinding" -> λ(DeclarativeEnvironmentRecord.DeleteBinding)
+      [4] "GetBindingValue" -> λ(DeclarativeEnvironmentRecord.GetBindingValue)
+      [5] "GetSuperBase" -> λ(FunctionEnvironmentRecord.GetSuperBase)
+      [6] "GetThisBinding" -> λ(FunctionEnvironmentRecord.GetThisBinding)
+      [7] "HasBinding" -> λ(DeclarativeEnvironmentRecord.HasBinding)
+      [8] "HasSuperBinding" -> λ(FunctionEnvironmentRecord.HasSuperBinding)
+      [9] "HasThisBinding" -> λ(FunctionEnvironmentRecord.HasThisBinding)
+      [10] "InitializeBinding" -> λ(DeclarativeEnvironmentRecord.InitializeBinding)
+      [11] "SetMutableBinding" -> λ(DeclarativeEnvironmentRecord.SetMutableBinding)
+      [12] "WithBaseObject" -> λ(DeclarativeEnvironmentRecord.WithBaseObject)
+      [13] "SubMap" -> {{401945719}}{{1337896232}}#2978:☊[Initializer/1722868231][call: 2][loop: 1][call: 5][loop: 0]:SubMap
+      [14] "FunctionObject" -> {{89390415}}#2819:[call: 8][loop: 2]
+      [15] "ThisBindingStatus" -> ~initialized~
+      [16] "NewTarget" -> undefined
+      [17] "OuterEnv" -> {~normal~ -> ({{-1394450300}}#2981:[call: 3][loop: 0], ~empty~)}
+      [18] "ThisValue" -> {~normal~ -> (undefined, ~empty~)}
+    }
+    [ ] {{1338990740}}#3413:[call: 6][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ("main", ~empty~)}
+      [1] "Writable" -> false
       [2] "Enumerable" -> false
       [3] "Configurable" -> true
     }
-    [ ] {{133715432}}#3493:☊[Expression/1022713356][call: 1][loop: 1][call: 11][loop: 0] -> []
-    [ ] {{1339341628}}#3553:☊[Initializer/2036295297][call: 2][loop: 1][call: 10][loop: 0] -> []
-    [ ] {{1347032779}}#3086:☊[Initializer/2036295297][call: 1][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1359140605}}#2819:[call: 8][loop: 2], ~empty~)}
+    [ ] {{1376423114}}#3552:☊[Initializer/903663666][call: 2][loop: 1][call: 10][loop: 0] -> []
+    [ ] {{1401583348}}#651:☊[Initializer/903663666][call: 3][loop: 1][call: 13][loop: 0] -> ExecutionContext {
+      [0] "Function" -> {{-41776461}}#GLOBAL.Generator.prototype.next
+      [1] "Realm" -> {{-572624684}}#REALM
+      [2] "ScriptOrModule" -> null
+    }
+    [ ] {{1406605401}}#3412:[call: 7][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> (2i, ~empty~)}
+      [1] "Writable" -> false
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> true
+    }
+    [ ] {{1430746972}}#3783:[call: 11][loop: 2] -> ["Value"]
+    [ ] {{1440052788}}#3086:☊[Expression/510873326][call: 0][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{734547689}}#2819:[call: 8][loop: 2], ~empty~)}
       [1] "Writable" -> true
       [2] "Enumerable" -> true
       [3] "Configurable" -> false
     }
-    [ ] {{1359140605}}#2819:[call: 8][loop: 2] -> ECMAScriptFunctionObject {
+    [ ] {{1461870665}}#582:☊[Expression/510873326][call: 1][loop: 1][call: 10][loop: 1] -> ["obj2"]
+    [ ] {{1464471295}}{{-1123423803}}#2819:☊[Initializer/1722868231][call: 2][loop: 1][call: 15][loop: 1]:SubMap -> SubMap {
+      [0] "value" -> {{-1197335131}}#3779:☊[Initializer/1722868231][call: 2][loop: 1][call: 18][loop: 1]
+      [1] "done" -> {{-1209693099}}#3779:☊[Initializer/1722868231][call: 2][loop: 1][call: 18][loop: 1]
+    }
+    [ ] {{1466559649}}#1121:☊[Initializer/1722868231][call: 2][loop: 1][call: 8][loop: 0] -> Record {
+      [0] "Iterator" -> {{-958527277}}#2819:☊[Initializer/1722868231][call: 2][loop: 1][call: 11][loop: 0]
+      [1] "NextMethod" -> {{-41776461}}#GLOBAL.Generator.prototype.next
+      [2] "Done" -> false
+    }
+    [ ] {{149737348}}#2819:☊[Expression/510873326][call: 1][loop: 1][call: 10][loop: 0] -> OrdinaryObject {
       [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
       [1] "Delete" -> λ(OrdinaryObject.Delete)
       [2] "Get" -> λ(OrdinaryObject.Get)
@@ -957,88 +1025,49 @@
       [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
       [9] "Set" -> λ(OrdinaryObject.Set)
       [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
-      [11] "SubMap" -> {{-1738274543}}{{1359140605}}#2819:[call: 8][loop: 2]:SubMap
-      [12] "Prototype" -> {{266749428}}#GLOBAL.Function.prototype
+      [11] "SubMap" -> {{-1711489488}}{{149737348}}#2819:☊[Expression/510873326][call: 1][loop: 1][call: 10][loop: 0]:SubMap
+      [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
       [13] "Extensible" -> true
-      [14] "Environment" -> {~normal~ -> ({{-1394450300}}#2981:[call: 3][loop: 0], ~empty~)}
-      [15] "FormalParameters" -> ☊[FormalParameters](key1  ,...) @ 0x44dd0d38
-      [16] "ECMAScriptCode" -> ☊[FunctionBody](return ...) @ 0x6987a133
-      [17] "ConstructorKind" -> ~base~
-      [18] "Realm" -> {{-572624684}}#REALM
-      [19] "ScriptOrModule" -> {~normal~ -> ({{-1204254822}}#3110:[call: 2][loop: 1], ~empty~)}
-      [20] "ThisMode" -> ~strict~
-      [21] "Strict" -> true
-      [22] "HomeObject" -> undefined
-      [23] "SourceText" -> "function makeObject ( key1  , key2  ) { return { [ key1 ] : 3 , y : 9 , [ key2 ] : 7 } ; }"
-      [24] "IsClassConstructor" -> false
-      [25] "Call" -> λ(ECMAScriptFunctionObject.Call)
-      [26] "Construct" -> λ(ECMAScriptFunctionObject.Construct)
+      [14] "ParameterMap" -> undefined
     }
-    [ ] {{1367840559}}#1803:☊[Expression/1022713356][call: 1][loop: 1][call: 7][loop: 0] -> []
-    [ ] {{1382533495}}#3779:☊[Initializer/1686232293][call: 2][loop: 1][call: 12][loop: 0] -> DataProperty {
-      [0] "Value" -> 2i
-      [1] "Writable" -> true
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
-    }
-    [ ] {{139941206}}#651:☊[Initializer/2036295297][call: 3][loop: 1][call: 13][loop: 0] -> ExecutionContext {
-      [0] "Function" -> {{-41776461}}#GLOBAL.Generator.prototype.next
-      [1] "Realm" -> {{-572624684}}#REALM
-      [2] "ScriptOrModule" -> null
-    }
-    [ ] {{1430746972}}#3783:[call: 11][loop: 2] -> ["Value"]
-    [ ] {{1445083888}}#3779:[call: 10][loop: 2] -> DataProperty {
-      [0] "Value" -> {{1082500274}}#2819:[call: 8][loop: 2]
-      [1] "Writable" -> true
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> false
-    }
-    [ ] {{1480586325}}#1817:☊[Expression/1022713356][call: 1][loop: 1][call: 7][loop: 0] -> ["arguments"]
-    [ ] {{1486988029}}#3088:[call: 7][loop: 2] -> ["Prototype", "Extensible"]
-    [ ] {{1496247628}}#3779:☊[Expression/1655750533][call: 2][loop: 1][call: 8][loop: 0] -> DataProperty {
-      [0] "Value" -> 3.0
+    [ ] {{1502752848}}#1116:☊[Initializer/903663666][call: 2][loop: 1][call: 9][loop: 0] -> ["GeneratorState", "GeneratorContext", "GeneratorBrand"]
+    [ ] {{1512664093}}#3088:[call: 7][loop: 2] -> ["Prototype", "Extensible"]
+    [ ] {{151820726}}#3779:☊[Initializer/903663666][call: 2][loop: 1][call: 13][loop: 1] -> DataProperty {
+      [0] "Value" -> "z"
       [1] "Writable" -> true
       [2] "Enumerable" -> true
       [3] "Configurable" -> true
     }
-    [ ] {{1503164101}}#3088:☊[Initializer/2036295297][call: 2][loop: 1][call: 14][loop: 1] -> ["Prototype", "Extensible"]
-    [ ] {{1507541633}}#3086:☊[Initializer/1686232293][call: 2][loop: 1][call: 16][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> false
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
+    [ ] {{1525245983}}#2819:☊[Initializer/903663666][call: 2][loop: 1][call: 10][loop: 0] -> OrdinaryObject {
+      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
+      [1] "Delete" -> λ(OrdinaryObject.Delete)
+      [2] "Get" -> λ(OrdinaryObject.Get)
+      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
+      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
+      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
+      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
+      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
+      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
+      [9] "Set" -> λ(OrdinaryObject.Set)
+      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
+      [11] "SubMap" -> {{949962345}}{{1525245983}}#2819:☊[Initializer/903663666][call: 2][loop: 1][call: 10][loop: 0]:SubMap
+      [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
+      [13] "Extensible" -> true
+      [14] "ParameterMap" -> undefined
     }
-    [ ] {{1552024392}}#2822:[call: 6][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1624244029}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
-    }
-    [ ] {{1552291736}}#658:☊[Initializer/1686232293][call: 3][loop: 1][call: 12][loop: 0] -> []
-    [ ] {{157399034}}#1100:☊[Expression/1655750533][call: 2][loop: 1][call: 4][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> 7.0
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{1590766950}}#3779:☊[Initializer/2036295297][call: 2][loop: 1][call: 18][loop: 1] -> DataProperty {
+    [ ] {{1550935744}}#3469:☊[Initializer/1722868231][call: 2][loop: 1][call: 9][loop: 0] -> []
+    [ ] {{1552212194}}#3088:☊[Initializer/1722868231][call: 2][loop: 1][call: 14][loop: 1] -> ["Prototype", "Extensible"]
+    [ ] {{1573299201}}#1100:☊[Initializer/1722868231][call: 2][loop: 1][call: 10][loop: 1] -> PropertyDescriptor {
       [0] "Value" -> "x"
       [1] "Writable" -> true
       [2] "Enumerable" -> true
       [3] "Configurable" -> true
     }
-    [ ] {{1592901350}}#1145:☊[Expression/1022713356][call: 1][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
-      [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
-      [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> false
+    [ ] {{1598039463}}{{1098186063}}#2819:☊[Initializer/903663666][call: 2][loop: 1][call: 15][loop: 1]:SubMap -> SubMap {
+      [0] "value" -> {{2116823575}}#3779:☊[Initializer/903663666][call: 2][loop: 1][call: 18][loop: 1]
+      [1] "done" -> {{-1520670404}}#3779:☊[Initializer/903663666][call: 2][loop: 1][call: 18][loop: 1]
     }
-    [ ] {{1593341024}}#1166:☊[Initializer/1686232293][call: 2][loop: 1][call: 8][loop: 1] -> MutableBinding {
-      [0] "initialized" -> true
-      [1] "BoundValue" -> "z"
-    }
-    [ ] {{1620351224}}#3469:[call: 6][loop: 1] -> []
-    [ ] {{1624244029}}#2819:[call: 8][loop: 2] -> ECMAScriptFunctionObject {
+    [ ] {{1606539702}}#2819:[call: 8][loop: 2] -> OrdinaryObject {
       [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
       [1] "Delete" -> λ(OrdinaryObject.Delete)
       [2] "Get" -> λ(OrdinaryObject.Get)
@@ -1050,12 +1079,360 @@
       [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
       [9] "Set" -> λ(OrdinaryObject.Set)
       [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
-      [11] "SubMap" -> {{-1381796030}}{{1624244029}}#2819:[call: 8][loop: 2]:SubMap
+      [11] "SubMap" -> {{-500606676}}{{1606539702}}#2819:[call: 8][loop: 2]:SubMap
+      [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
+      [13] "Extensible" -> true
+    }
+    [ ] {{1621908240}}#3493:☊[Expression/510873326][call: 1][loop: 1][call: 11][loop: 0] -> []
+    [ ] {{1662538742}}#1100:☊[Initializer/903663666][call: 2][loop: 1][call: 15][loop: 1] -> PropertyDescriptor {
+      [0] "Value" -> false
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{167379468}}#582:☊[Expression/510873326][call: 1][loop: 1][call: 14][loop: 0] -> ["obj1", "obj2", "obj3"]
+    [ ] {{1676625829}}#3779:☊[Expression/431966204][call: 2][loop: 1][call: 7][loop: 0] -> DataProperty {
+      [0] "Value" -> 7.0
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{1677522600}}#582:☊[Initializer/1722868231][call: 2][loop: 1][call: 10][loop: 0] -> ["key1", "key2", "arguments"]
+    [ ] {{1702131055}}#2819:☊[Initializer/1722868231][call: 2][loop: 1][call: 15][loop: 1] -> OrdinaryObject {
+      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
+      [1] "Delete" -> λ(OrdinaryObject.Delete)
+      [2] "Get" -> λ(OrdinaryObject.Get)
+      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
+      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
+      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
+      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
+      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
+      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
+      [9] "Set" -> λ(OrdinaryObject.Set)
+      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
+      [11] "SubMap" -> {{-1399175302}}{{1702131055}}#2819:☊[Initializer/1722868231][call: 2][loop: 1][call: 15][loop: 1]:SubMap
+      [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
+      [13] "Extensible" -> true
+    }
+    [ ] {{1702519098}}#2978:☊[Initializer/903663666][call: 2][loop: 1][call: 5][loop: 0] -> FunctionEnvironmentRecord {
+      [0] "BindThisValue" -> λ(FunctionEnvironmentRecord.BindThisValue)
+      [1] "CreateImmutableBinding" -> λ(DeclarativeEnvironmentRecord.CreateImmutableBinding)
+      [2] "CreateMutableBinding" -> λ(DeclarativeEnvironmentRecord.CreateMutableBinding)
+      [3] "DeleteBinding" -> λ(DeclarativeEnvironmentRecord.DeleteBinding)
+      [4] "GetBindingValue" -> λ(DeclarativeEnvironmentRecord.GetBindingValue)
+      [5] "GetSuperBase" -> λ(FunctionEnvironmentRecord.GetSuperBase)
+      [6] "GetThisBinding" -> λ(FunctionEnvironmentRecord.GetThisBinding)
+      [7] "HasBinding" -> λ(DeclarativeEnvironmentRecord.HasBinding)
+      [8] "HasSuperBinding" -> λ(FunctionEnvironmentRecord.HasSuperBinding)
+      [9] "HasThisBinding" -> λ(FunctionEnvironmentRecord.HasThisBinding)
+      [10] "InitializeBinding" -> λ(DeclarativeEnvironmentRecord.InitializeBinding)
+      [11] "SetMutableBinding" -> λ(DeclarativeEnvironmentRecord.SetMutableBinding)
+      [12] "WithBaseObject" -> λ(DeclarativeEnvironmentRecord.WithBaseObject)
+      [13] "SubMap" -> {{851098508}}{{1702519098}}#2978:☊[Initializer/903663666][call: 2][loop: 1][call: 5][loop: 0]:SubMap
+      [14] "FunctionObject" -> {{89390415}}#2819:[call: 8][loop: 2]
+      [15] "ThisBindingStatus" -> ~initialized~
+      [16] "NewTarget" -> undefined
+      [17] "OuterEnv" -> {~normal~ -> ({{-1394450300}}#2981:[call: 3][loop: 0], ~empty~)}
+      [18] "ThisValue" -> {~normal~ -> (undefined, ~empty~)}
+    }
+    [ ] {{1706566019}}#2558:[call: 4][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{734547689}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> false
+    }
+    [ ] {{1740043408}}#1142:☊[Initializer/903663666][call: 2][loop: 1][call: 8][loop: 0] -> ["ParameterMap"]
+    [ ] {{1745946785}}#2491:☊[Initializer/1722868231][call: 2][loop: 1][call: 11][loop: 0] -> ReferenceRecord {
+      [0] "Base" -> {~normal~ -> ({{1337896232}}#2978:☊[Initializer/1722868231][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
+      [1] "ReferencedName" -> {~normal~ -> ("key1", ~empty~)}
+      [2] "Strict" -> true
+      [3] "ThisValue" -> ~empty~
+    }
+    [ ] {{1755916023}}#1100:☊[Expression/431966204][call: 2][loop: 1][call: 5][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> 9.0
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{175901745}}#3779:☊[Initializer/1722868231][call: 2][loop: 1][call: 12][loop: 0] -> DataProperty {
+      [0] "Value" -> 2i
+      [1] "Writable" -> true
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> true
+    }
+    [ ] {{1764280982}}#1100:☊[Initializer/1722868231][call: 2][loop: 1][call: 15][loop: 1] -> PropertyDescriptor {
+      [0] "Value" -> false
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{1804041488}}#3086:[call: 9][loop: 0] -> PropertyDescriptor {
+      [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
+      [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> true
+    }
+    [ ] {{1815865301}}#3470:[call: 6][loop: 1] -> []
+    [ ] {{182613844}}#582:[call: 5][loop: 2] -> ["makeObject"]
+    [ ] {{1837041394}}#20:☊[Initializer/1722868231][call: 1][loop: 1][call: 3][loop: 0] -> ["x", "z"]
+    [ ] {{1849456838}}#1165:☊[Expression/510873326][call: 1][loop: 1][call: 8][loop: 2] -> ImmutableBinding {
+      [0] "initialized" -> true
+      [1] "strict" -> true
+      [2] "BoundValue" -> {{-1577460986}}#2819:☊[Expression/431966204][call: 2][loop: 1][call: 2][loop: 0]
+    }
+    [ ] {{191507332}}#3088:☊[Initializer/903663666][call: 2][loop: 1][call: 10][loop: 0] -> ["Prototype", "Extensible", "GeneratorState", "GeneratorContext", "GeneratorBrand"]
+    [ ] {{1930421210}}#3086:☊[Initializer/1722868231][call: 2][loop: 1][call: 16][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> false
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{1958626636}}#3088:[call: 7][loop: 2] -> ["Prototype", "Extensible", "Environment", "FormalParameters", "ECMAScriptCode", "ConstructorKind", "Realm", "ScriptOrModule", "ThisMode", "Strict", "HomeObject", "SourceText", "IsClassConstructor"]
+    [ ] {{1964079823}}#3086:☊[Initializer/903663666][call: 2][loop: 1][call: 16][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> false
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{1965385906}}#3086:☊[MemberExpression/209029677][call: 1][loop: 1][call: 10][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{89390415}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> false
+    }
+    [ ] {{1979375552}}#3169:☊[Initializer/903663666][call: 2][loop: 1][call: 4][loop: 0] -> ExecutionContext {
+      [0] "Function" -> {{89390415}}#2819:[call: 8][loop: 2]
+      [1] "Realm" -> {{-572624684}}#REALM
+      [2] "ScriptOrModule" -> {~normal~ -> ({{-1204254822}}#3110:[call: 2][loop: 1], ~empty~)}
+      [3] "LexicalEnvironment" -> {~normal~ -> ({{1702519098}}#2978:☊[Initializer/903663666][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
+      [4] "VariableEnvironment" -> {~normal~ -> ({{1702519098}}#2978:☊[Initializer/903663666][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
+      [5] "Generator" -> {{-344900471}}#2819:☊[Initializer/903663666][call: 2][loop: 1][call: 11][loop: 0]
+      [6] "ResumeCont" -> (resumptionValue) [=>] ☊[Initializer/903663666][call(2): ☊[Initializer/903663666], ☊[Expression/510873326]][loop: Loop[25926](0)][call(13): IApp(GeneratorYield), IApp(Yield), IApp(generatorBody), IApp(GeneratorStart), IApp(CreateIteratorFromClosure), IApp(CreateListIteratorRecord), IApp(FunctionDeclarationInstantiation), IAccess(FunctionBody."EvaluateFunctionBody"), IAccess(F.ECMAScriptCode."EvaluateBody"), IApp(OrdinaryCallEvaluateBody), IApp(F.Call), IApp(Call), IApp(EvaluateCall)][loop: Loop[6948](1)]:Entry[19206]
+      [7] "ReturnCont" -> {{-239611649}}#2479:☊[Initializer/903663666][call: 3][loop: 1][call: 15][loop: 0]
+    }
+    [ ] {{1979553531}}#3084:[call: 6][loop: 2] -> ["Environment", "FormalParameters", "ECMAScriptCode", "ConstructorKind", "Realm", "ScriptOrModule", "ThisMode", "Strict", "HomeObject", "SourceText", "IsClassConstructor"]
+    [ ] {{1986437413}}{{-1591112506}}#2978:☊[Expression/510873326][call: 1][loop: 1][call: 5][loop: 0]:SubMap -> SubMap {
+      [0] "arguments" -> {{111718891}}#1165:☊[Expression/510873326][call: 1][loop: 1][call: 8][loop: 0]
+      [1] "obj1" -> {{1849456838}}#1165:☊[Expression/510873326][call: 1][loop: 1][call: 8][loop: 2]
+      [2] "obj2" -> {{1172753989}}#1165:☊[Expression/510873326][call: 1][loop: 1][call: 8][loop: 2]
+      [3] "obj3" -> {{1130898839}}#1165:☊[Expression/510873326][call: 1][loop: 1][call: 8][loop: 2]
+    }
+    [ ] {{1989194515}}#3086:[call: 9][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{89390415}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> false
+    }
+    [ ] {{202969162}}#1145:☊[Expression/510873326][call: 1][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
+      [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
+      [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> false
+    }
+    [ ] {{203066978}}#2479:☊[Initializer/1722868231][call: 3][loop: 1][call: 15][loop: 0] -> []
+    [ ] {{2035739955}}#658:☊[Initializer/1722868231][call: 3][loop: 1][call: 12][loop: 0] -> []
+    [ ] {{2072770047}}#651:☊[Initializer/1722868231][call: 3][loop: 1][call: 13][loop: 0] -> ExecutionContext {
+      [0] "Function" -> {{-41776461}}#GLOBAL.Generator.prototype.next
+      [1] "Realm" -> {{-572624684}}#REALM
+      [2] "ScriptOrModule" -> null
+    }
+    [ ] {{2073362482}}#582:[call: 5][loop: 2] -> ["makeObject"]
+    [ ] {{210266062}}#3088:☊[Initializer/1722868231][call: 2][loop: 1][call: 9][loop: 0] -> ["Prototype", "Extensible", "ParameterMap"]
+    [ ] {{2103515837}}#582:☊[Expression/510873326][call: 1][loop: 1][call: 13][loop: 0] -> ["obj3"]
+    [ ] {{211457777}}#3088:☊[Initializer/903663666][call: 2][loop: 1][call: 14][loop: 1] -> ["Prototype", "Extensible"]
+    [ ] {{2114950787}}#3779:☊[Expression/510873326][call: 1][loop: 1][call: 12][loop: 0] -> DataProperty {
+      [0] "Value" -> 0i
+      [1] "Writable" -> true
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> true
+    }
+    [ ] {{2116823575}}#3779:☊[Initializer/903663666][call: 2][loop: 1][call: 18][loop: 1] -> DataProperty {
+      [0] "Value" -> "y"
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{2143781862}}{{89390415}}#2819:[call: 8][loop: 2]:SubMap -> SubMap {
+      [0] "length" -> {{-17452428}}#3779:[call: 11][loop: 2]
+      [1] "name" -> {{-107365638}}#3779:[call: 10][loop: 2]
+      [2] "prototype" -> {{1126091763}}#3779:[call: 10][loop: 2]
+    }
+    [ ] {{217339752}}#3488:[call: 7][loop: 1] -> []
+    [ ] {{259185374}}{{-1052149288}}#2819:☊[Initializer/903663666][call: 2][loop: 1][call: 15][loop: 1]:SubMap -> SubMap {
+      [0] "value" -> {{839849816}}#3779:☊[Initializer/903663666][call: 2][loop: 1][call: 18][loop: 1]
+      [1] "done" -> {{459770797}}#3779:☊[Initializer/903663666][call: 2][loop: 1][call: 18][loop: 1]
+    }
+    [ ] {{27956399}}#3088:☊[Initializer/903663666][call: 2][loop: 1][call: 14][loop: 1] -> ["Prototype", "Extensible"]
+    [ ] {{308005026}}#2823:[call: 6][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {{1190873651}}#2819:[call: 8][loop: 2]
+      [1] "Writable" -> true
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> false
+    }
+    [ ] {{308553099}}#2491:☊[MemberExpression/1749250768][call: 0][loop: 1][call: 2][loop: 0] -> ReferenceRecord {
+      [0] "Base" -> {~normal~ -> ({{-1394450300}}#2981:[call: 3][loop: 0], ~empty~)}
+      [1] "ReferencedName" -> {~normal~ -> ("main", ~empty~)}
+      [2] "Strict" -> true
+      [3] "ThisValue" -> ~empty~
+    }
+    [ ] {{312518289}}{{-1577460986}}#2819:☊[Expression/431966204][call: 2][loop: 1][call: 2][loop: 0]:SubMap -> SubMap {
+      [0] "x" -> {{57896102}}#3779:☊[Expression/431966204][call: 2][loop: 1][call: 8][loop: 0]
+      [1] "y" -> {{361732778}}#3779:☊[Expression/431966204][call: 2][loop: 1][call: 8][loop: 0]
+      [2] "z" -> {{1676625829}}#3779:☊[Expression/431966204][call: 2][loop: 1][call: 7][loop: 0]
+    }
+    [ ] {{314328425}}#3086:☊[Initializer/1722868231][call: 1][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{89390415}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> false
+    }
+    [ ] {{334064631}}#582:☊[Expression/510873326][call: 1][loop: 1][call: 14][loop: 0] -> ["obj2"]
+    [ ] {{343693516}}#1165:☊[Initializer/903663666][call: 2][loop: 1][call: 8][loop: 0] -> ImmutableBinding {
+      [0] "initialized" -> true
+      [1] "strict" -> false
+      [2] "BoundValue" -> {~normal~ -> ({{1525245983}}#2819:☊[Initializer/903663666][call: 2][loop: 1][call: 10][loop: 0], ~empty~)}
+    }
+    [ ] {{352903942}}#2491:☊[AssignmentExpression/1349536242][call: 2][loop: 1][call: 2][loop: 0] -> ReferenceRecord {
+      [0] "Base" -> {~normal~ -> ({{1337896232}}#2978:☊[Initializer/1722868231][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
+      [1] "ReferencedName" -> {~normal~ -> ("key1", ~empty~)}
+      [2] "Strict" -> true
+      [3] "ThisValue" -> ~empty~
+    }
+    [ ] {{361732778}}#3779:☊[Expression/431966204][call: 2][loop: 1][call: 8][loop: 0] -> DataProperty {
+      [0] "Value" -> 9.0
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{366720297}}#3086:[call: 9][loop: 0] -> PropertyDescriptor {
+      [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
+      [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> true
+    }
+    [ ] {{375825904}}#3084:[call: 6][loop: 2] -> ["Environment", "FormalParameters", "ECMAScriptCode", "ConstructorKind", "Realm", "ScriptOrModule", "ThisMode", "Strict", "HomeObject", "SourceText", "IsClassConstructor"]
+    [ ] {{392195680}}#3086:☊[Expression/510873326][call: 0][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{734547689}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> false
+    }
+    [ ] {{398156720}}#3779:☊[Initializer/1722868231][call: 2][loop: 1][call: 18][loop: 1] -> DataProperty {
+      [0] "Value" -> false
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{401945719}}{{1337896232}}#2978:☊[Initializer/1722868231][call: 2][loop: 1][call: 5][loop: 0]:SubMap -> SubMap {
+      [0] "key1" -> {{-1365615513}}#1166:☊[Initializer/1722868231][call: 2][loop: 1][call: 8][loop: 1]
+      [1] "key2" -> {{-998529643}}#1166:☊[Initializer/1722868231][call: 2][loop: 1][call: 8][loop: 1]
+      [2] "arguments" -> {{-762547581}}#1165:☊[Initializer/1722868231][call: 2][loop: 1][call: 8][loop: 0]
+    }
+    [ ] {{407854423}}#582:[call: 9][loop: 1] -> ["main"]
+    [ ] {{415357547}}#1100:☊[Initializer/1722868231][call: 2][loop: 1][call: 15][loop: 1] -> PropertyDescriptor {
+      [0] "Value" -> false
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{417727667}}#3086:[call: 10][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{734547689}}#2819:[call: 8][loop: 2], ~empty~)}
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> false
+    }
+    [ ] {{424945204}}#1100:☊[Expression/431966204][call: 2][loop: 1][call: 5][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> 3.0
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{434723585}}#651:☊[Initializer/1722868231][call: 3][loop: 1][call: 13][loop: 0] -> ExecutionContext {
+      [0] "Function" -> {{-41776461}}#GLOBAL.Generator.prototype.next
+      [1] "Realm" -> {{-572624684}}#REALM
+      [2] "ScriptOrModule" -> null
+    }
+    [ ] {{44001109}}#2536:[call: 3][loop: 1] -> ["main", "makeObject"]
+    [ ] {{445045542}}#658:☊[Initializer/903663666][call: 3][loop: 1][call: 12][loop: 0] -> []
+    [ ] {{45168320}}#3552:☊[Initializer/1722868231][call: 2][loop: 1][call: 10][loop: 0] -> []
+    [ ] {{459770797}}#3779:☊[Initializer/903663666][call: 2][loop: 1][call: 18][loop: 1] -> DataProperty {
+      [0] "Value" -> false
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{462390577}}#1817:☊[Initializer/903663666][call: 2][loop: 1][call: 7][loop: 0] -> ["key1", "key2", "arguments"]
+    [ ] {{486475623}}#3779:☊[Initializer/1722868231][call: 2][loop: 1][call: 18][loop: 1] -> DataProperty {
+      [0] "Value" -> "z"
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{496116397}}#1142:☊[Initializer/1722868231][call: 2][loop: 1][call: 8][loop: 0] -> ["ParameterMap"]
+    [ ] {{521762662}}{{-1697358579}}#2819:☊[Initializer/1722868231][call: 2][loop: 1][call: 10][loop: 0]:SubMap -> SubMap {
+      [0] "length" -> {{175901745}}#3779:☊[Initializer/1722868231][call: 2][loop: 1][call: 12][loop: 0]
+      [1] "0" -> {{-1521644147}}#3779:☊[Initializer/1722868231][call: 2][loop: 1][call: 13][loop: 1]
+      [2] "1" -> {{-1839398083}}#3779:☊[Initializer/1722868231][call: 2][loop: 1][call: 13][loop: 1]
+      [3] {{-1717161388}}#GLOBAL.Symbol.iterator -> {{-1149334904}}#3779:☊[Initializer/1722868231][call: 2][loop: 1][call: 12][loop: 0]
+      [4] "callee" -> {{-442835170}}#3780:☊[Initializer/1722868231][call: 2][loop: 1][call: 12][loop: 0]
+    }
+    [ ] {{534144527}}#582:[call: 9][loop: 1] -> ["makeObject", "main"]
+    [ ] {{54604841}}#3779:☊[Initializer/903663666][call: 2][loop: 1][call: 13][loop: 1] -> DataProperty {
+      [0] "Value" -> "y"
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{548640921}}#3088:☊[Expression/431966204][call: 2][loop: 1][call: 1][loop: 0] -> ["Prototype", "Extensible"]
+    [ ] {{550903271}}#3411:[call: 2][loop: 0] -> ["print", "$262", "globalThis", "Infinity", "NaN", "undefined", "Array", "ArrayBuffer", "BigInt64Array", "BigUint64Array", "Boolean", "DataView", "Date", "Error", "EvalError", "Float32Array", "Float64Array", "Function", "Int8Array", "Int16Array", "Int32Array", "Map", "Number", "BigInt", "Object", "Promise", "Proxy", "RangeError", "ReferenceError", "RegExp", "Set", "SharedArrayBuffer", "String", "Symbol", "SyntaxError", "TypeError", "Uint8Array", "Uint8ClampedArray", "Uint16Array", "Uint32Array", "URIError", "WeakMap", "WeakSet", "Atomics", "JSON", "Math", "Reflect", "HostPrint", "isNaN", "AwaitFulfilledFunctions", "TypedArray", "AsyncGeneratorFunction", "decodeURIComponent", "PromiseRejectFunctions", "encodeURIComponent", "PromiseResolveFunctions", "ThrowTypeError", "GetCapabilitiesExecutorFunctions", "parseFloat", "ArgGetter", "ThenFinallyFunctions", "AsyncGeneratorResumeNextReturnProcessorRejectedFunctions", "GeneratorFunction", "InternalizeJSONProperty", "parseInt", "decodeURI", "AggregateError", "CatchFinallyFunctions", "__ABS__", "isFinite", "FinalizationRegistry", "ProxyRevocationFunctions", "DefaultConstructorFunctions", "encodeURI", "AwaitRejectedFunctions", "CreateDataPropertyOnObjectFunctions", "ArgSetter", "eval", "AsyncGeneratorResumeNextReturnProcessorFulfilledFunctions", "AsyncfromSyncIteratorValueUnwrapFunctions", "IfAbruptRejectPromise"]
+    [ ] {{57896102}}#3779:☊[Expression/431966204][call: 2][loop: 1][call: 8][loop: 0] -> DataProperty {
+      [0] "Value" -> 3.0
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
+    }
+    [ ] {{579924545}}#3412:[call: 7][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> (0i, ~empty~)}
+      [1] "Writable" -> false
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> true
+    }
+    [ ] {{624861493}}{{-344900471}}#2819:☊[Initializer/903663666][call: 2][loop: 1][call: 11][loop: 0]:SubMap -> SubMap {}
+    [ ] {{639920498}}#3493:☊[Expression/510873326][call: 1][loop: 1][call: 10][loop: 0] -> []
+    [ ] {{694157392}}#1767:☊[Expression/510873326][call: 1][loop: 1][call: 8][loop: 0] -> ["arguments"]
+    [ ] {{697253647}}#3780:☊[Initializer/903663666][call: 2][loop: 1][call: 12][loop: 0] -> AccessorProperty {
+      [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
+      [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> false
+    }
+    [ ] {{725339897}}#3489:☊[Expression/510873326][call: 1][loop: 1][call: 11][loop: 0] -> [☊[Declaration](const o...) @ 0x394fb736, ☊[Declaration](const o...) @ 0x1689527c, ☊[Declaration](const o...) @ 0x4fc6e776]
+    [ ] {{732603839}}#1802:☊[Expression/510873326][call: 1][loop: 1][call: 7][loop: 0] -> []
+    [ ] {{732823181}}#2823:[call: 6][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {{1606539702}}#2819:[call: 8][loop: 2]
+      [1] "Writable" -> true
+      [2] "Enumerable" -> false
+      [3] "Configurable" -> false
+    }
+    [ ] {{733495227}}#658:☊[Initializer/1722868231][call: 3][loop: 1][call: 12][loop: 0] -> []
+    [ ] {{734547689}}#2819:[call: 8][loop: 2] -> ECMAScriptFunctionObject {
+      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
+      [1] "Delete" -> λ(OrdinaryObject.Delete)
+      [2] "Get" -> λ(OrdinaryObject.Get)
+      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
+      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
+      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
+      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
+      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
+      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
+      [9] "Set" -> λ(OrdinaryObject.Set)
+      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
+      [11] "SubMap" -> {{-1896342371}}{{734547689}}#2819:[call: 8][loop: 2]:SubMap
       [12] "Prototype" -> {{266749428}}#GLOBAL.Function.prototype
       [13] "Extensible" -> true
       [14] "Environment" -> {~normal~ -> ({{-1394450300}}#2981:[call: 3][loop: 0], ~empty~)}
-      [15] "FormalParameters" -> ☊[FormalParameters]() @ 0x2bdab835
-      [16] "ECMAScriptCode" -> ☊[FunctionBody](const o...) @ 0x1002d192
+      [15] "FormalParameters" -> ☊[FormalParameters]() @ 0x5be4be74
+      [16] "ECMAScriptCode" -> ☊[FunctionBody](const o...) @ 0x7bede4ea
       [17] "ConstructorKind" -> ~base~
       [18] "Realm" -> {{-572624684}}#REALM
       [19] "ScriptOrModule" -> {~normal~ -> ({{-1204254822}}#3110:[call: 2][loop: 1], ~empty~)}
@@ -1067,435 +1444,44 @@
       [25] "Call" -> λ(ECMAScriptFunctionObject.Call)
       [26] "Construct" -> λ(ECMAScriptFunctionObject.Construct)
     }
-    [ ] {{1669699976}}#582:☊[Expression/1022713356][call: 1][loop: 1][call: 13][loop: 0] -> ["obj3"]
-    [ ] {{1684386646}}#3088:☊[Initializer/2036295297][call: 2][loop: 1][call: 10][loop: 0] -> ["Prototype", "Extensible", "GeneratorState", "GeneratorContext", "GeneratorBrand"]
-    [ ] {{1693656452}}#1100:☊[Initializer/2036295297][call: 2][loop: 1][call: 10][loop: 1] -> PropertyDescriptor {
-      [0] "Value" -> "z"
+    [ ] {{746683084}}#3086:☊[Initializer/1722868231][call: 2][loop: 1][call: 15][loop: 0] -> PropertyDescriptor {
+      [0] "Value" -> "x"
       [1] "Writable" -> true
       [2] "Enumerable" -> true
       [3] "Configurable" -> true
     }
-    [ ] {{1703679150}}#3489:☊[Expression/1022713356][call: 1][loop: 1][call: 10][loop: 0] -> [☊[Declaration](const o...) @ 0x53cb0bcb]
-    [ ] {{1706566019}}#2558:[call: 4][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1624244029}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> false
-    }
-    [ ] {{1741368708}}#2819:☊[Expression/1022713356][call: 1][loop: 1][call: 11][loop: 0] -> OrdinaryObject {
-      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
-      [1] "Delete" -> λ(OrdinaryObject.Delete)
-      [2] "Get" -> λ(OrdinaryObject.Get)
-      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
-      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
-      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
-      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
-      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
-      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
-      [9] "Set" -> λ(OrdinaryObject.Set)
-      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
-      [11] "SubMap" -> {{2093745342}}{{1741368708}}#2819:☊[Expression/1022713356][call: 1][loop: 1][call: 11][loop: 0]:SubMap
-      [12] "Prototype" -> {{802063200}}#GLOBAL.IteratorPrototype
-      [13] "Extensible" -> true
-      [14] "GeneratorState" -> ~suspendedStart~
-      [15] "GeneratorContext" -> {{1916050812}}#3169:☊[Expression/1022713356][call: 1][loop: 1][call: 4][loop: 0]
-      [16] "GeneratorBrand" -> ~empty~
-    }
-    [ ] {{1754125319}}#2819:☊[Initializer/1686232293][call: 2][loop: 1][call: 15][loop: 1] -> OrdinaryObject {
-      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
-      [1] "Delete" -> λ(OrdinaryObject.Delete)
-      [2] "Get" -> λ(OrdinaryObject.Get)
-      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
-      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
-      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
-      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
-      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
-      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
-      [9] "Set" -> λ(OrdinaryObject.Set)
-      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
-      [11] "SubMap" -> {{-272872357}}{{1754125319}}#2819:☊[Initializer/1686232293][call: 2][loop: 1][call: 15][loop: 1]:SubMap
-      [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
-      [13] "Extensible" -> true
-    }
-    [ ] {{1767895838}}#3779:☊[Initializer/2036295297][call: 2][loop: 1][call: 12][loop: 0] -> DataProperty {
-      [0] "Value" -> 2i
-      [1] "Writable" -> true
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
-    }
-    [ ] {{1771311033}}#2491:☊[MemberExpression/1164442411][call: 0][loop: 1][call: 2][loop: 0] -> ReferenceRecord {
-      [0] "Base" -> {~normal~ -> ({{-1394450300}}#2981:[call: 3][loop: 0], ~empty~)}
-      [1] "ReferencedName" -> {~normal~ -> ("main", ~empty~)}
-      [2] "Strict" -> true
-      [3] "ThisValue" -> ~empty~
-    }
-    [ ] {{1788195656}}{{-194756375}}#2819:☊[Initializer/1686232293][call: 2][loop: 1][call: 11][loop: 0]:SubMap -> SubMap {}
-    [ ] {{1804041488}}#3086:[call: 9][loop: 0] -> PropertyDescriptor {
-      [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
-      [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
-    }
-    [ ] {{1804972473}}{{1255686456}}#2819:☊[Initializer/1686232293][call: 2][loop: 1][call: 15][loop: 1]:SubMap -> SubMap {
-      [0] "value" -> {{-1479352574}}#3779:☊[Initializer/1686232293][call: 2][loop: 1][call: 18][loop: 1]
-      [1] "done" -> {{-796298280}}#3779:☊[Initializer/1686232293][call: 2][loop: 1][call: 18][loop: 1]
-    }
-    [ ] {{183524208}}{{-1480555934}}#2819:[call: 8][loop: 2]:SubMap -> SubMap {
-      [0] "constructor" -> {{-1035275694}}#3779:[call: 10][loop: 2]
-    }
-    [ ] {{1869384391}}#1121:☊[Expression/1022713356][call: 1][loop: 1][call: 8][loop: 0] -> Record {
-      [0] "Iterator" -> {{1741368708}}#2819:☊[Expression/1022713356][call: 1][loop: 1][call: 11][loop: 0]
-      [1] "NextMethod" -> {{-41776461}}#GLOBAL.Generator.prototype.next
-      [2] "Done" -> false
-    }
-    [ ] {{1871732589}}#1144:☊[Initializer/2036295297][call: 2][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> {{296244539}}#GLOBAL.Array.prototype.values
-      [1] "Writable" -> true
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
-    }
-    [ ] {{1875012535}}#1100:☊[Expression/1655750533][call: 2][loop: 1][call: 5][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> 3.0
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{1884098992}}#3084:[call: 6][loop: 2] -> ["Environment", "FormalParameters", "ECMAScriptCode", "ConstructorKind", "Realm", "ScriptOrModule", "ThisMode", "Strict", "HomeObject", "SourceText", "IsClassConstructor"]
-    [ ] {{1890827868}}{{1998408796}}#2978:☊[Expression/1022713356][call: 1][loop: 1][call: 5][loop: 0]:SubMap -> SubMap {
-      [0] "arguments" -> {{-2015839820}}#1165:☊[Expression/1022713356][call: 1][loop: 1][call: 8][loop: 0]
-      [1] "obj1" -> {{-1511557876}}#1165:☊[Expression/1022713356][call: 1][loop: 1][call: 8][loop: 2]
-      [2] "obj2" -> {{-997435389}}#1165:☊[Expression/1022713356][call: 1][loop: 1][call: 8][loop: 2]
-      [3] "obj3" -> {{571975028}}#1165:☊[Expression/1022713356][call: 1][loop: 1][call: 8][loop: 2]
-    }
-    [ ] {{1907209741}}{{-912899472}}#2819:☊[Expression/1655750533][call: 2][loop: 1][call: 2][loop: 0]:SubMap -> SubMap {
-      [0] "y" -> {{-282189951}}#3779:☊[Expression/1655750533][call: 2][loop: 1][call: 8][loop: 0]
-    }
-    [ ] {{1916050812}}#3169:☊[Expression/1022713356][call: 1][loop: 1][call: 4][loop: 0] -> ExecutionContext {
-      [0] "Function" -> {{1624244029}}#2819:[call: 8][loop: 2]
-      [1] "Realm" -> {{-572624684}}#REALM
-      [2] "ScriptOrModule" -> {~normal~ -> ({{-1204254822}}#3110:[call: 2][loop: 1], ~empty~)}
-      [3] "LexicalEnvironment" -> {~normal~ -> ({{1998408796}}#2978:☊[Expression/1022713356][call: 1][loop: 1][call: 5][loop: 0], ~empty~)}
-      [4] "VariableEnvironment" -> {~normal~ -> ({{1998408796}}#2978:☊[Expression/1022713356][call: 1][loop: 1][call: 5][loop: 0], ~empty~)}
-      [5] "Generator" -> {{1741368708}}#2819:☊[Expression/1022713356][call: 1][loop: 1][call: 11][loop: 0]
-      [6] "ResumeCont" -> () [=>] ☊[Expression/1022713356][call(1): ☊[Expression/1022713356]][loop: Loop[25926](0)][call(10): IApp(GeneratorStart), IApp(CreateIteratorFromClosure), IApp(CreateListIteratorRecord), IApp(FunctionDeclarationInstantiation), IAccess(FunctionBody."EvaluateFunctionBody"), IAccess(F.ECMAScriptCode."EvaluateBody"), IApp(OrdinaryCallEvaluateBody), IApp(F.Call), IApp(Call), IApp(EvaluateCall)][loop: ]:Entry[19164]
-    }
-    [ ] {{195136523}}#20:☊[Initializer/2036295297][call: 1][loop: 1][call: 3][loop: 0] -> ["x", "z"]
-    [ ] {{1970154461}}#582:☊[Initializer/2036295297][call: 2][loop: 1][call: 10][loop: 0] -> ["key2"]
-    [ ] {{197499568}}#3488:[call: 7][loop: 1] -> []
-    [ ] {{1989194515}}#3086:[call: 9][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1359140605}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> false
-    }
-    [ ] {{1998408796}}#2978:☊[Expression/1022713356][call: 1][loop: 1][call: 5][loop: 0] -> FunctionEnvironmentRecord {
-      [0] "BindThisValue" -> λ(FunctionEnvironmentRecord.BindThisValue)
-      [1] "CreateImmutableBinding" -> λ(DeclarativeEnvironmentRecord.CreateImmutableBinding)
-      [2] "CreateMutableBinding" -> λ(DeclarativeEnvironmentRecord.CreateMutableBinding)
-      [3] "DeleteBinding" -> λ(DeclarativeEnvironmentRecord.DeleteBinding)
-      [4] "GetBindingValue" -> λ(DeclarativeEnvironmentRecord.GetBindingValue)
-      [5] "GetSuperBase" -> λ(FunctionEnvironmentRecord.GetSuperBase)
-      [6] "GetThisBinding" -> λ(FunctionEnvironmentRecord.GetThisBinding)
-      [7] "HasBinding" -> λ(DeclarativeEnvironmentRecord.HasBinding)
-      [8] "HasSuperBinding" -> λ(FunctionEnvironmentRecord.HasSuperBinding)
-      [9] "HasThisBinding" -> λ(FunctionEnvironmentRecord.HasThisBinding)
-      [10] "InitializeBinding" -> λ(DeclarativeEnvironmentRecord.InitializeBinding)
-      [11] "SetMutableBinding" -> λ(DeclarativeEnvironmentRecord.SetMutableBinding)
-      [12] "WithBaseObject" -> λ(DeclarativeEnvironmentRecord.WithBaseObject)
-      [13] "SubMap" -> {{1890827868}}{{1998408796}}#2978:☊[Expression/1022713356][call: 1][loop: 1][call: 5][loop: 0]:SubMap
-      [14] "FunctionObject" -> {{1624244029}}#2819:[call: 8][loop: 2]
-      [15] "ThisBindingStatus" -> ~initialized~
-      [16] "NewTarget" -> undefined
-      [17] "OuterEnv" -> {~normal~ -> ({{-1394450300}}#2981:[call: 3][loop: 0], ~empty~)}
-      [18] "ThisValue" -> {~normal~ -> (undefined, ~empty~)}
-    }
-    [ ] {{200638325}}#3488:[call: 7][loop: 1] -> []
-    [ ] {{2016372337}}#582:[call: 9][loop: 1] -> ["main"]
-    [ ] {{2027874179}}#3086:☊[Initializer/2036295297][call: 1][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1359140605}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> false
-    }
-    [ ] {{2045914360}}#582:☊[Expression/1022713356][call: 1][loop: 1][call: 10][loop: 1] -> ["obj1"]
-    [ ] {{2093745342}}{{1741368708}}#2819:☊[Expression/1022713356][call: 1][loop: 1][call: 11][loop: 0]:SubMap -> SubMap {}
-    [ ] {{2106975833}}#1100:☊[Initializer/1686232293][call: 2][loop: 1][call: 15][loop: 1] -> PropertyDescriptor {
+    [ ] {{7582096}}#1100:☊[Initializer/903663666][call: 2][loop: 1][call: 10][loop: 1] -> PropertyDescriptor {
       [0] "Value" -> "y"
       [1] "Writable" -> true
       [2] "Enumerable" -> true
       [3] "Configurable" -> true
     }
-    [ ] {{2131102505}}#1143:☊[Initializer/1686232293][call: 2][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> 2i
+    [ ] {{767572977}}#3498:☊[Expression/510873326][call: 1][loop: 1][call: 11][loop: 0] -> []
+    [ ] {{770190318}}#2822:[call: 6][loop: 2] -> PropertyDescriptor {
+      [0] "Value" -> {~normal~ -> ({{734547689}}#2819:[call: 8][loop: 2], ~empty~)}
       [1] "Writable" -> true
       [2] "Enumerable" -> false
       [3] "Configurable" -> true
     }
-    [ ] {{2136252216}}#1817:☊[Initializer/2036295297][call: 2][loop: 1][call: 7][loop: 0] -> ["key1", "key2", "arguments"]
-    [ ] {{2146601743}}#3498:☊[Expression/1022713356][call: 1][loop: 1][call: 11][loop: 0] -> []
-    [ ] {{224075541}}#2819:☊[Initializer/2036295297][call: 2][loop: 1][call: 15][loop: 1] -> OrdinaryObject {
-      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
-      [1] "Delete" -> λ(OrdinaryObject.Delete)
-      [2] "Get" -> λ(OrdinaryObject.Get)
-      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
-      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
-      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
-      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
-      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
-      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
-      [9] "Set" -> λ(OrdinaryObject.Set)
-      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
-      [11] "SubMap" -> {{87744402}}{{224075541}}#2819:☊[Initializer/2036295297][call: 2][loop: 1][call: 15][loop: 1]:SubMap
-      [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
-      [13] "Extensible" -> true
-    }
-    [ ] {{251248819}}#3084:[call: 6][loop: 2] -> ["Environment", "FormalParameters", "ECMAScriptCode", "ConstructorKind", "Realm", "ScriptOrModule", "ThisMode", "Strict", "HomeObject", "SourceText", "IsClassConstructor"]
-    [ ] {{255680610}}#3779:☊[Expression/1655750533][call: 2][loop: 1][call: 8][loop: 0] -> DataProperty {
-      [0] "Value" -> 9.0
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{258942853}}#582:[call: 9][loop: 1] -> ["makeObject", "main"]
-    [ ] {{267194983}}#3498:☊[Expression/1022713356][call: 1][loop: 1][call: 10][loop: 0] -> []
-    [ ] {{273449226}}#1142:☊[Initializer/2036295297][call: 2][loop: 1][call: 8][loop: 0] -> ["ParameterMap"]
-    [ ] {{302861842}}#3489:☊[Expression/1022713356][call: 1][loop: 1][call: 11][loop: 0] -> [☊[Declaration](const o...) @ 0x06e807e2, ☊[Declaration](const o...) @ 0x41a16eb3, ☊[Declaration](const o...) @ 0x53cb0bcb]
-    [ ] {{312591061}}#1803:☊[Initializer/2036295297][call: 2][loop: 1][call: 7][loop: 0] -> []
-    [ ] {{31719789}}#2491:☊[Initializer/2036295297][call: 2][loop: 1][call: 11][loop: 0] -> ReferenceRecord {
-      [0] "Base" -> {~normal~ -> ({{68671446}}#2978:☊[Initializer/2036295297][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
-      [1] "ReferencedName" -> {~normal~ -> ("key2", ~empty~)}
-      [2] "Strict" -> true
-      [3] "ThisValue" -> ~empty~
-    }
-    [ ] {{334231597}}#3780:☊[Initializer/1686232293][call: 2][loop: 1][call: 12][loop: 0] -> AccessorProperty {
-      [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
-      [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> false
-    }
-    [ ] {{342117589}}#3086:☊[Initializer/2036295297][call: 2][loop: 1][call: 16][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> false
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{342169945}}#1145:☊[Initializer/1686232293][call: 2][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
-      [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
-      [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> false
-    }
-    [ ] {{355871856}}{{689232984}}#2819:☊[Initializer/1686232293][call: 2][loop: 1][call: 10][loop: 0]:SubMap -> SubMap {
-      [0] "length" -> {{1382533495}}#3779:☊[Initializer/1686232293][call: 2][loop: 1][call: 12][loop: 0]
-      [1] "0" -> {{-109030448}}#3779:☊[Initializer/1686232293][call: 2][loop: 1][call: 13][loop: 1]
-      [2] "1" -> {{-1337710481}}#3779:☊[Initializer/1686232293][call: 2][loop: 1][call: 13][loop: 1]
-      [3] {{-1717161388}}#GLOBAL.Symbol.iterator -> {{1164682329}}#3779:☊[Initializer/1686232293][call: 2][loop: 1][call: 12][loop: 0]
-      [4] "callee" -> {{334231597}}#3780:☊[Initializer/1686232293][call: 2][loop: 1][call: 12][loop: 0]
-    }
-    [ ] {{366720297}}#3086:[call: 9][loop: 0] -> PropertyDescriptor {
-      [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
-      [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
-    }
-    [ ] {{376236105}}#3469:☊[Initializer/1686232293][call: 2][loop: 1][call: 9][loop: 0] -> []
-    [ ] {{382440409}}#3493:☊[Expression/1022713356][call: 1][loop: 1][call: 10][loop: 0] -> []
-    [ ] {{404572958}}#3086:☊[Expression/1022713356][call: 0][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1624244029}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> false
-    }
-    [ ] {{417727667}}#3086:[call: 10][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> ({{1624244029}}#2819:[call: 8][loop: 2], ~empty~)}
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> false
-    }
-    [ ] {{429910139}}#2491:☊[BindingList/1821989981][call: 1][loop: 1][call: 2][loop: 0] -> ReferenceRecord {
-      [0] "Base" -> {~normal~ -> ({{1998408796}}#2978:☊[Expression/1022713356][call: 1][loop: 1][call: 5][loop: 0], ~empty~)}
-      [1] "ReferencedName" -> {~normal~ -> ("obj1", ~empty~)}
-      [2] "Strict" -> true
-      [3] "ThisValue" -> ~empty~
-    }
-    [ ] {{44001109}}#2536:[call: 3][loop: 1] -> ["main", "makeObject"]
-    [ ] {{473101799}}#3470:☊[Initializer/1686232293][call: 2][loop: 1][call: 9][loop: 0] -> []
-    [ ] {{473792770}}#2491:☊[MemberExpression/707492405][call: 1][loop: 1][call: 3][loop: 0] -> ReferenceRecord {
-      [0] "Base" -> {~normal~ -> ({{-1394450300}}#2981:[call: 3][loop: 0], ~empty~)}
-      [1] "ReferencedName" -> {~normal~ -> ("makeObject", ~empty~)}
-      [2] "Strict" -> true
-      [3] "ThisValue" -> ~empty~
-    }
-    [ ] {{508954142}}#2491:☊[AssignmentExpression/1090191122][call: 2][loop: 1][call: 2][loop: 0] -> ReferenceRecord {
-      [0] "Base" -> {~normal~ -> ({{-1142727528}}#2978:☊[Initializer/1686232293][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
-      [1] "ReferencedName" -> {~normal~ -> ("key1", ~empty~)}
-      [2] "Strict" -> true
-      [3] "ThisValue" -> ~empty~
-    }
-    [ ] {{514877265}}#3086:☊[Initializer/2036295297][call: 2][loop: 1][call: 15][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> "z"
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{547380776}}#582:☊[Expression/1022713356][call: 1][loop: 1][call: 10][loop: 1] -> ["obj3"]
-    [ ] {{550903271}}#3411:[call: 2][loop: 0] -> ["print", "$262", "globalThis", "Infinity", "NaN", "undefined", "Array", "ArrayBuffer", "BigInt64Array", "BigUint64Array", "Boolean", "DataView", "Date", "Error", "EvalError", "Float32Array", "Float64Array", "Function", "Int8Array", "Int16Array", "Int32Array", "Map", "Number", "BigInt", "Object", "Promise", "Proxy", "RangeError", "ReferenceError", "RegExp", "Set", "SharedArrayBuffer", "String", "Symbol", "SyntaxError", "TypeError", "Uint8Array", "Uint8ClampedArray", "Uint16Array", "Uint32Array", "URIError", "WeakMap", "WeakSet", "Atomics", "JSON", "Math", "Reflect", "HostPrint", "isNaN", "AwaitFulfilledFunctions", "TypedArray", "AsyncGeneratorFunction", "decodeURIComponent", "PromiseRejectFunctions", "encodeURIComponent", "PromiseResolveFunctions", "ThrowTypeError", "GetCapabilitiesExecutorFunctions", "parseFloat", "ArgGetter", "ThenFinallyFunctions", "AsyncGeneratorResumeNextReturnProcessorRejectedFunctions", "GeneratorFunction", "InternalizeJSONProperty", "parseInt", "decodeURI", "AggregateError", "CatchFinallyFunctions", "__ABS__", "isFinite", "FinalizationRegistry", "ProxyRevocationFunctions", "DefaultConstructorFunctions", "encodeURI", "AwaitRejectedFunctions", "CreateDataPropertyOnObjectFunctions", "ArgSetter", "eval", "AsyncGeneratorResumeNextReturnProcessorFulfilledFunctions", "AsyncfromSyncIteratorValueUnwrapFunctions", "IfAbruptRejectPromise"]
-    [ ] {{552282897}}#1144:☊[Expression/1022713356][call: 1][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> {{296244539}}#GLOBAL.Array.prototype.values
-      [1] "Writable" -> true
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
-    }
-    [ ] {{565720343}}#3779:☊[Initializer/2036295297][call: 2][loop: 1][call: 13][loop: 1] -> DataProperty {
-      [0] "Value" -> "z"
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{571975028}}#1165:☊[Expression/1022713356][call: 1][loop: 1][call: 8][loop: 2] -> ImmutableBinding {
-      [0] "initialized" -> false
-      [1] "strict" -> true
-    }
-    [ ] {{589410001}}#3489:☊[Expression/1022713356][call: 1][loop: 1][call: 11][loop: 0] -> [☊[Declaration](const o...) @ 0x41a16eb3]
-    [ ] {{591244168}}#3088:[call: 7][loop: 2] -> ["Prototype", "Extensible", "Environment", "FormalParameters", "ECMAScriptCode", "ConstructorKind", "Realm", "ScriptOrModule", "ThisMode", "Strict", "HomeObject", "SourceText", "IsClassConstructor"]
-    [ ] {{59338655}}#3086:☊[Initializer/1686232293][call: 2][loop: 1][call: 16][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> false
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{595616264}}#3779:[call: 11][loop: 2] -> DataProperty {
-      [0] "Value" -> {~normal~ -> (0i, ~empty~)}
-      [1] "Writable" -> false
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
-    }
-    [ ] {{60092979}}{{-1142727528}}#2978:☊[Initializer/1686232293][call: 2][loop: 1][call: 5][loop: 0]:SubMap -> SubMap {
-      [0] "key1" -> {{-1069327294}}#1166:☊[Initializer/1686232293][call: 2][loop: 1][call: 8][loop: 1]
-      [1] "key2" -> {{1593341024}}#1166:☊[Initializer/1686232293][call: 2][loop: 1][call: 8][loop: 1]
-      [2] "arguments" -> {{-553204433}}#1165:☊[Initializer/1686232293][call: 2][loop: 1][call: 8][loop: 0]
-    }
-    [ ] {{606940745}}#3412:[call: 7][loop: 2] -> PropertyDescriptor {
-      [0] "Value" -> {~normal~ -> (0i, ~empty~)}
-      [1] "Writable" -> false
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> true
-    }
-    [ ] {{615123384}}{{-1822807976}}#2819:☊[Expression/1655750533][call: 2][loop: 1][call: 2][loop: 0]:SubMap -> SubMap {
-      [0] "x" -> {{1496247628}}#3779:☊[Expression/1655750533][call: 2][loop: 1][call: 8][loop: 0]
-      [1] "y" -> {{255680610}}#3779:☊[Expression/1655750533][call: 2][loop: 1][call: 8][loop: 0]
-      [2] "z" -> {{-37748530}}#3779:☊[Expression/1655750533][call: 2][loop: 1][call: 7][loop: 0]
-    }
-    [ ] {{626092254}}#3552:☊[Initializer/2036295297][call: 2][loop: 1][call: 10][loop: 0] -> []
-    [ ] {{671432234}}#2479:☊[Initializer/2036295297][call: 3][loop: 1][call: 15][loop: 0] -> []
-    [ ] {{68671446}}#2978:☊[Initializer/2036295297][call: 2][loop: 1][call: 5][loop: 0] -> FunctionEnvironmentRecord {
-      [0] "BindThisValue" -> λ(FunctionEnvironmentRecord.BindThisValue)
-      [1] "CreateImmutableBinding" -> λ(DeclarativeEnvironmentRecord.CreateImmutableBinding)
-      [2] "CreateMutableBinding" -> λ(DeclarativeEnvironmentRecord.CreateMutableBinding)
-      [3] "DeleteBinding" -> λ(DeclarativeEnvironmentRecord.DeleteBinding)
-      [4] "GetBindingValue" -> λ(DeclarativeEnvironmentRecord.GetBindingValue)
-      [5] "GetSuperBase" -> λ(FunctionEnvironmentRecord.GetSuperBase)
-      [6] "GetThisBinding" -> λ(FunctionEnvironmentRecord.GetThisBinding)
-      [7] "HasBinding" -> λ(DeclarativeEnvironmentRecord.HasBinding)
-      [8] "HasSuperBinding" -> λ(FunctionEnvironmentRecord.HasSuperBinding)
-      [9] "HasThisBinding" -> λ(FunctionEnvironmentRecord.HasThisBinding)
-      [10] "InitializeBinding" -> λ(DeclarativeEnvironmentRecord.InitializeBinding)
-      [11] "SetMutableBinding" -> λ(DeclarativeEnvironmentRecord.SetMutableBinding)
-      [12] "WithBaseObject" -> λ(DeclarativeEnvironmentRecord.WithBaseObject)
-      [13] "SubMap" -> {{-1351623902}}{{68671446}}#2978:☊[Initializer/2036295297][call: 2][loop: 1][call: 5][loop: 0]:SubMap
-      [14] "FunctionObject" -> {{1359140605}}#2819:[call: 8][loop: 2]
-      [15] "ThisBindingStatus" -> ~initialized~
-      [16] "NewTarget" -> undefined
-      [17] "OuterEnv" -> {~normal~ -> ({{-1394450300}}#2981:[call: 3][loop: 0], ~empty~)}
-      [18] "ThisValue" -> {~normal~ -> (undefined, ~empty~)}
-    }
-    [ ] {{689232984}}#2819:☊[Initializer/1686232293][call: 2][loop: 1][call: 10][loop: 0] -> OrdinaryObject {
-      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
-      [1] "Delete" -> λ(OrdinaryObject.Delete)
-      [2] "Get" -> λ(OrdinaryObject.Get)
-      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
-      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
-      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
-      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
-      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
-      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
-      [9] "Set" -> λ(OrdinaryObject.Set)
-      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
-      [11] "SubMap" -> {{355871856}}{{689232984}}#2819:☊[Initializer/1686232293][call: 2][loop: 1][call: 10][loop: 0]:SubMap
-      [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
-      [13] "Extensible" -> true
-      [14] "ParameterMap" -> undefined
-    }
-    [ ] {{692540892}}#1116:☊[Initializer/2036295297][call: 2][loop: 1][call: 9][loop: 0] -> ["GeneratorState", "GeneratorContext", "GeneratorBrand"]
-    [ ] {{703982698}}#3088:☊[Initializer/2036295297][call: 2][loop: 1][call: 9][loop: 0] -> ["Prototype", "Extensible", "ParameterMap"]
-    [ ] {{706380407}}{{839505632}}#2819:☊[Expression/1022713356][call: 1][loop: 1][call: 10][loop: 0]:SubMap -> SubMap {
-      [0] "length" -> {{1334583125}}#3779:☊[Expression/1022713356][call: 1][loop: 1][call: 12][loop: 0]
-      [1] {{-1717161388}}#GLOBAL.Symbol.iterator -> {{960801330}}#3779:☊[Expression/1022713356][call: 1][loop: 1][call: 12][loop: 0]
-      [2] "callee" -> {{1210732460}}#3780:☊[Expression/1022713356][call: 1][loop: 1][call: 12][loop: 0]
-    }
-    [ ] {{709043656}}#2819:☊[Initializer/2036295297][call: 2][loop: 1][call: 10][loop: 0] -> OrdinaryObject {
-      [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
-      [1] "Delete" -> λ(OrdinaryObject.Delete)
-      [2] "Get" -> λ(OrdinaryObject.Get)
-      [3] "GetOwnProperty" -> λ(OrdinaryObject.GetOwnProperty)
-      [4] "GetPrototypeOf" -> λ(OrdinaryObject.GetPrototypeOf)
-      [5] "HasProperty" -> λ(OrdinaryObject.HasProperty)
-      [6] "IsExtensible" -> λ(OrdinaryObject.IsExtensible)
-      [7] "OwnPropertyKeys" -> λ(OrdinaryObject.OwnPropertyKeys)
-      [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
-      [9] "Set" -> λ(OrdinaryObject.Set)
-      [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
-      [11] "SubMap" -> {{-745979147}}{{709043656}}#2819:☊[Initializer/2036295297][call: 2][loop: 1][call: 10][loop: 0]:SubMap
-      [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
-      [13] "Extensible" -> true
-      [14] "ParameterMap" -> undefined
-    }
-    [ ] {{723846118}}#1100:☊[Initializer/1686232293][call: 2][loop: 1][call: 10][loop: 1] -> PropertyDescriptor {
-      [0] "Value" -> "y"
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{727721361}}#2491:☊[AssignmentExpression/1090191122][call: 2][loop: 1][call: 2][loop: 0] -> ReferenceRecord {
-      [0] "Base" -> {~normal~ -> ({{68671446}}#2978:☊[Initializer/2036295297][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
-      [1] "ReferencedName" -> {~normal~ -> ("key1", ~empty~)}
-      [2] "Strict" -> true
-      [3] "ThisValue" -> ~empty~
-    }
-    [ ] {{763948020}}#3086:☊[Initializer/1686232293][call: 2][loop: 1][call: 15][loop: 0] -> PropertyDescriptor {
-      [0] "Value" -> "z"
-      [1] "Writable" -> true
-      [2] "Enumerable" -> true
-      [3] "Configurable" -> true
-    }
-    [ ] {{775952367}}#3553:☊[Initializer/1686232293][call: 2][loop: 1][call: 10][loop: 0] -> []
-    [ ] {{779196986}}#3780:☊[Initializer/2036295297][call: 2][loop: 1][call: 12][loop: 0] -> AccessorProperty {
-      [0] "Get" -> {{1076326900}}#GLOBAL.ThrowTypeError
-      [1] "Set" -> {{1076326900}}#GLOBAL.ThrowTypeError
-      [2] "Enumerable" -> false
-      [3] "Configurable" -> false
-    }
-    [ ] {{780438941}}#3169:☊[Initializer/2036295297][call: 2][loop: 1][call: 4][loop: 0] -> ExecutionContext {
-      [0] "Function" -> {{1359140605}}#2819:[call: 8][loop: 2]
-      [1] "Realm" -> {{-572624684}}#REALM
-      [2] "ScriptOrModule" -> {~normal~ -> ({{-1204254822}}#3110:[call: 2][loop: 1], ~empty~)}
-      [3] "LexicalEnvironment" -> {~normal~ -> ({{68671446}}#2978:☊[Initializer/2036295297][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
-      [4] "VariableEnvironment" -> {~normal~ -> ({{68671446}}#2978:☊[Initializer/2036295297][call: 2][loop: 1][call: 5][loop: 0], ~empty~)}
-      [5] "Generator" -> {{-534815878}}#2819:☊[Initializer/2036295297][call: 2][loop: 1][call: 11][loop: 0]
-      [6] "ResumeCont" -> (resumptionValue) [=>] ☊[Initializer/2036295297][call(2): ☊[Initializer/2036295297], ☊[Expression/1022713356]][loop: Loop[25926](0)][call(13): IApp(GeneratorYield), IApp(Yield), IApp(generatorBody), IApp(GeneratorStart), IApp(CreateIteratorFromClosure), IApp(CreateListIteratorRecord), IApp(FunctionDeclarationInstantiation), IAccess(FunctionBody."EvaluateFunctionBody"), IAccess(F.ECMAScriptCode."EvaluateBody"), IApp(OrdinaryCallEvaluateBody), IApp(F.Call), IApp(Call), IApp(EvaluateCall)][loop: Loop[6948](1)]:Entry[19206]
-      [7] "ReturnCont" -> {{671432234}}#2479:☊[Initializer/2036295297][call: 3][loop: 1][call: 15][loop: 0]
-    }
-    [ ] {{785669211}}#1142:☊[Initializer/1686232293][call: 2][loop: 1][call: 8][loop: 0] -> ["ParameterMap"]
-    [ ] {{797924778}}#1100:☊[Expression/1655750533][call: 2][loop: 1][call: 5][loop: 0] -> PropertyDescriptor {
+    [ ] {{82347196}}#3488:[call: 7][loop: 1] -> []
+    [ ] {{827792842}}#3086:☊[Expression/431966204][call: 2][loop: 1][call: 9][loop: 0] -> PropertyDescriptor {
       [0] "Value" -> 3.0
       [1] "Writable" -> true
       [2] "Enumerable" -> true
       [3] "Configurable" -> true
     }
-    [ ] {{837747378}}{{1082500274}}#2819:[call: 8][loop: 2]:SubMap -> SubMap {
-      [0] "constructor" -> {{-1070667548}}#3779:[call: 10][loop: 2]
+    [ ] {{839849816}}#3779:☊[Initializer/903663666][call: 2][loop: 1][call: 18][loop: 1] -> DataProperty {
+      [0] "Value" -> "z"
+      [1] "Writable" -> true
+      [2] "Enumerable" -> true
+      [3] "Configurable" -> true
     }
-    [ ] {{839505632}}#2819:☊[Expression/1022713356][call: 1][loop: 1][call: 10][loop: 0] -> OrdinaryObject {
+    [ ] {{851098508}}{{1702519098}}#2978:☊[Initializer/903663666][call: 2][loop: 1][call: 5][loop: 0]:SubMap -> SubMap {
+      [0] "key1" -> {{-288084853}}#1166:☊[Initializer/903663666][call: 2][loop: 1][call: 8][loop: 1]
+      [1] "key2" -> {{-1069932302}}#1166:☊[Initializer/903663666][call: 2][loop: 1][call: 8][loop: 1]
+      [2] "arguments" -> {{343693516}}#1165:☊[Initializer/903663666][call: 2][loop: 1][call: 8][loop: 0]
+    }
+    [ ] {{89390415}}#2819:[call: 8][loop: 2] -> ECMAScriptFunctionObject {
       [0] "DefineOwnProperty" -> λ(OrdinaryObject.DefineOwnProperty)
       [1] "Delete" -> λ(OrdinaryObject.Delete)
       [2] "Get" -> λ(OrdinaryObject.Get)
@@ -1507,16 +1493,23 @@
       [8] "PreventExtensions" -> λ(OrdinaryObject.PreventExtensions)
       [9] "Set" -> λ(OrdinaryObject.Set)
       [10] "SetPrototypeOf" -> λ(OrdinaryObject.SetPrototypeOf)
-      [11] "SubMap" -> {{706380407}}{{839505632}}#2819:☊[Expression/1022713356][call: 1][loop: 1][call: 10][loop: 0]:SubMap
-      [12] "Prototype" -> {{513414877}}#GLOBAL.Object.prototype
+      [11] "SubMap" -> {{2143781862}}{{89390415}}#2819:[call: 8][loop: 2]:SubMap
+      [12] "Prototype" -> {{266749428}}#GLOBAL.Function.prototype
       [13] "Extensible" -> true
-      [14] "ParameterMap" -> undefined
+      [14] "Environment" -> {~normal~ -> ({{-1394450300}}#2981:[call: 3][loop: 0], ~empty~)}
+      [15] "FormalParameters" -> ☊[FormalParameters](key1  ,...) @ 0x7523d5a1
+      [16] "ECMAScriptCode" -> ☊[FunctionBody](return ...) @ 0x3ea48c37
+      [17] "ConstructorKind" -> ~base~
+      [18] "Realm" -> {{-572624684}}#REALM
+      [19] "ScriptOrModule" -> {~normal~ -> ({{-1204254822}}#3110:[call: 2][loop: 1], ~empty~)}
+      [20] "ThisMode" -> ~strict~
+      [21] "Strict" -> true
+      [22] "HomeObject" -> undefined
+      [23] "SourceText" -> "function makeObject ( key1  , key2  ) { return { [ key1 ] : 3 , y : 9 , [ key2 ] : 7 } ; }"
+      [24] "IsClassConstructor" -> false
+      [25] "Call" -> λ(ECMAScriptFunctionObject.Call)
+      [26] "Construct" -> λ(ECMAScriptFunctionObject.Construct)
     }
-    [ ] {{87744402}}{{224075541}}#2819:☊[Initializer/2036295297][call: 2][loop: 1][call: 15][loop: 1]:SubMap -> SubMap {
-      [0] "value" -> {{-1017262942}}#3779:☊[Initializer/2036295297][call: 2][loop: 1][call: 18][loop: 1]
-      [1] "done" -> {{115359628}}#3779:☊[Initializer/2036295297][call: 2][loop: 1][call: 18][loop: 1]
-    }
-    [ ] {{88858413}}#582:[call: 5][loop: 2] -> ["makeObject"]
     [ ] {{896924618}}#2979:[call: 3][loop: 0] -> ObjectEnvironmentRecord {
       [0] "CreateMutableBinding" -> λ(ObjectEnvironmentRecord.CreateMutableBinding)
       [1] "DeleteBinding" -> λ(ObjectEnvironmentRecord.DeleteBinding)
@@ -1531,17 +1524,24 @@
       [10] "withEnvironment" -> false
       [11] "SubMap" -> {{988558327}}{{896924618}}#2979:[call: 3][loop: 0]:SubMap
     }
-    [ ] {{929712614}}#20:☊[Initializer/1686232293][call: 1][loop: 1][call: 3][loop: 0] -> ["y", "z"]
-    [ ] {{93070890}}#3088:[call: 7][loop: 2] -> ["Prototype", "Extensible", "Environment", "FormalParameters", "ECMAScriptCode", "ConstructorKind", "Realm", "ScriptOrModule", "ThisMode", "Strict", "HomeObject", "SourceText", "IsClassConstructor"]
-    [ ] {{950145241}}#3469:☊[Initializer/2036295297][call: 2][loop: 1][call: 9][loop: 0] -> []
-    [ ] {{96021480}}#3088:[call: 3][loop: 0] -> ["Prototype", "Extensible"]
-    [ ] {{960801330}}#3779:☊[Expression/1022713356][call: 1][loop: 1][call: 12][loop: 0] -> DataProperty {
+    [ ] {{931703860}}#1144:☊[Expression/510873326][call: 1][loop: 1][call: 8][loop: 0] -> PropertyDescriptor {
       [0] "Value" -> {{296244539}}#GLOBAL.Array.prototype.values
       [1] "Writable" -> true
       [2] "Enumerable" -> false
       [3] "Configurable" -> true
     }
-    [ ] {{966889080}}#3470:☊[Initializer/2036295297][call: 2][loop: 1][call: 9][loop: 0] -> []
+    [ ] {{949962345}}{{1525245983}}#2819:☊[Initializer/903663666][call: 2][loop: 1][call: 10][loop: 0]:SubMap -> SubMap {
+      [0] "length" -> {{-1363743256}}#3779:☊[Initializer/903663666][call: 2][loop: 1][call: 12][loop: 0]
+      [1] "0" -> {{54604841}}#3779:☊[Initializer/903663666][call: 2][loop: 1][call: 13][loop: 1]
+      [2] "1" -> {{151820726}}#3779:☊[Initializer/903663666][call: 2][loop: 1][call: 13][loop: 1]
+      [3] {{-1717161388}}#GLOBAL.Symbol.iterator -> {{-763219366}}#3779:☊[Initializer/903663666][call: 2][loop: 1][call: 12][loop: 0]
+      [4] "callee" -> {{697253647}}#3780:☊[Initializer/903663666][call: 2][loop: 1][call: 12][loop: 0]
+    }
+    [ ] {{955399867}}#1803:☊[Expression/510873326][call: 1][loop: 1][call: 7][loop: 0] -> []
+    [ ] {{96021480}}#3088:[call: 3][loop: 0] -> ["Prototype", "Extensible"]
+    [ ] {{967004271}}#582:☊[Initializer/903663666][call: 2][loop: 1][call: 10][loop: 0] -> ["key1", "key2", "arguments"]
     [ ] {{988558327}}{{896924618}}#2979:[call: 3][loop: 0]:SubMap -> SubMap {}
+    [ ] {{989609253}}#3088:☊[Expression/510873326][call: 1][loop: 1][call: 10][loop: 0] -> ["Prototype", "Extensible", "GeneratorState", "GeneratorContext", "GeneratorBrand"]
+    [ ] {{998657663}}#3088:☊[Initializer/1722868231][call: 2][loop: 1][call: 14][loop: 1] -> ["Prototype", "Extensible"]
   }
 }

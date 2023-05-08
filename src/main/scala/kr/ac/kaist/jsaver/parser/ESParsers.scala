@@ -116,6 +116,13 @@ trait ESParsers extends LAParsers {
     ))("")
   }
 
+  val comment: LAParser[String] = new LAParser(
+    follow => (Skip <~ +follow.parser) ^^ { case s => s },
+    FirstTerms()
+  )
+
+  lazy val PRECOMMENT: LAParser[Option[String]] = MATCH ~> opt(comment)
+
   // parser that supports automatic semicolon insertions
   override def parse[T](p: LAParser[T], in: Reader[Char]): ParseResult[T] = {
     val MAX_ADDITION = 100

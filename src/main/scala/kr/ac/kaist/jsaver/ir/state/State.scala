@@ -141,7 +141,7 @@ case class State(
   def getJSInfo(): (Int, Int, Int, Int) = (context :: ctxtStack).foldLeft((0, 0, -1, -1)) {
     case ((0, 0, -1, -1), cntxt) if cntxt.isAstEvaluation =>
       val ast = cntxt.astOpt.get
-      val Span(start, end) = ast.span
+      val Span(start, end, _) = ast.span
       (start.line, end.line, start.index, end.index)
     case (acc, _) => acc
   }

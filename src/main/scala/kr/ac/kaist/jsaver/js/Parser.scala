@@ -990,15 +990,15 @@ object Parser extends ESParsers {
   lazy val AssignmentExpression: ESParser[AssignmentExpression] = memo(args => {
     val List(pIn, pYield, pAwait) = getArgsN("AssignmentExpression", args, 3)
     log((
-      log(MATCH ~ ConditionalExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ x0 => AssignmentExpression0(x0, args, Span()) })("AssignmentExpression0") |
-      log((if (pYield) MATCH ~ YieldExpression(List(pIn, pAwait)) ^^ { case _ ~ x0 => AssignmentExpression1(x0, args, Span()) } else MISMATCH))("AssignmentExpression1") |
-      log(MATCH ~ ArrowFunction(List(pIn, pYield, pAwait)) ^^ { case _ ~ x0 => AssignmentExpression2(x0, args, Span()) })("AssignmentExpression2") |
-      log(MATCH ~ AsyncArrowFunction(List(pIn, pYield, pAwait)) ^^ { case _ ~ x0 => AssignmentExpression3(x0, args, Span()) })("AssignmentExpression3") |
-      log((MATCH ~ LeftHandSideExpression(List(pYield, pAwait)) <~ t("=")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ x0 ~ x1 => AssignmentExpression4(x0, x1, args, Span()) })("AssignmentExpression4") |
-      log(MATCH ~ LeftHandSideExpression(List(pYield, pAwait)) ~ AssignmentOperator(List()) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ x0 ~ x1 ~ x2 => AssignmentExpression5(x0, x1, x2, args, Span()) })("AssignmentExpression5") |
-      log((MATCH ~ LeftHandSideExpression(List(pYield, pAwait)) <~ t("&&=")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ x0 ~ x1 => AssignmentExpression6(x0, x1, args, Span()) })("AssignmentExpression6") |
-      log((MATCH ~ LeftHandSideExpression(List(pYield, pAwait)) <~ t("||=")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ x0 ~ x1 => AssignmentExpression7(x0, x1, args, Span()) })("AssignmentExpression7") |
-      log((MATCH ~ LeftHandSideExpression(List(pYield, pAwait)) <~ t("??=")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ x0 ~ x1 => AssignmentExpression8(x0, x1, args, Span()) })("AssignmentExpression8")
+      log(PRECOMMENT ~ ConditionalExpression(List(pIn, pYield, pAwait)) ^^ { case c ~ x0 => AssignmentExpression0(x0, args, Span(rawPreComment = c)) })("AssignmentExpression0") |
+      log((if (pYield) PRECOMMENT ~ YieldExpression(List(pIn, pAwait)) ^^ { case c ~ x0 => AssignmentExpression1(x0, args, Span(rawPreComment = c)) } else MISMATCH))("AssignmentExpression1") |
+      log(PRECOMMENT ~ ArrowFunction(List(pIn, pYield, pAwait)) ^^ { case c ~ x0 => AssignmentExpression2(x0, args, Span(rawPreComment = c)) })("AssignmentExpression2") |
+      log(PRECOMMENT ~ AsyncArrowFunction(List(pIn, pYield, pAwait)) ^^ { case c ~ x0 => AssignmentExpression3(x0, args, Span(rawPreComment = c)) })("AssignmentExpression3") |
+      log((PRECOMMENT ~ LeftHandSideExpression(List(pYield, pAwait)) <~ t("=")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case c ~ x0 ~ x1 => AssignmentExpression4(x0, x1, args, Span(rawPreComment = c)) })("AssignmentExpression4") |
+      log(PRECOMMENT ~ LeftHandSideExpression(List(pYield, pAwait)) ~ AssignmentOperator(List()) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case c ~ x0 ~ x1 ~ x2 => AssignmentExpression5(x0, x1, x2, args, Span(rawPreComment = c)) })("AssignmentExpression5") |
+      log((PRECOMMENT ~ LeftHandSideExpression(List(pYield, pAwait)) <~ t("&&=")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case c ~ x0 ~ x1 => AssignmentExpression6(x0, x1, args, Span(rawPreComment = c)) })("AssignmentExpression6") |
+      log((PRECOMMENT ~ LeftHandSideExpression(List(pYield, pAwait)) <~ t("||=")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case c ~ x0 ~ x1 => AssignmentExpression7(x0, x1, args, Span(rawPreComment = c)) })("AssignmentExpression7") |
+      log((PRECOMMENT ~ LeftHandSideExpression(List(pYield, pAwait)) <~ t("??=")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case c ~ x0 ~ x1 => AssignmentExpression8(x0, x1, args, Span(rawPreComment = c)) })("AssignmentExpression8")
     ))("AssignmentExpression")
   })
   lazy val AssignmentOperator: ESParser[AssignmentOperator] = memo(args => {
@@ -1168,8 +1168,16 @@ object Parser extends ESParsers {
   lazy val StatementListItem: ESParser[StatementListItem] = memo(args => {
     val List(pYield, pAwait, pReturn) = getArgsN("StatementListItem", args, 3)
     log((
-      log(MATCH ~ Statement(List(pYield, pAwait, pReturn)) ^^ { case _ ~ x0 => StatementListItem0(x0, args, Span()) })("StatementListItem0") |
-      log(MATCH ~ Declaration(List(pYield, pAwait)) ^^ { case _ ~ x0 => StatementListItem1(x0, args, Span()) })("StatementListItem1")
+      log(PRECOMMENT ~ Statement(List(pYield, pAwait, pReturn)) ^^ {
+        case c ~ x0 => {
+          StatementListItem0(x0, args, Span(rawPreComment = c))
+        }
+      })("StatementListItem0") |
+      log(PRECOMMENT ~ Declaration(List(pYield, pAwait)) ^^ {
+        case c ~ x0 => {
+          StatementListItem1(x0, args, Span(rawPreComment = c))
+        }
+      })("StatementListItem1")
     ))("StatementListItem")
   })
   lazy val LexicalDeclaration: ESParser[LexicalDeclaration] = memo(args => {
