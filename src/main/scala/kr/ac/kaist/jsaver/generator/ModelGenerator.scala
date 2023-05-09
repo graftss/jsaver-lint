@@ -18,7 +18,7 @@ case class ModelGenerator(spec: ECMAScript, parser: Boolean) {
   // generate js/ast/*.scala in source code directory
   ASTGenerator(grammar)
 
-  // generate js/Parser.scala in source code directory
+  // generate js/GeneratedParser.scala in source code directory
   if (parser) ParserGenerator(grammar)
 
   // generate js/ASTWalker.scala in source code directory

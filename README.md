@@ -52,7 +52,7 @@ and syntax of JavaScript. For semantics, it compiles abstract algorithms in
 ECMA-262 to corresponding [IR<sub>ES</sub>
 Functions](./src/main/resources/es2021/generated/algorithm/).  For syntax, it
 generates a [JavaScript
-Parser](./src/main/scala/kr/ac/kaist/jsaver/js/Parser.scala) in Scala.
+Parser](src/main/scala/kr/ac/kaist/jsaver/js/GeneratedParser.scala) in Scala.
 
 
 ### Meta-level Static Analysis

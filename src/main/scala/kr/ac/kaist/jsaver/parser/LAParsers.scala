@@ -1,7 +1,10 @@
 package kr.ac.kaist.jsaver.parser
 
+import kr.ac.kaist.jsaver.js.ast.AST
+import kr.ac.kaist.jsaver.util.{ Pos, Span }
 import kr.ac.kaist.jsaver.util.Useful._
 import kr.ac.kaist.jsaver.{ INTERACTIVE, LINE_SEP }
+
 import scala.collection.mutable
 import scala.language.reflectiveCalls
 import scala.util.parsing.input._
@@ -122,6 +125,28 @@ trait LAParsers extends Lexer {
           res
       }
     }, p.first)
+
+  def _log[T](p: LAParser[T])(name: String): LAParser[T] = {
+    new LAParser(follow => Parser { rawIn =>
+      {
+        val in = rawIn.asInstanceOf[EPackratReader[Char]]
+        println(s"pos: ${in.pos}")
+        p(follow, in)
+      }
+    }, p.first)
+  }
+
+  def withSpan[T <: AST](p: LAParser[T]): LAParser[T] = {
+    new LAParser(follow => Parser { rawIn =>
+      val in = rawIn.asInstanceOf[EPackratReader[Char]]
+      val result = p(follow, in)
+      result.map(value => {
+        value.span.start = Pos(in.pos)
+        value.span.end = Pos(result.next.pos)
+        value
+      })
+    }, p.first)
+  }
 
   // logging
   var keepLog: Boolean = true

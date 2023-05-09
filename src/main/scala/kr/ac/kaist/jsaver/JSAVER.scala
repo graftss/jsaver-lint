@@ -113,7 +113,6 @@ object JSAVER {
     app >> "    format: {command} {phase} [>> {phase}]*" >> LINE_SEP
     app >> LINE_SEP
     for (cmd <- commands) {
-      println(s"cmd: ${cmd}")
       app >> "    " >> wrap(cmd.name) >> cmd.help >> LINE_SEP
       app >> "    " >> " " * INDENT >> "(" >> cmd.pList.toString >> ")" >> LINE_SEP
     }

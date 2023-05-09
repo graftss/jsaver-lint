@@ -24,8 +24,9 @@ trait AST {
   def fullList: List[(String, PureValue)]
 
   def preComment: Option[String] = {
-    if (span.preComment.isDefined) span.preComment
-    else parent.flatMap(_.preComment)
+    if (span.preComment.isDefined) {
+      span.preComment
+    } else parent.flatMap(_.preComment)
   }
 
   // Compute the root node of the AST by recursively traveling upwards.
@@ -102,7 +103,7 @@ trait AST {
 
   def toLine(indent: Int = 0, newline: Boolean = true): String = {
     val code = this.toString
-    val maxCodeLen = 75 - indent * 2
+    val maxCodeLen = Math.max(10, 75 - indent * 2)
     val codeLine = if (code.length >= maxCodeLen) {
       code.substring(0, maxCodeLen) + " ..."
     } else {
@@ -110,14 +111,12 @@ trait AST {
     }
 
     val commentStr = preComment.map(pc => s"[${pc}] ").getOrElse("")
-    ("  " * indent) + s"$name ($hashCode): ${commentStr}$codeLine" + (if (newline) "\n" else "")
+    ("  " * indent) + s"$name [${span}] $codeLine" + (if (newline) "\n" else "")
   }
 
   // print the AST node as a tree, with one node printed per line and depth
   // indicated by indentation
   def toTreeString(depth: Int = 0, collapseExpr: Boolean = true): String = {
-    val spaces = "  " * depth
-
     if (kind == "StatementList" && idx == 1) {
       // special case to display StatementList1 as a flat list
       var node = this
@@ -128,7 +127,7 @@ trait AST {
           node.fullList match {
             case (_, ASTVal(nextNode)) :: (_, ASTVal(stmt)) :: _ => {
               // two children means there's another statement before `stmt`
-              result ::= stmt.toTreeString(depth + 1)
+              result ::= stmt.toTreeString(depth + 1, collapseExpr)
               node = nextNode
             }
             case (_, ASTVal(stmt)) :: _ => {
@@ -146,13 +145,13 @@ trait AST {
     } else if (collapseExpr && fullList.length == 1 && kind.contains("Expression")) {
       // collapse expression chains
       fullList.head match {
-        case (_, ASTVal(ast)) => ast.toTreeString(depth)
+        case (_, ASTVal(ast)) => ast.toTreeString(depth, collapseExpr)
         case _ => ""
       }
     } else if (fullList.nonEmpty) {
       // normal AST node with children
       toLine(depth) + fullList.flatMap({
-        case (_, ASTVal(ast)) => List(ast.toTreeString(depth + 1))
+        case (_, ASTVal(ast)) => List(ast.toTreeString(depth + 1, collapseExpr))
         case _ => List()
       }).mkString("\n")
     } else {

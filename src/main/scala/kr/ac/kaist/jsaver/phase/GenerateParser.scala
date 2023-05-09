@@ -13,7 +13,7 @@ case class GenerateParserConfig(
 
 case object GenerateParser extends Phase[Unit, GenerateParserConfig, Unit] {
   override val name: String = "gen-parser"
-  override val help: String = "generate the JS parser as `Parser.scala`"
+  override val help: String = "generate the JS parser as `GeneratedParser.scala`"
 
   override def defaultConfig: GenerateParserConfig = GenerateParserConfig()
 

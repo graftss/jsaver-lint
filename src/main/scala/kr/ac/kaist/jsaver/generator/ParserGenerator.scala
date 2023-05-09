@@ -7,9 +7,13 @@ import kr.ac.kaist.jsaver.util.Useful._
 import kr.ac.kaist.jsaver.util.JvmUseful._
 
 case class ParserGenerator(grammar: Grammar, outPath: Option[String] = None) {
+  private def isPrecommentProd(astKind: String): Boolean =
+    astKind == "StatementListItem" || astKind.contains("Expression") ||
+      astKind.contains("Identifier")
+
   val Grammar(lexProds, prods) = grammar
-  val lexNames = lexProds.map(_.lhs.name).toSet
-  val terminalTokens = prods.foldLeft(Set[String]()) {
+  val lexNames: Set[String] = lexProds.map(_.lhs.name).toSet
+  val terminalTokens: Set[String] = prods.foldLeft(Set[String]()) {
     case (set, Production(lhs, rhsList)) => rhsList.foldLeft(set) {
       case (set, Rhs(tokens, _)) => tokens.foldLeft(set) {
         case (set, Terminal(t)) => set + t
@@ -25,7 +29,7 @@ case class ParserGenerator(grammar: Grammar, outPath: Option[String] = None) {
   )
   val paramMap: Map[String, List[String]] =
     prods.map(prod => prod.lhs.name -> prod.lhs.params).toMap
-  val nf = getPrintWriter(outPath.getOrElse(s"$SRC_DIR/js/Parser.scala"))
+  val nf = getPrintWriter(outPath.getOrElse(s"$SRC_DIR/js/GeneratedParser.scala"))
   generate
   nf.close()
 
@@ -37,9 +41,9 @@ case class ParserGenerator(grammar: Grammar, outPath: Option[String] = None) {
     nf.println(s"""import $PACKAGE_NAME.parser.ESParsers""")
     nf.println(s"""import $PACKAGE_NAME.util.Span""")
     nf.println
-    nf.println(s"""object Parser extends ESParsers {""")
+    nf.println(s"""trait GeneratedParser extends ESParsers {""")
     lexProds.filter(isTargetLexer).foreach(genLexer)
-    prods.foreach(genParser)
+    prods.foreach(genParserWithSpan)
     nf.println(s"""  val TERMINAL: Lexer = (""")
     nf.println(terminalTokens.map(t => {
       if (t == "?.") s"""    "$t" <~ not(DecimalDigit)"""
@@ -63,10 +67,8 @@ case class ParserGenerator(grammar: Grammar, outPath: Option[String] = None) {
     val name = lhs.name
 
     nf.println(s"""  lazy val $name: Lexer = (""")
-    nf.print(rhsList.map {
-      case rhs => s"""    ${rhs.tokens.map(getTokenParser).mkString(" % ")}"""
-    }.mkString(" |||" + LINE_SEP))
-    nf.println
+    nf.print(rhsList.map(rhs => s"""    ${rhs.tokens.map(getTokenParser).mkString(" % ")}""").mkString(" |||" + LINE_SEP))
+    nf.println()
     nf.println(s"""  )""")
   }
 
@@ -107,13 +109,38 @@ case class ParserGenerator(grammar: Grammar, outPath: Option[String] = None) {
     }) + s"""    log($llpre("""
     nf.println(s"""  $pre $name: ESParser$post""")
     nf.print(noLRs.map {
-      case (rhs, i) => genParsers(name, rhs.tokens, rhs.condOpt, i, false)
+      case (rhs, i) => genParsers(name, rhs.tokens, rhs.condOpt, i, false, isPrecommentProd(name))
     }.mkString(" |" + LINE_SEP))
     if (!LRs.isEmpty) nf.print(LRs.map {
-      case (rhs, i) => genParsers(name, rhs.tokens.drop(1), rhs.condOpt, i, true)
+      case (rhs, i) => genParsers(name, rhs.tokens.drop(1), rhs.condOpt, i, true, isPrecommentProd(name))
     }.mkString(LINE_SEP + "    ), (" + LINE_SEP, " |" + LINE_SEP, ""))
     nf.println
     nf.println("    " + (if (LRs.isEmpty) "" else ")") + s"""))("$name")""")
+    nf.println(s"""  })""")
+  }
+
+  private def genParserWithSpan(prod: Production): Unit = {
+    val Production(lhs, rhsList) = prod
+    val Lhs(name, rawParams) = lhs
+    val params = rawParams.map("p" + _)
+
+    val noLRs = rhsList.zipWithIndex.filter { case (rhs, _) => !isLR(name, rhs) }
+    val LRs = rhsList.zipWithIndex.filter { case (rhs, _) => isLR(name, rhs) }
+
+    val pre = "lazy val"
+    val llpre = if (LRs.isEmpty) "" else "resolveLR("
+    val post = s"[$name] = memo(args => {" + LINE_SEP + (if (params.isEmpty) "" else {
+      s"""    val List(${params.mkString(", ")}) = getArgsN("$name", args, ${params.length})""" + LINE_SEP
+    }) + s"""    withSpan($llpre("""
+    nf.println(s"""  $pre $name: ESParser$post""")
+    nf.print(noLRs.map {
+      case (rhs, i) => genParsers(name, rhs.tokens, rhs.condOpt, i, false, isPrecommentProd(name), true)
+    }.mkString(" |" + LINE_SEP))
+    if (!LRs.isEmpty) nf.print(LRs.map {
+      case (rhs, i) => genParsers(name, rhs.tokens.drop(1), rhs.condOpt, i, true, isPrecommentProd(name), false)
+    }.mkString(LINE_SEP + "    ), (" + LINE_SEP, " |" + LINE_SEP, ""))
+    nf.println
+    nf.println("    " + (if (LRs.isEmpty) "" else ")") + s"""))""")
     nf.println(s"""  })""")
   }
 
@@ -122,23 +149,46 @@ case class ParserGenerator(grammar: Grammar, outPath: Option[String] = None) {
     tokens: List[Token],
     condOpt: Option[RhsCond],
     idx: Int,
-    isSub: Boolean
+    isSub: Boolean,
+    isPreComment: Boolean,
+    isWithSpan: Boolean = false
   ): String = {
-    var parser = tokens.foldLeft("MATCH")(appendParser(_, _)) + " ^^ { case "
-    val count = tokens.count(_ match {
+    // count the number of tokens that yield an AST node child
+    val childCount = tokens.count(_ match {
       case (_: NonTerminal) | (_: ButNot) => true
       case _ => false
     })
-    val ids = (0 until count).map("x" + _.toString)
+
+    // generate the ids of AST node children
+    val childIds = (0 until childCount).map("x" + _.toString)
+    // generate the name of the AST node class
     val astName = s"$name$idx"
-    val args = ids ++ List("args", "Span()") // TODO span info
-    parser += s"_${ids.map(" ~ " + _).mkString("")} => " + (if (isSub) {
+
+    val precommentId = "c"
+    val (parserInitStr, parserIds, spanStr) = isPreComment match {
+      case true => {
+        ("MATCH ~ opt(comment)", List(precommentId) ++ childIds, s"Span(rawPreComment=${precommentId})")
+      }
+      case false => {
+        ("MATCH", childIds, "Span()")
+      }
+    }
+
+    var parser = tokens.foldLeft(parserInitStr)(appendParser(_, _)) + " ^^ { case "
+
+    val args = childIds ++ List("args", spanStr) // TODO span info
+    parser += s"_${parserIds.map(" ~ " + _).mkString("")} => " + (if (isSub) {
       s"""((x: $name) => $astName(x, ${args.mkString(", ")})) }"""
     } else {
       s"""$astName(${args.mkString(", ")}) }"""
     })
     condOpt.foreach(cond => parser = s"(if (${cond.getParser}) $parser else MISMATCH)")
-    s"""      log($parser)("$astName")"""
+
+    isWithSpan match {
+      case true => s"""      withSpan($parser)"""
+      case false => s"""      log($parser)("$astName")"""
+    }
+
   }
 
   private def appendParser(base: String, token: Token): String = token match {

@@ -2,7 +2,7 @@ package kr.ac.kaist.jsaver.phase
 
 import kr.ac.kaist.jsaver.{ JSAVERConfig, js }
 import kr.ac.kaist.jsaver.analyzer.AbsSemantics
-import kr.ac.kaist.jsaver.analyzer.lint.{ LintUtil, LintWalker }
+import kr.ac.kaist.jsaver.analyzer.lint.{ LintUtil, LintWalker, ParserTest }
 import kr.ac.kaist.jsaver.js.ASTWalker
 import kr.ac.kaist.jsaver.js
 import kr.ac.kaist.jsaver.js.ast._
@@ -24,7 +24,7 @@ case object LintTest extends Phase[Script, LintConfig, LintTestResult] {
 
     walker.walk(script)
 
-    println(script.toTreeString())
+    println(script.toTreeString(collapseExpr = false))
 
     LintTestResult()
   }
