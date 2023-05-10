@@ -111,7 +111,7 @@ trait AST {
     }
 
     val commentStr = preComment.map(pc => s"[${pc}] ").getOrElse("")
-    ("  " * indent) + s"$name [${span}] $codeLine" + (if (newline) "\n" else "")
+    ("  " * indent) + s"[${span}] $name $commentStr$codeLine" + (if (newline) "\n" else "")
   }
 
   // print the AST node as a tree, with one node printed per line and depth

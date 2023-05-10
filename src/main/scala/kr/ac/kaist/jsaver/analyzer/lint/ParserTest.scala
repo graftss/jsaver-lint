@@ -9,7 +9,6 @@ import scala.util.parsing.combinator.Parsers
 import scala.util.parsing.input.Position
 
 object ParserTest {
-
   def withSpan[T <: AST](p: LAParser[T]): LAParser[T] = {
     new LAParser(follow => Parser { rawIn =>
       val in = rawIn.asInstanceOf[EPackratReader[Char]]
