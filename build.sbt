@@ -21,6 +21,7 @@ Global / onChangedBuildSource := ReloadOnSourceChanges
 lazy val basicTest = taskKey[Unit]("Launch basic analysis tests")
 lazy val test262Test = taskKey[Unit]("Launch Test262 analysis tests")
 lazy val test262BabelTest = taskKey[Unit]("Launch Test262 analysis tests with Babel")
+lazy val lintTest = taskKey[Unit]("Launch lint tests")
 
 // jsaver
 lazy val jsaver = (project in file("."))
@@ -53,4 +54,5 @@ lazy val jsaver = (project in file("."))
     basicTest := (testOnly in Test).toTask(" *.analyzer.BasicTest").value,
     test262Test := (testOnly in Test).toTask(" *.analyzer.Test262Test").value,
     test262BabelTest := (testOnly in Test).toTask(" *.test262.Test262BabelTest").value,
+    lintTest := (testOnly in Test).toTask(" *.analyzer.lint.*").value,
   )

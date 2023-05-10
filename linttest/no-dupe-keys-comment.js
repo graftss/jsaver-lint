@@ -11,5 +11,4 @@ function main() {
     const obj3 = makeObject('x', 'x');
 }
 
-// lint-disable-next-line
 main()
