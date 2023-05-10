@@ -2,8 +2,10 @@ package kr.ac.kaist.jsaver.phase
 
 import kr.ac.kaist.jsaver.{ JSAVERConfig, js }
 import kr.ac.kaist.jsaver.analyzer.AbsSemantics
-import kr.ac.kaist.jsaver.analyzer.lint.{ LintUtil, LintWalker, ParserTest }
-import kr.ac.kaist.jsaver.js.ASTWalker
+import kr.ac.kaist.jsaver.analyzer.lint.DisableNext.{ DisableNextAll, DisableNextRules }
+import kr.ac.kaist.jsaver.analyzer.lint.NamedDecl.NamedClassDecl
+import kr.ac.kaist.jsaver.analyzer.lint.{ LintComment, LintUtil, LintWalker, ParserTest }
+import kr.ac.kaist.jsaver.js.{ ASTWalker, Parser }
 import kr.ac.kaist.jsaver.js
 import kr.ac.kaist.jsaver.js.ast._
 import kr.ac.kaist.jsaver.util.OptionKind
@@ -26,7 +28,31 @@ case object LintTest extends Phase[Script, LintConfig, LintTestResult] {
 
     println(script.toTreeString(collapseExpr = false))
 
+    val commentBody = "  lint-named-decl react-component"
+    val classDecl = Parser.parse(Parser.ClassDeclaration(List(false, false, false)), "class A {}").get
+    val res = LintComment.parse(commentBody, Some(classDecl))
+    println(s"res: ${res}")
+    val expected = NamedClassDecl("react-component")
+    println(s"expected: ${expected}")
+    println(s"eq: ${res.contains(expected)}")
+
+    testComment(
+      "parse comment to name a function declaration",
+      "lint-named-decl react-component",
+      NamedClassDecl("react-component"),
+      Some(classDecl)
+    )
+
     LintTestResult()
+  }
+
+  def testComment(testDesc: String, commentBody: String, expected: LintComment, ast: Option[AST] = None): Unit = {
+    println(s"result: ${LintComment.parse(commentBody, ast)}")
+    LintComment.parse(commentBody, ast) match {
+      case Some(observed) if observed == expected => println("wootles")
+      case Some(lc) => println(s"Parsed incorrect lint comment: ${lc}.")
+      case _ => println(s"Failed to parse lint comment: ${commentBody}")
+    }
   }
 
   override def defaultConfig: LintConfig = LintConfig()
