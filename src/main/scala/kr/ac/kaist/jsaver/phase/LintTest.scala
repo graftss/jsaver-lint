@@ -26,22 +26,7 @@ case object LintTest extends Phase[Script, LintConfig, LintTestResult] {
 
     walker.walk(script)
 
-    println(script.toTreeString(collapseExpr = false))
-
-    val commentBody = "  lint-named-decl react-component"
-    val classDecl = Parser.parse(Parser.ClassDeclaration(List(false, false, false)), "class A {}").get
-    val res = LintComment.parse(commentBody, Some(classDecl))
-    println(s"res: ${res}")
-    val expected = NamedClassDecl("react-component")
-    println(s"expected: ${expected}")
-    println(s"eq: ${res.contains(expected)}")
-
-    testComment(
-      "parse comment to name a function declaration",
-      "lint-named-decl react-component",
-      NamedClassDecl("react-component"),
-      Some(classDecl)
-    )
+    println(script.toTreeString(collapseExpr = true))
 
     LintTestResult()
   }

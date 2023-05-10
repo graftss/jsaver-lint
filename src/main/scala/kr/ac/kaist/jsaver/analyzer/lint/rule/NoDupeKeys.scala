@@ -20,7 +20,7 @@ case class NdkReport(np: NodePoint[Node], st: AbsState, ast: ObjectLiteral, keyA
       println("no-dupe-keys violation:")
       println(s"  ast: ${ast}")
       println(s"  comment: ${ast.preComment}")
-      println(s"  is disable comment: ${ast.preComment.exists(rule.isDisableComment)}")
+      //      println(s"  is disable comment: ${ast.preComment.exists(rule.isDisableComment)}")
     }
 
     val lines = ListBuffer(

@@ -116,8 +116,15 @@ trait ESParsers extends LAParsers {
     ))("")
   }
 
-  val comment: LAParser[Lexical] = new LAParser(
-    follow => (Comment <~ +follow.parser) ^^ { case s => Lexical("Comment", s) },
+  val ws = (WhiteSpace | LineTerminator)*
+
+  val comment: LAParser[List[Lexical]] = new LAParser(
+    follow => (((ws ~> Comment)+) <~ +follow.parser) ^^ {
+      case strs => {
+        println(s"parsed comment: ${strs}")
+        strs.map(str => Lexical("Comment", str.trim))
+      }
+    },
     FirstTerms()
   )
 

@@ -8,7 +8,7 @@ import scala.util.parsing.input.Position
 case class Span(
   var start: Pos = Pos(),
   var end: Pos = Pos(),
-  var rawPreComment: Option[Lexical] = None
+  var rawPreComment: Option[List[Lexical]] = None
 ) {
   if (rawPreComment.isDefined) {
     println(s"creating span with rpc ${rawPreComment}")
@@ -25,8 +25,8 @@ case class Span(
     }
   }
 
-  def preComment: Option[String] = {
-    rawPreComment.flatMap(rpc => parseCommentText(rpc.str))
+  def preComment: Option[List[String]] = {
+    rawPreComment.map(rpc => rpc.map(lex => parseCommentText(lex.str).get))
   }
 
   // conversion to string

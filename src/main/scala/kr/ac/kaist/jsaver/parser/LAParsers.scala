@@ -141,6 +141,7 @@ trait LAParsers extends Lexer {
       val in = rawIn.asInstanceOf[EPackratReader[Char]]
       val result = p(follow, in)
       result.map(value => {
+        // mutate the parsed AST node's `span`
         value.span.start = Pos(in.pos)
         value.span.end = Pos(result.next.pos)
         value

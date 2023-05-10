@@ -23,7 +23,7 @@ trait AST {
   // child AST nodes
   def fullList: List[(String, PureValue)]
 
-  def preComment: Option[String] = {
+  def preComment: Option[List[String]] = {
     if (span.preComment.isDefined) {
       span.preComment
     } else parent.flatMap(_.preComment)
