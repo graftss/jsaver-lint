@@ -3,7 +3,10 @@ package kr.ac.kaist.jsaver.analyzer.lint.comment
 import kr.ac.kaist.jsaver.js.ast.AST
 
 /** The underlying trait for all lint comment metadata. */
-trait LintComment
+trait LintComment {
+  /** Returns `true` if the lint rule named `ruleName` is disabled by this comment. */
+  def disablesRule(ruleName: String): Boolean = false
+}
 
 object LintComment {
   private val kinds = List(

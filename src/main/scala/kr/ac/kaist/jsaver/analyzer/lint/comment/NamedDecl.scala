@@ -2,6 +2,7 @@ package kr.ac.kaist.jsaver.analyzer.lint.comment
 
 import kr.ac.kaist.jsaver.js.ast.AST
 
+/** Tags a function or class declaration with a name that can be referenced by other lint rules. */
 object NamedDecl extends LintCommentImpl {
   override def key: String = "lint-named-decl"
 

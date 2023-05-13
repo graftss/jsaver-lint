@@ -12,10 +12,16 @@ import kr.ac.kaist.jsaver.js.ast.{ AST, Expression }
 
 // Data encoding a single instance of a lint rule violation
 trait LintReport {
-  val rule: LintRule
-  val severity: LintSeverity
-  def disabled: Boolean = false
+  def rule: LintRule
+  def severity: LintSeverity
   def message: String
+
+  /** A list of AST nodes associated with the rule violation, if any. */
+  def astNodes: Option[List[AST]]
+
+  /** A report is automatically disabled if at least one of its associated AST nodes has a comment
+   *  which disables the report's rule. */
+  def disabled: Boolean = astNodes.exists(_.exists(_.stmtLintComments.exists(_.isRuleDisabled(rule))))
 
   override def toString: String = message
 

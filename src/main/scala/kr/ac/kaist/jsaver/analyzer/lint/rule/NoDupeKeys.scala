@@ -9,26 +9,20 @@ import kr.ac.kaist.jsaver.js.ast.{ AST, ObjectLiteral, ObjectLiteral0, ObjectLit
 
 import scala.collection.mutable.ListBuffer
 
-case class NdkReport(np: NodePoint[Node], st: AbsState, ast: ObjectLiteral, keyAst: AST, keyValue: AbsValue, oldValue: AbsValue, newValue: AbsValue) extends LintReport {
+case class NdkReport(np: NodePoint[Node], st: AbsState, objLiteralAst: ObjectLiteral, keyAst: AST, keyValue: AbsValue, oldValue: AbsValue, newValue: AbsValue) extends LintReport {
   override val rule: LintRule = NoDupeKeys
   override val severity: LintSeverity = LintError
 
-  override def disabled: Boolean = ast.lintComment.exists(_.isRuleDisabled(rule))
+  override def astNodes: Option[List[AST]] = Some(List(objLiteralAst, keyAst))
+  override def disabled: Boolean = objLiteralAst.stmtLintComments.exists(_.isRuleDisabled(rule))
 
   override def message: String = {
     val env = execContextEnv(np, st, 0).get
 
-    if (LintReport.LOG) {
-      println("no-dupe-keys violation:")
-      println(s"  ast: ${ast.kind} ${ast}")
-      println(s"  comment: ${ast.lintComment}")
-      //      println(s"  is disable comment: ${ast.preComment.exists(rule.isDisableComment)}")
-    }
-
     val lines = ListBuffer(
       "Defined duplicate key in object literal:",
-      s"  object literal: ${ast}",
-      jsIdValuesStr(st, ast, env, 2),
+      s"  object literal: ${objLiteralAst}",
+      jsIdValuesStr(st, objLiteralAst, env, 2),
       s"  duplicate property: `${keyAst}`",
       s"  key: ${keyValue}",
       s"  old value: ${oldValue}",

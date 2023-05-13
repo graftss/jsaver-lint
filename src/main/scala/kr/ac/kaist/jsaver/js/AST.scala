@@ -5,14 +5,12 @@ import kr.ac.kaist.jsaver.spec.algorithm._
 import kr.ac.kaist.jsaver.ir._
 import kr.ac.kaist.jsaver.error._
 import kr.ac.kaist.jsaver.spec.grammar._
-import kr.ac.kaist.jsaver.util.{Pos, Span, WeakUId}
-import kr.ac.kaist.jsaver.util.Useful.{cached, error}
+import kr.ac.kaist.jsaver.util.{ Pos, Span, WeakUId }
+import kr.ac.kaist.jsaver.util.Useful.{ cached, error }
 import io.circe._
-import io.circe.syntax._
-import kr.ac.kaist.jsaver.analyzer.lint.LintComments
-import kr.ac.kaist.jsaver.analyzer.lint.comment.{LintComment, LintComments}
+import kr.ac.kaist.jsaver.analyzer.lint.comment.{ LintComment, LintComments }
 
-import scala.util.control.Breaks.{break, breakable}
+import scala.util.control.Breaks.{ break, breakable }
 
 trait AST {
   var parent: Option[AST] = None
@@ -25,16 +23,18 @@ trait AST {
   // child AST nodes
   def fullList: List[(String, PureValue)]
 
-  def lintComment: Option[LintComments] = {
+  /** Returns the `LintComments` data on the `StatementListItem` ancestor of this AST node. */
+  def stmtLintComments: Option[LintComments] = {
     if (span.rawPreComment.isDefined) {
       ownLintComments
     } else if (kind != "StatementListItem" && parent.isDefined) {
-      parent.get.lintComment
+      parent.get.stmtLintComments
     } else {
       None
     }
   }
 
+  /** Returns the `LintComments` data on this AST node. */
   def ownLintComments: Option[LintComments] =
     span.rawPreComment.map(lexes => lexes.flatMap(lex => {
       LintComment.parse(lex.str, Some(this))
