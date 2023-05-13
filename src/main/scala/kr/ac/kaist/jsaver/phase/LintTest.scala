@@ -1,11 +1,12 @@
 package kr.ac.kaist.jsaver.phase
 
-import kr.ac.kaist.jsaver.{ JSAVERConfig, js }
+import kr.ac.kaist.jsaver.{JSAVERConfig, js}
 import kr.ac.kaist.jsaver.analyzer.AbsSemantics
-import kr.ac.kaist.jsaver.analyzer.lint.DisableNext.{ DisableNextAll, DisableNextRules }
-import kr.ac.kaist.jsaver.analyzer.lint.NamedDecl.NamedClassDecl
-import kr.ac.kaist.jsaver.analyzer.lint.{ LintComment, LintUtil, LintWalker, ParserTest }
-import kr.ac.kaist.jsaver.js.{ ASTWalker, Parser }
+import kr.ac.kaist.jsaver.analyzer.lint.comment.DisableNext.{DisableNextAll, DisableNextRules}
+import kr.ac.kaist.jsaver.analyzer.lint.comment.LintComment
+import kr.ac.kaist.jsaver.analyzer.lint.comment.NamedDecl.NamedClassDecl
+import kr.ac.kaist.jsaver.analyzer.lint.{LintUtil, LintWalker, ParserTest}
+import kr.ac.kaist.jsaver.js.{ASTWalker, Parser}
 import kr.ac.kaist.jsaver.js
 import kr.ac.kaist.jsaver.js.ast._
 import kr.ac.kaist.jsaver.util.OptionKind

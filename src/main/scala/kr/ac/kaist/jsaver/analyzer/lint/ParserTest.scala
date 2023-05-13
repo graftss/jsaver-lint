@@ -31,8 +31,8 @@ object ParserTest {
   lazy val StatementListItem: ESParser[StatementListItem] = memo(args => {
     val List(pYield, pAwait, pReturn) = getArgsN("StatementListItem", args, 3)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ Statement(List(pYield, pAwait, pReturn)) ^^ { case _ ~ c ~ x0 => StatementListItem0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ Declaration(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => StatementListItem1(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ Statement(List(pYield, pAwait, pReturn)) ^^ { case _ ~ c ~ x0 => StatementListItem0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ Declaration(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => StatementListItem1(x0, args, Span(rawPreComment = c)) })
     ))
   })
 

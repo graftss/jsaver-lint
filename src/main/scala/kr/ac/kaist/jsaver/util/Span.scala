@@ -1,5 +1,6 @@
 package kr.ac.kaist.jsaver.util
 
+import kr.ac.kaist.jsaver.analyzer.lint.comment.LintComment
 import kr.ac.kaist.jsaver.js.ast.Lexical
 
 import scala.util.matching.Regex
@@ -10,24 +11,8 @@ case class Span(
   var end: Pos = Pos(),
   var rawPreComment: Option[List[Lexical]] = None
 ) {
-  if (rawPreComment.isDefined) {
-    println(s"creating span with rpc ${rawPreComment}")
-  }
   // validity check
   def valid: Boolean = start.valid && end.valid
-
-  def parseCommentText(str: String): Option[String] = {
-    // first attempt to parse a single-line comment
-    "//\\s*(.*)".r.findPrefixMatchOf(str) match {
-      case Some(m) => Some(m.group(1))
-      // if that fails, try to parse a multiline comment
-      case None => "/\\*\\s*(.*[^\\s+])\\s*\\*/".r.findPrefixMatchOf(str).map(_.group(1))
-    }
-  }
-
-  def preComment: Option[List[String]] = {
-    rawPreComment.map(rpc => rpc.map(lex => parseCommentText(lex.str).get))
-  }
 
   // conversion to string
   override def toString: String = toString(useIndex = false)

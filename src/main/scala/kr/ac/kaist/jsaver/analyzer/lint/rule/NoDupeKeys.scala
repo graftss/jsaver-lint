@@ -13,13 +13,15 @@ case class NdkReport(np: NodePoint[Node], st: AbsState, ast: ObjectLiteral, keyA
   override val rule: LintRule = NoDupeKeys
   override val severity: LintSeverity = LintError
 
+  override def disabled: Boolean = ast.lintComment.exists(_.isRuleDisabled(rule))
+
   override def message: String = {
     val env = execContextEnv(np, st, 0).get
 
     if (LintReport.LOG) {
       println("no-dupe-keys violation:")
-      println(s"  ast: ${ast}")
-      println(s"  comment: ${ast.preComment}")
+      println(s"  ast: ${ast.kind} ${ast}")
+      println(s"  comment: ${ast.lintComment}")
       //      println(s"  is disable comment: ${ast.preComment.exists(rule.isDisableComment)}")
     }
 

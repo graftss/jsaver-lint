@@ -118,11 +118,20 @@ trait ESParsers extends LAParsers {
 
   val ws = (WhiteSpace | LineTerminator)*
 
-  val comment: LAParser[List[Lexical]] = new LAParser(
+  def parseCommentBody(str: String): Option[String] = {
+    // first attempt to parse a single-line comment
+    "//\\s*(.*)".r.findPrefixMatchOf(str) match {
+      case Some(m) => Some(m.group(1))
+      // if that fails, try to parse a multiline comment
+      case None => "/\\*\\s*(.*[^\\s+])\\s*\\*/".r.findPrefixMatchOf(str).map(_.group(1))
+    }
+  }
+
+  // parse a sequence of comment tokens
+  val comments: LAParser[List[Lexical]] = new LAParser(
     follow => (((ws ~> Comment)+) <~ +follow.parser) ^^ {
-      case strs => {
-        println(s"parsed comment: ${strs}")
-        strs.map(str => Lexical("Comment", str.trim))
+      case commentStrs => {
+        commentStrs.map(str => Lexical("Comment", parseCommentBody(str.trim).get))
       }
     },
     FirstTerms()

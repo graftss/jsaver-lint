@@ -517,66 +517,66 @@ trait GeneratedParser extends ESParsers {
   lazy val IdentifierReference: ESParser[IdentifierReference] = memo(args => {
     val List(pYield, pAwait) = getArgsN("IdentifierReference", args, 2)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ Identifier(List()) ^^ { case _ ~ c ~ x0 => IdentifierReference0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((if (!pYield) (MATCH ~ opt(comment) <~ t("yield")) ^^ { case _ ~ c => IdentifierReference1(args, Span(rawPreComment = c)) } else MISMATCH)) |
-      withSpan((if (!pAwait) (MATCH ~ opt(comment) <~ t("await")) ^^ { case _ ~ c => IdentifierReference2(args, Span(rawPreComment = c)) } else MISMATCH))
+      withSpan(MATCH ~ opt(comments) ~ Identifier(List()) ^^ { case _ ~ c ~ x0 => IdentifierReference0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((if (!pYield) (MATCH ~ opt(comments) <~ t("yield")) ^^ { case _ ~ c => IdentifierReference1(args, Span(rawPreComment = c)) } else MISMATCH)) |
+      withSpan((if (!pAwait) (MATCH ~ opt(comments) <~ t("await")) ^^ { case _ ~ c => IdentifierReference2(args, Span(rawPreComment = c)) } else MISMATCH))
     ))
   })
   lazy val BindingIdentifier: ESParser[BindingIdentifier] = memo(args => {
     val List(pYield, pAwait) = getArgsN("BindingIdentifier", args, 2)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ Identifier(List()) ^^ { case _ ~ c ~ x0 => BindingIdentifier0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) <~ t("yield")) ^^ { case _ ~ c => BindingIdentifier1(args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) <~ t("await")) ^^ { case _ ~ c => BindingIdentifier2(args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ Identifier(List()) ^^ { case _ ~ c ~ x0 => BindingIdentifier0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) <~ t("yield")) ^^ { case _ ~ c => BindingIdentifier1(args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) <~ t("await")) ^^ { case _ ~ c => BindingIdentifier2(args, Span(rawPreComment = c)) })
     ))
   })
   lazy val LabelIdentifier: ESParser[LabelIdentifier] = memo(args => {
     val List(pYield, pAwait) = getArgsN("LabelIdentifier", args, 2)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ Identifier(List()) ^^ { case _ ~ c ~ x0 => LabelIdentifier0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((if (!pYield) (MATCH ~ opt(comment) <~ t("yield")) ^^ { case _ ~ c => LabelIdentifier1(args, Span(rawPreComment = c)) } else MISMATCH)) |
-      withSpan((if (!pAwait) (MATCH ~ opt(comment) <~ t("await")) ^^ { case _ ~ c => LabelIdentifier2(args, Span(rawPreComment = c)) } else MISMATCH))
+      withSpan(MATCH ~ opt(comments) ~ Identifier(List()) ^^ { case _ ~ c ~ x0 => LabelIdentifier0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((if (!pYield) (MATCH ~ opt(comments) <~ t("yield")) ^^ { case _ ~ c => LabelIdentifier1(args, Span(rawPreComment = c)) } else MISMATCH)) |
+      withSpan((if (!pAwait) (MATCH ~ opt(comments) <~ t("await")) ^^ { case _ ~ c => LabelIdentifier2(args, Span(rawPreComment = c)) } else MISMATCH))
     ))
   })
   lazy val Identifier: ESParser[Identifier] = memo(args => {
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ nt("""(IdentifierName \ (ReservedWord))""", (IdentifierName \ (ReservedWord))) ^^ { case _ ~ c ~ x0 => Identifier0(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ nt("""(IdentifierName \ (ReservedWord))""", (IdentifierName \ (ReservedWord))) ^^ { case _ ~ c ~ x0 => Identifier0(x0, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val PrimaryExpression: ESParser[PrimaryExpression] = memo(args => {
     val List(pYield, pAwait) = getArgsN("PrimaryExpression", args, 2)
     withSpan((
-      withSpan((MATCH ~ opt(comment) <~ t("this")) ^^ { case _ ~ c => PrimaryExpression0(args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ IdentifierReference(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => PrimaryExpression1(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ Literal(List()) ^^ { case _ ~ c ~ x0 => PrimaryExpression2(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ ArrayLiteral(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => PrimaryExpression3(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ ObjectLiteral(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => PrimaryExpression4(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ FunctionExpression(List()) ^^ { case _ ~ c ~ x0 => PrimaryExpression5(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ ClassExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => PrimaryExpression6(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ GeneratorExpression(List()) ^^ { case _ ~ c ~ x0 => PrimaryExpression7(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ AsyncFunctionExpression(List()) ^^ { case _ ~ c ~ x0 => PrimaryExpression8(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ AsyncGeneratorExpression(List()) ^^ { case _ ~ c ~ x0 => PrimaryExpression9(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ nt("RegularExpressionLiteral", RegularExpressionLiteral) ^^ { case _ ~ c ~ x0 => PrimaryExpression10(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ TemplateLiteral(List(pYield, pAwait, false)) ^^ { case _ ~ c ~ x0 => PrimaryExpression11(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ CoverParenthesizedExpressionAndArrowParameterList(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => PrimaryExpression12(x0, args, Span(rawPreComment = c)) })
+      withSpan((MATCH ~ opt(comments) <~ t("this")) ^^ { case _ ~ c => PrimaryExpression0(args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ IdentifierReference(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => PrimaryExpression1(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ Literal(List()) ^^ { case _ ~ c ~ x0 => PrimaryExpression2(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ ArrayLiteral(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => PrimaryExpression3(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ ObjectLiteral(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => PrimaryExpression4(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ FunctionExpression(List()) ^^ { case _ ~ c ~ x0 => PrimaryExpression5(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ ClassExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => PrimaryExpression6(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ GeneratorExpression(List()) ^^ { case _ ~ c ~ x0 => PrimaryExpression7(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ AsyncFunctionExpression(List()) ^^ { case _ ~ c ~ x0 => PrimaryExpression8(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ AsyncGeneratorExpression(List()) ^^ { case _ ~ c ~ x0 => PrimaryExpression9(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ nt("RegularExpressionLiteral", RegularExpressionLiteral) ^^ { case _ ~ c ~ x0 => PrimaryExpression10(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ TemplateLiteral(List(pYield, pAwait, false)) ^^ { case _ ~ c ~ x0 => PrimaryExpression11(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ CoverParenthesizedExpressionAndArrowParameterList(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => PrimaryExpression12(x0, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val CoverParenthesizedExpressionAndArrowParameterList: ESParser[CoverParenthesizedExpressionAndArrowParameterList] = memo(args => {
     val List(pYield, pAwait) = getArgsN("CoverParenthesizedExpressionAndArrowParameterList", args, 2)
     withSpan((
-      withSpan(((MATCH ~ opt(comment) <~ t("(")) ~ Expression(List(true, pYield, pAwait)) <~ t(")")) ^^ { case _ ~ c ~ x0 => CoverParenthesizedExpressionAndArrowParameterList0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((((MATCH ~ opt(comment) <~ t("(")) ~ Expression(List(true, pYield, pAwait)) <~ t(",")) <~ t(")")) ^^ { case _ ~ c ~ x0 => CoverParenthesizedExpressionAndArrowParameterList1(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(((MATCH ~ opt(comment) <~ t("(")) <~ t(")")) ^^ { case _ ~ c => CoverParenthesizedExpressionAndArrowParameterList2(args, Span(rawPreComment = c)) }) |
-      withSpan((((MATCH ~ opt(comment) <~ t("(")) <~ t("...")) ~ BindingIdentifier(List(pYield, pAwait)) <~ t(")")) ^^ { case _ ~ c ~ x0 => CoverParenthesizedExpressionAndArrowParameterList3(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((((MATCH ~ opt(comment) <~ t("(")) <~ t("...")) ~ BindingPattern(List(pYield, pAwait)) <~ t(")")) ^^ { case _ ~ c ~ x0 => CoverParenthesizedExpressionAndArrowParameterList4(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(((((MATCH ~ opt(comment) <~ t("(")) ~ Expression(List(true, pYield, pAwait)) <~ t(",")) <~ t("...")) ~ BindingIdentifier(List(pYield, pAwait)) <~ t(")")) ^^ { case _ ~ c ~ x0 ~ x1 => CoverParenthesizedExpressionAndArrowParameterList5(x0, x1, args, Span(rawPreComment = c)) }) |
-      withSpan(((((MATCH ~ opt(comment) <~ t("(")) ~ Expression(List(true, pYield, pAwait)) <~ t(",")) <~ t("...")) ~ BindingPattern(List(pYield, pAwait)) <~ t(")")) ^^ { case _ ~ c ~ x0 ~ x1 => CoverParenthesizedExpressionAndArrowParameterList6(x0, x1, args, Span(rawPreComment = c)) })
+      withSpan(((MATCH ~ opt(comments) <~ t("(")) ~ Expression(List(true, pYield, pAwait)) <~ t(")")) ^^ { case _ ~ c ~ x0 => CoverParenthesizedExpressionAndArrowParameterList0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((((MATCH ~ opt(comments) <~ t("(")) ~ Expression(List(true, pYield, pAwait)) <~ t(",")) <~ t(")")) ^^ { case _ ~ c ~ x0 => CoverParenthesizedExpressionAndArrowParameterList1(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(((MATCH ~ opt(comments) <~ t("(")) <~ t(")")) ^^ { case _ ~ c => CoverParenthesizedExpressionAndArrowParameterList2(args, Span(rawPreComment = c)) }) |
+      withSpan((((MATCH ~ opt(comments) <~ t("(")) <~ t("...")) ~ BindingIdentifier(List(pYield, pAwait)) <~ t(")")) ^^ { case _ ~ c ~ x0 => CoverParenthesizedExpressionAndArrowParameterList3(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((((MATCH ~ opt(comments) <~ t("(")) <~ t("...")) ~ BindingPattern(List(pYield, pAwait)) <~ t(")")) ^^ { case _ ~ c ~ x0 => CoverParenthesizedExpressionAndArrowParameterList4(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(((((MATCH ~ opt(comments) <~ t("(")) ~ Expression(List(true, pYield, pAwait)) <~ t(",")) <~ t("...")) ~ BindingIdentifier(List(pYield, pAwait)) <~ t(")")) ^^ { case _ ~ c ~ x0 ~ x1 => CoverParenthesizedExpressionAndArrowParameterList5(x0, x1, args, Span(rawPreComment = c)) }) |
+      withSpan(((((MATCH ~ opt(comments) <~ t("(")) ~ Expression(List(true, pYield, pAwait)) <~ t(",")) <~ t("...")) ~ BindingPattern(List(pYield, pAwait)) <~ t(")")) ^^ { case _ ~ c ~ x0 ~ x1 => CoverParenthesizedExpressionAndArrowParameterList6(x0, x1, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val ParenthesizedExpression: ESParser[ParenthesizedExpression] = memo(args => {
     val List(pYield, pAwait) = getArgsN("ParenthesizedExpression", args, 2)
     withSpan((
-      withSpan(((MATCH ~ opt(comment) <~ t("(")) ~ Expression(List(true, pYield, pAwait)) <~ t(")")) ^^ { case _ ~ c ~ x0 => ParenthesizedExpression0(x0, args, Span(rawPreComment = c)) })
+      withSpan(((MATCH ~ opt(comments) <~ t("(")) ~ Expression(List(true, pYield, pAwait)) <~ t(")")) ^^ { case _ ~ c ~ x0 => ParenthesizedExpression0(x0, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val Literal: ESParser[Literal] = memo(args => {
@@ -707,14 +707,14 @@ trait GeneratedParser extends ESParsers {
   lazy val MemberExpression: ESParser[MemberExpression] = memo(args => {
     val List(pYield, pAwait) = getArgsN("MemberExpression", args, 2)
     withSpan(resolveLR((
-      withSpan(MATCH ~ opt(comment) ~ PrimaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => MemberExpression0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ SuperProperty(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => MemberExpression4(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ MetaProperty(List()) ^^ { case _ ~ c ~ x0 => MemberExpression5(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) <~ t("new")) ~ MemberExpression(List(pYield, pAwait)) ~ Arguments(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => MemberExpression6(x0, x1, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ PrimaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => MemberExpression0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ SuperProperty(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => MemberExpression4(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ MetaProperty(List()) ^^ { case _ ~ c ~ x0 => MemberExpression5(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) <~ t("new")) ~ MemberExpression(List(pYield, pAwait)) ~ Arguments(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => MemberExpression6(x0, x1, args, Span(rawPreComment = c)) })
     ), (
-      log(((MATCH ~ opt(comment) <~ t("[")) ~ Expression(List(true, pYield, pAwait)) <~ t("]")) ^^ { case _ ~ c ~ x0 => ((x: MemberExpression) => MemberExpression1(x, x0, args, Span(rawPreComment = c))) })("MemberExpression1") |
-      log((MATCH ~ opt(comment) <~ t(".")) ~ nt("IdentifierName", IdentifierName) ^^ { case _ ~ c ~ x0 => ((x: MemberExpression) => MemberExpression2(x, x0, args, Span(rawPreComment = c))) })("MemberExpression2") |
-      log(MATCH ~ opt(comment) ~ TemplateLiteral(List(pYield, pAwait, true)) ^^ { case _ ~ c ~ x0 => ((x: MemberExpression) => MemberExpression3(x, x0, args, Span(rawPreComment = c))) })("MemberExpression3")
+      log(((MATCH ~ opt(comments) <~ t("[")) ~ Expression(List(true, pYield, pAwait)) <~ t("]")) ^^ { case _ ~ c ~ x0 => ((x: MemberExpression) => MemberExpression1(x, x0, args, Span(rawPreComment = c))) })("MemberExpression1") |
+      log((MATCH ~ opt(comments) <~ t(".")) ~ nt("IdentifierName", IdentifierName) ^^ { case _ ~ c ~ x0 => ((x: MemberExpression) => MemberExpression2(x, x0, args, Span(rawPreComment = c))) })("MemberExpression2") |
+      log(MATCH ~ opt(comments) ~ TemplateLiteral(List(pYield, pAwait, true)) ^^ { case _ ~ c ~ x0 => ((x: MemberExpression) => MemberExpression3(x, x0, args, Span(rawPreComment = c))) })("MemberExpression3")
     )))
   })
   lazy val SuperProperty: ESParser[SuperProperty] = memo(args => {
@@ -743,21 +743,21 @@ trait GeneratedParser extends ESParsers {
   lazy val NewExpression: ESParser[NewExpression] = memo(args => {
     val List(pYield, pAwait) = getArgsN("NewExpression", args, 2)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ MemberExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => NewExpression0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) <~ t("new")) ~ NewExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => NewExpression1(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ MemberExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => NewExpression0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) <~ t("new")) ~ NewExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => NewExpression1(x0, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val CallExpression: ESParser[CallExpression] = memo(args => {
     val List(pYield, pAwait) = getArgsN("CallExpression", args, 2)
     withSpan(resolveLR((
-      withSpan(MATCH ~ opt(comment) ~ CoverCallExpressionAndAsyncArrowHead(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => CallExpression0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ SuperCall(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => CallExpression1(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ ImportCall(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => CallExpression2(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ CoverCallExpressionAndAsyncArrowHead(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => CallExpression0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ SuperCall(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => CallExpression1(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ ImportCall(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => CallExpression2(x0, args, Span(rawPreComment = c)) })
     ), (
-      log(MATCH ~ opt(comment) ~ Arguments(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: CallExpression) => CallExpression3(x, x0, args, Span(rawPreComment = c))) })("CallExpression3") |
-      log(((MATCH ~ opt(comment) <~ t("[")) ~ Expression(List(true, pYield, pAwait)) <~ t("]")) ^^ { case _ ~ c ~ x0 => ((x: CallExpression) => CallExpression4(x, x0, args, Span(rawPreComment = c))) })("CallExpression4") |
-      log((MATCH ~ opt(comment) <~ t(".")) ~ nt("IdentifierName", IdentifierName) ^^ { case _ ~ c ~ x0 => ((x: CallExpression) => CallExpression5(x, x0, args, Span(rawPreComment = c))) })("CallExpression5") |
-      log(MATCH ~ opt(comment) ~ TemplateLiteral(List(pYield, pAwait, true)) ^^ { case _ ~ c ~ x0 => ((x: CallExpression) => CallExpression6(x, x0, args, Span(rawPreComment = c))) })("CallExpression6")
+      log(MATCH ~ opt(comments) ~ Arguments(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: CallExpression) => CallExpression3(x, x0, args, Span(rawPreComment = c))) })("CallExpression3") |
+      log(((MATCH ~ opt(comments) <~ t("[")) ~ Expression(List(true, pYield, pAwait)) <~ t("]")) ^^ { case _ ~ c ~ x0 => ((x: CallExpression) => CallExpression4(x, x0, args, Span(rawPreComment = c))) })("CallExpression4") |
+      log((MATCH ~ opt(comments) <~ t(".")) ~ nt("IdentifierName", IdentifierName) ^^ { case _ ~ c ~ x0 => ((x: CallExpression) => CallExpression5(x, x0, args, Span(rawPreComment = c))) })("CallExpression5") |
+      log(MATCH ~ opt(comments) ~ TemplateLiteral(List(pYield, pAwait, true)) ^^ { case _ ~ c ~ x0 => ((x: CallExpression) => CallExpression6(x, x0, args, Span(rawPreComment = c))) })("CallExpression6")
     )))
   })
   lazy val SuperCall: ESParser[SuperCall] = memo(args => {
@@ -793,10 +793,10 @@ trait GeneratedParser extends ESParsers {
   lazy val OptionalExpression: ESParser[OptionalExpression] = memo(args => {
     val List(pYield, pAwait) = getArgsN("OptionalExpression", args, 2)
     withSpan(resolveLR((
-      withSpan(MATCH ~ opt(comment) ~ MemberExpression(List(pYield, pAwait)) ~ OptionalChain(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => OptionalExpression0(x0, x1, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ CallExpression(List(pYield, pAwait)) ~ OptionalChain(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => OptionalExpression1(x0, x1, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ MemberExpression(List(pYield, pAwait)) ~ OptionalChain(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => OptionalExpression0(x0, x1, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ CallExpression(List(pYield, pAwait)) ~ OptionalChain(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => OptionalExpression1(x0, x1, args, Span(rawPreComment = c)) })
     ), (
-      log(MATCH ~ opt(comment) ~ OptionalChain(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: OptionalExpression) => OptionalExpression2(x, x0, args, Span(rawPreComment = c))) })("OptionalExpression2")
+      log(MATCH ~ opt(comments) ~ OptionalChain(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: OptionalExpression) => OptionalExpression2(x, x0, args, Span(rawPreComment = c))) })("OptionalExpression2")
     )))
   })
   lazy val OptionalChain: ESParser[OptionalChain] = memo(args => {
@@ -816,54 +816,54 @@ trait GeneratedParser extends ESParsers {
   lazy val LeftHandSideExpression: ESParser[LeftHandSideExpression] = memo(args => {
     val List(pYield, pAwait) = getArgsN("LeftHandSideExpression", args, 2)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ NewExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => LeftHandSideExpression0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ CallExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => LeftHandSideExpression1(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ OptionalExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => LeftHandSideExpression2(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ NewExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => LeftHandSideExpression0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ CallExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => LeftHandSideExpression1(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ OptionalExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => LeftHandSideExpression2(x0, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val CallMemberExpression: ESParser[CallMemberExpression] = memo(args => {
     val List(pYield, pAwait) = getArgsN("CallMemberExpression", args, 2)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ MemberExpression(List(pYield, pAwait)) ~ Arguments(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => CallMemberExpression0(x0, x1, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ MemberExpression(List(pYield, pAwait)) ~ Arguments(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => CallMemberExpression0(x0, x1, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val UpdateExpression: ESParser[UpdateExpression] = memo(args => {
     val List(pYield, pAwait) = getArgsN("UpdateExpression", args, 2)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ LeftHandSideExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UpdateExpression0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(((MATCH ~ opt(comment) ~ LeftHandSideExpression(List(pYield, pAwait)) <~ NoLineTerminator) <~ t("++")) ^^ { case _ ~ c ~ x0 => UpdateExpression1(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(((MATCH ~ opt(comment) ~ LeftHandSideExpression(List(pYield, pAwait)) <~ NoLineTerminator) <~ t("--")) ^^ { case _ ~ c ~ x0 => UpdateExpression2(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) <~ t("++")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UpdateExpression3(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) <~ t("--")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UpdateExpression4(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ LeftHandSideExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UpdateExpression0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(((MATCH ~ opt(comments) ~ LeftHandSideExpression(List(pYield, pAwait)) <~ NoLineTerminator) <~ t("++")) ^^ { case _ ~ c ~ x0 => UpdateExpression1(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(((MATCH ~ opt(comments) ~ LeftHandSideExpression(List(pYield, pAwait)) <~ NoLineTerminator) <~ t("--")) ^^ { case _ ~ c ~ x0 => UpdateExpression2(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) <~ t("++")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UpdateExpression3(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) <~ t("--")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UpdateExpression4(x0, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val UnaryExpression: ESParser[UnaryExpression] = memo(args => {
     val List(pYield, pAwait) = getArgsN("UnaryExpression", args, 2)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ UpdateExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UnaryExpression0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) <~ t("delete")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UnaryExpression1(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) <~ t("void")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UnaryExpression2(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) <~ t("typeof")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UnaryExpression3(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) <~ t("+")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UnaryExpression4(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) <~ t("-")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UnaryExpression5(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) <~ t("~")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UnaryExpression6(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) <~ t("!")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UnaryExpression7(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((if (pAwait) MATCH ~ opt(comment) ~ AwaitExpression(List(pYield)) ^^ { case _ ~ c ~ x0 => UnaryExpression8(x0, args, Span(rawPreComment = c)) } else MISMATCH))
+      withSpan(MATCH ~ opt(comments) ~ UpdateExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UnaryExpression0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) <~ t("delete")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UnaryExpression1(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) <~ t("void")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UnaryExpression2(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) <~ t("typeof")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UnaryExpression3(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) <~ t("+")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UnaryExpression4(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) <~ t("-")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UnaryExpression5(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) <~ t("~")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UnaryExpression6(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) <~ t("!")) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => UnaryExpression7(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((if (pAwait) MATCH ~ opt(comments) ~ AwaitExpression(List(pYield)) ^^ { case _ ~ c ~ x0 => UnaryExpression8(x0, args, Span(rawPreComment = c)) } else MISMATCH))
     ))
   })
   lazy val ExponentiationExpression: ESParser[ExponentiationExpression] = memo(args => {
     val List(pYield, pAwait) = getArgsN("ExponentiationExpression", args, 2)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ExponentiationExpression0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) ~ UpdateExpression(List(pYield, pAwait)) <~ t("**")) ~ ExponentiationExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => ExponentiationExpression1(x0, x1, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ UnaryExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ExponentiationExpression0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) ~ UpdateExpression(List(pYield, pAwait)) <~ t("**")) ~ ExponentiationExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => ExponentiationExpression1(x0, x1, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val MultiplicativeExpression: ESParser[MultiplicativeExpression] = memo(args => {
     val List(pYield, pAwait) = getArgsN("MultiplicativeExpression", args, 2)
     withSpan(resolveLR((
-      withSpan(MATCH ~ opt(comment) ~ ExponentiationExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => MultiplicativeExpression0(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ ExponentiationExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => MultiplicativeExpression0(x0, args, Span(rawPreComment = c)) })
     ), (
-      log(MATCH ~ opt(comment) ~ MultiplicativeOperator(List()) ~ ExponentiationExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => ((x: MultiplicativeExpression) => MultiplicativeExpression1(x, x0, x1, args, Span(rawPreComment = c))) })("MultiplicativeExpression1")
+      log(MATCH ~ opt(comments) ~ MultiplicativeOperator(List()) ~ ExponentiationExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => ((x: MultiplicativeExpression) => MultiplicativeExpression1(x, x0, x1, args, Span(rawPreComment = c))) })("MultiplicativeExpression1")
     )))
   })
   lazy val MultiplicativeOperator: ESParser[MultiplicativeOperator] = memo(args => {
@@ -876,125 +876,125 @@ trait GeneratedParser extends ESParsers {
   lazy val AdditiveExpression: ESParser[AdditiveExpression] = memo(args => {
     val List(pYield, pAwait) = getArgsN("AdditiveExpression", args, 2)
     withSpan(resolveLR((
-      withSpan(MATCH ~ opt(comment) ~ MultiplicativeExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => AdditiveExpression0(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ MultiplicativeExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => AdditiveExpression0(x0, args, Span(rawPreComment = c)) })
     ), (
-      log((MATCH ~ opt(comment) <~ t("+")) ~ MultiplicativeExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: AdditiveExpression) => AdditiveExpression1(x, x0, args, Span(rawPreComment = c))) })("AdditiveExpression1") |
-      log((MATCH ~ opt(comment) <~ t("-")) ~ MultiplicativeExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: AdditiveExpression) => AdditiveExpression2(x, x0, args, Span(rawPreComment = c))) })("AdditiveExpression2")
+      log((MATCH ~ opt(comments) <~ t("+")) ~ MultiplicativeExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: AdditiveExpression) => AdditiveExpression1(x, x0, args, Span(rawPreComment = c))) })("AdditiveExpression1") |
+      log((MATCH ~ opt(comments) <~ t("-")) ~ MultiplicativeExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: AdditiveExpression) => AdditiveExpression2(x, x0, args, Span(rawPreComment = c))) })("AdditiveExpression2")
     )))
   })
   lazy val ShiftExpression: ESParser[ShiftExpression] = memo(args => {
     val List(pYield, pAwait) = getArgsN("ShiftExpression", args, 2)
     withSpan(resolveLR((
-      withSpan(MATCH ~ opt(comment) ~ AdditiveExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ShiftExpression0(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ AdditiveExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ShiftExpression0(x0, args, Span(rawPreComment = c)) })
     ), (
-      log((MATCH ~ opt(comment) <~ t("<<")) ~ AdditiveExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: ShiftExpression) => ShiftExpression1(x, x0, args, Span(rawPreComment = c))) })("ShiftExpression1") |
-      log((MATCH ~ opt(comment) <~ t(">>")) ~ AdditiveExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: ShiftExpression) => ShiftExpression2(x, x0, args, Span(rawPreComment = c))) })("ShiftExpression2") |
-      log((MATCH ~ opt(comment) <~ t(">>>")) ~ AdditiveExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: ShiftExpression) => ShiftExpression3(x, x0, args, Span(rawPreComment = c))) })("ShiftExpression3")
+      log((MATCH ~ opt(comments) <~ t("<<")) ~ AdditiveExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: ShiftExpression) => ShiftExpression1(x, x0, args, Span(rawPreComment = c))) })("ShiftExpression1") |
+      log((MATCH ~ opt(comments) <~ t(">>")) ~ AdditiveExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: ShiftExpression) => ShiftExpression2(x, x0, args, Span(rawPreComment = c))) })("ShiftExpression2") |
+      log((MATCH ~ opt(comments) <~ t(">>>")) ~ AdditiveExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: ShiftExpression) => ShiftExpression3(x, x0, args, Span(rawPreComment = c))) })("ShiftExpression3")
     )))
   })
   lazy val RelationalExpression: ESParser[RelationalExpression] = memo(args => {
     val List(pIn, pYield, pAwait) = getArgsN("RelationalExpression", args, 3)
     withSpan(resolveLR((
-      withSpan(MATCH ~ opt(comment) ~ ShiftExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => RelationalExpression0(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ ShiftExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => RelationalExpression0(x0, args, Span(rawPreComment = c)) })
     ), (
-      log((MATCH ~ opt(comment) <~ t("<")) ~ ShiftExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: RelationalExpression) => RelationalExpression1(x, x0, args, Span(rawPreComment = c))) })("RelationalExpression1") |
-      log((MATCH ~ opt(comment) <~ t(">")) ~ ShiftExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: RelationalExpression) => RelationalExpression2(x, x0, args, Span(rawPreComment = c))) })("RelationalExpression2") |
-      log((MATCH ~ opt(comment) <~ t("<=")) ~ ShiftExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: RelationalExpression) => RelationalExpression3(x, x0, args, Span(rawPreComment = c))) })("RelationalExpression3") |
-      log((MATCH ~ opt(comment) <~ t(">=")) ~ ShiftExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: RelationalExpression) => RelationalExpression4(x, x0, args, Span(rawPreComment = c))) })("RelationalExpression4") |
-      log((MATCH ~ opt(comment) <~ t("instanceof")) ~ ShiftExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: RelationalExpression) => RelationalExpression5(x, x0, args, Span(rawPreComment = c))) })("RelationalExpression5") |
-      log((if (pIn) (MATCH ~ opt(comment) <~ t("in")) ~ ShiftExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: RelationalExpression) => RelationalExpression6(x, x0, args, Span(rawPreComment = c))) } else MISMATCH))("RelationalExpression6")
+      log((MATCH ~ opt(comments) <~ t("<")) ~ ShiftExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: RelationalExpression) => RelationalExpression1(x, x0, args, Span(rawPreComment = c))) })("RelationalExpression1") |
+      log((MATCH ~ opt(comments) <~ t(">")) ~ ShiftExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: RelationalExpression) => RelationalExpression2(x, x0, args, Span(rawPreComment = c))) })("RelationalExpression2") |
+      log((MATCH ~ opt(comments) <~ t("<=")) ~ ShiftExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: RelationalExpression) => RelationalExpression3(x, x0, args, Span(rawPreComment = c))) })("RelationalExpression3") |
+      log((MATCH ~ opt(comments) <~ t(">=")) ~ ShiftExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: RelationalExpression) => RelationalExpression4(x, x0, args, Span(rawPreComment = c))) })("RelationalExpression4") |
+      log((MATCH ~ opt(comments) <~ t("instanceof")) ~ ShiftExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: RelationalExpression) => RelationalExpression5(x, x0, args, Span(rawPreComment = c))) })("RelationalExpression5") |
+      log((if (pIn) (MATCH ~ opt(comments) <~ t("in")) ~ ShiftExpression(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: RelationalExpression) => RelationalExpression6(x, x0, args, Span(rawPreComment = c))) } else MISMATCH))("RelationalExpression6")
     )))
   })
   lazy val EqualityExpression: ESParser[EqualityExpression] = memo(args => {
     val List(pIn, pYield, pAwait) = getArgsN("EqualityExpression", args, 3)
     withSpan(resolveLR((
-      withSpan(MATCH ~ opt(comment) ~ RelationalExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => EqualityExpression0(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ RelationalExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => EqualityExpression0(x0, args, Span(rawPreComment = c)) })
     ), (
-      log((MATCH ~ opt(comment) <~ t("==")) ~ RelationalExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: EqualityExpression) => EqualityExpression1(x, x0, args, Span(rawPreComment = c))) })("EqualityExpression1") |
-      log((MATCH ~ opt(comment) <~ t("!=")) ~ RelationalExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: EqualityExpression) => EqualityExpression2(x, x0, args, Span(rawPreComment = c))) })("EqualityExpression2") |
-      log((MATCH ~ opt(comment) <~ t("===")) ~ RelationalExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: EqualityExpression) => EqualityExpression3(x, x0, args, Span(rawPreComment = c))) })("EqualityExpression3") |
-      log((MATCH ~ opt(comment) <~ t("!==")) ~ RelationalExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: EqualityExpression) => EqualityExpression4(x, x0, args, Span(rawPreComment = c))) })("EqualityExpression4")
+      log((MATCH ~ opt(comments) <~ t("==")) ~ RelationalExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: EqualityExpression) => EqualityExpression1(x, x0, args, Span(rawPreComment = c))) })("EqualityExpression1") |
+      log((MATCH ~ opt(comments) <~ t("!=")) ~ RelationalExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: EqualityExpression) => EqualityExpression2(x, x0, args, Span(rawPreComment = c))) })("EqualityExpression2") |
+      log((MATCH ~ opt(comments) <~ t("===")) ~ RelationalExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: EqualityExpression) => EqualityExpression3(x, x0, args, Span(rawPreComment = c))) })("EqualityExpression3") |
+      log((MATCH ~ opt(comments) <~ t("!==")) ~ RelationalExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: EqualityExpression) => EqualityExpression4(x, x0, args, Span(rawPreComment = c))) })("EqualityExpression4")
     )))
   })
   lazy val BitwiseANDExpression: ESParser[BitwiseANDExpression] = memo(args => {
     val List(pIn, pYield, pAwait) = getArgsN("BitwiseANDExpression", args, 3)
     withSpan(resolveLR((
-      withSpan(MATCH ~ opt(comment) ~ EqualityExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => BitwiseANDExpression0(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ EqualityExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => BitwiseANDExpression0(x0, args, Span(rawPreComment = c)) })
     ), (
-      log((MATCH ~ opt(comment) <~ t("&")) ~ EqualityExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: BitwiseANDExpression) => BitwiseANDExpression1(x, x0, args, Span(rawPreComment = c))) })("BitwiseANDExpression1")
+      log((MATCH ~ opt(comments) <~ t("&")) ~ EqualityExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: BitwiseANDExpression) => BitwiseANDExpression1(x, x0, args, Span(rawPreComment = c))) })("BitwiseANDExpression1")
     )))
   })
   lazy val BitwiseXORExpression: ESParser[BitwiseXORExpression] = memo(args => {
     val List(pIn, pYield, pAwait) = getArgsN("BitwiseXORExpression", args, 3)
     withSpan(resolveLR((
-      withSpan(MATCH ~ opt(comment) ~ BitwiseANDExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => BitwiseXORExpression0(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ BitwiseANDExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => BitwiseXORExpression0(x0, args, Span(rawPreComment = c)) })
     ), (
-      log((MATCH ~ opt(comment) <~ t("^")) ~ BitwiseANDExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: BitwiseXORExpression) => BitwiseXORExpression1(x, x0, args, Span(rawPreComment = c))) })("BitwiseXORExpression1")
+      log((MATCH ~ opt(comments) <~ t("^")) ~ BitwiseANDExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: BitwiseXORExpression) => BitwiseXORExpression1(x, x0, args, Span(rawPreComment = c))) })("BitwiseXORExpression1")
     )))
   })
   lazy val BitwiseORExpression: ESParser[BitwiseORExpression] = memo(args => {
     val List(pIn, pYield, pAwait) = getArgsN("BitwiseORExpression", args, 3)
     withSpan(resolveLR((
-      withSpan(MATCH ~ opt(comment) ~ BitwiseXORExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => BitwiseORExpression0(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ BitwiseXORExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => BitwiseORExpression0(x0, args, Span(rawPreComment = c)) })
     ), (
-      log((MATCH ~ opt(comment) <~ t("|")) ~ BitwiseXORExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: BitwiseORExpression) => BitwiseORExpression1(x, x0, args, Span(rawPreComment = c))) })("BitwiseORExpression1")
+      log((MATCH ~ opt(comments) <~ t("|")) ~ BitwiseXORExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: BitwiseORExpression) => BitwiseORExpression1(x, x0, args, Span(rawPreComment = c))) })("BitwiseORExpression1")
     )))
   })
   lazy val LogicalANDExpression: ESParser[LogicalANDExpression] = memo(args => {
     val List(pIn, pYield, pAwait) = getArgsN("LogicalANDExpression", args, 3)
     withSpan(resolveLR((
-      withSpan(MATCH ~ opt(comment) ~ BitwiseORExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => LogicalANDExpression0(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ BitwiseORExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => LogicalANDExpression0(x0, args, Span(rawPreComment = c)) })
     ), (
-      log((MATCH ~ opt(comment) <~ t("&&")) ~ BitwiseORExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: LogicalANDExpression) => LogicalANDExpression1(x, x0, args, Span(rawPreComment = c))) })("LogicalANDExpression1")
+      log((MATCH ~ opt(comments) <~ t("&&")) ~ BitwiseORExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: LogicalANDExpression) => LogicalANDExpression1(x, x0, args, Span(rawPreComment = c))) })("LogicalANDExpression1")
     )))
   })
   lazy val LogicalORExpression: ESParser[LogicalORExpression] = memo(args => {
     val List(pIn, pYield, pAwait) = getArgsN("LogicalORExpression", args, 3)
     withSpan(resolveLR((
-      withSpan(MATCH ~ opt(comment) ~ LogicalANDExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => LogicalORExpression0(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ LogicalANDExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => LogicalORExpression0(x0, args, Span(rawPreComment = c)) })
     ), (
-      log((MATCH ~ opt(comment) <~ t("||")) ~ LogicalANDExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: LogicalORExpression) => LogicalORExpression1(x, x0, args, Span(rawPreComment = c))) })("LogicalORExpression1")
+      log((MATCH ~ opt(comments) <~ t("||")) ~ LogicalANDExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: LogicalORExpression) => LogicalORExpression1(x, x0, args, Span(rawPreComment = c))) })("LogicalORExpression1")
     )))
   })
   lazy val CoalesceExpression: ESParser[CoalesceExpression] = memo(args => {
     val List(pIn, pYield, pAwait) = getArgsN("CoalesceExpression", args, 3)
     withSpan((
-      withSpan((MATCH ~ opt(comment) ~ CoalesceExpressionHead(List(pIn, pYield, pAwait)) <~ t("??")) ~ BitwiseORExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => CoalesceExpression0(x0, x1, args, Span(rawPreComment = c)) })
+      withSpan((MATCH ~ opt(comments) ~ CoalesceExpressionHead(List(pIn, pYield, pAwait)) <~ t("??")) ~ BitwiseORExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => CoalesceExpression0(x0, x1, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val CoalesceExpressionHead: ESParser[CoalesceExpressionHead] = memo(args => {
     val List(pIn, pYield, pAwait) = getArgsN("CoalesceExpressionHead", args, 3)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ CoalesceExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => CoalesceExpressionHead0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ BitwiseORExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => CoalesceExpressionHead1(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ CoalesceExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => CoalesceExpressionHead0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ BitwiseORExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => CoalesceExpressionHead1(x0, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val ShortCircuitExpression: ESParser[ShortCircuitExpression] = memo(args => {
     val List(pIn, pYield, pAwait) = getArgsN("ShortCircuitExpression", args, 3)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ LogicalORExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ShortCircuitExpression0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ CoalesceExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ShortCircuitExpression1(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ LogicalORExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ShortCircuitExpression0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ CoalesceExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ShortCircuitExpression1(x0, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val ConditionalExpression: ESParser[ConditionalExpression] = memo(args => {
     val List(pIn, pYield, pAwait) = getArgsN("ConditionalExpression", args, 3)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ ShortCircuitExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ConditionalExpression0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(((MATCH ~ opt(comment) ~ ShortCircuitExpression(List(pIn, pYield, pAwait)) <~ t("?")) ~ AssignmentExpression(List(true, pYield, pAwait)) <~ t(":")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 ~ x2 => ConditionalExpression1(x0, x1, x2, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ ShortCircuitExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ConditionalExpression0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(((MATCH ~ opt(comments) ~ ShortCircuitExpression(List(pIn, pYield, pAwait)) <~ t("?")) ~ AssignmentExpression(List(true, pYield, pAwait)) <~ t(":")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 ~ x2 => ConditionalExpression1(x0, x1, x2, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val AssignmentExpression: ESParser[AssignmentExpression] = memo(args => {
     val List(pIn, pYield, pAwait) = getArgsN("AssignmentExpression", args, 3)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ ConditionalExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => AssignmentExpression0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((if (pYield) MATCH ~ opt(comment) ~ YieldExpression(List(pIn, pAwait)) ^^ { case _ ~ c ~ x0 => AssignmentExpression1(x0, args, Span(rawPreComment = c)) } else MISMATCH)) |
-      withSpan(MATCH ~ opt(comment) ~ ArrowFunction(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => AssignmentExpression2(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ AsyncArrowFunction(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => AssignmentExpression3(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) ~ LeftHandSideExpression(List(pYield, pAwait)) <~ t("=")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => AssignmentExpression4(x0, x1, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ LeftHandSideExpression(List(pYield, pAwait)) ~ AssignmentOperator(List()) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 ~ x2 => AssignmentExpression5(x0, x1, x2, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) ~ LeftHandSideExpression(List(pYield, pAwait)) <~ t("&&=")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => AssignmentExpression6(x0, x1, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) ~ LeftHandSideExpression(List(pYield, pAwait)) <~ t("||=")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => AssignmentExpression7(x0, x1, args, Span(rawPreComment = c)) }) |
-      withSpan((MATCH ~ opt(comment) ~ LeftHandSideExpression(List(pYield, pAwait)) <~ t("??=")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => AssignmentExpression8(x0, x1, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ ConditionalExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => AssignmentExpression0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((if (pYield) MATCH ~ opt(comments) ~ YieldExpression(List(pIn, pAwait)) ^^ { case _ ~ c ~ x0 => AssignmentExpression1(x0, args, Span(rawPreComment = c)) } else MISMATCH)) |
+      withSpan(MATCH ~ opt(comments) ~ ArrowFunction(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => AssignmentExpression2(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ AsyncArrowFunction(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => AssignmentExpression3(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) ~ LeftHandSideExpression(List(pYield, pAwait)) <~ t("=")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => AssignmentExpression4(x0, x1, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ LeftHandSideExpression(List(pYield, pAwait)) ~ AssignmentOperator(List()) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 ~ x2 => AssignmentExpression5(x0, x1, x2, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) ~ LeftHandSideExpression(List(pYield, pAwait)) <~ t("&&=")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => AssignmentExpression6(x0, x1, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) ~ LeftHandSideExpression(List(pYield, pAwait)) <~ t("||=")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => AssignmentExpression7(x0, x1, args, Span(rawPreComment = c)) }) |
+      withSpan((MATCH ~ opt(comments) ~ LeftHandSideExpression(List(pYield, pAwait)) <~ t("??=")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => AssignmentExpression8(x0, x1, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val AssignmentOperator: ESParser[AssignmentOperator] = memo(args => {
@@ -1093,9 +1093,9 @@ trait GeneratedParser extends ESParsers {
   lazy val Expression: ESParser[Expression] = memo(args => {
     val List(pIn, pYield, pAwait) = getArgsN("Expression", args, 3)
     withSpan(resolveLR((
-      withSpan(MATCH ~ opt(comment) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => Expression0(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => Expression0(x0, args, Span(rawPreComment = c)) })
     ), (
-      log((MATCH ~ opt(comment) <~ t(",")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: Expression) => Expression1(x, x0, args, Span(rawPreComment = c))) })("Expression1")
+      log((MATCH ~ opt(comments) <~ t(",")) ~ AssignmentExpression(List(pIn, pYield, pAwait)) ^^ { case _ ~ c ~ x0 => ((x: Expression) => Expression1(x, x0, args, Span(rawPreComment = c))) })("Expression1")
     )))
   })
   lazy val Statement: ESParser[Statement] = memo(args => {
@@ -1164,8 +1164,8 @@ trait GeneratedParser extends ESParsers {
   lazy val StatementListItem: ESParser[StatementListItem] = memo(args => {
     val List(pYield, pAwait, pReturn) = getArgsN("StatementListItem", args, 3)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ Statement(List(pYield, pAwait, pReturn)) ^^ { case _ ~ c ~ x0 => StatementListItem0(x0, args, Span(rawPreComment = c)) }) |
-      withSpan(MATCH ~ opt(comment) ~ Declaration(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => StatementListItem1(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ Statement(List(pYield, pAwait, pReturn)) ^^ { case _ ~ c ~ x0 => StatementListItem0(x0, args, Span(rawPreComment = c)) }) |
+      withSpan(MATCH ~ opt(comments) ~ Declaration(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 => StatementListItem1(x0, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val LexicalDeclaration: ESParser[LexicalDeclaration] = memo(args => {
@@ -1303,7 +1303,7 @@ trait GeneratedParser extends ESParsers {
   lazy val ExpressionStatement: ESParser[ExpressionStatement] = memo(args => {
     val List(pYield, pAwait) = getArgsN("ExpressionStatement", args, 2)
     withSpan((
-      withSpan(((MATCH ~ opt(comment) <~ -ntl(("{") | (("function" <~ not(IDContinue))) | (("async" <~ not(IDContinue)) %% strNoLineTerminator %% ("function" <~ not(IDContinue))) | (("class" <~ not(IDContinue))) | (("let" <~ not(IDContinue)) %% "["))) ~ Expression(List(true, pYield, pAwait)) <~ t(";")) ^^ { case _ ~ c ~ x0 => ExpressionStatement0(x0, args, Span(rawPreComment = c)) })
+      withSpan(((MATCH ~ opt(comments) <~ -ntl(("{") | (("function" <~ not(IDContinue))) | (("async" <~ not(IDContinue)) %% strNoLineTerminator %% ("function" <~ not(IDContinue))) | (("class" <~ not(IDContinue))) | (("let" <~ not(IDContinue)) %% "["))) ~ Expression(List(true, pYield, pAwait)) <~ t(";")) ^^ { case _ ~ c ~ x0 => ExpressionStatement0(x0, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val IfStatement: ESParser[IfStatement] = memo(args => {
@@ -1526,7 +1526,7 @@ trait GeneratedParser extends ESParsers {
   })
   lazy val FunctionExpression: ESParser[FunctionExpression] = memo(args => {
     withSpan((
-      withSpan((((((MATCH ~ opt(comment) <~ t("function")) ~ opt(BindingIdentifier(List(false, false))) <~ t("(")) ~ FormalParameters(List(false, false)) <~ t(")")) <~ t("{")) ~ FunctionBody(List(false, false)) <~ t("}")) ^^ { case _ ~ c ~ x0 ~ x1 ~ x2 => FunctionExpression0(x0, x1, x2, args, Span(rawPreComment = c)) })
+      withSpan((((((MATCH ~ opt(comments) <~ t("function")) ~ opt(BindingIdentifier(List(false, false))) <~ t("(")) ~ FormalParameters(List(false, false)) <~ t(")")) <~ t("{")) ~ FunctionBody(List(false, false)) <~ t("}")) ^^ { case _ ~ c ~ x0 ~ x1 ~ x2 => FunctionExpression0(x0, x1, x2, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val FunctionBody: ESParser[FunctionBody] = memo(args => {
@@ -1564,7 +1564,7 @@ trait GeneratedParser extends ESParsers {
   lazy val ExpressionBody: ESParser[ExpressionBody] = memo(args => {
     val List(pIn, pAwait) = getArgsN("ExpressionBody", args, 2)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ AssignmentExpression(List(pIn, false, pAwait)) ^^ { case _ ~ c ~ x0 => ExpressionBody0(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ AssignmentExpression(List(pIn, false, pAwait)) ^^ { case _ ~ c ~ x0 => ExpressionBody0(x0, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val ArrowFormalParameters: ESParser[ArrowFormalParameters] = memo(args => {
@@ -1604,7 +1604,7 @@ trait GeneratedParser extends ESParsers {
   })
   lazy val GeneratorExpression: ESParser[GeneratorExpression] = memo(args => {
     withSpan((
-      withSpan(((((((MATCH ~ opt(comment) <~ t("function")) <~ t("*")) ~ opt(BindingIdentifier(List(true, false))) <~ t("(")) ~ FormalParameters(List(true, false)) <~ t(")")) <~ t("{")) ~ GeneratorBody(List()) <~ t("}")) ^^ { case _ ~ c ~ x0 ~ x1 ~ x2 => GeneratorExpression0(x0, x1, x2, args, Span(rawPreComment = c)) })
+      withSpan(((((((MATCH ~ opt(comments) <~ t("function")) <~ t("*")) ~ opt(BindingIdentifier(List(true, false))) <~ t("(")) ~ FormalParameters(List(true, false)) <~ t(")")) <~ t("{")) ~ GeneratorBody(List()) <~ t("}")) ^^ { case _ ~ c ~ x0 ~ x1 ~ x2 => GeneratorExpression0(x0, x1, x2, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val GeneratorBody: ESParser[GeneratorBody] = memo(args => {
@@ -1615,9 +1615,9 @@ trait GeneratedParser extends ESParsers {
   lazy val YieldExpression: ESParser[YieldExpression] = memo(args => {
     val List(pIn, pAwait) = getArgsN("YieldExpression", args, 2)
     withSpan((
-      withSpan((MATCH ~ opt(comment) <~ t("yield")) ^^ { case _ ~ c => YieldExpression0(args, Span(rawPreComment = c)) }) |
-      withSpan(((MATCH ~ opt(comment) <~ t("yield")) <~ NoLineTerminator) ~ AssignmentExpression(List(pIn, true, pAwait)) ^^ { case _ ~ c ~ x0 => YieldExpression1(x0, args, Span(rawPreComment = c)) }) |
-      withSpan((((MATCH ~ opt(comment) <~ t("yield")) <~ NoLineTerminator) <~ t("*")) ~ AssignmentExpression(List(pIn, true, pAwait)) ^^ { case _ ~ c ~ x0 => YieldExpression2(x0, args, Span(rawPreComment = c)) })
+      withSpan((MATCH ~ opt(comments) <~ t("yield")) ^^ { case _ ~ c => YieldExpression0(args, Span(rawPreComment = c)) }) |
+      withSpan(((MATCH ~ opt(comments) <~ t("yield")) <~ NoLineTerminator) ~ AssignmentExpression(List(pIn, true, pAwait)) ^^ { case _ ~ c ~ x0 => YieldExpression1(x0, args, Span(rawPreComment = c)) }) |
+      withSpan((((MATCH ~ opt(comments) <~ t("yield")) <~ NoLineTerminator) <~ t("*")) ~ AssignmentExpression(List(pIn, true, pAwait)) ^^ { case _ ~ c ~ x0 => YieldExpression2(x0, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val AsyncGeneratorMethod: ESParser[AsyncGeneratorMethod] = memo(args => {
@@ -1635,7 +1635,7 @@ trait GeneratedParser extends ESParsers {
   })
   lazy val AsyncGeneratorExpression: ESParser[AsyncGeneratorExpression] = memo(args => {
     withSpan((
-      withSpan(((((((((MATCH ~ opt(comment) <~ t("async")) <~ NoLineTerminator) <~ t("function")) <~ t("*")) ~ opt(BindingIdentifier(List(true, true))) <~ t("(")) ~ FormalParameters(List(true, true)) <~ t(")")) <~ t("{")) ~ AsyncGeneratorBody(List()) <~ t("}")) ^^ { case _ ~ c ~ x0 ~ x1 ~ x2 => AsyncGeneratorExpression0(x0, x1, x2, args, Span(rawPreComment = c)) })
+      withSpan(((((((((MATCH ~ opt(comments) <~ t("async")) <~ NoLineTerminator) <~ t("function")) <~ t("*")) ~ opt(BindingIdentifier(List(true, true))) <~ t("(")) ~ FormalParameters(List(true, true)) <~ t(")")) <~ t("{")) ~ AsyncGeneratorBody(List()) <~ t("}")) ^^ { case _ ~ c ~ x0 ~ x1 ~ x2 => AsyncGeneratorExpression0(x0, x1, x2, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val AsyncGeneratorBody: ESParser[AsyncGeneratorBody] = memo(args => {
@@ -1653,7 +1653,7 @@ trait GeneratedParser extends ESParsers {
   lazy val ClassExpression: ESParser[ClassExpression] = memo(args => {
     val List(pYield, pAwait) = getArgsN("ClassExpression", args, 2)
     withSpan((
-      withSpan((MATCH ~ opt(comment) <~ t("class")) ~ opt(BindingIdentifier(List(pYield, pAwait))) ~ ClassTail(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => ClassExpression0(x0, x1, args, Span(rawPreComment = c)) })
+      withSpan((MATCH ~ opt(comments) <~ t("class")) ~ opt(BindingIdentifier(List(pYield, pAwait))) ~ ClassTail(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => ClassExpression0(x0, x1, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val ClassTail: ESParser[ClassTail] = memo(args => {
@@ -1699,7 +1699,7 @@ trait GeneratedParser extends ESParsers {
   })
   lazy val AsyncFunctionExpression: ESParser[AsyncFunctionExpression] = memo(args => {
     withSpan((
-      withSpan((((((((MATCH ~ opt(comment) <~ t("async")) <~ NoLineTerminator) <~ t("function")) ~ opt(BindingIdentifier(List(false, true))) <~ t("(")) ~ FormalParameters(List(false, true)) <~ t(")")) <~ t("{")) ~ AsyncFunctionBody(List()) <~ t("}")) ^^ { case _ ~ c ~ x0 ~ x1 ~ x2 => AsyncFunctionExpression0(x0, x1, x2, args, Span(rawPreComment = c)) })
+      withSpan((((((((MATCH ~ opt(comments) <~ t("async")) <~ NoLineTerminator) <~ t("function")) ~ opt(BindingIdentifier(List(false, true))) <~ t("(")) ~ FormalParameters(List(false, true)) <~ t(")")) <~ t("{")) ~ AsyncFunctionBody(List()) <~ t("}")) ^^ { case _ ~ c ~ x0 ~ x1 ~ x2 => AsyncFunctionExpression0(x0, x1, x2, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val AsyncMethod: ESParser[AsyncMethod] = memo(args => {
@@ -1716,7 +1716,7 @@ trait GeneratedParser extends ESParsers {
   lazy val AwaitExpression: ESParser[AwaitExpression] = memo(args => {
     val List(pYield) = getArgsN("AwaitExpression", args, 1)
     withSpan((
-      withSpan((MATCH ~ opt(comment) <~ t("await")) ~ UnaryExpression(List(pYield, true)) ^^ { case _ ~ c ~ x0 => AwaitExpression0(x0, args, Span(rawPreComment = c)) })
+      withSpan((MATCH ~ opt(comments) <~ t("await")) ~ UnaryExpression(List(pYield, true)) ^^ { case _ ~ c ~ x0 => AwaitExpression0(x0, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val AsyncArrowFunction: ESParser[AsyncArrowFunction] = memo(args => {
@@ -1736,13 +1736,13 @@ trait GeneratedParser extends ESParsers {
   lazy val AsyncArrowBindingIdentifier: ESParser[AsyncArrowBindingIdentifier] = memo(args => {
     val List(pYield) = getArgsN("AsyncArrowBindingIdentifier", args, 1)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ BindingIdentifier(List(pYield, true)) ^^ { case _ ~ c ~ x0 => AsyncArrowBindingIdentifier0(x0, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ BindingIdentifier(List(pYield, true)) ^^ { case _ ~ c ~ x0 => AsyncArrowBindingIdentifier0(x0, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val CoverCallExpressionAndAsyncArrowHead: ESParser[CoverCallExpressionAndAsyncArrowHead] = memo(args => {
     val List(pYield, pAwait) = getArgsN("CoverCallExpressionAndAsyncArrowHead", args, 2)
     withSpan((
-      withSpan(MATCH ~ opt(comment) ~ MemberExpression(List(pYield, pAwait)) ~ Arguments(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => CoverCallExpressionAndAsyncArrowHead0(x0, x1, args, Span(rawPreComment = c)) })
+      withSpan(MATCH ~ opt(comments) ~ MemberExpression(List(pYield, pAwait)) ~ Arguments(List(pYield, pAwait)) ^^ { case _ ~ c ~ x0 ~ x1 => CoverCallExpressionAndAsyncArrowHead0(x0, x1, args, Span(rawPreComment = c)) })
     ))
   })
   lazy val AsyncArrowHead: ESParser[AsyncArrowHead] = memo(args => {

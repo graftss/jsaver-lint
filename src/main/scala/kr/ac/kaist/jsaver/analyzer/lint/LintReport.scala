@@ -3,6 +3,7 @@ package kr.ac.kaist.jsaver.analyzer.lint
 import kr.ac.kaist.jsaver.analyzer.domain.BasicObj.PropMap
 import kr.ac.kaist.jsaver.analyzer.{ JSCallToken, NodePoint, View }
 import kr.ac.kaist.jsaver.analyzer.domain.{ ASimple, AbsBool, AbsComp, AbsObj, AbsState, AbsValue, BasicObj, FlatBot, FlatElem, FlatTop }
+import kr.ac.kaist.jsaver.analyzer.lint.comment.DisableNext.{ DisableNextAll, DisableNextRules }
 import kr.ac.kaist.jsaver.analyzer.lint.LintReport.UNKNOWN
 import kr.ac.kaist.jsaver.analyzer.lint.rule.LintRule
 import kr.ac.kaist.jsaver.cfg.Node
@@ -13,6 +14,7 @@ import kr.ac.kaist.jsaver.js.ast.{ AST, Expression }
 trait LintReport {
   val rule: LintRule
   val severity: LintSeverity
+  def disabled: Boolean = false
   def message: String
 
   override def toString: String = message
@@ -121,6 +123,8 @@ trait LintReport {
       .mkString("\n")
   }
 
+  // Compute the lexical environment of the execution context at index `stackIdx` from the top of the
+  // execution stack.
   def execContextEnv(np: NodePoint[Node], st: AbsState, stackIdx: Int): Option[AbsObj] = {
     val stackRef = st(Id("EXECUTION_STACK"), np)
 

@@ -5,12 +5,14 @@ import kr.ac.kaist.jsaver.spec.algorithm._
 import kr.ac.kaist.jsaver.ir._
 import kr.ac.kaist.jsaver.error._
 import kr.ac.kaist.jsaver.spec.grammar._
-import kr.ac.kaist.jsaver.util.{ Pos, Span, WeakUId }
-import kr.ac.kaist.jsaver.util.Useful.{ cached, error }
+import kr.ac.kaist.jsaver.util.{Pos, Span, WeakUId}
+import kr.ac.kaist.jsaver.util.Useful.{cached, error}
 import io.circe._
 import io.circe.syntax._
+import kr.ac.kaist.jsaver.analyzer.lint.LintComments
+import kr.ac.kaist.jsaver.analyzer.lint.comment.{LintComment, LintComments}
 
-import scala.util.control.Breaks.{ break, breakable }
+import scala.util.control.Breaks.{break, breakable}
 
 trait AST {
   var parent: Option[AST] = None
@@ -23,11 +25,20 @@ trait AST {
   // child AST nodes
   def fullList: List[(String, PureValue)]
 
-  def preComment: Option[List[String]] = {
-    if (span.preComment.isDefined) {
-      span.preComment
-    } else parent.flatMap(_.preComment)
+  def lintComment: Option[LintComments] = {
+    if (span.rawPreComment.isDefined) {
+      ownLintComments
+    } else if (kind != "StatementListItem" && parent.isDefined) {
+      parent.get.lintComment
+    } else {
+      None
+    }
   }
+
+  def ownLintComments: Option[LintComments] =
+    span.rawPreComment.map(lexes => lexes.flatMap(lex => {
+      LintComment.parse(lex.str, Some(this))
+    })).map(LintComments)
 
   // Compute the root node of the AST by recursively traveling upwards.
   def root: AST = {
@@ -110,8 +121,13 @@ trait AST {
       code
     }
 
-    val commentStr = preComment.map(pc => s"[${pc}] ").getOrElse("")
-    ("  " * indent) + s"[${span}] $name $commentStr$codeLine" + (if (newline) "\n" else "")
+    val selfIndent = "  " * indent
+    val subIndent = "  " * (indent + 1)
+
+    val commentStr = ownLintComments.map(_.toString(subIndent)).getOrElse("")
+    val newlineStr = if (newline) "\n" else ""
+
+    s"$selfIndent[${span}, $name] $codeLine" + commentStr + newlineStr
   }
 
   // print the AST node as a tree, with one node printed per line and depth

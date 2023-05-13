@@ -1,9 +1,10 @@
 package kr.ac.kaist.jsaver.analyzer.lint
 
-import kr.ac.kaist.jsaver.analyzer.lint.DisableNext.{ DisableNextAll, DisableNextRules }
-import kr.ac.kaist.jsaver.analyzer.lint.NamedDecl.{ NamedClassDecl, NamedFuncDecl }
+import kr.ac.kaist.jsaver.analyzer.lint.comment.DisableNext.{DisableNextAll, DisableNextRules}
+import kr.ac.kaist.jsaver.analyzer.lint.comment.LintComment
+import kr.ac.kaist.jsaver.analyzer.lint.comment.NamedDecl.{NamedClassDecl, NamedFuncDecl}
 import kr.ac.kaist.jsaver.js.Parser
-import kr.ac.kaist.jsaver.js.ast.{ AST, ClassDeclaration, FunctionDeclaration, FunctionDeclaration0 }
+import kr.ac.kaist.jsaver.js.ast.{AST, ClassDeclaration, FunctionDeclaration, FunctionDeclaration0}
 import org.scalatest.FunSuite
 
 class LintCommentTest extends FunSuite {
