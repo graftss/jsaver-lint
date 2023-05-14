@@ -14,7 +14,6 @@ case class NdkReport(np: NodePoint[Node], st: AbsState, objLiteralAst: ObjectLit
   override val severity: LintSeverity = LintError
 
   override def astNodes: Option[List[AST]] = Some(List(objLiteralAst, keyAst))
-  override def disabled: Boolean = objLiteralAst.stmtLintComments.exists(_.isRuleDisabled(rule))
 
   override def message: String = {
     val env = execContextEnv(np, st, 0).get

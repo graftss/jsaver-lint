@@ -22,19 +22,17 @@ case class RcMethods(classEval: ClassEval, methodRefs: Map[String, AbsValue]) {
   }
 }
 
-trait Key[T] {
-  def lookup(st: AbsState, obj: AbsObj): Option[T]
-}
-
-case class RefKey(key: AbsValue) extends Key[AbsObj] {
-  def lookup(st: AbsState, obj: AbsObj): Option[AbsObj] = {
-    st(obj(key).loc)
-  }
-}
-
-case class NlssReport(methodName: String, className: Option[String], view: View) extends LintReport {
+/**
+ * The report for a `no-lifecycle-set-state` rule violation.
+ *
+ * @param np: The control point where `setState` was called.
+ * @param methodName: The name of the React component method yielding the `setState` call.
+ * @param className: The name of the React component class whose method yielded the `setState` call.
+ */
+case class NlssReport(np: NodePoint[Node], methodName: String, className: Option[String]) extends LintReport {
   override val rule: LintRule = NoLifecycleSetState
   override val severity: LintSeverity = LintError
+  override val astNodes: Option[List[AST]] = np.view.jsAst.map(List(_))
 
   override def message: String = {
     val lines = ListBuffer(
@@ -43,7 +41,7 @@ case class NlssReport(methodName: String, className: Option[String], view: View)
       s"  method name: ${methodName}",
     )
 
-    view.jsCallString.foreach(s => lines += s"  source: ${s}")
+    np.view.jsCallString.foreach(s => lines += s"  source: ${s}")
 
     lines.mkString("\n")
   }
@@ -103,8 +101,9 @@ object NoLifecycleSetState extends LintRule {
               calls.foreach {
                 case JSCallToken(ast, fnRef) => {
                   rcMethodsList.zip(rcMethodsList.map(_.findMatch(fnRef))).foreach {
-                    case (rcm, matches) => matches.foreach(methodName =>
-                      ctx.report(NlssReport(methodName, rcm.classEval.className(), np.view)))
+                    case (rcm, matches) => matches.foreach(methodName => {
+                      ctx.report(NlssReport(np, methodName, rcm.classEval.className()))
+                    })
                   }
                 }
               }

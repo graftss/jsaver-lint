@@ -26,14 +26,15 @@ trait NdmsReport extends LintReport {
 }
 
 case class OverwriteStateReport(np: NodePoint[Node]) extends NdmsReport {
+  override def astNodes: Option[List[AST]] = np.view.jsAst.map(List(_))
+
   override def message(): String = {
     super.message(np, "Overwrote `state` property of React component:")
   }
 }
 
 case class MutateStateReport(np: NodePoint[Node], statePath: ObjPath) extends NdmsReport {
-  override val rule: LintRule = NoDirectMutationState
-  override val severity: LintSeverity = LintError
+  override def astNodes: Option[List[AST]] = np.view.jsAst.map(List(_))
 
   override def message(): String = {
     super.message(np, "Mutated React component state:", Some(List(

@@ -30,6 +30,9 @@ case class AcrReport(np: NodePoint[Node], st: AbsState, acrInst: AcrInst, callba
   override val rule: LintRule = ArrayCallbackReturn
   override val severity: LintSeverity = LintError
 
+  // TODO: add [array method callsite] and [callback function declaration] as associated AST nodes
+  override def astNodes: Option[List[AST]] = None
+
   override def message: String = {
     val name = "callback" + callbackDef.map(cb => " " + cb.getName).getOrElse("")
     val env = execContextEnv(np, st, 1).get

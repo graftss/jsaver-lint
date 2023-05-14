@@ -46,6 +46,8 @@ case class View(
     js.calls.length
   ))
 
+  def jsAst: Option[AST] = jsViewOpt.map(_.ast)
+
   // Map a `View` to its JS function call string
   def jsCallString(): Option[String] = {
     jsViewOpt.map(jsView => {

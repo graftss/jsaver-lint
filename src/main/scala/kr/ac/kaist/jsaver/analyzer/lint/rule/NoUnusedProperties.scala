@@ -11,6 +11,9 @@ case class NupReport(dop: DefinedObjProp) extends LintReport {
   override val rule: LintRule = NoUnusedProperties
   override val severity: LintSeverity = LintWarning
 
+  // TODO
+  override val astNodes = None
+
   override def message: String = {
     List(
       "Unused property of object literal:",

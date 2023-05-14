@@ -19,7 +19,10 @@ class LintContext(val sem: AbsSemantics) {
 
   def logReports(): Unit = {
     reports.zipWithIndex.foreach {
-      case (report, idx) => println(s"[${idx}] ${report}")
+      case (report, idx) => {
+        val disabled = if (report.disabled) "D" else ""
+        println(s"[$idx$disabled] $report")
+      }
     }
   }
 

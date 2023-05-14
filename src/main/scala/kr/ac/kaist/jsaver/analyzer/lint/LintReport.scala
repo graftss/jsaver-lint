@@ -19,8 +19,10 @@ trait LintReport {
   /** A list of AST nodes associated with the rule violation, if any. */
   def astNodes: Option[List[AST]]
 
-  /** A report is automatically disabled if at least one of its associated AST nodes has a comment
-   *  which disables the report's rule. */
+  /**
+   * A report is automatically disabled if at least one of its associated AST nodes has a comment
+   *  which disables the report's rule.
+   */
   def disabled: Boolean = astNodes.exists(_.exists(_.stmtLintComments.exists(_.isRuleDisabled(rule))))
 
   override def toString: String = message

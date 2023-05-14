@@ -15,6 +15,9 @@ abstract class NafeReport() extends LintReport {
 case class PreciseNafeReport(np: NodePoint[Node]) extends NafeReport {
   override val severity: LintSeverity = LintWarning
 
+  // TODO: add [foreach callsite] as associated AST node
+  override def astNodes: Option[List[AST]] = None
+
   override def message: String = {
     List(
       "Called `Array.prototype.forEach` method:",
@@ -26,6 +29,7 @@ case class PreciseNafeReport(np: NodePoint[Node]) extends NafeReport {
 
 case class ImpreciseNafeReport() extends NafeReport {
   override def message: String = "imprecise report"
+  override def astNodes: Option[List[AST]] = None
 
   override val severity: LintSeverity = LintImprecision
 }
