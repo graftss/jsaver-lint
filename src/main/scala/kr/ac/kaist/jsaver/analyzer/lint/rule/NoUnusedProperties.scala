@@ -12,7 +12,7 @@ case class NupReport(dop: DefinedObjProp) extends LintReport {
   override val severity: LintSeverity = LintWarning
 
   // TODO
-  override val astNodes = None
+  override val astNodes = Nil
 
   override def message: String = {
     List(

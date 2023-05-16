@@ -12,6 +12,9 @@ trait NdmsReport extends LintReport {
   override val rule: LintRule = NoDirectMutationState
   override val severity: LintSeverity = LintError
 
+  def np: NodePoint[Node]
+  override def astNodes: List[Option[AST]] = List(np.view.jsAst)
+
   def message(np: NodePoint[Node], header: String, footer: Option[List[String]] = None): String = {
     val lines = ListBuffer(
       header,
@@ -26,21 +29,19 @@ trait NdmsReport extends LintReport {
 }
 
 case class OverwriteStateReport(np: NodePoint[Node]) extends NdmsReport {
-  override def astNodes: Option[List[AST]] = np.view.jsAst.map(List(_))
-
   override def message(): String = {
     super.message(np, "Overwrote `state` property of React component:")
   }
 }
 
 case class MutateStateReport(np: NodePoint[Node], statePath: ObjPath) extends NdmsReport {
-  override def astNodes: Option[List[AST]] = np.view.jsAst.map(List(_))
-
-  override def message(): String = {
-    super.message(np, "Mutated React component state:", Some(List(
+  override def message(): String = super.message(
+    np,
+    "Mutated React component state:",
+    Some(List(
       s"  mutated state path: ${statePath}"
-    )))
-  }
+    ))
+  )
 }
 
 object NoDirectMutationState extends LintRule {

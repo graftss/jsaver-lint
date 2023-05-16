@@ -4,7 +4,9 @@ function main(a, b) {
     const callbacks = [function(a) { x += a; }, a => a * 2, a => a > 3];
     const arr = [2, 3, 4, 5];
 
-    methods.forEach((methodName, idx) => arr[methodName](callbacks[idx]))
+    methods.forEach((methodName, idx) => {
+      arr[methodName](callbacks[idx])
+    })
 }
 
 main();

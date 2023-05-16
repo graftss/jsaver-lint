@@ -13,7 +13,7 @@ case class NdkReport(np: NodePoint[Node], st: AbsState, objLiteralAst: ObjectLit
   override val rule: LintRule = NoDupeKeys
   override val severity: LintSeverity = LintError
 
-  override def astNodes: Option[List[AST]] = Some(List(objLiteralAst, keyAst))
+  override def astNodes: List[Option[AST]] = List(Some(objLiteralAst), Some(keyAst))
 
   override def message: String = {
     val env = execContextEnv(np, st, 0).get

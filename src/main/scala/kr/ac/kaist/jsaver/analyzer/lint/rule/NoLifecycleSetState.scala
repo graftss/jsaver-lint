@@ -32,7 +32,7 @@ case class RcMethods(classEval: ClassEval, methodRefs: Map[String, AbsValue]) {
 case class NlssReport(np: NodePoint[Node], methodName: String, className: Option[String]) extends LintReport {
   override val rule: LintRule = NoLifecycleSetState
   override val severity: LintSeverity = LintError
-  override val astNodes: Option[List[AST]] = np.view.jsAst.map(List(_))
+  override val astNodes: List[Option[AST]] = List(np.view.jsAst)
 
   override def message: String = {
     val lines = ListBuffer(

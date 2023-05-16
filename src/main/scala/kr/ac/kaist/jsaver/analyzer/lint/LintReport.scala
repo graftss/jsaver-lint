@@ -17,7 +17,7 @@ trait LintReport {
   def message: String
 
   /** A list of AST nodes associated with the rule violation, if any. */
-  def astNodes: Option[List[AST]]
+  def astNodes: List[Option[AST]]
 
   /**
    * A report is automatically disabled if at least one of its associated AST nodes has a comment

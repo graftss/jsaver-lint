@@ -26,15 +26,23 @@ case class AcrInst(id: AcrInstId, methodName: String, node: Node, valueId: Id) {
     }.mkString("\n")
 }
 
+/**
+ * @param np: The control point at the callsite of the array method.
+ * @param st: The state at the callsite of the array method.
+ * @param acrInst: Data associated to the return value of the array method's callback.
+ * @param callbackDef: Data associated to the callback argument of the array method, if any.
+ */
 case class AcrReport(np: NodePoint[Node], st: AbsState, acrInst: AcrInst, callbackDef: Option[FuncDefInfo]) extends LintReport {
   override val rule: LintRule = ArrayCallbackReturn
   override val severity: LintSeverity = LintError
 
-  // TODO: add [array method callsite] and [callback function declaration] as associated AST nodes
-  override def astNodes: Option[List[AST]] = None
+  override def astNodes: List[Option[AST]] = List(
+    np.view.jsAst, // array method callsite
+    callbackDef.map(_.ast), // callback function definition
+  )
 
   override def message: String = {
-    val name = "callback" + callbackDef.map(cb => " " + cb.getName).getOrElse("")
+    val name = "callback" + callbackDef.map(" " + _.getName).getOrElse("")
     val env = execContextEnv(np, st, 1).get
     val ast = np.view.jsViewOpt.get.ast
 

@@ -238,30 +238,8 @@ case class AbsTransfer(sem: AbsSemantics) {
                 }
               }.getOrElse(warn("invalid use of __ABS__"))
             } else {
-              if (algo.name == "GLOBAL.Array.prototype.forEach") {
-                println("calling forEach")
-                println(s"  inst [${call.inst.uid}]: ${call.inst}")
-              }
               var calleeLoc: Option[AbsValue] = None
               val st2 = algo.name match {
-                case "PutValue" => {
-                  // TODO: record mutations
-                  //                  println("PutValue:")
-                  // read value argument
-                  //                  val W = vs(1)
-                  //                  println(s"  W=${W}")
-
-                  // read reference record argument
-                  //                  vs(0).loc.getSingle match {
-                  //                    case FlatBot => println("bot")
-                  //                    case FlatTop => println("top")
-                  //                    case FlatElem(loc) => {
-                  //                      val V = st(loc)
-                  //                      println(s"V=${V}")
-                  //                    }
-                  //                  }
-                  st
-                }
                 case "Construct" | "Call" => {
                   vs.head.loc.getSingle match {
                     case FlatElem(loc) => {

@@ -10,13 +10,13 @@ import kr.ac.kaist.jsaver.spec.algorithm.Algo
 
 abstract class NafeReport() extends LintReport {
   override val rule: LintRule = NoArrayForEach
+
+  def np: NodePoint[Node]
+  override val astNodes: List[Option[AST]] = List(np.view.jsAst)
 }
 
 case class PreciseNafeReport(np: NodePoint[Node]) extends NafeReport {
   override val severity: LintSeverity = LintWarning
-
-  // TODO: add [foreach callsite] as associated AST node
-  override def astNodes: Option[List[AST]] = None
 
   override def message: String = {
     List(
@@ -27,11 +27,10 @@ case class PreciseNafeReport(np: NodePoint[Node]) extends NafeReport {
   }
 }
 
-case class ImpreciseNafeReport() extends NafeReport {
-  override def message: String = "imprecise report"
-  override def astNodes: Option[List[AST]] = None
-
+case class ImpreciseNafeReport(np: NodePoint[Node]) extends NafeReport {
   override val severity: LintSeverity = LintImprecision
+
+  override def message: String = "imprecise report"
 }
 
 object NoArrayForEach extends LintRule {
@@ -57,7 +56,7 @@ object NoArrayForEach extends LintRule {
 
         Some(PreciseNafeReport(np))
       }
-      case FlatTop => Some(ImpreciseNafeReport())
+      case FlatTop => Some(ImpreciseNafeReport(np))
       case _ => None
     }
   }

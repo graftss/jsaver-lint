@@ -2,7 +2,6 @@ const xxx = 'asdf'
 const yyy = '3'
 
 function main() {
-
     const subtable = {x: 3, y: 4}
     const table = { a: 1, b: 2, d: subtable };
     const yyy = 78
