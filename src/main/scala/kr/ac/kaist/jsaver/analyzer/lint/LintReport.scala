@@ -30,11 +30,20 @@ trait LintReport {
    * A report is automatically disabled if at least one of its associated AST nodes has a comment
    *  which disables the report's rule.
    */
-  def astDisabled: Boolean = astNodes.exists(_.exists(_.stmtLintComments.exists(_.isRuleDisabled(rule))))
+  def astDisabled: Boolean = astNodes.exists(_.exists(_.stmtLintComments.exists(_.isRuleAstDisabled(rule))))
 
-  def npDisabled: Boolean = {
-    false
-  }
+  def npDisabled: Boolean =
+    // for some associated control point:
+    nodePoints.exists(
+      // for some JS call in the control point's view:
+      _.view.jsCalls.exists(
+        // for each lint comment on the call's statement:
+        _.ast.stmtLintComments.exists(
+          // check if the lint comment eval-disables this report's rule
+          _.isRuleEvalDisabled(rule)
+        )
+      )
+    )
 
   def disabled: Boolean = astDisabled || npDisabled
 

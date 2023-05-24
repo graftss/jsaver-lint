@@ -1,6 +1,13 @@
 function makeDupeKeyObj(key) {
+  // lint-disable-stmt
   return { [key]: 3, [key]: 4 };
 }
 
-// lint-disable-eval
-makeDupeKeyObj('x')
+function makeDupeKeyObjMaker(key) {
+  return function() {
+    return makeDupeKeyObj(key)
+  }
+}
+
+// lint-disable-stmt
+makeDupeKeyObjMaker('x')()

@@ -1,14 +1,24 @@
 package kr.ac.kaist.jsaver.analyzer.lint.comment
 
+import kr.ac.kaist.jsaver.analyzer.lint.comment.DisableEval.{ DisableEvalAll, DisableEvalRules }
 import kr.ac.kaist.jsaver.analyzer.lint.comment.DisableStmt.{ DisableStmtAll, DisableStmtRules }
 import kr.ac.kaist.jsaver.analyzer.lint.rule.LintRule
 
 case class LintComments(comments: List[LintComment]) {
-  /** Returns true if the lint rule `rule` is disabled by these lint comments. */
-  def isRuleDisabled(rule: LintRule): Boolean = {
+  /** Returns true if the lint rule `rule` is AST-disabled by these lint comments. */
+  def isRuleAstDisabled(rule: LintRule): Boolean = {
     comments.exists {
       case DisableStmtAll => true
       case DisableStmtRules(rules) => rules.contains(rule.name)
+      case _ => false
+    }
+  }
+
+  /** Returns true if the lint rule `rule` is evak-disabled by these lint comments. */
+  def isRuleEvalDisabled(rule: LintRule): Boolean = {
+    comments.exists {
+      case DisableEvalAll => true
+      case DisableEvalRules(rules) => rules.contains(rule.name)
       case _ => false
     }
   }
