@@ -13,6 +13,7 @@ case class NupReport(dop: DefinedObjProp) extends LintReport {
 
   // TODO
   override val astNodes = Nil
+  override val nodePoints = Nil
 
   override def message: String = {
     List(

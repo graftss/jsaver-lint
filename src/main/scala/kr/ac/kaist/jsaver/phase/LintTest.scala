@@ -2,7 +2,7 @@ package kr.ac.kaist.jsaver.phase
 
 import kr.ac.kaist.jsaver.{ JSAVERConfig, js }
 import kr.ac.kaist.jsaver.analyzer.AbsSemantics
-import kr.ac.kaist.jsaver.analyzer.lint.comment.DisableNext.{ DisableNextAll, DisableNextRules }
+import kr.ac.kaist.jsaver.analyzer.lint.comment.DisableStmt.{ DisableStmtAll, DisableStmtRules }
 import kr.ac.kaist.jsaver.analyzer.lint.comment.LintComment
 import kr.ac.kaist.jsaver.analyzer.lint.comment.NamedDecl.NamedClassDecl
 import kr.ac.kaist.jsaver.analyzer.lint.{ LintUtil, LintWalker, ParserTest }

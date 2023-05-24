@@ -11,8 +11,11 @@ import kr.ac.kaist.jsaver.spec.algorithm.Algo
 abstract class NafeReport() extends LintReport {
   override val rule: LintRule = NoArrayForEach
 
+  // The control point where the `forEach` call occurs.
   def np: NodePoint[Node]
+
   override val astNodes: List[Option[AST]] = List(np.view.jsAst)
+  override val nodePoints: List[NodePoint[Node]] = List(np)
 }
 
 case class PreciseNafeReport(np: NodePoint[Node]) extends NafeReport {

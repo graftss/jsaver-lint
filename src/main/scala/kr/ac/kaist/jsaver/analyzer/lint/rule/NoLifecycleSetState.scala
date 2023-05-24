@@ -33,6 +33,7 @@ case class NlssReport(np: NodePoint[Node], methodName: String, className: Option
   override val rule: LintRule = NoLifecycleSetState
   override val severity: LintSeverity = LintError
   override val astNodes: List[Option[AST]] = List(np.view.jsAst)
+  override val nodePoints: List[NodePoint[Node]] = List(np)
 
   override def message: String = {
     val lines = ListBuffer(

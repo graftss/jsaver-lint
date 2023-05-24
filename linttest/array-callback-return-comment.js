@@ -1,4 +1,4 @@
-// lint-disable-next array-callback-return
+// lint-disable-stmt array-callback-return
 function noReturn() { return; }
 
 function noReturn2() { return; }

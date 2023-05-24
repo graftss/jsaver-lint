@@ -1,14 +1,14 @@
 package kr.ac.kaist.jsaver.analyzer.lint.comment
 
-import kr.ac.kaist.jsaver.analyzer.lint.comment.DisableNext.{ DisableNextAll, DisableNextRules }
+import kr.ac.kaist.jsaver.analyzer.lint.comment.DisableStmt.{ DisableStmtAll, DisableStmtRules }
 import kr.ac.kaist.jsaver.analyzer.lint.rule.LintRule
 
 case class LintComments(comments: List[LintComment]) {
   /** Returns true if the lint rule `rule` is disabled by these lint comments. */
   def isRuleDisabled(rule: LintRule): Boolean = {
     comments.exists {
-      case DisableNextAll => true
-      case DisableNextRules(rules) => rules.contains(rule.name)
+      case DisableStmtAll => true
+      case DisableStmtRules(rules) => rules.contains(rule.name)
       case _ => false
     }
   }

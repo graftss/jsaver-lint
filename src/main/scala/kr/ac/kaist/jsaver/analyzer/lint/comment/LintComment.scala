@@ -10,8 +10,9 @@ trait LintComment {
 
 object LintComment {
   private val kinds = List(
-    DisableNext,
-    NamedDecl
+    DisableEval,
+    DisableStmt,
+    NamedDecl,
   )
 
   def parse(commentBody: String, ast: Option[AST]): Option[LintComment] = {

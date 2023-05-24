@@ -1,6 +1,6 @@
 package kr.ac.kaist.jsaver.analyzer.lint
 
-import kr.ac.kaist.jsaver.analyzer.lint.comment.DisableNext.{DisableNextAll, DisableNextRules}
+import kr.ac.kaist.jsaver.analyzer.lint.comment.DisableStmt.{DisableStmtAll, DisableStmtRules}
 import kr.ac.kaist.jsaver.analyzer.lint.comment.LintComment
 import kr.ac.kaist.jsaver.analyzer.lint.comment.NamedDecl.{NamedClassDecl, NamedFuncDecl}
 import kr.ac.kaist.jsaver.js.Parser
@@ -23,20 +23,20 @@ class LintCommentTest extends FunSuite {
 
   testComment(
     "parse comment to disable all rules",
-    "lint-disable-next   ",
-    DisableNextAll
+    "lint-disable-stmt   ",
+    DisableStmtAll
   )
 
   testComment(
     "parse comment to disable one rule",
-    "lint-disable-next  no-dupe-keys  ",
-    DisableNextRules(List("no-dupe-keys"))
+    "lint-disable-stmt  no-dupe-keys  ",
+    DisableStmtRules(List("no-dupe-keys"))
   )
 
   testComment(
     "parse comment to disable multiple rules",
-    "lint-disable-next  no-dupe-keys \n\n   array-callback-return ",
-    DisableNextRules(List("no-dupe-keys", "array-callback-return"))
+    "lint-disable-stmt  no-dupe-keys \n\n   array-callback-return ",
+    DisableStmtRules(List("no-dupe-keys", "array-callback-return"))
   )
 
   testComment(

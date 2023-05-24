@@ -3,7 +3,7 @@ package kr.ac.kaist.jsaver.analyzer.lint
 import kr.ac.kaist.jsaver.analyzer.domain.BasicObj.PropMap
 import kr.ac.kaist.jsaver.analyzer.{ JSCallToken, NodePoint, View }
 import kr.ac.kaist.jsaver.analyzer.domain.{ ASimple, AbsBool, AbsComp, AbsObj, AbsState, AbsValue, BasicObj, FlatBot, FlatElem, FlatTop }
-import kr.ac.kaist.jsaver.analyzer.lint.comment.DisableNext.{ DisableNextAll, DisableNextRules }
+import kr.ac.kaist.jsaver.analyzer.lint.comment.DisableStmt.{ DisableStmtAll, DisableStmtRules }
 import kr.ac.kaist.jsaver.analyzer.lint.LintReport.UNKNOWN
 import kr.ac.kaist.jsaver.analyzer.lint.rule.LintRule
 import kr.ac.kaist.jsaver.cfg.Node
@@ -16,14 +16,27 @@ trait LintReport {
   def severity: LintSeverity
   def message: String
 
-  /** A list of AST nodes associated with the rule violation, if any. */
+  /**
+   * A list of AST nodes associated with the rule violation, if any.
+   * The elements of the list are optional for convenience, since JS AST nodes are optional
+   * fields of control points, from which these AST nodes are generally inherited.
+   */
   def astNodes: List[Option[AST]]
+
+  /** A list of control points associated with the rule violation, if any. */
+  def nodePoints: List[NodePoint[Node]]
 
   /**
    * A report is automatically disabled if at least one of its associated AST nodes has a comment
    *  which disables the report's rule.
    */
-  def disabled: Boolean = astNodes.exists(_.exists(_.stmtLintComments.exists(_.isRuleDisabled(rule))))
+  def astDisabled: Boolean = astNodes.exists(_.exists(_.stmtLintComments.exists(_.isRuleDisabled(rule))))
+
+  def npDisabled: Boolean = {
+    false
+  }
+
+  def disabled: Boolean = astDisabled || npDisabled
 
   override def toString: String = message
 

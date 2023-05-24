@@ -154,8 +154,4 @@ trait LintRule {
   // Finds the `SubMap` with properties corresponding to the JS prototype of `obj`
   def lookupJsProto(st: AbsState, obj: AbsObj): Option[AbsObj] =
     lookupRefPath(st, obj, List("SubMap", "prototype", "Value", "SubMap"))
-
-  def isDisableComment(preComment: String): Boolean = {
-    (s"lint-disable-next-line ${this.name}").r.matches(preComment)
-  }
 }

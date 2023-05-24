@@ -41,6 +41,8 @@ case class AcrReport(np: NodePoint[Node], st: AbsState, acrInst: AcrInst, callba
     callbackDef.map(_.ast), // callback function definition
   )
 
+  override def nodePoints: List[NodePoint[Node]] = List(np)
+
   override def message: String = {
     val name = "callback" + callbackDef.map(" " + _.getName).getOrElse("")
     val env = execContextEnv(np, st, 1).get

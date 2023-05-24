@@ -12,8 +12,11 @@ trait NdmsReport extends LintReport {
   override val rule: LintRule = NoDirectMutationState
   override val severity: LintSeverity = LintError
 
+  /** The control point where the state field is directly mutated */
   def np: NodePoint[Node]
+
   override def astNodes: List[Option[AST]] = List(np.view.jsAst)
+  override def nodePoints: List[NodePoint[Node]] = List(np)
 
   def message(np: NodePoint[Node], header: String, footer: Option[List[String]] = None): String = {
     val lines = ListBuffer(

@@ -1,7 +1,9 @@
 
-// lint-named-decl react-component
-// lint-disable-next no-dupe-keys
-/* lint-disable-next */
-y =  /*lint-disable-next*/x +z;
+// lint-disable-eval a b c
+function f(a, b, c) {
+  return a + b + c;
+}
 
+// lint-disable-eval d e f
+const x = (a, b, c) => a + b + c;
 

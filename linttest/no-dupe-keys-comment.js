@@ -1,5 +1,5 @@
 function makeObject(key1, key2) {
-    // lint-disable-next no-dupe-keys
+    // lint-disable-eval no-dupe-keys
     return { [key1]: 3, y: 9, [key2]: 7 };
 }
 
